@@ -64,6 +64,7 @@ const TransactionListFilters = ({
   const centralServerAgencies = agencies[0]?.centralServerAgencies || [];
   const centralServerPatronTypes = patronTypes[0]?.centralServerPatronTypes || [];
   const centralServerItemTypes = itemTypes[0]?.centralServerItemTypes || [];
+
   const transactionStatusOptions = useMemo(() => getTransactionStatusOptions(Object.values(TRANSACTION_STATUSES)), []);
   const centralServerOptions = useMemo(() => getCentralServerOptions(servers), [servers]);
   const centralServerAgencyOptions = useMemo(() => getCentralServerAgencyOptions(centralServerAgencies), [centralServerAgencies]);
