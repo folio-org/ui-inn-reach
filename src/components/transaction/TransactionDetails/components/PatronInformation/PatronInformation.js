@@ -13,14 +13,23 @@ import {
 import {
   PATRON_INFORMATION,
   TRANSACTION_DETAIL_FIELDS,
+  TRANSACTION_STATUSES,
 } from '../../../../../constants';
 
 const {
   PATRON_ID,
+  FOLIO_PATRON_ID,
   PATRON_NAME,
-  PATRON_TYPE,
+  CENTRAL_PATRON_TYPE,
   PATRON_AGENCY,
+  HOLD,
+  STATE,
+  CENTRAL_SERVER_CODE,
 } = TRANSACTION_DETAIL_FIELDS;
+
+const {
+  PATRON_HOLD,
+} = TRANSACTION_STATUSES;
 
 const PatronInformation = ({
   transaction,
@@ -34,33 +43,39 @@ const PatronInformation = ({
         <Col xs={3}>
           <KeyValue
             label={<FormattedMessage id="ui-inn-reach.transaction-detail.field.patronId" />}
-            value={transaction[PATRON_ID] &&
-              <Link to="/">
-                {transaction[PATRON_ID]}
-              </Link>
+            value={
+              transaction[HOLD]?.[PATRON_ID] &&
+              transaction[HOLD]?.[FOLIO_PATRON_ID] &&
+              transaction[HOLD]?.[STATE] === PATRON_HOLD
+                ? (
+                  <Link to={`/users/preview/${transaction[HOLD][FOLIO_PATRON_ID]}`}>
+                    {transaction[HOLD][FOLIO_PATRON_ID]}
+                  </Link>
+                )
+                : transaction[HOLD]?.[PATRON_ID]
             }
           />
         </Col>
         <Col xs={3}>
           <KeyValue
             label={<FormattedMessage id="ui-inn-reach.transaction-detail.field.patronName" />}
-            value={transaction[PATRON_NAME]}
+            value={transaction[HOLD]?.[PATRON_NAME]}
           />
         </Col>
         <Col xs={3}>
           <KeyValue
             label={<FormattedMessage id="ui-inn-reach.transaction-detail.field.patronType" />}
-            value={transaction[PATRON_TYPE]}
+            value={
+              transaction[CENTRAL_SERVER_CODE] &&
+              transaction[HOLD]?.[CENTRAL_PATRON_TYPE] &&
+              `${transaction[CENTRAL_SERVER_CODE]}: ${transaction[HOLD][CENTRAL_PATRON_TYPE]}`
+            }
           />
         </Col>
         <Col xs={3}>
           <KeyValue
             label={<FormattedMessage id="ui-inn-reach.transaction-detail.field.patronAgency" />}
-            value={transaction[PATRON_AGENCY] &&
-              <Link to="/">
-                {transaction[PATRON_AGENCY]}
-              </Link>
-            }
+            value={transaction[HOLD]?.[PATRON_AGENCY]}
           />
         </Col>
       </Row>

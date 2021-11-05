@@ -24,7 +24,8 @@ import {
 
 const {
   TITLE,
-  TYPE
+  TYPE,
+  HOLD,
 } = TRANSACTION_DETAIL_FIELDS;
 
 const TransactionDetail = ({
@@ -33,7 +34,7 @@ const TransactionDetail = ({
 }) => {
   const renderActionMenu = useCallback(({ onToggle }) => (
     <ActionMenu
-      transactionType={transaction[TYPE]}
+      transactionType={transaction[TYPE]?.toLowerCase()}
       onToggle={onToggle}
     />
   ), [transaction[TYPE]]);
@@ -53,7 +54,7 @@ const TransactionDetail = ({
             tag="h2"
             margin="small"
           >
-            {transaction[TITLE]}
+            {transaction[HOLD]?.[TITLE]}
           </Headline>
         </Col>
       </Row>
