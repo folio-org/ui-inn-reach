@@ -18,7 +18,13 @@ import {
   CENTRAL_SERVERS_LIMITING,
   TRANSACTION_TYPES,
   TRANSACTION_STATUSES,
-  TRANSACTION_FILTER_NAMES,
+  TYPE_PARAMETER,
+  STATE_PARAMETER,
+  CENTRAL_SERVER_CODE_PARAMETER,
+  PATRON_AGENCY_CODE_PARAMETER,
+  ITEM_AGENCY_CODE_PARAMETER,
+  PATRON_TYPE_PARAMETER,
+  ITEM_TYPE_PARAMETER,
 } from '../../../constants';
 import {
   applyFiltersAdapter,
@@ -31,16 +37,6 @@ import {
   getCentralServerPatronTypeOptions,
   getCentralServerItemTypeOptions,
 } from './utils';
-
-const {
-  TRANSACTION_TYPE,
-  TRANSACTION_STATUS,
-  CENTRAL_SERVER,
-  PATRON_AGENCY,
-  ITEM_AGENCY,
-  PATRON_TYPE,
-  ITEM_TYPE,
-} = TRANSACTION_FILTER_NAMES;
 
 const TransactionListFilters = ({
   resources: {
@@ -64,6 +60,8 @@ const TransactionListFilters = ({
   const centralServerAgencies = agencies[0]?.centralServerAgencies || [];
   const centralServerPatronTypes = patronTypes[0]?.centralServerPatronTypes || [];
   const centralServerItemTypes = itemTypes[0]?.centralServerItemTypes || [];
+
+  const getTransactionTypeDataOptions = useMemo(() => getCheckboxFilterOptions(TYPE_PARAMETER, Object.values(TRANSACTION_TYPES)), []);
   const transactionStatusOptions = useMemo(() => getTransactionStatusOptions(Object.values(TRANSACTION_STATUSES)), []);
   const centralServerOptions = useMemo(() => getCentralServerOptions(servers), [servers]);
   const centralServerAgencyOptions = useMemo(() => getCentralServerAgencyOptions(centralServerAgencies), [centralServerAgencies]);
@@ -72,55 +70,55 @@ const TransactionListFilters = ({
 
   const adaptedApplyFilters = useCallback(applyFiltersAdapter(applyFilters), [applyFilters]);
 
-  const getTransactionTypeDataOptions = useMemo(() => (
-    getCheckboxFilterOptions(
-      TRANSACTION_TYPE,
-      Object.values(TRANSACTION_TYPES),
-    )), [TRANSACTION_TYPES]);
-
   return (
     <AccordionSet>
       <CheckboxFilter
-        activeFilters={activeFilters[TRANSACTION_TYPE]}
-        id={TRANSACTION_TYPE}
-        labelId="ui-inn-reach.transaction.transactionType"
-        name={TRANSACTION_TYPE}
+        activeFilters={activeFilters[TYPE_PARAMETER]}
+        id={TYPE_PARAMETER}
+        labelId="ui-inn-reach.transaction.type"
+        name={TYPE_PARAMETER}
         options={getTransactionTypeDataOptions}
         onChange={adaptedApplyFilters}
       />
       <MultiChoiceFilter
-        name={TRANSACTION_STATUS}
-        activeFilters={activeFilters[TRANSACTION_STATUS]}
+        name={STATE_PARAMETER}
+        labelId="ui-inn-reach.transaction.status"
+        activeFilters={activeFilters[STATE_PARAMETER]}
         dataOptions={transactionStatusOptions}
         onChange={adaptedApplyFilters}
       />
       <MultiChoiceFilter
-        name={CENTRAL_SERVER}
-        activeFilters={activeFilters[CENTRAL_SERVER]}
+        name={CENTRAL_SERVER_CODE_PARAMETER}
+        labelId="ui-inn-reach.transaction.centralServer"
+        activeFilters={activeFilters[CENTRAL_SERVER_CODE_PARAMETER]}
         dataOptions={centralServerOptions}
         onChange={adaptedApplyFilters}
       />
       <MultiChoiceFilter
-        name={PATRON_AGENCY}
-        activeFilters={activeFilters[PATRON_AGENCY]}
+        name={PATRON_AGENCY_CODE_PARAMETER}
+        labelId="ui-inn-reach.transaction.patronAgency"
+        activeFilters={activeFilters[PATRON_AGENCY_CODE_PARAMETER]}
         dataOptions={centralServerAgencyOptions}
         onChange={adaptedApplyFilters}
       />
       <MultiChoiceFilter
-        name={ITEM_AGENCY}
-        activeFilters={activeFilters[ITEM_AGENCY]}
+        name={ITEM_AGENCY_CODE_PARAMETER}
+        labelId="ui-inn-reach.transaction.itemAgency"
+        activeFilters={activeFilters[ITEM_AGENCY_CODE_PARAMETER]}
         dataOptions={centralServerAgencyOptions}
         onChange={adaptedApplyFilters}
       />
       <MultiChoiceFilter
-        name={PATRON_TYPE}
-        activeFilters={activeFilters[PATRON_TYPE]}
+        name={PATRON_TYPE_PARAMETER}
+        labelId="ui-inn-reach.transaction.patronType"
+        activeFilters={activeFilters[PATRON_TYPE_PARAMETER]}
         dataOptions={centralServerPatronTypeOptions}
         onChange={adaptedApplyFilters}
       />
       <MultiChoiceFilter
-        name={ITEM_TYPE}
-        activeFilters={activeFilters[ITEM_TYPE]}
+        name={ITEM_TYPE_PARAMETER}
+        labelId="ui-inn-reach.transaction.itemType"
+        activeFilters={activeFilters[ITEM_TYPE_PARAMETER]}
         dataOptions={centralServerItemTypeOptions}
         onChange={adaptedApplyFilters}
       />

@@ -17,29 +17,19 @@ export const TRANSACTION_STATUSES = {
   FINAL_CHECKIN: 'FINAL_CHECKIN',
 };
 
-export const TRANSACTION_FILTER_NAMES = {
-  TRANSACTION_TYPE: 'transactionType',
-  TRANSACTION_STATUS: 'transactionStatus',
-  CENTRAL_SERVER: 'centralServer',
-  PATRON_AGENCY: 'patronAgency',
-  ITEM_AGENCY: 'itemAgency',
-  PATRON_TYPE: 'patronType',
-  ITEM_TYPE: 'itemType',
-};
-
 export const TRANSACTION_TYPES = {
-  ITEM: 'item',
-  PATRON: 'patron',
-  LOCAL: 'local',
+  ITEM: 'ITEM',
+  PATRON: 'PATRON',
+  LOCAL: 'LOCAL',
 };
 
 export const TRANSACTION_FIELDS = {
   ID: 'id',
-  TIME: 'time',
+  TIME: 'TRANSACTION_TIME',
   TYPE: 'type',
   ITEM_TITLE: 'itemTitle',
   PATRON_NAME: 'patronName',
-  STATUS: 'status',
+  STATUS: 'TRANSACTION_STATUS',
 };
 
 export const TRANSACTION_LIST_DEFAULT_SORT_FIELD = TRANSACTION_FIELDS.TIME;
