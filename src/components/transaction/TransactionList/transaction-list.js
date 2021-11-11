@@ -42,7 +42,7 @@ const columnMapping = {
 
 const resultsFormatter = {
   [TRANSACTION_FIELDS.TIME]: (data) => {
-    const timestamp = new Date(data[TRANSACTION_FIELDS.HOLD][HOLD_FIELDS.TRANSACTION_TIME]) * 1000;
+    const timestamp = data[TRANSACTION_FIELDS.HOLD][HOLD_FIELDS.TRANSACTION_TIME] * 1000;
 
     return (
       <FormattedMessage
