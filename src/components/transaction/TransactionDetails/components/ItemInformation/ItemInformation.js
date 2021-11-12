@@ -11,24 +11,27 @@ import {
   Link,
 } from 'react-router-dom';
 import {
+  HOLD_FIELDS,
   ITEM_INFORMATION,
-  TRANSACTION_DETAIL_FIELDS,
+  TRANSACTION_FIELDS,
 } from '../../../../../constants';
 
 const {
-  ITEM_ID,
-  FOLIO_ITEM_ID,
-  TITLE,
-  CENTRAL_ITEM_TYPE,
-  CALL_NUMBER,
-  ITEM_AGENCY_CODE,
   HOLD,
   CENTRAL_SERVER_CODE,
-  METADATA,
-  CREATED_BY_USER_NAME,
-  INSTANCE_ID,
-  HOLDINGS_ID,
-} = TRANSACTION_DETAIL_FIELDS;
+} = TRANSACTION_FIELDS;
+
+const {
+  ITEM_ID,
+  TITLE,
+  CENTRAL_ITEM_TYPE,
+  AUTHOR,
+  CALL_NUMBER,
+  ITEM_AGENCY_CODE,
+  FOLIO_ITEM_ID,
+  FOLIO_INSTANCE_ID,
+  FOLIO_HOLDING_ID,
+} = HOLD_FIELDS;
 
 const ItemInformation = ({
   transaction,
@@ -45,9 +48,9 @@ const ItemInformation = ({
             value={
               transaction[HOLD]?.[ITEM_ID] &&
               transaction[HOLD]?.[FOLIO_ITEM_ID] &&
-              transaction[HOLD]?.[INSTANCE_ID] &&
-              transaction[HOLD]?.[HOLDINGS_ID] &&
-              <Link to={`/inventory/view/${transaction[HOLD][INSTANCE_ID]}/${transaction[HOLD][HOLDINGS_ID]}/${transaction[HOLD][FOLIO_ITEM_ID]}`}>
+              transaction[HOLD]?.[FOLIO_INSTANCE_ID] &&
+              transaction[HOLD]?.[FOLIO_HOLDING_ID] &&
+              <Link to={`/inventory/view/${transaction[HOLD][FOLIO_INSTANCE_ID]}/${transaction[HOLD][FOLIO_HOLDING_ID]}/${transaction[HOLD][FOLIO_ITEM_ID]}`}>
                 {transaction[HOLD][ITEM_ID]}
               </Link>
             }
@@ -70,7 +73,7 @@ const ItemInformation = ({
         <Col xs={3}>
           <KeyValue
             label={<FormattedMessage id="ui-inn-reach.transaction-detail.field.author" />}
-            value={transaction[HOLD]?.[METADATA]?.[CREATED_BY_USER_NAME]}
+            value={transaction[HOLD]?.[AUTHOR]}
           />
         </Col>
         <Col xs={3}>

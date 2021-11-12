@@ -11,25 +11,29 @@ import {
   Link,
 } from 'react-router-dom';
 import {
+  HOLD_FIELDS,
   PATRON_INFORMATION,
-  TRANSACTION_DETAIL_FIELDS,
+  TRANSACTION_FIELDS,
   TRANSACTION_STATUSES,
 } from '../../../../../constants';
 
 const {
-  PATRON_ID,
-  FOLIO_PATRON_ID,
-  PATRON_NAME,
-  CENTRAL_PATRON_TYPE,
-  PATRON_AGENCY,
-  HOLD,
-  STATE,
-  CENTRAL_SERVER_CODE,
-} = TRANSACTION_DETAIL_FIELDS;
-
-const {
   PATRON_HOLD,
 } = TRANSACTION_STATUSES;
+
+const {
+  HOLD,
+  STATUS,
+  CENTRAL_SERVER_CODE,
+} = TRANSACTION_FIELDS;
+
+const {
+  PATRON_NAME,
+  PATRON_ID,
+  CENTRAL_PATRON_TYPE,
+  PATRON_AGENCY_CODE,
+  FOLIO_PATRON_ID,
+} = HOLD_FIELDS;
 
 const PatronInformation = ({
   transaction,
@@ -46,7 +50,7 @@ const PatronInformation = ({
             value={
               transaction[HOLD]?.[PATRON_ID] &&
               transaction[HOLD]?.[FOLIO_PATRON_ID] &&
-              transaction[HOLD]?.[STATE] === PATRON_HOLD
+              transaction[STATUS] === PATRON_HOLD
                 ? (
                   <Link to={`/users/preview/${transaction[HOLD][FOLIO_PATRON_ID]}`}>
                     {transaction[HOLD][FOLIO_PATRON_ID]}
@@ -75,7 +79,7 @@ const PatronInformation = ({
         <Col xs={3}>
           <KeyValue
             label={<FormattedMessage id="ui-inn-reach.transaction-detail.field.patronAgency" />}
-            value={transaction[HOLD]?.[PATRON_AGENCY]}
+            value={transaction[HOLD]?.[PATRON_AGENCY_CODE]}
           />
         </Col>
       </Row>

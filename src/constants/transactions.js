@@ -28,15 +28,15 @@ export const TRANSACTION_FILTER_NAMES = {
 };
 
 export const TRANSACTION_TYPES = {
-  ITEM: 'item',
-  PATRON: 'patron',
-  LOCAL: 'local',
+  ITEM: 'ITEM',
+  PATRON: 'PATRON',
+  LOCAL: 'LOCAL',
 };
 
 export const HOLD_FIELDS = {
   ID: 'id',
   TRANSACTION_TIME: 'transactionTime',
-  PICH_UP_LOCATION: 'pickupLocation',
+  PICK_UP_LOCATION: 'pickupLocation',
   PATRON_ID: 'patronId',
   PATRON_AGENCY_CODE: 'patronAgencyCode',
   ITEM_AGENCY_CODE: 'itemAgencyCode',
@@ -52,6 +52,14 @@ export const HOLD_FIELDS = {
   CALL_NUMBER: 'callNumber',
   SHIPPED_ITEM_BARCODE: 'shippedItemBarcode',
   METADATA: 'metadata',
+  FOLIO_ITEM_ID: 'folioItemId',
+  FOLIO_PATRON_ID: 'folioPatronId',
+  FOLIO_REQUEST_ID: 'folioRequestId',
+  FOLIO_INSTANCE_ID: 'folioInstanceId',
+  FOLIO_HOLDING_ID: 'folioHoldingId',
+  FOLIO_LOAN_ID: 'folioLoanId',
+  FOLIO_PATRON_BARCODE: 'folioPatronBarcode',
+  FOLIO_ITEM_BARCODE: 'folioItemBarcode',
 };
 
 export const TRANSACTION_FIELDS = {
@@ -78,34 +86,4 @@ export const TRANSACTION_DETAIL_ACCORDION_STATE = {
   [TRANSACTION_SUMMARY]: true,
   [PATRON_INFORMATION]: true,
   [ITEM_INFORMATION]: true,
-};
-
-export const TRANSACTION_DETAIL_FIELDS = {
-  TITLE: 'title',
-  TRANSACTION_TIME: 'transactionTime',
-  TRACKING_ID: 'trackingId',
-  TYPE: 'type',
-  STATE: 'state',
-  PATRON_NAME: 'patronName',
-  PICKUP_LOCATION: 'pickupLocation',
-  PATRON_ID: 'patronId',
-  ITEM_ID: 'itemId',
-  CENTRAL_PATRON_TYPE: 'centralPatronType',
-  PATRON_AGENCY: 'patronAgencyCode',
-  CENTRAL_ITEM_TYPE: 'centralItemType',
-  AUTHOR: 'author',
-  CALL_NUMBER: 'callNumber',
-  ITEM_AGENCY_CODE: 'itemAgencyCode',
-  METADATA: 'metadata',
-  CREATED_DATE: 'createdDate',
-  UPDATED_DATE: 'updatedDate',
-  HOLD: 'hold',
-  CENTRAL_SERVER_CODE: 'centralServerCode',
-  CREATED_BY_USER_NAME: 'createdByUsername',
-  FOLIO_REQUEST_ID: 'folioRequestId',
-  FOLIO_LOAN_ID: 'folioLoanId',
-  FOLIO_PATRON_ID: 'folioPatronId',
-  FOLIO_ITEM_ID: 'folioItemId',
-  INSTANCE_ID: 'instanceId',
-  HOLDINGS_ID: 'holdingsId',
 };

@@ -14,7 +14,7 @@ const transactionMock = {
   hold: {
     patronName: 'Brown, Adam',
     pickupLocation: 'Pickup Loc Code 1:Display Name 1:Print Name 1:Delivery stop 1',
-    transactionTime: 1544466568,
+    transactionTime: 1636614805,
     folioRequestId: '78ad79d9-afbb-462a-afb7-a31eb331a371',
     folioLoanId: '829f0791-9c2a-42d5-a2eb-6c3b4a38c1d8',
     folioPatronId: 'b4cee18d-f862-4ef1-95a5-879fdd619603',
@@ -50,7 +50,7 @@ describe('TransactionSummary', () => {
   });
 
   it('should show the transaction time', () => {
-    expect(screen.getByText('1/18/1970, 9:01 PM')).toBeVisible();
+    expect(screen.getByText('11/11/2021, 7:13 AM')).toBeVisible();
   });
 
   it('should show the transaction tracking id', () => {

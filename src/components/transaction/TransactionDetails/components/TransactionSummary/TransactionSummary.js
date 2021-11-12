@@ -16,23 +16,27 @@ import {
   Link,
 } from 'react-router-dom';
 import {
-  TRANSACTION_DETAIL_FIELDS,
+  HOLD_FIELDS,
+  TRANSACTION_FIELDS,
   TRANSACTION_SUMMARY,
 } from '../../../../../constants';
 
 const {
-  METADATA,
-  TRANSACTION_TIME,
-  TRACKING_ID,
   TYPE,
-  STATE,
+  HOLD,
+  TRACKING_ID,
+  STATUS,
+} = TRANSACTION_FIELDS;
+
+const {
+  TRANSACTION_TIME,
+  METADATA,
   PATRON_NAME,
-  PICKUP_LOCATION,
+  PICK_UP_LOCATION,
+  FOLIO_PATRON_ID,
   FOLIO_REQUEST_ID,
   FOLIO_LOAN_ID,
-  FOLIO_PATRON_ID,
-  HOLD,
-} = TRANSACTION_DETAIL_FIELDS;
+} = HOLD_FIELDS;
 
 const TransactionSummary = ({
   transaction,
@@ -51,8 +55,8 @@ const TransactionSummary = ({
               <FormattedMessage
                 id="ui-inn-reach.transaction-detail.field.label.time"
                 values={{
-                  date: <FormattedDate value={transaction[HOLD][TRANSACTION_TIME]} />,
-                  time: <FormattedTime value={transaction[HOLD][TRANSACTION_TIME]} />,
+                  date: <FormattedDate value={transaction[HOLD][TRANSACTION_TIME] * 1000} />,
+                  time: <FormattedTime value={transaction[HOLD][TRANSACTION_TIME] * 1000} />,
                 }}
               />}
           />
@@ -74,7 +78,7 @@ const TransactionSummary = ({
         <Col xs={3}>
           <KeyValue
             label={<FormattedMessage id="ui-inn-reach.transaction-detail.field.status" />}
-            value={transaction[STATE]}
+            value={transaction[STATUS]}
           />
         </Col>
         <Col xs={3}>
@@ -86,7 +90,7 @@ const TransactionSummary = ({
         <Col xs={3}>
           <KeyValue
             label={<FormattedMessage id="ui-inn-reach.transaction-detail.field.pickupLocation" />}
-            value={transaction[HOLD]?.[PICKUP_LOCATION]}
+            value={transaction[HOLD]?.[PICK_UP_LOCATION]}
           />
         </Col>
         <Col xs={3}>

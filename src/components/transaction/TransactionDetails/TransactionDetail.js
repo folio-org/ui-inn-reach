@@ -19,14 +19,18 @@ import {
 import {
   TRANSACTION_DETAIL_ACCORDION_STATE,
   FILL_PANE_WIDTH,
-  TRANSACTION_DETAIL_FIELDS,
+  HOLD_FIELDS,
+  TRANSACTION_FIELDS,
 } from '../../../constants';
 
 const {
-  TITLE,
   TYPE,
   HOLD,
-} = TRANSACTION_DETAIL_FIELDS;
+} = TRANSACTION_FIELDS;
+
+const {
+  TITLE,
+} = HOLD_FIELDS;
 
 const TransactionDetail = ({
   transaction,
@@ -34,7 +38,7 @@ const TransactionDetail = ({
 }) => {
   const renderActionMenu = useCallback(({ onToggle }) => (
     <ActionMenu
-      transactionType={transaction[TYPE]?.toLowerCase()}
+      transactionType={transaction[TYPE]}
       onToggle={onToggle}
     />
   ), [transaction[TYPE]]);

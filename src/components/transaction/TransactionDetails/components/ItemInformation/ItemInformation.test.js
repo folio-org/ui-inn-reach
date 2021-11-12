@@ -12,13 +12,11 @@ const transactionMock = {
     centralItemType: 200,
     itemAgencyCode: 'ydg01',
     itemId: 'it00000000002',
-    metadata: {
-      createdByUsername: 'diku_admin',
-    },
+    author: 'Herbert, Frank J',
     folioItemId: '34bd066f-51a3-40d0-ba49-4ad3508b4778',
-    instanceId: 'j7f5ebb7-9285-58f8-bc1e-608ac2080894',
-    holdingsId: 'w5f5ebb7-9285-58f8-bc1e-608ac2080832',
-    title: 'test title',
+    folioInstanceId: 'j7f5ebb7-9285-58f8-bc1e-608ac2080894',
+    folioHoldingId: 'w5f5ebb7-9285-58f8-bc1e-608ac2080832',
+    title: 'Children of Dune',
     callNumber: 'QP1.E61 v.78 c.1',
   },
 };
@@ -48,7 +46,7 @@ describe('ItemInformation', () => {
   });
 
   it('should show the transaction item title', () => {
-    expect(screen.getByText('test title')).toBeVisible();
+    expect(screen.getByText('Children of Dune')).toBeVisible();
   });
 
   it('should show the transaction central item type', () => {
@@ -56,7 +54,7 @@ describe('ItemInformation', () => {
   });
 
   it('should show the transaction author', () => {
-    expect(screen.getByText('diku_admin')).toBeVisible();
+    expect(screen.getByText('Herbert, Frank J')).toBeVisible();
   });
 
   it('should show the transaction call no.', () => {
