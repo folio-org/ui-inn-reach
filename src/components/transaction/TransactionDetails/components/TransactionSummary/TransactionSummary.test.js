@@ -77,7 +77,7 @@ describe('TransactionSummary', () => {
     expect(screen.getByText('Request detail')).toBeVisible();
   });
 
-  it('should show the transaction type', () => {
+  it('should show the "Loan detail" link', () => {
     expect(screen.getByText('Loan detail')).toBeVisible();
   });
 });

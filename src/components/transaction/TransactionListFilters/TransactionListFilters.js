@@ -83,7 +83,7 @@ const TransactionListFilters = ({
       <CheckboxFilter
         activeFilters={activeFilters[TRANSACTION_TYPE]}
         id={TRANSACTION_TYPE}
-        labelId="ui-inn-reach.transaction.transactionType"
+        labelId="ui-inn-reach.transaction.type"
         name={TRANSACTION_TYPE}
         options={getTransactionTypeDataOptions}
         onChange={adaptedApplyFilters}
