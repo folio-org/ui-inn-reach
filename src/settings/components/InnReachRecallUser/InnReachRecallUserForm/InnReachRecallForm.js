@@ -113,13 +113,13 @@ const InnReachRecallUserForm = ({
 InnReachRecallUserForm.propTypes = {
   form: PropTypes.object.isRequired,
   handleSubmit: PropTypes.func.isRequired,
-  invalid: PropTypes.bool.isRequired,
   isInnReachRecallUserPending: PropTypes.bool.isRequired,
   pristine: PropTypes.bool.isRequired,
   selectedServer: PropTypes.object.isRequired,
   serverOptions: PropTypes.arrayOf(PropTypes.object).isRequired,
   onChangeServer: PropTypes.func.isRequired,
   innReachRecallUser: PropTypes.object,
+  invalid: PropTypes.bool,
   parentMutator: PropTypes.shape({
     selectedServerId: PropTypes.shape({
       replace: PropTypes.func.isRequired,

@@ -31,7 +31,7 @@ const {
   RECALL_INN_REACH_ITEMS_AS_USER,
 } = INN_REACH_RECALL_USER_FIELDS;
 
-const InnReachRecallUserRoute = ({
+const InnReachRecallUserCreateEditRoute = ({
   resources: {
     centralServerRecords: {
       records: centralServers,
@@ -117,7 +117,7 @@ const InnReachRecallUserRoute = ({
   );
 };
 
-InnReachRecallUserRoute.manifest = {
+InnReachRecallUserCreateEditRoute.manifest = {
   selectedServerId: { initialValue: '' },
   centralServerRecords: {
     type: 'okapi',
@@ -141,7 +141,7 @@ InnReachRecallUserRoute.manifest = {
   },
 };
 
-InnReachRecallUserRoute.propTypes = {
+InnReachRecallUserCreateEditRoute.propTypes = {
   history: ReactRouterPropTypes.history.isRequired,
   resources: PropTypes.shape({
     selectedServerId: PropTypes.string,
@@ -168,4 +168,4 @@ InnReachRecallUserRoute.propTypes = {
   }),
 };
 
-export default stripesConnect(InnReachRecallUserRoute);
+export default stripesConnect(InnReachRecallUserCreateEditRoute);

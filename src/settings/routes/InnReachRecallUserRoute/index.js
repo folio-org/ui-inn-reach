@@ -7,7 +7,7 @@ import {
   Switch,
 } from '@folio/stripes/core';
 
-import InnReachRecallUserCreateEditRoute from './InnReachRecallUserRoute';
+import InnReachRecallUserCreateEditRoute from './InnReachRecallUserCreateEditRoute';
 
 const InnReachRecallUserRoute = (props) => {
   const { match } = props;
