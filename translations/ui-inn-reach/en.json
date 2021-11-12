@@ -322,11 +322,15 @@
   "transaction.patronAgency": "Patron agency",
   "transaction.itemAgency": "Item agency",
   "transaction.patronType": "INN-Reach patron type",
+  "transaction.itemType": "INN-Reach material type",
 
   "title.list.transactions": "INN-Reach transactions",
   "search": "Search",
   "resetAllFilters": "Reset all",
   "searchAndFilter": "Select activity",
+
+  "transaction.list.itemTitle": "{itemTitle} ({itemAgencyCode})",
+  "transaction.list.patronName": "{patronName} ({patronAgencyCode})",
 
   "transaction-detail.title": "Transaction detail",
   "transaction-detail.accordion.transaction": "Transaction summary",

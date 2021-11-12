@@ -128,7 +128,7 @@
           "inn-reach.material-type-mappings.item.get",
           "inn-reach.library-mappings.collection.get",
           "inn-reach.location-mappings.collection.get",
-          "inn-reach.d2r.settings.any.get",
+          "inn-reach.d2ir.settings.any.get",
           "inn-reach.central-servers.item-contribution-options-configuration.item.get",
           "inn-reach.agency-mappings.item.get",
           "inn-reach.central-servers.marc-transformation-options-settings.item.get",
@@ -199,13 +199,16 @@
           "inn-reach.central-patron-type-mappings.all",
           "inn-reach.d2ir.bib-info.all",
           "inn-reach.d2ir.patron-info.all",
-          "inn-reach.central-server.sys-configuration.all"
+          "inn-reach.central-server.sys-configuration.all",
+          "inn-reach.recall-user.item.post",
+          "inn-reach.recall-user.item.get",
+          "inn-reach.recall-user.item.put"
         ],
         "visible": true
       },
       {
         "permissionName": "ui-inn-reach.app.all",
-        "displayName": "Settings (inn-reach): INN-Reach App: All permissions",
+        "displayName": "INN-Reach App: All permissions",
         "subPermissions": [
           "module.inn-reach.enabled",
           "inn-reach.central-servers.all",
@@ -214,7 +217,7 @@
           "inn-reach.material-type-mappings.all",
           "inn-reach.library-mappings.all",
           "inn-reach.location-mappings.all",
-          "inn-reach.d2r.settings.any.get",
+          "inn-reach.d2ir.settings.any.get",
           "inn-reach.authentication.all",
           "inn-reach.central-servers.item-contribution-options-configuration.all",
           "inn-reach.agency-mappings.all",
