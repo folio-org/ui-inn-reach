@@ -34,8 +34,8 @@ const params = {
   'patronAgencyCode': '5dlpl',
   'patronType': '201',
   'query': 'secrets',
-  'sortBy': 'TRANSACTION_TIME',
-  'sortOrder': 'ASC',
+  'sortBy': 'transactionTime',
+  'sortOrder': 'ascending',
   'state': 'ITEM_HOLD',
   'type': ['PATRON', 'ITEM'],
 };
