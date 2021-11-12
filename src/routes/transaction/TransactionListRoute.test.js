@@ -24,7 +24,7 @@ const mutatorMock = {
   },
 };
 
-const path = '/innreach/transactions?centralItemType=200&centralServerCode=demo1&itemAgencyCode=5east&patronAgencyCode=5dlpl&patronType=201&query=secrets&state=ITEM_HOLD&type=PATRON&type=ITEM';
+const path = '/innreach/transactions?centralItemType=200&centralServerCode=demo1&itemAgencyCode=5east&patronAgencyCode=5dlpl&centralPatronType=201&query=secrets&state=ITEM_HOLD&type=PATRON&type=ITEM';
 const params = {
   'centralItemType': '200',
   'centralServerCode': 'demo1',
@@ -32,10 +32,10 @@ const params = {
   'limit': 100,
   'offset': 0,
   'patronAgencyCode': '5dlpl',
-  'patronType': '201',
+  'centralPatronType': '201',
   'query': 'secrets',
   'sortBy': 'transactionTime',
-  'sortOrder': 'ascending',
+  'sortOrder': 'asc',
   'state': 'ITEM_HOLD',
   'type': ['PATRON', 'ITEM'],
 };
