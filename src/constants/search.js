@@ -4,9 +4,9 @@ export const SORT_PARAMETER = 'sortBy';
 
 export const SORT_ORDER_PARAMETER = 'sortOrder';
 
-export const ASC_ORDER = 'ASC';
+export const ASC_ORDER = 'ascending';
 
-export const DESC_ORDER = 'DESC';
+export const DESC_ORDER = 'descending';
 
 export const TYPE_PARAMETER = 'type';
 
