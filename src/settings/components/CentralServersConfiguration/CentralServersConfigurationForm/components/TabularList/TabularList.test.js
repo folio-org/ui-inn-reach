@@ -112,7 +112,6 @@ describe('TabularList component', () => {
     });
   });
 
-  /*
   describe('Filtering of FOLIO libraries', () => {
     it('should show all libraries', () => {
       const librariesCount = document.querySelectorAll('[id="multiselect-option-list-localAgencies[0].FOLIOLibraries-0"]>li').length;
@@ -130,5 +129,4 @@ describe('TabularList component', () => {
       expect(librariesCount).toBe(6);
     });
   });
-  */
 });
