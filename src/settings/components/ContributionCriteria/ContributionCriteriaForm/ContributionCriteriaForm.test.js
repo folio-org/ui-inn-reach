@@ -143,7 +143,7 @@ describe('ContributionCriteriaForm', () => {
       ...commonProps,
       selectedServer: serverOptions[0],
     });
-    const libraryOptions = document.querySelectorAll('[id="multiselect-option-list-locationIds"]>ul>li');
+    const libraryOptions = document.querySelectorAll('[id="multiselect-option-list-locationIds"]>li');
 
     expect(libraryOptions.length).toBe(1);
     expect(screen.getByText('Annex'));
