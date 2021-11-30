@@ -16,6 +16,7 @@ import {
   FILL_PANE_WIDTH,
   ICON_KEYS,
 } from '../../../../../constants';
+import { getFiltersCount } from '../../../../../utils';
 
 const ResultsPane = ({
   children,
@@ -40,7 +41,7 @@ const ResultsPane = ({
       return null;
     }
 
-    const filterCount = Object.keys(filters).length;
+    const filterCount = getFiltersCount(filters);
 
     return (
       <PaneMenu>
@@ -79,8 +80,8 @@ const ResultsPane = ({
 ResultsPane.propTypes = {
   children: PropTypes.node.isRequired,
   filters: PropTypes.object.isRequired,
-  isFiltersOpened: PropTypes.bool.isRequired,
   title: PropTypes.node.isRequired,
+  isFiltersOpened: PropTypes.bool,
   count: PropTypes.number,
   renderLastMenu: PropTypes.func,
   subTitle: PropTypes.node,
@@ -89,6 +90,7 @@ ResultsPane.propTypes = {
 };
 
 ResultsPane.defaultProps = {
+  isFiltersOpened: true,
   width: FILL_PANE_WIDTH,
   subTitle: '',
   count: 0,
