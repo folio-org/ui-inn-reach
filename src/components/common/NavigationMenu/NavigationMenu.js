@@ -7,12 +7,14 @@ import {
   getReceiveShippedItemUrl,
   getTransactionListUrl,
 } from '../../../constants';
+import css from './NavigationMenu.css';
 
 const NavigationMenu = ({
   history,
   location,
   value,
   dataOptions,
+  separator,
 }) => {
   const intl = useIntl();
 
@@ -44,11 +46,14 @@ const NavigationMenu = ({
   };
 
   return (
-    <Select
-      value={value}
-      dataOptions={dataOptions || defaultOptions}
-      onChange={handleChangeMenu}
-    />
+    <>
+      <Select
+        value={value}
+        dataOptions={dataOptions || defaultOptions}
+        onChange={handleChangeMenu}
+      />
+      {separator && <div className={css.separator} />}
+    </>
   );
 };
 
@@ -63,6 +68,7 @@ NavigationMenu.propTypes = {
     label: PropTypes.string.isRequired,
     value: PropTypes.string.isRequired,
   })),
+  separator: PropTypes.bool,
   value: PropTypes.string,
 };
 

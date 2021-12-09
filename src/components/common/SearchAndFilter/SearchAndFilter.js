@@ -107,6 +107,7 @@ const SearchAndFilter = ({
       {(isFiltersOpened && !isInsideListSearch) && (
         <FiltersPane toggleFilters={toggleFilters}>
           <NavigationMenu
+            separator
             history={history}
             location={location}
           />
