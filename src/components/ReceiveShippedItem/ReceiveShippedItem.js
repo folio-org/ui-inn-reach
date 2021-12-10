@@ -1,6 +1,7 @@
 import {
   useState,
-  useRef, useEffect,
+  useRef,
+  useEffect,
 } from 'react';
 import PropTypes from 'prop-types';
 import ReactRouterPropTypes from 'react-router-prop-types';
@@ -198,9 +199,9 @@ const ReceiveShippedItems = ({
         </Pane>
       </Paneset>
       <PaneFooter
-        innerClassName={css.footerContent}
         renderEnd={
           <Button
+            marginBottom0
             buttonStyle="primary mega"
             disabled={isEmpty(scannedItems)}
             onClick={handleSessionEnd}
