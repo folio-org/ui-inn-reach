@@ -52,7 +52,12 @@ const NavigationMenu = ({
         dataOptions={dataOptions || defaultOptions}
         onChange={handleChangeMenu}
       />
-      {separator && <div className={css.separator} />}
+      {separator &&
+        <div
+          className={css.separator}
+          data-testid="separator"
+        />
+      }
     </>
   );
 };
