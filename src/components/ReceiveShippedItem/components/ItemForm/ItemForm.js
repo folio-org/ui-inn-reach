@@ -15,8 +15,9 @@ import {
   TextField,
   Row,
   Col,
+  Modal,
+  ModalFooter,
 } from '@folio/stripes-components';
-import ItemFormModal from './components';
 
 const ItemForm = ({
   isOpenModal,
@@ -63,10 +64,26 @@ const ItemForm = ({
           </Button>
         </Row>
       </form>
-      <ItemFormModal
+      <Modal
+        dismissible
         open={open}
+        size="small"
+        label={<FormattedMessage id="ui-inn-reach.shipped-items.modal.title" />}
+        footer={
+          <ModalFooter>
+            <Button
+              marginBottom0
+              buttonStyle="primary"
+              onClick={handleCloseModal}
+            >
+              <FormattedMessage id="ui-inn-reach.shipped-items.modal.button" />
+            </Button>
+          </ModalFooter>
+        }
         onClose={handleCloseModal}
-      />
+      >
+        <FormattedMessage id="ui-inn-reach.shipped-items.modal.message" />
+      </Modal>
     </>
   );
 };
