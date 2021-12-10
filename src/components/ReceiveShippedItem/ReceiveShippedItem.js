@@ -87,7 +87,7 @@ const ReceiveShippedItems = ({
 }) => {
   const showCallout = useCallout();
   const intl = useIntl();
-  const itemFormRef = useRef();
+  const itemFormRef = useRef({});
   const isLoading = isTransactionsPending || isReceiveShippedItemPending;
 
   const [scannedItems, setScannedItems] = useState([]);
@@ -154,7 +154,9 @@ const ReceiveShippedItems = ({
   };
 
   const handleSessionEnd = () => {
-    itemFormRef.current.reset();
+    if (itemFormRef.current.reset) {
+      itemFormRef.current.reset();
+    }
     setScannedItems([]);
   };
 
@@ -225,6 +227,7 @@ ReceiveShippedItems.manifest = Object.freeze({
     type: 'okapi',
     path: 'inn-reach/transactions/%{transactionId}/receive-item/%{servicePointId}',
     pk: '',
+    clientGeneratePk: false,
     fetch: false,
     accumulate: true,
     throwErrors: false,
