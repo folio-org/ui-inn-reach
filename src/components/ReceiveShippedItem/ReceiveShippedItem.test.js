@@ -198,7 +198,7 @@ describe('ReceiveShippedItem', () => {
 
         it('should pass the received item to the list', async () => {
           await renderReceiveItem();
-          expect(ListCheckInItems.mock.calls[1][0].scannedItems).toEqual([{
+          expect(ListCheckInItems.mock.calls[2][0].scannedItems).toEqual([{
             item: { barcode: '5465657766', title: 'God Emperor of Dune: Sianoq!' },
             pickupLocation: 'cd2:Circ Desk 2:Circulation Desk -- Back Entrance:Circ Desk'
           }]);
@@ -220,7 +220,7 @@ describe('ReceiveShippedItem', () => {
       renderReceiveShippedItem({ stripes });
       await act(async () => { ItemForm.mock.calls[0][0].onSubmit({ itemBarcode }); });
       screen.getByRole('button', { name: 'End session' }).click();
-      expect(ListCheckInItems.mock.calls[2][0].scannedItems).toEqual([]);
+      expect(ListCheckInItems.mock.calls[3][0].scannedItems).toEqual([]);
     });
   });
 });
