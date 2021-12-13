@@ -9,6 +9,7 @@ import {
 import {
   FormattedMessage,
 } from 'react-intl';
+
 import stripesFinalForm from '@folio/stripes/final-form';
 import {
   Button,

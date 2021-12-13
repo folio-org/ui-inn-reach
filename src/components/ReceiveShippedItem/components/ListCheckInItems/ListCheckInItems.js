@@ -2,9 +2,11 @@ import PropTypes from 'prop-types';
 import {
   FormattedMessage,
 } from 'react-intl';
+
 import {
   MultiColumnList,
 } from '@folio/stripes-components';
+
 import {
   RECEIVED_ITEM_FIELDS,
   FOLIO_CHECK_IN_FIELDS,

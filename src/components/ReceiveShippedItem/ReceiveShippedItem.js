@@ -3,12 +3,17 @@ import {
   useRef,
   useEffect,
 } from 'react';
+import {
+  FormattedMessage,
+  useIntl,
+} from 'react-intl';
 import PropTypes from 'prop-types';
 import ReactRouterPropTypes from 'react-router-prop-types';
 import {
   isEmpty,
   orderBy,
 } from 'lodash';
+
 import {
   Button,
   Paneset,
@@ -20,7 +25,7 @@ import {
   stripesConnect,
   stripesShape,
 } from '@folio/stripes/core';
-import { FormattedMessage, useIntl } from 'react-intl';
+
 import {
   CALLOUT_ERROR_TYPE,
   FILL_PANE_WIDTH,
@@ -77,7 +82,6 @@ const ReceiveShippedItems = ({
     transactionRecords: {
       records: transactionsData,
       isPending: isTransactionsPending,
-      hasLoaded: isTransactionsLoaded,
     },
     receiveShippedItem: {
       isPending: isReceiveShippedItemPending,
@@ -92,6 +96,7 @@ const ReceiveShippedItems = ({
   const isLoading = isTransactionsPending || isReceiveShippedItemPending;
 
   const [scannedItems, setScannedItems] = useState([]);
+  const [isTransactionsLoaded, setIsTransactionsLoaded] = useState(false);
 
   const addScannedItem = (checkinResp) => {
     const {
@@ -123,6 +128,7 @@ const ReceiveShippedItems = ({
   };
 
   const fetchTransactions = (itemBarcode) => {
+    setIsTransactionsLoaded(false);
     mutator.transactionRecords.reset();
     mutator.transactionRecords.GET({
       params: {
@@ -135,6 +141,7 @@ const ReceiveShippedItems = ({
         const transaction = orderBy(transactions, [`${METADATA}.${UPDATED_DATE}`], ['desc'])[0];
         const servicePointId = stripes?.user?.user?.curServicePoint?.id;
 
+        setIsTransactionsLoaded(true);
         mutator.transactionId.replace(transaction?.id || '');
         mutator.servicePointId.replace(servicePointId || '');
 
@@ -258,7 +265,6 @@ ReceiveShippedItems.propTypes = {
     transactionRecords: PropTypes.shape({
       records: PropTypes.arrayOf(PropTypes.object).isRequired,
       isPending: PropTypes.bool.isRequired,
-      hasLoaded: PropTypes.bool.isRequired,
     }).isRequired,
     receiveShippedItem: PropTypes.shape({
       isPending: PropTypes.bool.isRequired,

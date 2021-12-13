@@ -1,8 +1,10 @@
 import PropTypes from 'prop-types';
+import { useIntl } from 'react-intl';
+
 import {
   Select,
 } from '@folio/stripes/components';
-import { useIntl } from 'react-intl';
+
 import {
   getReceiveShippedItemUrl,
   getTransactionListUrl,

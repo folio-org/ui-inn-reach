@@ -2,12 +2,14 @@ import PropTypes from 'prop-types';
 import {
   FormattedMessage,
 } from 'react-intl';
+
 import {
   Button,
   IconButton,
   Dropdown,
   DropdownMenu,
 } from '@folio/stripes-components';
+
 import {
   ICONS,
 } from '../../../../../../constants';
@@ -29,7 +31,7 @@ const ItemActions = ({
   const menu = ({ onToggle }) => (
     <DropdownMenu
       role="menu"
-      aria-label="available actions"
+      aria-label={<FormattedMessage id="ui-inn-reach.available-actions" />}
       onToggle={onToggle}
     >
       <Button
