@@ -206,6 +206,7 @@ const ReceiveShippedItems = ({
         </Pane>
       </Paneset>
       <PaneFooter
+        innerClassName={css.footerContent}
         renderEnd={
           <Button
             marginBottom0
