@@ -1,7 +1,6 @@
 import {
   useState,
   useRef,
-  useEffect,
 } from 'react';
 import {
   FormattedMessage,
@@ -167,10 +166,6 @@ const ReceiveShippedItems = ({
     }
     setScannedItems([]);
   };
-
-  useEffect(() => {
-    mutator.transactionRecords.reset();
-  }, []);
 
   return (
     <div className={css.container}>

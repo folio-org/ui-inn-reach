@@ -134,11 +134,6 @@ describe('ReceiveShippedItem', () => {
     expect(container).toBeVisible();
   });
 
-  it('should reset the transactions data', () => {
-    renderReceiveShippedItem({ stripes });
-    expect(mutatorMock.transactionRecords.reset).toHaveBeenCalled();
-  });
-
   describe('spinner display', () => {
     it('should be visible when loading "transactions"', () => {
       const newResources = cloneDeep(resourcesMock);
@@ -165,7 +160,7 @@ describe('ReceiveShippedItem', () => {
 
     it('should reset the transactions data', () => {
       renderReceiveItem();
-      expect(mutatorMock.transactionRecords.reset).toHaveBeenCalledTimes(2);
+      expect(mutatorMock.transactionRecords.reset).toHaveBeenCalled();
     });
 
     it('should request transactions with proper parameters', () => {
