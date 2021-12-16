@@ -167,7 +167,7 @@ describe('ReceiveShippedItem', () => {
       renderReceiveItem();
       expect(mutatorMock.transactionRecords.GET).toHaveBeenCalledWith({
         params: {
-          query: itemBarcode,
+          itemBarcode,
           type: 'PATRON',
           state: 'ITEM_SHIPPED',
         },

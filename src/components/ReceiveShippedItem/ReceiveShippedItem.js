@@ -33,7 +33,6 @@ import {
   METADATA,
   METADATA_FIELDS,
   RECEIVED_ITEM_FIELDS,
-  SEARCH_PARAMETER,
   TRANSACTION_FIELDS,
   TRANSACTION_STATUSES,
   TRANSACTION_TYPES,
@@ -61,6 +60,7 @@ const {
 const {
   TYPE,
   STATUS,
+  ITEM_BARCODE,
 } = TRANSACTION_FIELDS;
 
 const {
@@ -131,7 +131,7 @@ const ReceiveShippedItems = ({
     mutator.transactionRecords.reset();
     mutator.transactionRecords.GET({
       params: {
-        [SEARCH_PARAMETER]: itemBarcode.trim(),
+        [ITEM_BARCODE]: itemBarcode.trim(),
         [TYPE]: PATRON,
         [STATUS]: ITEM_SHIPPED,
       },
