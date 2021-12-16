@@ -1,5 +1,6 @@
 import React, {
   useCallback,
+  useEffect,
   useState,
 } from 'react';
 import PropTypes from 'prop-types';
@@ -51,6 +52,7 @@ const TransactionDetail = ({
   stripes,
   onClose,
 }) => {
+  const servicePointId = stripes?.user?.user?.curServicePoint?.id;
   const intl = useIntl();
   const showCallout = useCallout();
   const [openUnshippedItemModal, setOpenUnshippedItemModal] = useState(false);
@@ -59,7 +61,7 @@ const TransactionDetail = ({
     setOpenUnshippedItemModal(prevModalState => !prevModalState);
   };
 
-  const fetchReceiveUnshippedItem = (itemBarcode) => {
+  const fetchReceiveUnshippedItem = ({ itemBarcode }) => {
     mutator.receiveUnshippedItem.POST({
       itemBarcode,
     })
@@ -76,12 +78,9 @@ const TransactionDetail = ({
       });
   };
 
-  const handleSubmit = ({ itemBarcode }) => {
-    const servicePointId = stripes?.user?.user?.curServicePoint?.id;
-
+  useEffect(() => {
     mutator.servicePointId.replace(servicePointId);
-    fetchReceiveUnshippedItem(itemBarcode);
-  };
+  }, [servicePointId]);
 
   const renderActionMenu = useCallback(({ onToggle }) => (
     <ActionMenu
@@ -118,7 +117,7 @@ const TransactionDetail = ({
       {openUnshippedItemModal &&
         <ReceiveUnshippedItemModal
           intl={intl}
-          onSubmit={handleSubmit}
+          onSubmit={fetchReceiveUnshippedItem}
           onTriggerModal={triggerUnshippedItemModal}
         />
       }
