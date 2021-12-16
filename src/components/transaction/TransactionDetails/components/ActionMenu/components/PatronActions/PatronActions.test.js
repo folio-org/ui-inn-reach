@@ -3,12 +3,20 @@ import { renderWithIntl } from '@folio/stripes-data-transfer-components/test/jes
 import { translationsProperties } from '../../../../../../../../test/jest/helpers';
 import PatronActions from './PatronActions';
 
+const transactionMock = {
+  state: 'PATRON_HOLD',
+};
+
 const renderPatronActions = ({
+  transaction = transactionMock,
   onToggle = jest.fn(),
+  onReceiveUnshippedItem = jest.fn(),
 } = {}) => {
   return renderWithIntl(
     <PatronActions
+      transaction={transaction}
       onToggle={onToggle}
+      onReceiveUnshippedItem={onReceiveUnshippedItem}
     />,
     translationsProperties,
   );
