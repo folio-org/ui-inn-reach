@@ -5,6 +5,14 @@ export const getTransactionStatusOptions = statuses => {
   }));
 };
 
+export const getCentralServerOpts = (servers) => {
+  return servers.map(({ id, name, centralServerCode }) => ({
+    id,
+    label: `${name} (${centralServerCode})`,
+    value: centralServerCode,
+  }));
+};
+
 export const getCentralServerAgencyOptions = (centralServerAgencies) => {
   return centralServerAgencies.map(({ centralServerCode, agencies }) => {
     return agencies.map(({ agencyCode, description }) => ({
@@ -19,6 +27,15 @@ export const getCentralServerPatronTypeOptions = (centralServerPatronTypes) => {
     return patronTypes.map(({ centralPatronType, description }) => ({
       label: `${centralServerCode}: ${centralPatronType} - ${description}`,
       value: `${centralPatronType}`,
+    }));
+  }).flat();
+};
+
+export const getCentralServerItemTypeOptions = (centralServerItemTypes) => {
+  return centralServerItemTypes.map(({ centralServerCode, itemTypes }) => {
+    return itemTypes.map(({ centralItemType, description }) => ({
+      label: `${centralServerCode}: ${centralItemType} - ${description}`,
+      value: `${centralItemType}`,
     }));
   }).flat();
 };
