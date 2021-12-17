@@ -88,8 +88,12 @@ const TransactionDetail = ({
 };
 
 TransactionDetail.propTypes = {
+  intl: PropTypes.object.isRequired,
+  isOpenUnshippedItemModal: PropTypes.bool.isRequired,
   transaction: PropTypes.object.isRequired,
   onClose: PropTypes.func.isRequired,
+  onFetchReceiveUnshippedItem: PropTypes.func.isRequired,
+  onTriggerUnshippedItemModal: PropTypes.func.isRequired,
 };
 
 export default TransactionDetail;

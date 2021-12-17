@@ -8,6 +8,7 @@ import ReactRouterPropTypes from 'react-router-prop-types';
 
 import {
   stripesConnect,
+  stripesShape,
 } from '@folio/stripes/core';
 import {
   LoadingPane,
@@ -121,6 +122,7 @@ TransactionDetailContainer.propTypes = {
       isPending: PropTypes.bool.isRequired,
     }).isRequired,
   }).isRequired,
+  stripes: stripesShape.isRequired,
   mutator: PropTypes.shape({
     servicePointId: PropTypes.shape({
       replace: PropTypes.func.isRequired,

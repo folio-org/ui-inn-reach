@@ -29,6 +29,7 @@ const renderTransactionDetail = ({
   return renderWithIntl(
     <TransactionDetail
       transaction={transaction}
+      intl={{}}
       isOpenUnshippedItemModal={isOpenUnshippedItemModal}
       onClose={onClose}
       onTriggerUnshippedItemModal={onTriggerUnshippedItemModal}
