@@ -1,8 +1,6 @@
 import React from 'react';
 import { screen } from '@testing-library/react';
 import { renderWithIntl } from '@folio/stripes-data-transfer-components/test/jest/helpers';
-import { cloneDeep } from 'lodash';
-import { useStripes } from '@folio/stripes/core';
 import { translationsProperties } from '../../../../test/jest/helpers';
 import TransactionDetail from './TransactionDetail';
 
@@ -11,6 +9,7 @@ jest.mock('./components', () => ({
   TransactionSummary: jest.fn(() => <div>TransactionSummary</div>),
   PatronInformation: jest.fn(() => <div>PatronInformation</div>),
   ItemInformation: jest.fn(() => <div>ItemInformation</div>),
+  ReceiveUnshippedItemModal: jest.fn(() => <div>ReceiveUnshippedItemModal</div>),
 }));
 
 const transactionMock = {
@@ -20,33 +19,20 @@ const transactionMock = {
   },
 };
 
-const receiveUnshippedItemMock = {
-
-};
-
-const mutatorMock = {
-  servicePointId: {
-    replace: jest.fn(),
-  },
-  receiveUnshippedItem: {
-    POST: jest.fn(() => Promise.resolve(receiveUnshippedItemMock)),
-  },
-};
-
-const servicePointId = 'c4c90014-c8c9-4ade-8f24-b5e313319f4b';
-
 const renderTransactionDetail = ({
-  mutator = mutatorMock,
   transaction = transactionMock,
-  stripes,
+  isOpenUnshippedItemModal = false,
+  onTriggerUnshippedItemModal,
+  onFetchReceiveUnshippedItem,
   onClose,
 } = {}) => {
   return renderWithIntl(
     <TransactionDetail
-      mutator={mutator}
       transaction={transaction}
-      stripes={stripes}
+      isOpenUnshippedItemModal={isOpenUnshippedItemModal}
       onClose={onClose}
+      onTriggerUnshippedItemModal={onTriggerUnshippedItemModal}
+      onFetchReceiveUnshippedItem={onFetchReceiveUnshippedItem}
     />,
     translationsProperties,
   );
@@ -54,17 +40,14 @@ const renderTransactionDetail = ({
 
 describe('TransactionDetail', () => {
   const onClose = jest.fn();
-  let stripes;
+  const onTriggerUnshippedItemModal = jest.fn();
+  const onFetchReceiveUnshippedItem = jest.fn();
 
   const commonProps = {
-    stripes,
     onClose,
+    onTriggerUnshippedItemModal,
+    onFetchReceiveUnshippedItem,
   };
-
-  beforeEach(() => {
-    stripes = cloneDeep(useStripes());
-    stripes.user.user.curServicePoint = { id: servicePointId };
-  });
 
   it('should be rendered', () => {
     const { container } = renderTransactionDetail(commonProps);
@@ -93,5 +76,13 @@ describe('TransactionDetail', () => {
     it('should have ItemInformation', () => {
       expect(screen.getByText('ItemInformation')).toBeVisible();
     });
+  });
+
+  it('should display a modal for "receive unshipped item"', () => {
+    renderTransactionDetail({
+      ...commonProps,
+      isOpenUnshippedItemModal: true,
+    });
+    expect(screen.getByText('ReceiveUnshippedItemModal')).toBeVisible();
   });
 });

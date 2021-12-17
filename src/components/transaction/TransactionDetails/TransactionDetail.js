@@ -1,18 +1,11 @@
 import React, {
   useCallback,
-  useEffect,
-  useState,
 } from 'react';
 import PropTypes from 'prop-types';
 import {
   FormattedMessage,
-  useIntl,
 } from 'react-intl';
 
-import {
-  stripesConnect,
-  stripesShape,
-} from '@folio/stripes/core';
 import {
   Pane,
   Row,
@@ -20,23 +13,20 @@ import {
   AccordionSet,
   Headline,
 } from '@folio/stripes-components';
+
 import {
   PatronInformation,
   TransactionSummary,
   ItemInformation,
   ActionMenu,
+  ReceiveUnshippedItemModal,
 } from './components';
 import {
   TRANSACTION_DETAIL_ACCORDION_STATE,
   FILL_PANE_WIDTH,
   HOLD_FIELDS,
   TRANSACTION_FIELDS,
-  CALLOUT_ERROR_TYPE,
 } from '../../../constants';
-import ReceiveUnshippedItemModal from './components/ReceiveUnshippedItemModal';
-import {
-  useCallout,
-} from '../../../hooks';
 
 const {
   HOLD,
@@ -47,46 +37,18 @@ const {
 } = HOLD_FIELDS;
 
 const TransactionDetail = ({
-  mutator,
   transaction,
-  stripes,
+  intl,
+  isOpenUnshippedItemModal,
   onClose,
+  onTriggerUnshippedItemModal,
+  onFetchReceiveUnshippedItem,
 }) => {
-  const servicePointId = stripes?.user?.user?.curServicePoint?.id;
-  const intl = useIntl();
-  const showCallout = useCallout();
-  const [openUnshippedItemModal, setOpenUnshippedItemModal] = useState(false);
-
-  const triggerUnshippedItemModal = () => {
-    setOpenUnshippedItemModal(prevModalState => !prevModalState);
-  };
-
-  const fetchReceiveUnshippedItem = ({ itemBarcode }) => {
-    mutator.receiveUnshippedItem.POST({
-      itemBarcode,
-    })
-      .then(() => {
-        showCallout({
-          message: <FormattedMessage id="ui-inn-reach.unshipped-item.callout.success.post.receive-unshipped-item" />,
-        });
-      })
-      .catch(() => {
-        showCallout({
-          type: CALLOUT_ERROR_TYPE,
-          message: <FormattedMessage id="ui-inn-reach.unshipped-item.callout.connection-problem.post.receive-unshipped-item" />,
-        });
-      });
-  };
-
-  useEffect(() => {
-    mutator.servicePointId.replace(servicePointId);
-  }, [servicePointId]);
-
   const renderActionMenu = useCallback(({ onToggle }) => (
     <ActionMenu
       transaction={transaction}
       onToggle={onToggle}
-      onReceiveUnshippedItem={triggerUnshippedItemModal}
+      onReceiveUnshippedItem={onTriggerUnshippedItemModal}
     />
   ), [transaction]);
 
@@ -114,42 +76,20 @@ const TransactionDetail = ({
         <PatronInformation transaction={transaction} />
         <ItemInformation transaction={transaction} />
       </AccordionSet>
-      {openUnshippedItemModal &&
+      {isOpenUnshippedItemModal &&
         <ReceiveUnshippedItemModal
           intl={intl}
-          onSubmit={fetchReceiveUnshippedItem}
-          onTriggerModal={triggerUnshippedItemModal}
+          onSubmit={onFetchReceiveUnshippedItem}
+          onTriggerModal={onTriggerUnshippedItemModal}
         />
       }
     </Pane>
   );
 };
 
-TransactionDetail.manifest = Object.freeze({
-  servicePointId: { initialValue: '' },
-  receiveUnshippedItem: {
-    type: 'okapi',
-    path: 'inn-reach/transactions/!{transaction.id}/receive-unshipped/%{servicePointId}',
-    pk: '',
-    clientGeneratePk: false,
-    fetch: false,
-    accumulate: true,
-    throwErrors: false,
-  },
-});
-
 TransactionDetail.propTypes = {
-  stripes: stripesShape.isRequired,
   transaction: PropTypes.object.isRequired,
   onClose: PropTypes.func.isRequired,
-  mutator: PropTypes.shape({
-    servicePointId: PropTypes.shape({
-      replace: PropTypes.func.isRequired,
-    }).isRequired,
-    receiveUnshippedItem: PropTypes.shape({
-      POST: PropTypes.func.isRequired,
-    }),
-  }),
 };
 
-export default stripesConnect(TransactionDetail);
+export default TransactionDetail;

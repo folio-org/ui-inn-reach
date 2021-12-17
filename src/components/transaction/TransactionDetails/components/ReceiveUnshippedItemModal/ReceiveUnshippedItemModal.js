@@ -54,6 +54,7 @@ const ReceiveUnshippedItemModal = ({
             <Field
               required
               autoFocus
+              data-testid="itemBarcode"
               name="itemBarcode"
               placeholder={intl.formatMessage({ id: 'ui-inn-reach.unshipped-item.placeholder.enter-item-barcode' })}
               validate={required}

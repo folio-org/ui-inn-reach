@@ -35,10 +35,32 @@ describe('PatronActions component', () => {
     expect(getByText('Receive item')).toBeVisible();
   });
 
-  it('should render "Receive unshipped item" action', () => {
-    const { getByText } = renderPatronActions();
+  describe('Receive unshipped item', () => {
+    it('should be visible', () => {
+      const { getByText } = renderPatronActions();
 
-    expect(getByText('Receive unshipped item')).toBeVisible();
+      expect(getByText('Receive unshipped item')).toBeVisible();
+    });
+
+    it('should be enabled', () => {
+      const { getByText } = renderPatronActions({
+        transaction: {
+          state: 'PATRON_HOLD',
+        },
+      });
+
+      expect(getByText('Receive unshipped item')).toBeEnabled();
+    });
+
+    it('should be enabled', () => {
+      const { getByText } = renderPatronActions({
+        transaction: {
+          state: 'TRANSFER',
+        },
+      });
+
+      expect(getByText('Receive unshipped item')).toBeEnabled();
+    });
   });
 
   it('should render "Return item" action', () => {
