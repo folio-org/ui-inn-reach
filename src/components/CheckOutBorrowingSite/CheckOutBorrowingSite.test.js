@@ -136,7 +136,7 @@ describe('CheckOutBorrowingSite', () => {
     ItemForm.mockClear();
     ListCheckOutItems.mockClear();
     mutatorMock.transactionRecords.reset.mockClear();
-    mutatorMock.receiveShippedItem.POST.mockClear();
+    mutatorMock.checkoutBorroingSiteItem.POST.mockClear();
     mutatorMock.itemBarcode.replace.mockClear();
     mutatorMock.servicePointId.replace.mockClear();
   });
@@ -159,7 +159,7 @@ describe('CheckOutBorrowingSite', () => {
     it('should be visible when loading "checked out item"', () => {
       const newResources = cloneDeep(resourcesMock);
 
-      newResources.receiveShippedItem.isPending = true;
+      newResources.checkoutBorroingSiteItem.isPending = true;
       renderCheckOutBorrowingSite({ resources: newResources, stripes });
       expect(screen.getByText('spinner')).toBeVisible();
     });
@@ -203,22 +203,33 @@ describe('CheckOutBorrowingSite', () => {
       describe('receive shipped item call', () => {
         it('should return item', async () => {
           await renderReceiveItem();
-          expect(mutatorMock.receiveShippedItem.POST).toBeCalled();
+          expect(mutatorMock.checkoutBorroingSiteItem.POST).toBeCalled();
         });
 
         it('should pass the received item to the list', async () => {
           await renderReceiveItem();
           expect(ListCheckOutItems.mock.calls[2][0].scannedItems).toEqual([{
-            item: { barcode: '12345678', title: 'God Emperor of Dune: Sianoq!' },
-            pickupLocation: 'cd2:Circ Desk 2:Circulation Desk -- Back Entrance:Circ Desk'
+            item: {
+              barcode: '1234567',
+              title: 'God Emperor of Dune: Sianoq!',
+              location: {
+                name: 'Meyer General Collection',
+              },
+            },
+            loanDate: '2021-12-20T12:22:15.623+00:00',
+            dueDate: '2022-03-21T23:59:59.000+00:00',
+            loanPolicy: {
+              name: 'INN-Reach Institutional Loan'
+            },
           }]);
         });
 
         it('should not be called', async () => {
           const newMutator = cloneDeep(mutatorMock);
+
           newMutator.transactionRecords.GET = jest.fn(() => Promise.resolve());
           await renderReceiveItem({ mutator: newMutator });
-          expect(mutatorMock.receiveShippedItem.POST).not.toBeCalled();
+          expect(mutatorMock.checkoutBorroingSiteItem.POST).not.toBeCalled();
         });
       });
     });

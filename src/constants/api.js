@@ -6,7 +6,7 @@ const TRANSACTIONS = 'transactions';
 
 const VIEW = 'view';
 const RECEIVE_SHIPPED_ITEM = 'receive-shipped-item';
-const CHECK_OUT_TO_BORROWING_SITE = "check-out-to-borrowing-site";
+const CHECK_OUT_TO_BORROWING_SITE = 'check-out-to-borrowing-site';
 
 export const getTransactionListUrl = () => (`/${MODULE_ROUTE}/${TRANSACTIONS}`);
 export const getTransactionViewUrl = (id) => (`/${MODULE_ROUTE}/${TRANSACTIONS}/${id}/${VIEW}`);

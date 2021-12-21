@@ -133,11 +133,11 @@ const CheckOutBorrowingSite = ({
         [SORT_ORDER_PARAMETER]: DESC_ORDER,
       },
     })
-    .then(({ transactions: [transaction] }) => {
+      .then(({ transactions: [transaction] }) => {
         const servicePointId = stripes?.user?.user?.curServicePoint?.id;
 
         setIsTransactionsLoaded(true);
-        mutator.itemBarcode.replace(transaction?.hold?.folioItemBarcode|| '');
+        mutator.itemBarcode.replace(transaction?.hold?.folioItemBarcode || '');
         mutator.servicePointId.replace(servicePointId || '');
 
         if (transaction) {
