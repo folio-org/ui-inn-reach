@@ -10,7 +10,6 @@ import PropTypes from 'prop-types';
 import ReactRouterPropTypes from 'react-router-prop-types';
 import {
   isEmpty,
-  orderBy,
 } from 'lodash';
 
 import {
@@ -26,22 +25,24 @@ import {
 } from '@folio/stripes/core';
 
 import {
+  DESC_ORDER,
+  SORT_ORDER_PARAMETER,
+  SORT_PARAMETER,
   CALLOUT_ERROR_TYPE,
   FILL_PANE_WIDTH,
   FILTER_PANE_WIDTH,
-  getReceiveShippedItemUrl,
+  getCheckOutToBorrowingSiteUrl,
   ICONS,
-  METADATA,
   METADATA_FIELDS,
-  RECEIVED_ITEM_FIELDS,
-  SEARCH_PARAMETER,
   TRANSACTION_FIELDS,
   TRANSACTION_STATUSES,
   TRANSACTION_TYPES,
+  CHECK_OUT_ITEM_FIELDS,
 } from '../../constants';
+
 import {
   ItemForm,
-  ListCheckInItems,
+  ListCheckOutItems,
 } from './components';
 import {
   NavigationMenu,
@@ -49,33 +50,32 @@ import {
 import {
   useCallout,
 } from '../../hooks';
-import css from './ReceiveShippedItem.css';
+import css from './CheckOutBorrowingSite.css';
 
 const {
   UPDATED_DATE,
 } = METADATA_FIELDS;
 
 const {
-  PATRON,
+  ITEM,
 } = TRANSACTION_TYPES;
 
 const {
   TYPE,
   STATUS,
+  ITEM_BARCODE,
 } = TRANSACTION_FIELDS;
 
 const {
-  ITEM_SHIPPED,
+  ITEM_HOLD,
+  TRANSFER,
 } = TRANSACTION_STATUSES;
 
 const {
-  TRANSACTION,
-  FOLIO_CHECK_IN,
-  HOLD,
-  PICK_UP_LOCATION,
-} = RECEIVED_ITEM_FIELDS;
+  FOLIO_CHECK_OUT,
+} = CHECK_OUT_ITEM_FIELDS;
 
-const ReceiveShippedItems = ({
+const CheckOutBorrowingSite = ({
   history,
   location,
   resources: {
@@ -83,8 +83,8 @@ const ReceiveShippedItems = ({
       records: transactionsData,
       isPending: isTransactionsPending,
     },
-    receiveShippedItem: {
-      isPending: isReceiveShippedItemPending,
+    checkoutBorroingSiteItem: {
+      isPending: isCheckoutBorroingSitePending,
     },
   },
   mutator,
@@ -93,36 +93,30 @@ const ReceiveShippedItems = ({
   const showCallout = useCallout();
   const intl = useIntl();
   const itemFormRef = useRef({});
-  const isLoading = isTransactionsPending || isReceiveShippedItemPending;
+  const isLoading = isTransactionsPending || isCheckoutBorroingSitePending;
 
   const [scannedItems, setScannedItems] = useState([]);
   const [isTransactionsLoaded, setIsTransactionsLoaded] = useState(false);
 
-  const addScannedItem = (checkinResp) => {
+  const addScannedItem = (checkoutResp) => {
     const {
-      [TRANSACTION]: {
-        [HOLD]: {
-          [PICK_UP_LOCATION]: pickupLocation,
-        },
-      },
-      [FOLIO_CHECK_IN]: folioCheckIn,
-    } = checkinResp;
+      [FOLIO_CHECK_OUT]: folioCheckOut,
+    } = checkoutResp;
 
     const scannedItem = {
-      ...folioCheckIn,
-      [PICK_UP_LOCATION]: pickupLocation,
+      ...folioCheckOut,
     };
 
     setScannedItems(prev => [scannedItem, ...prev]);
   };
 
   const fetchReceiveShippedItem = () => {
-    mutator.receiveShippedItem.POST({})
+    mutator.checkoutBorroingSiteItem.POST({})
       .then(addScannedItem)
       .catch(() => {
         showCallout({
           type: CALLOUT_ERROR_TYPE,
-          message: <FormattedMessage id="ui-inn-reach.shipped-items.callout.connection-problem.put.receive-shipped-item" />,
+          message: <FormattedMessage id="ui-inn-reach.check-out-borrowing-site.callout.connection-problem.post.check-out-borrowing-site" />,
         });
       });
   };
@@ -132,17 +126,18 @@ const ReceiveShippedItems = ({
     mutator.transactionRecords.reset();
     mutator.transactionRecords.GET({
       params: {
-        [SEARCH_PARAMETER]: itemBarcode.trim(),
-        [TYPE]: PATRON,
-        [STATUS]: ITEM_SHIPPED,
+        [ITEM_BARCODE]: itemBarcode.trim(),
+        [TYPE]: ITEM,
+        [STATUS]: [ITEM_HOLD, TRANSFER],
+        [SORT_PARAMETER]: UPDATED_DATE,
+        [SORT_ORDER_PARAMETER]: DESC_ORDER,
       },
     })
-      .then(({ transactions }) => {
-        const transaction = orderBy(transactions, [`${METADATA}.${UPDATED_DATE}`], ['desc'])[0];
+    .then(({ transactions: [transaction] }) => {
         const servicePointId = stripes?.user?.user?.curServicePoint?.id;
 
         setIsTransactionsLoaded(true);
-        mutator.transactionId.replace(transaction?.id || '');
+        mutator.itemBarcode.replace(transaction?.hold?.folioItemBarcode|| '');
         mutator.servicePointId.replace(servicePointId || '');
 
         if (transaction) {
@@ -152,7 +147,7 @@ const ReceiveShippedItems = ({
       .catch(() => {
         showCallout({
           type: CALLOUT_ERROR_TYPE,
-          message: <FormattedMessage id="ui-inn-reach.shipped-items.callout.connection-problem.get.transactions" />,
+          message: <FormattedMessage id="ui-inn-reach.check-out-borrowing-site.callout.connection-problem.get.transactions" />,
         });
       });
   };
@@ -173,17 +168,17 @@ const ReceiveShippedItems = ({
       <Paneset static>
         <Pane
           defaultWidth={FILTER_PANE_WIDTH}
-          paneTitle={<FormattedMessage id="ui-inn-reach.shipped-items.title.receive-shipped-items" />}
+          paneTitle={<FormattedMessage id="ui-inn-reach.check-out-borrowing-site.title.check-out-borrowing-site" />}
         >
           <NavigationMenu
             history={history}
             location={location}
-            value={getReceiveShippedItemUrl()}
+            value={getCheckOutToBorrowingSiteUrl()}
           />
         </Pane>
         <Pane
           defaultWidth={FILL_PANE_WIDTH}
-          paneTitle={<FormattedMessage id="ui-inn-reach.shipped-items.title.scan-items" />}
+          paneTitle={<FormattedMessage id="ui-inn-reach.check-out-borrowing-site.title.scan-items" />}
         >
           <ItemForm
             isOpenModal={isTransactionsLoaded && !transactionsData[0]?.totalRecords}
@@ -195,7 +190,7 @@ const ReceiveShippedItems = ({
           {isLoading &&
             <Icon icon={ICONS.SPINNER_ELLIPSIS} />
           }
-          <ListCheckInItems
+          <ListCheckOutItems
             scannedItems={scannedItems}
             intl={intl}
           />
@@ -210,7 +205,7 @@ const ReceiveShippedItems = ({
             disabled={isEmpty(scannedItems)}
             onClick={handleSessionEnd}
           >
-            <FormattedMessage id="ui-inn-reach.shipped-items.button.end-session" />
+            <FormattedMessage id="ui-inn-reach.check-out-borrowing-site.button.end-session" />
           </Button>
         }
       />
@@ -218,8 +213,8 @@ const ReceiveShippedItems = ({
   );
 };
 
-ReceiveShippedItems.manifest = Object.freeze({
-  transactionId: { initialValue: '' },
+CheckOutBorrowingSite.manifest = Object.freeze({
+  itemBarcode: { initialValue: '' },
   servicePointId: { initialValue: '' },
   transactionRecords: {
     type: 'okapi',
@@ -228,9 +223,9 @@ ReceiveShippedItems.manifest = Object.freeze({
     accumulate: true,
     throwErrors: false,
   },
-  receiveShippedItem: {
+  checkoutBorroingSiteItem: {
     type: 'okapi',
-    path: 'inn-reach/transactions/%{transactionId}/receive-item/%{servicePointId}',
+    path: 'inn-reach/transactions/%{itemBarcode}/check-out-item/%{servicePointId}',
     pk: '',
     clientGeneratePk: false,
     fetch: false,
@@ -239,12 +234,12 @@ ReceiveShippedItems.manifest = Object.freeze({
   },
 });
 
-ReceiveShippedItems.propTypes = {
+CheckOutBorrowingSite.propTypes = {
   history: ReactRouterPropTypes.history.isRequired,
   location: ReactRouterPropTypes.location.isRequired,
   stripes: stripesShape.isRequired,
   mutator: PropTypes.shape({
-    transactionId: PropTypes.shape({
+    itemBarcode: PropTypes.shape({
       replace: PropTypes.func.isRequired,
     }).isRequired,
     servicePointId: PropTypes.shape({
@@ -254,7 +249,7 @@ ReceiveShippedItems.propTypes = {
       GET: PropTypes.func.isRequired,
       reset: PropTypes.func.isRequired,
     }),
-    receiveShippedItem: PropTypes.shape({
+    checkoutBorroingSiteItem: PropTypes.shape({
       POST: PropTypes.func.isRequired,
     }),
   }),
@@ -263,10 +258,10 @@ ReceiveShippedItems.propTypes = {
       records: PropTypes.arrayOf(PropTypes.object).isRequired,
       isPending: PropTypes.bool.isRequired,
     }).isRequired,
-    receiveShippedItem: PropTypes.shape({
+    checkoutBorroingSiteItem: PropTypes.shape({
       isPending: PropTypes.bool.isRequired,
     }).isRequired,
   }),
 };
 
-export default stripesConnect(ReceiveShippedItems);
+export default stripesConnect(CheckOutBorrowingSite);
