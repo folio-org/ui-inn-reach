@@ -43,7 +43,7 @@ const NavigationMenu = ({
       state: location.state,
     };
 
-    if (pathname === getTransactionListUrl() || pathname === getCheckOutToBorrowingSiteUrl()) {
+    if (pathname === getTransactionListUrl()) {
       destination.search = location.state;
     } else {
       destination.state = location.search;
