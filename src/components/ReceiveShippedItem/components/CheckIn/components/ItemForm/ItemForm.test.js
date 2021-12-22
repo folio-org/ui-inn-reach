@@ -3,7 +3,7 @@ import { screen } from '@testing-library/react';
 import { renderWithIntl } from '@folio/stripes-data-transfer-components/test/jest/helpers';
 import { Router } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
-import { translationsProperties } from '../../../../../test/jest/helpers';
+import { translationsProperties } from '../../../../../../../test/jest/helpers';
 import ItemForm from './ItemForm';
 
 const history = createMemoryHistory();
