@@ -146,20 +146,21 @@ const ReceiveShippedItems = ({
       barcodeAugmented,
     } = checkinResp;
 
+    setCheckinData(checkinResp);
+
     switch (item?.status?.name) {
       case AWAITING_PICKUP:
         checkinResp.isHoldItem = true;
         setIsHoldItem(true);
         break;
       case IN_TRANSIT:
-        checkinResp.transinItem = true;
+        checkinResp.isTransitItem = true;
         setIsTransitItem(true);
         break;
       default:
     }
 
     if (barcodeAugmented) setBarcodeSupplemented(true);
-    setCheckinData(checkinResp);
 
     return checkinResp;
   };
@@ -246,7 +247,7 @@ const ReceiveShippedItems = ({
       },
       transaction,
     } = checkinData;
-    const slipData = convertToSlipData({ staffSlipContext, transaction });
+    const slipData = convertToSlipData({ staffSlipContext, transaction, intl });
     const messages = [
       <FormattedMessage id="ui-inn-reach.shipped-items.modal.message.barcode-augmented" />,
     ];
@@ -310,6 +311,7 @@ const ReceiveShippedItems = ({
 
     return (
       <ConfirmStatusModal
+        showPrintButton
         label={<FormattedMessage id="ui-inn-reach.shipped-items.modal.hold.heading" />}
         isPrintable={isPrintable('hold')}
         slipTemplate={getSlipTmpl('hold')}
@@ -348,6 +350,7 @@ const ReceiveShippedItems = ({
 
     return (
       <ConfirmStatusModal
+        showPrintButton
         label={<FormattedMessage id="ui-inn-reach.shipped-items.modal.transit.heading" />}
         slipTemplate={getSlipTmpl('transit')}
         slipData={slipData}
@@ -376,7 +379,6 @@ const ReceiveShippedItems = ({
       />
       {noTransaction &&
         <ConfirmStatusModal
-          showPrintButton={false}
           label={<FormattedMessage id="ui-inn-reach.shipped-items.modal.no-transaction.heading" />}
           message={[<FormattedMessage id="ui-inn-reach.shipped-items.modal.message.barcode-augmented" />]}
           onClose={handleCloseModal}
@@ -384,8 +386,8 @@ const ReceiveShippedItems = ({
         />
       }
       {barcodeSupplemented && renderAugmentedBarcodeModal()}
-      {isHoldItem && hasNextRequest && checkinData && renderHoldModal()}
-      {isTransitItem && checkinData && renderTransitionModal()}
+      {isHoldItem && !barcodeSupplemented && hasNextRequest && renderHoldModal()}
+      {isTransitItem && renderTransitionModal()}
     </>
   );
 };
@@ -454,7 +456,6 @@ ReceiveShippedItems.propTypes = {
   }),
   resources: PropTypes.shape({
     transactionRecords: PropTypes.shape({
-      records: PropTypes.arrayOf(PropTypes.object).isRequired,
       isPending: PropTypes.bool.isRequired,
     }).isRequired,
     receiveShippedItem: PropTypes.shape({

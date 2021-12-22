@@ -1,7 +1,7 @@
 export const convertToSlipData = ({
   staffSlipContext = {},
   transaction = {},
-  intl = {},
+  intl = { formatDate: () => null },
   timeZone,
   locale,
   slipName,

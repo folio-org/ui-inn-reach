@@ -112,7 +112,6 @@ ConfirmStatusModal.propTypes = {
 
 ConfirmStatusModal.defaultProps = {
   open: true,
-  showPrintButton: true,
   slipTemplate: '',
 };
 
