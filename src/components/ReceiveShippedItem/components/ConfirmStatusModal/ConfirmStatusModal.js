@@ -52,6 +52,7 @@ const ConfirmStatusModal = ({
         ?
           <PrintButton
             marginBottom0
+            data-testid="print-button"
             buttonStyle="primary"
             dataSource={slipData}
             template={slipTemplate}
@@ -63,6 +64,7 @@ const ConfirmStatusModal = ({
         :
           <Button
             marginBottom0
+            data-testid="close-button"
             buttonStyle="primary"
             onClick={onClose}
           >
