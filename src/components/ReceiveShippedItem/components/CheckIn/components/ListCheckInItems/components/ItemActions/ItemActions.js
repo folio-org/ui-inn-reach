@@ -59,6 +59,7 @@ const ItemActions = ({
     >
       {barcodeAugmented &&
         <PrintButton
+          data-testid="print-inn-reach-barcode"
           role="menuitem"
           buttonStyle="dropdownItem"
           template={AUGMENTED_BARCODE_TEMPLATE}
@@ -69,6 +70,7 @@ const ItemActions = ({
       }
       {nextRequest &&
         <PrintButton
+          data-testid="print-hold-slip"
           role="menuitem"
           buttonStyle="dropdownItem"
           template={onGetSlipTemplate('hold')}
@@ -79,6 +81,7 @@ const ItemActions = ({
       }
       {isTransitItem &&
         <PrintButton
+          data-testid="print-transit-slip"
           role="menuitem"
           buttonStyle="dropdownItem"
           template={onGetSlipTemplate('transit')}
