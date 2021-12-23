@@ -11,11 +11,6 @@ jest.mock('./components', () => ({
   ItemActions: jest.fn(() => <div>ItemActions</div>),
 }));
 
-// jest.mock('@folio/stripes-components', () => ({
-//   ...jest.requireActual('@folio/stripes-components'),
-//   MultiColumnList: jest.fn(() => <div>MultiColumnList</div>),
-// }));
-
 const scannedItemsMock = [
   {
     barcodeAugmented: false,

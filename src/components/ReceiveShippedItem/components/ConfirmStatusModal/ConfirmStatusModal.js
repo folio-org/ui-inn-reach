@@ -51,6 +51,7 @@ const ConfirmStatusModal = ({
       {isPrint
         ?
           <PrintButton
+            marginBottom0
             buttonStyle="primary"
             dataSource={slipData}
             template={slipTemplate}
