@@ -54,7 +54,7 @@ describe('PrintButton', () => {
   it('should show Close button', () => {
     renderPrintButton(commonProps);
     expect(screen.getByText('Close')).toBeVisible();
-  })
+  });
 
   it('should pass template to ComponentToPrint', () => {
     renderPrintButton(commonProps);

@@ -68,7 +68,7 @@ const ItemActions = ({
           <FormattedMessage id="ui-inn-reach.shipped-items.action.print-inn-reach-barcode" />
         </PrintButton>
       }
-      {nextRequest &&
+      {nextRequest && !barcodeAugmented &&
         <PrintButton
           data-testid="print-hold-slip"
           role="menuitem"
