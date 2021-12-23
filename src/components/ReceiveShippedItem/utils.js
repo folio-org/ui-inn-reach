@@ -12,7 +12,7 @@ export const convertToSlipData = ({
     requester = {},
   } = staffSlipContext;
 
-  const slipData = {
+  return {
     'staffSlip.Name': slipName,
     'requester.firstName': requester.firstName,
     'requester.lastName': requester.lastName,
@@ -65,6 +65,4 @@ export const convertToSlipData = ({
     'transaction.itemAgencyCode': transaction.hold?.itemAgencyCode,
     'transaction.folioItemBarcode': transaction.hold?.folioItemBarcode,
   };
-
-  return slipData;
 };

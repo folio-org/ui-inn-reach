@@ -38,11 +38,8 @@ class ComponentToPrint extends React.Component {
       dataSource,
     } = this.props;
     const componentStr = this.template(dataSource);
-    const Component = this.parser.parseWithInstructions(componentStr, () => true, this.rules) || null;
 
-    return (
-      Component
-    );
+    return this.parser.parseWithInstructions(componentStr, () => true, this.rules) || null;
   }
 }
 
