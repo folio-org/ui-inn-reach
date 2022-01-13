@@ -69,6 +69,9 @@ const mutatorMock = {
   transactionId: {
     replace: jest.fn(),
   },
+  itemBarcode: {
+    replace: jest.fn(),
+  },
   receiveUnshippedItem: {
     POST: jest.fn(() => Promise.resolve()),
   },
