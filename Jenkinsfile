@@ -1,3 +1,5 @@
+@Library ('folio_jenkins_shared_libs@fix-stripes-path') _
+
 buildNPM {
   publishModDescriptor = 'yes'
   runLint = 'yes'
