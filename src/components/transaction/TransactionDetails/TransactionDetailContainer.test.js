@@ -86,6 +86,7 @@ const renderTransactionDetailContainer = ({
   mutator = mutatorMock,
   history = historyMock,
   stripes,
+  onUpdateTransactionList,
 } = {}) => {
   return renderWithIntl(
     <TransactionDetailContainer
@@ -94,13 +95,20 @@ const renderTransactionDetailContainer = ({
       history={history}
       location={{ pathname: '/' }}
       stripes={stripes}
+      onUpdateTransactionList={onUpdateTransactionList}
     />,
     translationsProperties,
   );
 };
 
 describe('TransactionDetailContainer', () => {
+  const onUpdateTransactionList = jest.fn();
   let stripes;
+
+  const commonProps = {
+    stripes,
+    onUpdateTransactionList,
+  };
 
   beforeEach(() => {
     stripes = cloneDeep(useStripes());
@@ -109,7 +117,7 @@ describe('TransactionDetailContainer', () => {
   });
 
   it('should be rendered', () => {
-    const { container } = renderTransactionDetailContainer({ stripes });
+    const { container } = renderTransactionDetailContainer(commonProps);
 
     expect(container).toBeVisible();
   });
@@ -119,8 +127,8 @@ describe('TransactionDetailContainer', () => {
 
     newResources.transactionView.isPending = true;
     renderTransactionDetailContainer({
+      ...commonProps,
       resources: newResources,
-      stripes,
     });
     expect(screen.getByText('LoadingPane')).toBeVisible();
   });
@@ -130,8 +138,8 @@ describe('TransactionDetailContainer', () => {
       const history = createMemoryHistory();
 
       renderTransactionDetailContainer({
+        ...commonProps,
         history,
-        stripes,
       });
       TransactionDetail.mock.calls[0][0].onClose();
       expect(history.location.pathname).toBe('/innreach/transactions');
@@ -140,24 +148,30 @@ describe('TransactionDetailContainer', () => {
 
   describe('receive unshipped modal', () => {
     it('should be open', () => {
-      renderTransactionDetailContainer({ stripes });
+      renderTransactionDetailContainer(commonProps);
       act(() => { TransactionDetail.mock.calls[0][0].onTriggerUnshippedItemModal(); });
       expect(TransactionDetail.mock.calls[1][0].isOpenUnshippedItemModal).toBeTruthy();
     });
 
     it('should update the transaction state', () => {
-      renderTransactionDetailContainer({ stripes });
+      renderTransactionDetailContainer(commonProps);
       TransactionDetail.mock.calls[0][0].onFetchReceiveUnshippedItem({ itemBarcode });
       expect(mutatorMock.receiveUnshippedItem.POST).toHaveBeenCalled();
     });
 
+    it('should update the transaction list', async () => {
+      renderTransactionDetailContainer(commonProps);
+      await TransactionDetail.mock.calls[0][0].onFetchReceiveUnshippedItem({ itemBarcode });
+      expect(onUpdateTransactionList).toHaveBeenCalled();
+    });
+
     it('should write transaction id to the redux', () => {
-      renderTransactionDetailContainer({ stripes });
+      renderTransactionDetailContainer(commonProps);
       expect(mutatorMock.transactionId.replace).toHaveBeenLastCalledWith(transactionMock.id);
     });
 
     it('should write service point id to the redux', () => {
-      renderTransactionDetailContainer({ stripes });
+      renderTransactionDetailContainer({ ...commonProps, stripes });
       expect(mutatorMock.servicePointId.replace).toHaveBeenCalledWith(servicePointId);
     });
   });

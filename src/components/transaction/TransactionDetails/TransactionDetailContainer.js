@@ -38,6 +38,7 @@ const TransactionDetailContainer = ({
   stripes,
   history,
   location,
+  onUpdateTransactionList,
 }) => {
   const transaction = transactionData[0] || {};
   const servicePointId = stripes?.user?.user?.curServicePoint?.id;
@@ -61,6 +62,7 @@ const TransactionDetailContainer = ({
   const fetchReceiveUnshippedItem = () => {
     mutator.receiveUnshippedItem.POST({})
       .then(() => {
+        onUpdateTransactionList();
         showCallout({
           message: <FormattedMessage id="ui-inn-reach.unshipped-item.callout.success.post.receive-unshipped-item" />,
         });
@@ -128,6 +130,7 @@ TransactionDetailContainer.propTypes = {
     }).isRequired,
   }).isRequired,
   stripes: stripesShape.isRequired,
+  onUpdateTransactionList: PropTypes.func.isRequired,
   mutator: PropTypes.shape({
     servicePointId: PropTypes.shape({
       replace: PropTypes.func.isRequired,
