@@ -90,7 +90,7 @@ const ConfirmStatusModal = ({
             <Checkbox
               checked={isPrint}
               name="printBarcodeSlip"
-              label={<FormattedMessage id="ui-inn-reach.shipped-items.field.print-barcode-slip" />}
+              label={<FormattedMessage id="ui-inn-reach.shipped-items.field.print-slip" />}
               value={isPrint + ''}
               onChange={triggerPrintBarcodeSlip}
             />
