@@ -202,10 +202,6 @@ const ReceiveShippedItems = ({
     delay(() => setIsAugmentedBarcodeModalAfterClose(true), 200);
   };
 
-  // const handleCloseAugmentedBarcodeModal = () => {
-  //   delay(() => setBarcodeSupplemented(false), 200);
-  // };
-
   const renderAugmentedBarcodeModal = () => {
     const {
       folioCheckIn: {
