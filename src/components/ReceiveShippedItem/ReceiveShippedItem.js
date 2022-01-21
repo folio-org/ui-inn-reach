@@ -10,6 +10,7 @@ import PropTypes from 'prop-types';
 import ReactRouterPropTypes from 'react-router-prop-types';
 import {
   upperFirst,
+  delay,
 } from 'lodash';
 
 import {
@@ -198,8 +199,12 @@ const ReceiveShippedItems = ({
   };
 
   const handleIsAugmentedBarcodeModalAfterClose = () => {
-    setIsAugmentedBarcodeModalAfterClose(true);
+    delay(() => setIsAugmentedBarcodeModalAfterClose(true), 200);
   };
+
+  // const handleCloseAugmentedBarcodeModal = () => {
+  //   delay(() => setBarcodeSupplemented(false), 200);
+  // };
 
   const renderAugmentedBarcodeModal = () => {
     const {
@@ -215,12 +220,16 @@ const ReceiveShippedItems = ({
 
     return (
       <ConfirmStatusModal
+        isPrintable
+        showPrintButton
         label={<FormattedMessage id="ui-inn-reach.shipped-items.modal.barcode-augmented.heading" />}
+        checkboxLabel={<FormattedMessage id="ui-inn-reach.shipped-items.field.print-barcode-slip" />}
         slipTemplate={AUGMENTED_BARCODE_TEMPLATE}
         slipData={slipData}
         message={messages}
-        onClose={handleIsAugmentedBarcodeModalAfterClose}
-        onAfterPrint={focusBarcodeField}
+        onClose={handleCloseModal}
+        onClickClose={handleIsAugmentedBarcodeModalAfterClose}
+        onBeforePrint={handleIsAugmentedBarcodeModalAfterClose}
       />
     );
   };
@@ -272,7 +281,6 @@ const ReceiveShippedItems = ({
     return (
       <ConfirmStatusModal
         showPrintButton
-        isPrintable={barcodeSupplemented}
         label={<FormattedMessage id="ui-inn-reach.shipped-items.modal.hold.heading" />}
         slipTemplate={getSlipTmpl('hold')}
         slipData={slipData}
@@ -311,7 +319,6 @@ const ReceiveShippedItems = ({
     return (
       <ConfirmStatusModal
         showPrintButton
-        isPrintable={barcodeSupplemented}
         label={<FormattedMessage id="ui-inn-reach.shipped-items.modal.transit.heading" />}
         slipTemplate={getSlipTmpl('transit')}
         slipData={slipData}
