@@ -73,7 +73,7 @@ describe('InnReach', () => {
         expect(screen.getByText('TransactionDetailContainer')).toBeVisible();
       });
 
-      it('should have function to update transaction list', () => {
+      it('should have a callback to update the list of transactions', () => {
         expect(TransactionDetailContainer.mock.calls[3][0].onUpdateTransactionList).toBeDefined();
       });
     });
