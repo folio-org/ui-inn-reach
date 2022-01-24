@@ -75,7 +75,23 @@ const TransactionDetailContainer = ({
       });
   };
 
-  const handleSubmit = ({ itemBarcode }) => {
+  const fetchReceiveItem = () => {
+    mutator.receiveItem.POST({})
+      .then(() => {
+        onUpdateTransactionList();
+        showCallout({
+          message: <FormattedMessage id="ui-inn-reach.receive-item.callout.success.post.receive-item" />,
+        });
+      })
+      .catch(() => {
+        showCallout({
+          type: CALLOUT_ERROR_TYPE,
+          message: <FormattedMessage id="ui-inn-reach.receive-item.callout.connection-problem.post.receive-item" />,
+        });
+      });
+  };
+
+  const handleFetchReceiveUnshippedItem = ({ itemBarcode }) => {
     setIsOpenUnshippedItemModal(false);
     mutator.itemBarcode.replace(itemBarcode || '');
     fetchReceiveUnshippedItem();
@@ -95,7 +111,8 @@ const TransactionDetailContainer = ({
       isOpenUnshippedItemModal={isOpenUnshippedItemModal}
       onClose={backToList}
       onTriggerUnshippedItemModal={triggerUnshippedItemModal}
-      onFetchReceiveUnshippedItem={handleSubmit}
+      onFetchReceiveUnshippedItem={handleFetchReceiveUnshippedItem}
+      onFetchReceiveItem={fetchReceiveItem}
     />
   );
 };
@@ -112,6 +129,15 @@ TransactionDetailContainer.manifest = Object.freeze({
   receiveUnshippedItem: {
     type: 'okapi',
     path: 'inn-reach/transactions/%{transactionId}/receive-unshipped-item/%{servicePointId}/%{itemBarcode}',
+    pk: '',
+    clientGeneratePk: false,
+    fetch: false,
+    accumulate: true,
+    throwErrors: false,
+  },
+  receiveItem: {
+    type: 'okapi',
+    path: 'inn-reach/transactions/%{transactionId}/receive-item/%{servicePointId}',
     pk: '',
     clientGeneratePk: false,
     fetch: false,
@@ -142,6 +168,9 @@ TransactionDetailContainer.propTypes = {
       replace: PropTypes.func.isRequired,
     }).isRequired,
     receiveUnshippedItem: PropTypes.shape({
+      POST: PropTypes.func.isRequired,
+    }),
+    receiveItem: PropTypes.shape({
       POST: PropTypes.func.isRequired,
     }),
   }),

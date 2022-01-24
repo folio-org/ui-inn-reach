@@ -75,6 +75,9 @@ const mutatorMock = {
   receiveUnshippedItem: {
     POST: jest.fn(() => Promise.resolve()),
   },
+  receiveItem: {
+    POST: jest.fn(() => Promise.resolve()),
+  },
 };
 
 const historyMock = createMemoryHistory();
@@ -173,6 +176,20 @@ describe('TransactionDetailContainer', () => {
     it('should write service point id to the redux', () => {
       renderTransactionDetailContainer({ ...commonProps, stripes });
       expect(mutatorMock.servicePointId.replace).toHaveBeenCalledWith(servicePointId);
+    });
+  });
+
+  describe('receive item', () => {
+    it('should update the transaction state', () => {
+      renderTransactionDetailContainer(commonProps);
+      TransactionDetail.mock.calls[0][0].onFetchReceiveItem();
+      expect(mutatorMock.receiveItem.POST).toHaveBeenCalled();
+    });
+
+    it('should update the transaction list', async () => {
+      renderTransactionDetailContainer(commonProps);
+      TransactionDetail.mock.calls[0][0].onFetchReceiveItem();
+      expect(onUpdateTransactionList).toHaveBeenCalled();
     });
   });
 });
