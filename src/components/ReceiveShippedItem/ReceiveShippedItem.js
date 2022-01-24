@@ -276,6 +276,7 @@ const ReceiveShippedItems = ({
 
     return (
       <ConfirmStatusModal
+        isPrintable
         showPrintButton
         label={<FormattedMessage id="ui-inn-reach.shipped-items.modal.hold.heading" />}
         slipTemplate={getSlipTmpl('hold')}
@@ -314,6 +315,7 @@ const ReceiveShippedItems = ({
 
     return (
       <ConfirmStatusModal
+        isPrintable
         showPrintButton
         label={<FormattedMessage id="ui-inn-reach.shipped-items.modal.transit.heading" />}
         slipTemplate={getSlipTmpl('transit')}
