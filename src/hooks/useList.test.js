@@ -1,6 +1,6 @@
 import { renderHook, act } from '@testing-library/react-hooks';
+import { useLocation } from 'react-router-dom';
 import useList from './useList';
-import { useLocation } from "react-router-dom";
 
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
@@ -33,6 +33,7 @@ describe('useList hook', () => {
 
   it('should return records', () => {
     const { records } = result.current;
+
     expect(records).toEqual(recordsMock.transactions);
   });
 
@@ -42,14 +43,16 @@ describe('useList hook', () => {
 
   it('should return records count', () => {
     const { recordsCount } = result.current;
+
     expect(recordsCount).toEqual(recordsMock.totalRecords);
   });
 
   describe('onUpdateList callback', () => {
     beforeEach(async () => {
       const { onUpdateList } = result.current;
+
       loadRecordsCB.mockClear();
-      await act(async () => { onUpdateList() });
+      await act(async () => { onUpdateList(); });
     });
 
     it('should fetch records ', () => {
@@ -64,7 +67,8 @@ describe('useList hook', () => {
   describe('onNeedMoreData callback', () => {
     beforeEach(async () => {
       const { onNeedMoreData } = result.current;
-      await act(async () => { onNeedMoreData() });
+
+      await act(async () => { onNeedMoreData(); });
     });
 
     it('should fetch records ', () => {
