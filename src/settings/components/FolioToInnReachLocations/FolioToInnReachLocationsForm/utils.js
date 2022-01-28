@@ -1,4 +1,7 @@
 import {
+  some,
+} from 'lodash';
+import {
   FOLIO_TO_INN_REACH_LOCATION_FIELDS,
   NO_VALUE_LOCATION_OPTION,
 } from '../../../../constants';
@@ -8,7 +11,8 @@ import {
 
 const {
   INN_REACH_LOCATIONS,
-  TABULAR_LIST,
+  LIBRARIES_TABULAR_LIST,
+  LOCATIONS_TABULAR_LIST,
   FOLIO_LIBRARY,
   FOLIO_LOCATION,
 } = FOLIO_TO_INN_REACH_LOCATION_FIELDS;
@@ -27,8 +31,8 @@ export const getInnReachLocationOptions = (innReachLocations) => {
   }, [NO_VALUE_LOCATION_OPTION]);
 };
 
-export const validate = (value, allValues) => {
-  const tabularList = allValues[TABULAR_LIST];
+export const validate = (value, allValues, index) => {
+  const tabularList = allValues[LOCATIONS_TABULAR_LIST] || allValues[`${LIBRARIES_TABULAR_LIST}${index}`];
   const leftColName = tabularList[0][FOLIO_LIBRARY]
     ? FOLIO_LIBRARY
     : FOLIO_LOCATION;
@@ -40,4 +44,14 @@ export const validate = (value, allValues) => {
 
     return required(value || isSomeFieldFilledIn);
   }
+};
+
+export const getFilteredInnReachLocationOptions = (innReachLocationOptions, values, index) => {
+  return innReachLocationOptions.filter(location => {
+    return !some(values, (tabularList, key) => {
+      return tabularList.some(listItem => {
+        return listItem[INN_REACH_LOCATIONS] === location.value && key !== `${LIBRARIES_TABULAR_LIST}${index}`;
+      });
+    });
+  });
 };

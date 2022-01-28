@@ -179,11 +179,23 @@ export const getLeftColumnLocations = ({
   }, []);
 };
 
-export const getLeftColumnLibraries = (serverLibraries) => {
-  return serverLibraries.map(({ label, code }) => ({
-    [FOLIO_LIBRARY]: label,
-    [CODE]: code,
-  }));
+const getFolioLibraryIdsSet = (folioLibraryIds) => {
+  return folioLibraryIds.reduce((accum, libId) => {
+    accum.add(libId);
+
+    return accum;
+  }, new Set());
+};
+
+export const getLeftColumnLibraries = (serverLibraries, folioLibraryIds) => {
+  const folioLibraryIdsSet = getFolioLibraryIdsSet(folioLibraryIds);
+
+  return serverLibraries
+    .filter(({ id }) => folioLibraryIdsSet.has(id))
+    .map(({ label, code }) => ({
+      [FOLIO_LIBRARY]: label,
+      [CODE]: code,
+    }));
 };
 
 export const getTabularListForLocations = ({
@@ -221,24 +233,28 @@ export const getLibrariesTabularList = ({
   serverLibraries,
   libMappingsMap,
   innReachLocations,
+  folioLibraryIds,
 }) => {
   const innReachLocationsMap = getInnReachLocationsMap(innReachLocations);
+  const folioLibraryIdsSet = getFolioLibraryIdsSet(folioLibraryIds);
 
-  return serverLibraries.map(({ id, label, code }) => {
-    const option = {
-      [FOLIO_LIBRARY]: label,
-      [CODE]: code,
-    };
-    const isCodeSelected = libMappingsMap.has(id);
+  return serverLibraries
+    .filter(({ id }) => folioLibraryIdsSet.has(id))
+    .map(({ id, label, code }) => {
+      const option = {
+        [FOLIO_LIBRARY]: label,
+        [CODE]: code,
+      };
+      const isCodeSelected = libMappingsMap.has(id);
 
-    if (isCodeSelected) {
-      const innReachLocationId = libMappingsMap.get(id).innReachLocationId;
+      if (isCodeSelected) {
+        const innReachLocationId = libMappingsMap.get(id).innReachLocationId;
 
-      option[INN_REACH_LOCATIONS] = innReachLocationsMap.get(innReachLocationId);
-    }
+        option[INN_REACH_LOCATIONS] = innReachLocationsMap.get(innReachLocationId);
+      }
 
-    return option;
-  });
+      return option;
+    });
 };
 
 export const getTabularListMap = (tabularList) => {
