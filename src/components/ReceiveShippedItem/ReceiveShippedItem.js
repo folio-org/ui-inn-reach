@@ -10,7 +10,6 @@ import PropTypes from 'prop-types';
 import ReactRouterPropTypes from 'react-router-prop-types';
 import {
   upperFirst,
-  delay,
 } from 'lodash';
 
 import {
@@ -201,7 +200,7 @@ const ReceiveShippedItems = ({
   };
 
   const handleIsAugmentedBarcodeModalAfterClose = () => {
-    delay(() => setIsAugmentedBarcodeModalAfterClose(true), 200);
+    setIsAugmentedBarcodeModalAfterClose(true);
   };
 
   const renderAugmentedBarcodeModal = () => {
