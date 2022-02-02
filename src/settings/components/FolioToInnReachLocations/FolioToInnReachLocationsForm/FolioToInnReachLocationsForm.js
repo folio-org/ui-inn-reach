@@ -1,7 +1,6 @@
 import React, {
   useEffect,
   useMemo,
-  Fragment,
 } from 'react';
 import stripesFinalForm from '@folio/stripes/final-form';
 import PropTypes from 'prop-types';
@@ -13,6 +12,7 @@ import {
   PaneFooter,
   Select,
   Selection,
+  Headline,
 } from '@folio/stripes-components';
 import {
   CENTRAL_SERVER_CONFIGURATION_FIELDS,
@@ -22,8 +22,9 @@ import {
   LOCAL_AGENCIES_FIELDS,
 } from '../../../../constants';
 import {
-  getFilteredInnReachLocationOptions,
+  getLocationsForEachTableRow,
   getInnReachLocationOptions,
+  getUniqueLocationsForEachTable,
   validate,
 } from './utils';
 import {
@@ -140,14 +141,18 @@ const FolioToInnReachLocationsForm = ({
         {isShowTabularList && (
           mappingType === librariesMappingType
             ? selectedServer[LOCAL_AGENCIES].map((localAgency, index) => {
-              const filteredInnReachLocationOptions = getFilteredInnReachLocationOptions(innReachLocationOptions, values, index);
+              const filteredInnReachLocationOptions = getUniqueLocationsForEachTable(innReachLocationOptions, values, index);
 
               return (
-                <Fragment key={index}>
-                  <b>
-                    {`${formatMessage({ id: 'ui-inn-reach.settings.folio-to-inn-reach-locations.list-title.local-agency-code' })}
-                      : ${localAgency[CODE]}`}
-                  </b>
+                <section key={index}>
+                  <Headline
+                    tag="h2"
+                    margin="none"
+                    className={css.tabularListTitle}
+                  >
+                    {`${formatMessage({ id: 'ui-inn-reach.settings.folio-to-inn-reach-locations.list-title.local-agency-code' })}:
+                     ${localAgency[CODE]}`}
+                  </Headline>
                   <TableStyleList
                     requiredRightCol
                     fieldArrayName={`${LIBRARIES_TABULAR_LIST}${index}`}
@@ -159,8 +164,9 @@ const FolioToInnReachLocationsForm = ({
                     dataOptions={filteredInnReachLocationOptions}
                     ariaLabel={<FormattedMessage id="ui-inn-reach.settings.folio-to-inn-reach-locations.field.inn-reach-locations" />}
                     validate={(value, allValues) => validate(value, allValues, index)}
+                    onProcessDataOptions={getLocationsForEachTableRow}
                   />
-                </Fragment>
+                </section>
               );
             })
             : <TableStyleList
@@ -172,6 +178,7 @@ const FolioToInnReachLocationsForm = ({
                 dataOptions={innReachLocationOptions}
                 ariaLabel={<FormattedMessage id="ui-inn-reach.settings.folio-to-inn-reach-locations.field.inn-reach-locations" />}
                 validate={validate}
+                onProcessDataOptions={getLocationsForEachTableRow}
             />
         )}
       </form>

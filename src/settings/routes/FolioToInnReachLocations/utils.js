@@ -1,4 +1,7 @@
 import {
+  flatMap,
+} from 'lodash';
+import {
   FOLIO_TO_INN_REACH_LOCATION_FIELDS,
 } from '../../../constants';
 
@@ -257,10 +260,11 @@ export const getLibrariesTabularList = ({
     });
 };
 
-export const getTabularListMap = (tabularList) => {
+export const getTabularListMap = (record) => {
   const tabularListMap = new Map();
+  const tabularLists = flatMap(record, tabularList => tabularList);
 
-  tabularList.forEach(row => {
+  tabularLists.forEach(row => {
     tabularListMap.set(row[CODE], row[INN_REACH_LOCATIONS]);
   });
 

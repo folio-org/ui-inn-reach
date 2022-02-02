@@ -1,5 +1,5 @@
 import {
-  some,
+  filter,
 } from 'lodash';
 import {
   FOLIO_TO_INN_REACH_LOCATION_FIELDS,
@@ -46,12 +46,29 @@ export const validate = (value, allValues, index) => {
   }
 };
 
-export const getFilteredInnReachLocationOptions = (innReachLocationOptions, values, index) => {
-  return innReachLocationOptions.filter(location => {
-    return !some(values, (tabularList, key) => {
-      return tabularList.some(listItem => {
-        return listItem[INN_REACH_LOCATIONS] === location.value && key !== `${LIBRARIES_TABULAR_LIST}${index}`;
-      });
-    });
-  });
+export const getUniqueLocationsForEachTable = (innReachLocationOptions, values, currentTableIndex) => {
+  const excludeCurTable = (_, key) => !key.endsWith(currentTableIndex);
+  const selectedLocationsOfOtherTables = filter(values, excludeCurTable)
+    .flat()
+    .filter(row => row[INN_REACH_LOCATIONS])
+    .map(row => row[INN_REACH_LOCATIONS]);
+  const excludeSelectedLocations = ({ value: location }) => !selectedLocationsOfOtherTables.includes(location);
+
+  return innReachLocationOptions.filter(excludeSelectedLocations);
+};
+
+export const getLocationsForEachTableRow = (fields, index, dataOptions) => {
+  const filterCurRow = (_, i) => i !== index;
+  const rowNotSelected = (item) => !item[INN_REACH_LOCATIONS];
+  const onlyCurRowSelected = fields.value
+    .filter(filterCurRow)
+    .every(rowNotSelected);
+
+  const selectedLocation = fields.value.find(row => row[INN_REACH_LOCATIONS])?.[INN_REACH_LOCATIONS];
+  const alreadySelectedOption = dataOptions.find(({ value: location }) => location === selectedLocation);
+  const emptyOption = dataOptions[0];
+
+  return onlyCurRowSelected
+    ? dataOptions
+    : [emptyOption, alreadySelectedOption];
 };

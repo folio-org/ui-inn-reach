@@ -219,7 +219,7 @@ const FolioToInnReachLocationsCreateEditRoute = ({
       finalRecord = {
         locationMappings: getFinalLocationMappings({
           folioLocations,
-          tabularListMap: getTabularListMap(record.tabularList),
+          tabularListMap: getTabularListMap(record),
           innReachLocationsMap: getInnReachLocationsMapCodeFirst(innReachLocations),
           locationMappingsMap: getLocationMappingsMap(locationMappings),
         }),
@@ -244,7 +244,7 @@ const FolioToInnReachLocationsCreateEditRoute = ({
       finalRecord = {
         libraryMappings: getFinalLibraryMappings({
           folioLibraries,
-          tabularListMap: getTabularListMap(record.tabularList),
+          tabularListMap: getTabularListMap(record),
           innReachLocationsMap: getInnReachLocationsMapCodeFirst(innReachLocations),
           librariesMappingsMap: getLibrariesMappingsMap(libraryMappings),
         }),
