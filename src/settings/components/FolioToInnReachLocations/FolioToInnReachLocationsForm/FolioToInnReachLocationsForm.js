@@ -133,7 +133,7 @@ const FolioToInnReachLocationsForm = ({
           />
         </section>
       );
-    })
+    });
   };
 
   const getLocationTabularList = () => (

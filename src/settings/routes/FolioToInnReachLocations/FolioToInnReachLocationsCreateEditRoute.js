@@ -78,7 +78,7 @@ const FolioToInnReachLocationsCreateEditRoute = ({
     },
   },
   mutator,
-}) => {  
+}) => {
   const servers = centralServers[0]?.centralServers || [];
   const innReachLocations = innReachLoc[0]?.locations || [];
   const folioLocations = locations[0]?.locations || [];
@@ -178,7 +178,7 @@ const FolioToInnReachLocationsCreateEditRoute = ({
     const libraryIds = selectedServer.localAgencies
       .filter(localAgency => !localAgency.folioLibraryIds.includes(libraryId))
       .flatMap(localAgency => localAgency.folioLibraryIds);
-      
+
     const requests = libraryIds.map(libId => {
       const path = `inn-reach/central-servers/${selectedServer.id}/libraries/${libId}/locations/location-mappings`;
 
