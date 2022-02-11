@@ -1,7 +1,6 @@
 import {
   useState,
   useRef,
-  Suspense,
 } from 'react';
 import {
   FormattedMessage,
@@ -14,9 +13,6 @@ import {
   stripesConnect,
   stripesShape,
 } from '@folio/stripes/core';
-import {
-  Loading,
-} from '@folio/stripes-components';
 
 import {
   CALLOUT_ERROR_TYPE,
@@ -28,6 +24,11 @@ import {
   TRANSACTION_STATUSES,
   TRANSACTION_TYPES,
 } from '../../constants';
+import {
+  AugmentedBarcodeModal,
+  HoldModal,
+  InTransitModal,
+} from '../common';
 import {
   CheckIn,
   ConfirmStatusModal,
@@ -89,13 +90,13 @@ const ReceiveShippedItems = ({
     isOpenAugmentedBarcodeModal,
     isOpenItemHoldModal,
     isOpenInTransitModal,
-    onRenderAugmentedBarcodeModal,
-    onRenderHoldModal,
-    onRenderTransitModal,
-    onGetSlipTmpl,
+    checkinData,
     onSetCheckinData,
+    onGetSlipTmpl,
     onProcessModals,
-  } = useReceiveItemModals(staffSlips, stripes, intl, focusBarcodeField);
+    onSetAugmentedBarcodeModalAfterClose,
+    onCloseModal,
+  } = useReceiveItemModals(staffSlips);
 
   const resetData = () => {
     if (itemFormRef.current.reset) {
@@ -173,6 +174,38 @@ const ReceiveShippedItems = ({
     );
   };
 
+  const renderAugmentedBarcodeModal = () => (
+    <AugmentedBarcodeModal
+      {...checkinData}
+      intl={intl}
+      onClose={onCloseModal}
+      onClickClose={onSetAugmentedBarcodeModalAfterClose}
+      onBeforePrint={onSetAugmentedBarcodeModalAfterClose}
+    />
+  );
+
+  const renderHoldModal = () => (
+    <HoldModal
+      stripes={stripes}
+      checkinData={checkinData}
+      intl={intl}
+      onGetSlipTmpl={onGetSlipTmpl}
+      onFocusBarcodeField={focusBarcodeField}
+      onClose={onCloseModal}
+    />
+  );
+
+  const renderTransitModal = () => (
+    <InTransitModal
+      stripes={stripes}
+      checkinData={checkinData}
+      intl={intl}
+      onGetSlipTmpl={onGetSlipTmpl}
+      onClose={onCloseModal}
+      onFocusBarcodeField={focusBarcodeField}
+    />
+  );
+
   return (
     <>
       <CheckIn
@@ -189,11 +222,9 @@ const ReceiveShippedItems = ({
         onSubmit={fetchTransactions}
       />
       {noTransaction && renderNoTransactionModal()}
-      <Suspense fallback={<Loading />}>
-        {isOpenAugmentedBarcodeModal && onRenderAugmentedBarcodeModal()}
-        {isOpenItemHoldModal && onRenderHoldModal()}
-        {isOpenInTransitModal && onRenderTransitModal()}
-      </Suspense>
+      {isOpenAugmentedBarcodeModal && renderAugmentedBarcodeModal()}
+      {isOpenItemHoldModal && renderHoldModal()}
+      {isOpenInTransitModal && renderTransitModal()}
     </>
   );
 };

@@ -20,6 +20,11 @@ import {
 } from 'react-intl';
 import TransactionDetail from './TransactionDetail';
 import {
+  AugmentedBarcodeModal,
+  HoldModal,
+  InTransitModal,
+} from '../../common';
+import {
   CALLOUT_ERROR_TYPE,
   getTransactionListUrl,
 } from '../../../constants';
@@ -56,12 +61,13 @@ const TransactionDetailContainer = ({
     isOpenAugmentedBarcodeModal,
     isOpenItemHoldModal,
     isOpenInTransitModal,
-    onRenderAugmentedBarcodeModal,
-    onRenderHoldModal,
-    onRenderTransitModal,
+    checkinData,
     onSetCheckinData,
+    onGetSlipTmpl,
     onProcessModals,
-  } = useReceiveItemModals(staffSlips, stripes, intl);
+    onSetAugmentedBarcodeModalAfterClose,
+    onCloseModal,
+  } = useReceiveItemModals(staffSlips);
 
   const triggerUnshippedItemModal = () => {
     setIsOpenUnshippedItemModal(prevModalState => !prevModalState);
@@ -116,6 +122,36 @@ const TransactionDetailContainer = ({
     fetchReceiveUnshippedItem();
   };
 
+  const renderAugmentedBarcodeModal = () => (
+    <AugmentedBarcodeModal
+      {...checkinData}
+      intl={intl}
+      onClose={onCloseModal}
+      onClickClose={onSetAugmentedBarcodeModalAfterClose}
+      onBeforePrint={onSetAugmentedBarcodeModalAfterClose}
+    />
+  );
+
+  const renderHoldModal = () => (
+    <HoldModal
+      stripes={stripes}
+      checkinData={checkinData}
+      intl={intl}
+      onGetSlipTmpl={onGetSlipTmpl}
+      onClose={onCloseModal}
+    />
+  );
+
+  const renderTransitModal = () => (
+    <InTransitModal
+      stripes={stripes}
+      checkinData={checkinData}
+      intl={intl}
+      onGetSlipTmpl={onGetSlipTmpl}
+      onClose={onCloseModal}
+    />
+  );
+
   useEffect(() => {
     mutator.servicePointId.replace(servicePointId || '');
     mutator.transactionId.replace(transaction.id || '');
@@ -135,9 +171,9 @@ const TransactionDetailContainer = ({
       onTriggerUnshippedItemModal={triggerUnshippedItemModal}
       onFetchReceiveUnshippedItem={handleFetchReceiveUnshippedItem}
       onFetchReceiveItem={fetchReceiveItem}
-      onRenderAugmentedBarcodeModal={onRenderAugmentedBarcodeModal}
-      onRenderHoldModal={onRenderHoldModal}
-      onRenderTransitModal={onRenderTransitModal}
+      onRenderAugmentedBarcodeModal={renderAugmentedBarcodeModal}
+      onRenderHoldModal={renderHoldModal}
+      onRenderTransitModal={renderTransitModal}
     />
   );
 };

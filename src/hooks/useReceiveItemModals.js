@@ -1,21 +1,16 @@
 import {
-  lazy,
   useState,
 } from 'react';
 import {
   CHECK_IN_STATUSES,
 } from '../constants';
 
-const AugmentedBarcodeModal = lazy(() => import('../components/common/AugmentedBarcodeModal'));
-const HoldModal = lazy(() => import('../components/common/HoldModal'));
-const InTransitModal = lazy(() => import('../components/common/InTransitModal'));
-
 const {
   AWAITING_PICKUP,
   IN_TRANSIT,
 } = CHECK_IN_STATUSES;
 
-const useReceiveItemModals = (staffSlips, stripes, intl, focusBarcodeField) => {
+const useReceiveItemModals = (staffSlips) => {
   const [isOpenAugmentedBarcodeModal, setIsOpenAugmentedBarcodeModal] = useState(false);
   const [isHoldItem, setIsHoldItem] = useState(false);
   const [isTransitItem, setIsTransitItem] = useState(false);
@@ -26,7 +21,7 @@ const useReceiveItemModals = (staffSlips, stripes, intl, focusBarcodeField) => {
   const isOpenItemHoldModal = isHoldItem && showHoldOrTransitModal;
   const isOpenInTransitModal = isTransitItem && showHoldOrTransitModal;
 
-  const handleCloseModal = () => {
+  const onCloseModal = () => {
     setIsOpenAugmentedBarcodeModal(false);
     setIsHoldItem(false);
     setIsTransitItem(false);
@@ -34,7 +29,7 @@ const useReceiveItemModals = (staffSlips, stripes, intl, focusBarcodeField) => {
     setCheckinData(null);
   };
 
-  const setAugmentedBarcodeModalAfterClose = () => {
+  const onSetAugmentedBarcodeModalAfterClose = () => {
     setIsAugmentedBarcodeModalAfterClose(true);
   };
 
@@ -73,48 +68,16 @@ const useReceiveItemModals = (staffSlips, stripes, intl, focusBarcodeField) => {
     return checkinResp;
   };
 
-  const onRenderAugmentedBarcodeModal = () => (
-    <AugmentedBarcodeModal
-      {...checkinData}
-      intl={intl}
-      onClose={handleCloseModal}
-      onClickClose={setAugmentedBarcodeModalAfterClose}
-      onBeforePrint={setAugmentedBarcodeModalAfterClose}
-    />
-  );
-
-  const onRenderHoldModal = () => (
-    <HoldModal
-      stripes={stripes}
-      checkinData={checkinData}
-      intl={intl}
-      onGetSlipTmpl={onGetSlipTmpl}
-      onFocusBarcodeField={focusBarcodeField}
-      onClose={handleCloseModal}
-    />
-  );
-
-  const onRenderTransitModal = () => (
-    <InTransitModal
-      stripes={stripes}
-      checkinData={checkinData}
-      intl={intl}
-      onGetSlipTmpl={onGetSlipTmpl}
-      onClose={handleCloseModal}
-      onFocusBarcodeField={focusBarcodeField}
-    />
-  );
-
   return {
     isOpenAugmentedBarcodeModal,
     isOpenItemHoldModal,
     isOpenInTransitModal,
-    onRenderAugmentedBarcodeModal,
-    onRenderHoldModal,
-    onRenderTransitModal,
+    checkinData,
     onSetCheckinData,
     onGetSlipTmpl,
     onProcessModals,
+    onSetAugmentedBarcodeModalAfterClose,
+    onCloseModal,
   };
 };
 
