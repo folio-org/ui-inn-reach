@@ -1,6 +1,6 @@
 import {
-  useState,
   lazy,
+  useState,
 } from 'react';
 import {
   CHECK_IN_STATUSES,
