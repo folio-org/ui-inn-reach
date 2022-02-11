@@ -5,11 +5,6 @@ import {
 import {
   CHECK_IN_STATUSES,
 } from '../constants';
-import {
-  AugmentedBarcodeModal,
-  HoldModal,
-  InTransitModal,
-} from '../components/common';
 
 const AugmentedBarcodeModal = lazy(() => import('../components/common/AugmentedBarcodeModal'));
 const HoldModal = lazy(() => import('../components/common/HoldModal'));
