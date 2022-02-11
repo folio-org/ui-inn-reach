@@ -1,5 +1,6 @@
 import {
   useState,
+  lazy,
 } from 'react';
 import {
   CHECK_IN_STATUSES,
@@ -9,6 +10,10 @@ import {
   HoldModal,
   InTransitModal,
 } from '../components/common';
+
+const AugmentedBarcodeModal = lazy(() => import('../components/common/AugmentedBarcodeModal'));
+const HoldModal = lazy(() => import('../components/common/HoldModal'));
+const InTransitModal = lazy(() => import('../components/common/InTransitModal'));
 
 const {
   AWAITING_PICKUP,

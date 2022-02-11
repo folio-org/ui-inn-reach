@@ -1,5 +1,6 @@
 import React, {
   useCallback,
+  Suspense,
 } from 'react';
 import PropTypes from 'prop-types';
 import {
@@ -12,6 +13,7 @@ import {
   Col,
   AccordionSet,
   Headline,
+  Loading,
 } from '@folio/stripes-components';
 
 import {
@@ -93,9 +95,11 @@ const TransactionDetail = ({
         <ItemInformation transaction={transaction} />
       </AccordionSet>
       {isOpenUnshippedItemModal && renderReceiveUnshippedItemModal()}
-      {isOpenAugmentedBarcodeModal && onRenderAugmentedBarcodeModal()}
-      {isOpenItemHoldModal && onRenderHoldModal()}
-      {isOpenInTransitModal && onRenderTransitModal()}
+      <Suspense fallback={<Loading />}>
+        {isOpenAugmentedBarcodeModal && onRenderAugmentedBarcodeModal()}
+        {isOpenItemHoldModal && onRenderHoldModal()}
+        {isOpenInTransitModal && onRenderTransitModal()}
+      </Suspense>
     </Pane>
   );
 };

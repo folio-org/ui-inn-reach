@@ -1,6 +1,7 @@
 import {
   useState,
   useRef,
+  Suspense,
 } from 'react';
 import {
   FormattedMessage,
@@ -13,6 +14,9 @@ import {
   stripesConnect,
   stripesShape,
 } from '@folio/stripes/core';
+import {
+  Loading,
+} from '@folio/stripes-components';
 
 import {
   CALLOUT_ERROR_TYPE,
@@ -185,9 +189,11 @@ const ReceiveShippedItems = ({
         onSubmit={fetchTransactions}
       />
       {noTransaction && renderNoTransactionModal()}
-      {isOpenAugmentedBarcodeModal && onRenderAugmentedBarcodeModal()}
-      {isOpenItemHoldModal && onRenderHoldModal()}
-      {isOpenInTransitModal && onRenderTransitModal()}
+      <Suspense fallback={<Loading />}>
+        {isOpenAugmentedBarcodeModal && onRenderAugmentedBarcodeModal()}
+        {isOpenItemHoldModal && onRenderHoldModal()}
+        {isOpenInTransitModal && onRenderTransitModal()}
+      </Suspense>
     </>
   );
 };
