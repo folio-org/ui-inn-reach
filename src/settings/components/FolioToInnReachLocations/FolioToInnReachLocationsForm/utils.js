@@ -51,9 +51,11 @@ export const getUniqueLocationsForEachTable = ({
     .filter(row => row[INN_REACH_LOCATIONS])
     .map(row => row[INN_REACH_LOCATIONS]);
 
+  const selectedLocationsOfOtherTablesOfLibrariesLevelSet = new Set(selectedLocationsOfOtherTablesOfLibrariesLevel);
+
   const excludeSelectedLocations = ({ value: locationId }) => {
     return !(
-      new Set(selectedLocationsOfOtherTablesOfLibrariesLevel).has(locationId) ||
+      selectedLocationsOfOtherTablesOfLibrariesLevelSet.has(locationId) ||
       fetchedLocationsToExcludeSet.has(locationId)
     );
   };

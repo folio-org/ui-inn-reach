@@ -113,7 +113,7 @@ const FolioToInnReachLocationsForm = ({
       const filteredInnReachLocationOptions = getUniqueLocationsForEachTable({
         innReachLocationOptions,
         values,
-        index,
+        currentTableIndex: index,
         pickedLocationsByAgencyCodeMap,
         curAgencyCode: localAgency[CODE],
       });
