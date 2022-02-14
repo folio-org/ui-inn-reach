@@ -22,10 +22,20 @@ import TransactionDetail from './TransactionDetail';
 import {
   CALLOUT_ERROR_TYPE,
   getTransactionListUrl,
+  TRANSACTION_FIELDS,
+  HOLD_FIELDS,
 } from '../../../constants';
 import {
   useCallout,
 } from '../../../hooks';
+
+const {
+  HOLD,
+} = TRANSACTION_FIELDS;
+
+const {
+  FOLIO_ITEM_BARCODE,
+} = HOLD_FIELDS;
 
 const TransactionDetailContainer = ({
   resources: {
@@ -41,7 +51,10 @@ const TransactionDetailContainer = ({
   onUpdateTransactionList,
 }) => {
   const transaction = transactionData[0] || {};
+
   const servicePointId = stripes?.user?.user?.curServicePoint?.id;
+
+  const folioItemBarcode = transaction?.[HOLD]?.[FOLIO_ITEM_BARCODE];
 
   const showCallout = useCallout();
   const intl = useIntl();
@@ -82,6 +95,21 @@ const TransactionDetailContainer = ({
         });
       });
   };
+  const onCheckoutBorroingSite = () => {
+    mutator.checkoutBorroingSiteItem.POST({})
+      .then(() => {
+        onUpdateTransactionList();
+        showCallout({
+          message: <FormattedMessage id="ui-inn-reach.check-out-borrowing-site.callout.success.post.check-out-borrowing-site" />,
+        });
+      })
+      .catch(() => {
+        showCallout({
+          type: CALLOUT_ERROR_TYPE,
+          message: <FormattedMessage id="ui-inn-reach.check-out-borrowing-site.callout.connection-problem.post.check-out-borrowing-site" />,
+        });
+      });
+  };
 
   const fetchReceiveItem = () => {
     mutator.receiveItem.POST({})
@@ -107,7 +135,8 @@ const TransactionDetailContainer = ({
   useEffect(() => {
     mutator.servicePointId.replace(servicePointId || '');
     mutator.transactionId.replace(transaction.id || '');
-  }, [servicePointId, transaction]);
+    mutator.itemBarcode.replace(folioItemBarcode || '');
+  }, [servicePointId, transaction, folioItemBarcode]);
 
   if (isTransactionPending) return <LoadingPane />;
 
@@ -118,6 +147,7 @@ const TransactionDetailContainer = ({
       isOpenUnshippedItemModal={isOpenUnshippedItemModal}
       unshippedItem={unshippedItem}
       onClose={backToList}
+      onCheckoutBorrowingSite={onCheckoutBorroingSite}
       onTriggerUnshippedItemModal={triggerUnshippedItemModal}
       onFetchReceiveUnshippedItem={handleFetchReceiveUnshippedItem}
       onFetchReceiveItem={fetchReceiveItem}
@@ -153,6 +183,15 @@ TransactionDetailContainer.manifest = Object.freeze({
     accumulate: true,
     throwErrors: false,
   },
+  checkoutBorroingSiteItem: {
+    type: 'okapi',
+    path: 'inn-reach/transactions/%{itemBarcode}/check-out-item/%{servicePointId}',
+    pk: '',
+    clientGeneratePk: false,
+    fetch: false,
+    accumulate: true,
+    throwErrors: false,
+  },
 });
 
 TransactionDetailContainer.propTypes = {
@@ -180,6 +219,9 @@ TransactionDetailContainer.propTypes = {
       POST: PropTypes.func.isRequired,
     }),
     receiveItem: PropTypes.shape({
+      POST: PropTypes.func.isRequired,
+    }),
+    checkoutBorroingSiteItem: PropTypes.shape({
       POST: PropTypes.func.isRequired,
     }),
   }),

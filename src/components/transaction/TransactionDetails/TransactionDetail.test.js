@@ -27,6 +27,7 @@ const renderTransactionDetail = ({
   transaction = transactionMock,
   isOpenUnshippedItemModal = false,
   unshippedItem = {},
+  onCheckoutBorrowingSite,
   onTriggerUnshippedItemModal,
   onFetchReceiveUnshippedItem,
   onFetchReceiveItem,
@@ -43,6 +44,7 @@ const renderTransactionDetail = ({
       onTriggerUnshippedItemModal={onTriggerUnshippedItemModal}
       onFetchReceiveUnshippedItem={onFetchReceiveUnshippedItem}
       onFetchReceiveItem={onFetchReceiveItem}
+      onCheckoutBorrowingSite={onCheckoutBorrowingSite}
       onReset={onReset}
     />,
     translationsProperties,
@@ -54,6 +56,7 @@ describe('TransactionDetail', () => {
   const onTriggerUnshippedItemModal = jest.fn();
   const onFetchReceiveUnshippedItem = jest.fn();
   const onFetchReceiveItem = jest.fn();
+  const onCheckoutBorrowingSite = jest.fn();
   const onReset = jest.fn();
 
   const commonProps = {
@@ -61,6 +64,7 @@ describe('TransactionDetail', () => {
     onTriggerUnshippedItemModal,
     onFetchReceiveUnshippedItem,
     onFetchReceiveItem,
+    onCheckoutBorrowingSite,
     onReset,
   };
 
