@@ -127,16 +127,16 @@ const TransactionDetailContainer = ({
       });
   };
 
-  const handleFetchReceiveUnshippedItem = ({ itemBarcode }) => {
-    mutator.itemBarcode.replace(itemBarcode || '');
-    fetchReceiveUnshippedItem();
-  };
-
   useEffect(() => {
     mutator.servicePointId.replace(servicePointId || '');
     mutator.transactionId.replace(transaction.id || '');
     mutator.itemBarcode.replace(folioItemBarcode || '');
   }, [servicePointId, transaction, folioItemBarcode]);
+
+  const handleFetchReceiveUnshippedItem = ({ itemBarcode }) => {
+    mutator.itemBarcode.replace(itemBarcode || '');
+    fetchReceiveUnshippedItem();
+  };
 
   if (isTransactionPending) return <LoadingPane />;
 
