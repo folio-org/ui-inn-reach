@@ -3,10 +3,11 @@ import { screen } from '@testing-library/react';
 import {
   renderWithIntl,
 } from '@folio/stripes-data-transfer-components/test/jest/helpers';
+import { createMemoryHistory } from 'history';
+import { Router } from 'react-router-dom';
 import SearchAndFilter from './SearchAndFilter';
-import {translationsProperties} from "../../../../test/jest/helpers";
-import {createMemoryHistory} from "history";
-import {Router} from "react-router-dom";
+import { translationsProperties } from '../../../../test/jest/helpers';
+import { OverdueReportModal } from '../../../routes/transaction/components';
 
 jest.mock('@folio/stripes/components', () => {
   return {
@@ -21,15 +22,16 @@ jest.mock('./components', () => ({
   ResetButton: jest.fn(() => <div>ResetButton</div>),
   ResultListLastMenu: jest.fn(() => <div>ResultListLastMenu</div>),
   SearchForm: jest.fn(() => <div>SearchForm</div>),
-  ResultsPane: jest.fn(() => <div>ResultsPane</div>),
+  // ResultsPane: jest.fn(() => <div>ResultsPane</div>),
   ResultStatusMessage: jest.fn(() => <div>ResultStatusMessage</div>),
 }));
 
 jest.mock('../NavigationMenu', () => jest.fn(() => <div>NavigationMenu</div>));
 
 jest.mock('../../../routes/transaction/components', () => ({
+  ...jest.requireActual('../../../routes/transaction/components'),
   OverdueReportModal: jest.fn(() => <div>OverdueReportModal</div>),
-}))
+}));
 
 const renderSearchAndFilter = ({
   isLoading = false,
@@ -38,7 +40,7 @@ const renderSearchAndFilter = ({
   visibleColumns = [],
   columnMapping = {},
   resultsFormatter = {},
-  resultsPaneTitle = {},
+  resultsPaneTitle = <div>resultsPaneTitle</div>,
   isShowAddNew = false,
   count = 0,
   contentData = [],
@@ -53,7 +55,6 @@ const renderSearchAndFilter = ({
 }) => (renderWithIntl(
   <Router history={createMemoryHistory()}>
     <SearchAndFilter
-      history={history}
       location={{ pathname: '/', hash: '', search: '' }}
       isLoading={isLoading}
       showOverdueReportModal={showOverdueReportModal}
@@ -67,11 +68,11 @@ const renderSearchAndFilter = ({
       isPreRenderAllData={isPreRenderAllData}
       isInsideListSearch={isInsideListSearch}
       id={id}
+      resetData={resetData}
       onNeedMoreData={onNeedMoreData}
       onRowClick={onRowClick}
       onGenerateReport={onGenerateReport}
       onToggleOverdueReportModal={onToggleOverdueReportModal}
-      resetData={resetData}
     >
       {children}
     </SearchAndFilter>
@@ -100,11 +101,36 @@ describe('SearchAndFilter', () => {
     expect(container).toBeVisible();
   });
 
-  it('should display OverdueReportModal', () => {
+  it('should display ResultListLastMenu', () => {
     renderSearchAndFilter({
       ...commonProps,
-      showOverdueReportModal: true,
+      isShowAddNew: true,
     });
-    expect(screen.getByText('OverdueReportModal')).toBeVisible();
-  })
+    expect(screen.getByText('ResultListLastMenu')).toBeVisible();
+  });
+
+  describe('OverdueReportModal', () => {
+    beforeEach(() => {
+      renderSearchAndFilter({
+        ...commonProps,
+        showOverdueReportModal: true,
+      });
+    });
+
+    it('should be visible', () => {
+      expect(screen.getByText('OverdueReportModal')).toBeVisible();
+    });
+
+    it('should generate report', () => {
+      const record = { minDaysOverdue: 2 };
+
+      OverdueReportModal.mock.calls[1][0].onSubmit(record);
+      expect(onGenerateReport).toHaveBeenCalledWith('overdue', record);
+    });
+
+    it('should close the modal', () => {
+      OverdueReportModal.mock.calls[1][0].onTriggerModal();
+      expect(onToggleOverdueReportModal).toHaveBeenCalled();
+    });
+  });
 });
