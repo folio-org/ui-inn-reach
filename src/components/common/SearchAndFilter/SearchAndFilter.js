@@ -27,6 +27,14 @@ import {
   useLocationSorting,
   useToggle,
 } from '../../../hooks';
+import ActionItem from '../ActionItem';
+import {
+  OverdueReportModal,
+} from '../../../routes/transaction/components';
+import {
+  ICONS,
+  OVERDUE,
+} from '../../../constants';
 
 const SearchAndFilter = ({
   history,
@@ -34,6 +42,7 @@ const SearchAndFilter = ({
   location,
   onNeedMoreData,
   resetData,
+  showOverdueReportModal,
   children,
   visibleColumns,
   columnMapping,
@@ -46,6 +55,8 @@ const SearchAndFilter = ({
   isPreRenderAllData,
   isInsideListSearch,
   id,
+  onGenerateReport,
+  onToggleOverdueReportModal,
 }) => {
   const [
     filters,
@@ -102,6 +113,30 @@ const SearchAndFilter = ({
     }
   />;
 
+  const handleOverdueReport = (record) => {
+    onGenerateReport(OVERDUE, record);
+    onToggleOverdueReportModal();
+  };
+
+  const renderActionMenu = ({ onToggle }) => {
+    return (
+      <ActionItem
+        id="export-owning-site-overdue-report"
+        icon={ICONS.DOWNLOAD}
+        buttonTextTranslationKey="ui-inn-reach.reports.owning-site-overdue.label"
+        onClickHandler={onToggleOverdueReportModal}
+        onToggle={onToggle}
+      />
+    );
+  };
+
+  const renderOverdueReportModal = () => (
+    <OverdueReportModal
+      onSubmit={handleOverdueReport}
+      onTriggerModal={onToggleOverdueReportModal}
+    />
+  );
+
   return (
     <Paneset data-test-result-list>
       {(isFiltersOpened && !isInsideListSearch) && (
@@ -134,6 +169,7 @@ const SearchAndFilter = ({
         filters={getResultsPaneFilters}
         isFiltersOpened={isFiltersOpened}
         renderLastMenu={renderLastMenu}
+        renderActionMenu={renderActionMenu}
         title={resultsPaneTitle}
         toggleFiltersPane={toggleFilters}
       >
@@ -169,6 +205,7 @@ const SearchAndFilter = ({
         />
       </ResultsPane>
       { children }
+      {showOverdueReportModal && renderOverdueReportModal()}
     </Paneset>
   );
 };
@@ -182,9 +219,12 @@ SearchAndFilter.propTypes = {
   resetData: PropTypes.func.isRequired,
   resultsFormatter: PropTypes.object.isRequired,
   resultsPaneTitle: PropTypes.object.isRequired,
+  showOverdueReportModal: PropTypes.bool.isRequired,
   visibleColumns: PropTypes.array.isRequired,
+  onGenerateReport: PropTypes.func.isRequired,
   onNeedMoreData: PropTypes.func.isRequired,
   onRowClick: PropTypes.func.isRequired,
+  onToggleOverdueReportModal: PropTypes.func.isRequired,
   children: PropTypes.node,
   contentData: PropTypes.arrayOf(PropTypes.object),
   count: PropTypes.number,

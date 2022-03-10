@@ -27,6 +27,7 @@ const transactionsMock = {
 const mutatorMock = {
   transactionRecords: {
     GET: jest.fn(() => Promise.resolve(transactionsMock)),
+    reset: jest.fn(),
   },
 };
 
