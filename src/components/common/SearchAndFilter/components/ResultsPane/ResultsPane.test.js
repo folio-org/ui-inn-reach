@@ -21,7 +21,7 @@ const renderResultsPane = (props = {
     {...props}
     filters={{}}
     renderActionMenu={jest.fn(() => <div>renderActionMenu</div>)}
->
+  >
     {RESULTS}
   </ResultsPane>,
   translationsProperties
