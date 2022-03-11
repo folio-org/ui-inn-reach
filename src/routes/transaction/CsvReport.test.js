@@ -91,6 +91,10 @@ const mutatorMock = {
 describe('CsvReport', () => {
   beforeEach(() => {
     exportToCsv.mockClear();
+    setUpSpy.mockClear();
+    toCSVSpy.mockClear();
+    parseSpy.mockClear();
+    parseDatesSpy.mockClear();
   });
 
   describe('generate method', () => {
