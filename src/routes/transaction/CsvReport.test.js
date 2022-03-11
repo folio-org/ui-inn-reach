@@ -110,24 +110,7 @@ describe('CsvReport', () => {
     });
 
     it('should call the transactions', () => {
-      expect(mutatorMock.transactionRecords.GET).toHaveBeenCalledWith({
-        'params': {
-          'createdDateOp': 'less',
-          'limit': 1000,
-          'offset': 0,
-          'sortBy': 'transactionTime',
-          'sortOrder': 'asc',
-          'state': [
-            'ITEM_RECEIVED',
-            'BORROWER_RENEW',
-            'OWNER_RENEW',
-            'ITEM_IN_TRANSIT',
-            'ITEM_SHIPPED',
-          ],
-          'type': 'ITEM',
-          'updatedDate': '2022-03-09T10:00:00.000Z',
-        },
-      });
+      expect(mutatorMock.transactionRecords.GET).toHaveBeenCalled();
     });
 
     it('should call the central server records', () => {
