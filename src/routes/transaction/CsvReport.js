@@ -4,8 +4,8 @@ import {
 } from 'lodash';
 
 import {
-  exportCsv,
-} from '@folio/stripes/util';
+  exportToCsv,
+} from "@folio/stripes-components";
 
 import {
   HOLD_FIELDS,
@@ -88,21 +88,20 @@ class CsvReport {
   }
 
   async fetchBatchItems(mutator, loans) {
-    const { items } = mutator;
     // Split the list of items into small chunks to create a short enough query string
     // that we can avoid request with error
     const CHUNK_SIZE = 100;
     const LIMIT = 1000;
     const chunkedItems = chunk(loans, CHUNK_SIZE);
 
-    items.reset();
+    mutator.items.reset();
 
     const allRequests = chunkedItems.map(itemChunk => {
       const query = itemChunk
         .map(item => `barcode==${item[HOLD][FOLIO_ITEM_BARCODE]}`)
         .join(' or ');
 
-      return items.GET({ params: { limit: LIMIT, query } });
+      return mutator.items.GET({ params: { limit: LIMIT, query } });
     });
 
     return Promise.all(allRequests).then(res => {
@@ -183,7 +182,7 @@ class CsvReport {
     const onlyFields = this.columnsMap;
     const parsedRecords = this.parse(records);
 
-    exportCsv(parsedRecords, { onlyFields });
+    exportToCsv(parsedRecords, { onlyFields });
   }
 }
 
