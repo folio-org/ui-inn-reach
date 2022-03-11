@@ -5,7 +5,7 @@ import {
 
 import {
   exportToCsv,
-} from "@folio/stripes-components";
+} from '@folio/stripes-components';
 
 import {
   HOLD_FIELDS,
