@@ -30,11 +30,34 @@ import {
   NO_ITEMS_FOUND,
   CALLOUT_ERROR_TYPE,
   CENTRAL_SERVERS_LIMITING,
+  HOLD_FIELDS,
+  INVENTORY_ITEM_FIELDS,
+  TRANSACTION_FIELDS,
+  OVERDUE,
 } from '../../constants';
 import {
   getParams,
 } from '../../utils';
 import CsvReport from './CsvReport';
+import {
+  fetchBatchItems,
+  fetchLocalServers,
+  getAgencyCodeMap,
+  getLoansMap,
+} from './utils';
+
+const {
+  HOLD,
+} = TRANSACTION_FIELDS;
+
+const {
+  PATRON_AGENCY_CODE,
+  CALL_NUMBER,
+} = HOLD_FIELDS;
+
+const {
+  EFFECTIVE_LOCATION,
+} = INVENTORY_ITEM_FIELDS;
 
 const resetData = () => {};
 
@@ -79,13 +102,41 @@ const TransactionListRoute = ({
     render: props => children.props.render({ ...props, onUpdateTransactionList }),
   };
 
+  const getOverdueLoansToCsv = async (loans) => {
+    const localServers = await fetchLocalServers(mutator, loans);
+    const agencyCodeMap = getAgencyCodeMap(localServers);
+    const items = await fetchBatchItems(mutator, loans);
+    const loansMap = getLoansMap(loans);
+
+    return items.map(item => {
+      const patronAgencyCode = loansMap.get(item.id)[HOLD][PATRON_AGENCY_CODE];
+      const agencyDescription = agencyCodeMap.get(patronAgencyCode);
+
+      return {
+        ...loansMap.get(item.id),
+        [CALL_NUMBER]: item[CALL_NUMBER],
+        [EFFECTIVE_LOCATION]: item[EFFECTIVE_LOCATION].name,
+        [PATRON_AGENCY_CODE]: `${agencyDescription} (${patronAgencyCode})`,
+      };
+    });
+  };
+
   const generateReport = (type, record) => {
     if (exportInProgress) return;
+
+    let getLoansToCsv;
+
+    switch (type) {
+      case OVERDUE:
+        getLoansToCsv = getOverdueLoansToCsv;
+        break;
+      default:
+    }
 
     setExportInProgress(true);
     showCallout({ message: <FormattedMessage id="ui-inn-reach.reports.callout.export-in-progress" /> });
 
-    csvReport.generate(mutator, type, record)
+    csvReport.generate(mutator, type, record, getLoansToCsv)
       .catch(error => {
         if (error.message === NO_ITEMS_FOUND) {
           showCallout({

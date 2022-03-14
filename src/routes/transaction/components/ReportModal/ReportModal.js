@@ -80,11 +80,11 @@ const ReportModal = ({
 };
 
 ReportModal.propTypes = {
-  fieldLabel: PropTypes.string.isRequired,
+  fieldLabel: PropTypes.object.isRequired,
   fieldName: PropTypes.string.isRequired,
   form: PropTypes.object.isRequired,
   handleSubmit: PropTypes.func.isRequired,
-  heading: PropTypes.string.isRequired,
+  heading: PropTypes.object.isRequired,
   invalid: PropTypes.bool.isRequired,
   onTriggerModal: PropTypes.func.isRequired,
 };
