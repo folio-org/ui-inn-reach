@@ -19,15 +19,11 @@ import {
 import {
   required,
 } from '../../../../utils';
-import {
-  OWNING_SITE_OVERDUE_FIELDS,
-} from '../../../../constants';
 
-const {
-  MINIMUM_DAYS_OVERDUE,
-} = OWNING_SITE_OVERDUE_FIELDS;
-
-const OverdueReportModal = ({
+const ReportModal = ({
+  heading,
+  fieldLabel,
+  fieldName,
   invalid,
   handleSubmit,
   form,
@@ -58,7 +54,7 @@ const OverdueReportModal = ({
       open
       dismissible
       size="small"
-      label={<FormattedMessage id="ui-inn-reach.reports.modal.title.maximum-days-overdue" />}
+      label={heading}
       footer={footer}
       onClose={onTriggerModal}
     >
@@ -69,8 +65,10 @@ const OverdueReportModal = ({
               required
               autoFocus
               type="number"
-              label={<FormattedMessage id="ui-inn-reach.reports.modal.field.maximum-days-overdue" />}
-              name={MINIMUM_DAYS_OVERDUE}
+              initialValue={0}
+              min={0}
+              label={fieldLabel}
+              name={fieldName}
               validate={required}
               component={TextField}
             />
@@ -81,9 +79,12 @@ const OverdueReportModal = ({
   );
 };
 
-OverdueReportModal.propTypes = {
+ReportModal.propTypes = {
+  fieldLabel: PropTypes.string.isRequired,
+  fieldName: PropTypes.string.isRequired,
   form: PropTypes.object.isRequired,
   handleSubmit: PropTypes.func.isRequired,
+  heading: PropTypes.string.isRequired,
   invalid: PropTypes.bool.isRequired,
   onTriggerModal: PropTypes.func.isRequired,
 };
@@ -92,4 +93,4 @@ export default stripesFinalForm({
   subscription: {
     invalid: true,
   },
-})(OverdueReportModal);
+})(ReportModal);

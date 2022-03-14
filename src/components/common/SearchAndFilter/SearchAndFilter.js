@@ -3,6 +3,9 @@ import React, {
 } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
+import {
+  FormattedMessage,
+} from 'react-intl';
 import ReactRouterPropTypes from 'react-router-prop-types';
 
 import {
@@ -29,12 +32,17 @@ import {
 } from '../../../hooks';
 import ActionItem from '../ActionItem';
 import {
-  OverdueReportModal,
+  ReportModal,
 } from '../../../routes/transaction/components';
 import {
   ICONS,
   OVERDUE,
+  OWNING_SITE_OVERDUE_FIELDS,
 } from '../../../constants';
+
+const {
+  MINIMUM_DAYS_OVERDUE,
+} = OWNING_SITE_OVERDUE_FIELDS;
 
 const SearchAndFilter = ({
   history,
@@ -131,7 +139,10 @@ const SearchAndFilter = ({
   };
 
   const renderOverdueReportModal = () => (
-    <OverdueReportModal
+    <ReportModal
+      heading={<FormattedMessage id="ui-inn-reach.reports.modal.title.maximum-days-overdue" />}
+      fieldLabel={<FormattedMessage id="ui-inn-reach.reports.modal.field.maximum-days-overdue" />}
+      fieldName={MINIMUM_DAYS_OVERDUE}
       onSubmit={handleOverdueReport}
       onTriggerModal={onToggleOverdueReportModal}
     />

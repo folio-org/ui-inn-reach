@@ -7,7 +7,7 @@ import { createMemoryHistory } from 'history';
 import { Router } from 'react-router-dom';
 import SearchAndFilter from './SearchAndFilter';
 import { translationsProperties } from '../../../../test/jest/helpers';
-import { OverdueReportModal } from '../../../routes/transaction/components';
+import { ReportModal } from '../../../routes/transaction/components';
 
 jest.mock('@folio/stripes/components', () => {
   return {
@@ -30,7 +30,7 @@ jest.mock('../NavigationMenu', () => jest.fn(() => <div>NavigationMenu</div>));
 
 jest.mock('../../../routes/transaction/components', () => ({
   ...jest.requireActual('../../../routes/transaction/components'),
-  OverdueReportModal: jest.fn(() => <div>OverdueReportModal</div>),
+  ReportModal: jest.fn(() => <div>ReportModal</div>),
 }));
 
 const renderSearchAndFilter = ({
@@ -109,7 +109,7 @@ describe('SearchAndFilter', () => {
     expect(screen.getByText('ResultListLastMenu')).toBeVisible();
   });
 
-  describe('OverdueReportModal', () => {
+  describe('ReportModal', () => {
     beforeEach(() => {
       renderSearchAndFilter({
         ...commonProps,
@@ -118,18 +118,18 @@ describe('SearchAndFilter', () => {
     });
 
     it('should be visible', () => {
-      expect(screen.getByText('OverdueReportModal')).toBeVisible();
+      expect(screen.getByText('ReportModal')).toBeVisible();
     });
 
     it('should generate report', () => {
       const record = { minDaysOverdue: 2 };
 
-      OverdueReportModal.mock.calls[1][0].onSubmit(record);
+      ReportModal.mock.calls[1][0].onSubmit(record);
       expect(onGenerateReport).toHaveBeenCalledWith('overdue', record);
     });
 
     it('should close the modal', () => {
-      OverdueReportModal.mock.calls[1][0].onTriggerModal();
+      ReportModal.mock.calls[1][0].onTriggerModal();
       expect(onToggleOverdueReportModal).toHaveBeenCalled();
     });
   });

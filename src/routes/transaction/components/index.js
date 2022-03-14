@@ -1,1 +1,1 @@
-export { default as OverdueReportModal } from './OverdueReportModal';
+export { default as ReportModal } from './ReportModal';
