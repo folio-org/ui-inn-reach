@@ -22,7 +22,6 @@ jest.mock('./components', () => ({
   ResetButton: jest.fn(() => <div>ResetButton</div>),
   ResultListLastMenu: jest.fn(() => <div>ResultListLastMenu</div>),
   SearchForm: jest.fn(() => <div>SearchForm</div>),
-  // ResultsPane: jest.fn(() => <div>ResultsPane</div>),
   ResultStatusMessage: jest.fn(() => <div>ResultStatusMessage</div>),
 }));
 

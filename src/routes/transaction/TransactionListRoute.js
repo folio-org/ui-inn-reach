@@ -34,6 +34,7 @@ import {
   INVENTORY_ITEM_FIELDS,
   TRANSACTION_FIELDS,
   OVERDUE,
+  OVERDUE_COLUMNS_FOR_CSV,
 } from '../../constants';
 import {
   getParams,
@@ -44,6 +45,7 @@ import {
   fetchLocalServers,
   getAgencyCodeMap,
   getLoansMap,
+  getOverdueParams,
 } from './utils';
 
 const {
@@ -125,18 +127,19 @@ const TransactionListRoute = ({
     if (exportInProgress) return;
 
     let getLoansToCsv;
+    let reportColumns;
+    let params;
 
-    switch (type) {
-      case OVERDUE:
-        getLoansToCsv = getOverdueLoansToCsv;
-        break;
-      default:
+    if (type === OVERDUE) {
+      getLoansToCsv = getOverdueLoansToCsv;
+      reportColumns = OVERDUE_COLUMNS_FOR_CSV;
+      params = getOverdueParams(record);
     }
 
     setExportInProgress(true);
     showCallout({ message: <FormattedMessage id="ui-inn-reach.reports.callout.export-in-progress" /> });
 
-    csvReport.generate(mutator, type, record, getLoansToCsv)
+    csvReport.generate(mutator, getLoansToCsv, params, reportColumns)
       .catch(error => {
         if (error.message === NO_ITEMS_FOUND) {
           showCallout({

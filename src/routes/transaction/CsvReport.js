@@ -8,8 +8,6 @@ import {
 
 import {
   NO_ITEMS_FOUND,
-  REPORT_COLUMNS,
-  REPORT_SETTINGS,
   TRANSACTION_FIELDS,
 } from '../../constants';
 import {
@@ -33,10 +31,10 @@ class CsvReport {
     this.formatTime = formatTime;
   }
 
-  setUp(type, record) {
-    this.params = REPORT_SETTINGS[type].getParams(record);
+  setUp(params, reportColumns) {
+    this.params = params;
 
-    this.columnsMap = REPORT_COLUMNS.map(value => ({
+    this.columnsMap = reportColumns.map(value => ({
       label: this.formatMessage({ id: `ui-inn-reach.reports.${value}` }),
       value,
     }));
@@ -70,8 +68,8 @@ class CsvReport {
     return data;
   }
 
-  async generate(mutator, type, record, getLoansToCsv) {
-    this.setUp(type, record);
+  async generate(mutator, getLoansToCsv, params, reportColumns) {
+    this.setUp(params, reportColumns);
     const loans = await this.fetchData(mutator.transactionRecords);
 
     if (loans.length !== 0) {
