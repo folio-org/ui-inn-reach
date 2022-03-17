@@ -10,7 +10,7 @@ import TransactionDetailContainer from '../../components/transaction/Transaction
 import {
   getOverdueParams,
   getRequestedTooLongParams,
-} from "./utils";
+} from './utils';
 
 jest.mock('../../components/transaction/TransactionList', () => {
   return jest.fn(() => <div>TransactionList</div>);
@@ -124,7 +124,7 @@ const executeCommonTests = () => {
       },
     });
   });
-}
+};
 
 const renderTransactionListRoute = ({
   history = createMemoryHistory(),
@@ -262,7 +262,7 @@ describe('TransactionListRoute', () => {
     });
 
     it('should display "Owning site overdue" modal', async () => {
-      await act(async () => { TransactionList.mock.calls[3][0].onToggleStatesOfModalReports('showOverdueReportModal'); })
+      await act(async () => { TransactionList.mock.calls[3][0].onToggleStatesOfModalReports('showOverdueReportModal'); });
       expect(TransactionList.mock.calls[4][0].statesOfModalReports).toEqual({
         showOverdueReportModal: true,
         showRequestedTooLongReportModal: false,
@@ -270,11 +270,11 @@ describe('TransactionListRoute', () => {
     });
 
     it('should display "Owning site overdue" modal', async () => {
-      await act(async () => { TransactionList.mock.calls[3][0].onToggleStatesOfModalReports('showRequestedTooLongReportModal'); })
+      await act(async () => { TransactionList.mock.calls[3][0].onToggleStatesOfModalReports('showRequestedTooLongReportModal'); });
       expect(TransactionList.mock.calls[4][0].statesOfModalReports).toEqual({
         showOverdueReportModal: false,
         showRequestedTooLongReportModal: true,
       });
     });
-  })
+  });
 });
