@@ -10,8 +10,6 @@ import {
   DUE_DATE,
   HOLD_FIELDS,
   METADATA_FIELDS,
-  OWNING_SITE_OVERDUE_FIELDS,
-  REQUESTED_TOO_LONG_FIELDS,
   SORT_ORDER_PARAMETER,
   SORT_PARAMETER,
   TRANSACTION_FIELDS,
@@ -19,6 +17,7 @@ import {
   TRANSACTION_OPERATIONS,
   TRANSACTION_STATUSES,
   TRANSACTION_TYPES,
+  FIELDS_OF_REPORT_MODALS,
 } from '../../constants';
 
 const {
@@ -27,12 +26,10 @@ const {
 } = TRANSACTION_OPERATIONS;
 
 const {
+  MINIMUM_DAYS_RETURNED,
   MINIMUM_DAYS_OVERDUE,
-} = OWNING_SITE_OVERDUE_FIELDS;
-
-const {
   MINIMUM_DAYS_REQUESTED,
-} = REQUESTED_TOO_LONG_FIELDS;
+} = FIELDS_OF_REPORT_MODALS;
 
 const {
   HOLD,
@@ -43,6 +40,8 @@ const {
 
 const {
   FOLIO_ITEM_ID,
+  PATRON_AGENCY_CODE,
+  ITEM_AGENCY_CODE,
 } = HOLD_FIELDS;
 
 const {
@@ -58,6 +57,7 @@ const {
   BORROWER_RENEW,
   PATRON_HOLD,
   TRANSFER,
+  RETURN_UNCIRCULATED,
 } = TRANSACTION_STATUSES;
 
 const {
@@ -68,11 +68,17 @@ const {
   LESS,
 } = CREATED_DATE_OPERATIONS;
 
+const TOMORROW = 1;
+const GENERAL_PARAMS = {
+  [SORT_PARAMETER]: TRANSACTION_LIST_DEFAULT_SORT_FIELD,
+  [SORT_ORDER_PARAMETER]: ASC_ORDER,
+};
+
 export const formatDateAndTime = (date, formatter) => {
   return date ? formatter(date, { day: 'numeric', month: 'numeric', year: 'numeric' }) : '';
 };
 
-export const getAgencyCodeMap = (localServers) => {
+const getAgencyCodeMap = (localServers) => {
   return localServers.reduce((accum, { localServerList }) => {
     localServerList.forEach(({ agencyList }) => {
       agencyList.forEach(({ agencyCode, description }) => {
@@ -84,7 +90,7 @@ export const getAgencyCodeMap = (localServers) => {
   }, new Map());
 };
 
-export const getLoansMap = (loans) => {
+const getLoansMap = (loans) => {
   return loans.reduce((accum, loan) => {
     if (loan[HOLD][FOLIO_ITEM_ID]) {
       accum.set(loan[HOLD][FOLIO_ITEM_ID], loan);
@@ -110,7 +116,7 @@ const getCentralServersMap = (centralServers) => {
   }, new Map());
 };
 
-export const fetchLocalServers = async (mutator, loans) => {
+const fetchLocalServers = async (mutator, loans) => {
   const centralServerCodesSet = getCentralServerCodesSet(loans);
   const requests = [];
   const { centralServers } = await mutator.centralServerRecords.GET();
@@ -128,7 +134,7 @@ export const fetchLocalServers = async (mutator, loans) => {
   return Promise.all(requests);
 };
 
-export const fetchBatchItems = async (mutator, loans) => {
+const fetchBatchItems = async (mutator, loans) => {
   // Split the list of items into small chunks to create a short enough query string
   // that we can avoid request with error
   const CHUNK_SIZE = 77;
@@ -150,14 +156,22 @@ export const fetchBatchItems = async (mutator, loans) => {
   });
 };
 
-export const getOverdueParams = (record) => {
+const getLastModifiedDate = (minDays) => {
+  const date = new Date();
+
+  date.setDate(date.getDate() - minDays + TOMORROW);
+  date.setHours(0, 0, 0, 0);
+
+  return date.toISOString();
+};
+
+export const getParamsForOverdueReport = (record) => {
   const overdueDate = new Date();
 
   overdueDate.setDate(overdueDate.getDate() - record[MINIMUM_DAYS_OVERDUE]);
 
   return {
-    [SORT_PARAMETER]: TRANSACTION_LIST_DEFAULT_SORT_FIELD,
-    [SORT_ORDER_PARAMETER]: ASC_ORDER,
+    ...GENERAL_PARAMS,
     [TYPE]: ITEM,
     [STATUS]: [ITEM_RECEIVED, BORROWER_RENEW, OWNER_RENEW, ITEM_IN_TRANSIT, ITEM_SHIPPED],
     [DUE_DATE]: roundHours(overdueDate).toISOString(),
@@ -165,19 +179,49 @@ export const getOverdueParams = (record) => {
   };
 };
 
-export const getRequestedTooLongParams = (record) => {
-  const date = new Date();
-  const TOMORROW = 1;
-
-  date.setDate(date.getDate() - record[MINIMUM_DAYS_REQUESTED] + TOMORROW);
-  date.setHours(0, 0, 0, 0);
-
+export const getParamsForRequestedTooLongReport = (record) => {
   return {
-    [SORT_PARAMETER]: TRANSACTION_LIST_DEFAULT_SORT_FIELD,
-    [SORT_ORDER_PARAMETER]: ASC_ORDER,
+    ...GENERAL_PARAMS,
     [TYPE]: PATRON,
     [STATUS]: [PATRON_HOLD, TRANSFER],
-    [UPDATED_DATE]: date.toISOString(),
+    [UPDATED_DATE]: getLastModifiedDate(record[MINIMUM_DAYS_REQUESTED]),
     [UPDATED_DATE_OP]: LESS,
+  };
+};
+
+export const getParamsForReturnedTooLongReport = (record) => {
+  return {
+    ...GENERAL_PARAMS,
+    [TYPE]: PATRON,
+    [STATUS]: [ITEM_IN_TRANSIT, RETURN_UNCIRCULATED],
+    [UPDATED_DATE]: getLastModifiedDate(record[MINIMUM_DAYS_RETURNED]),
+    [UPDATED_DATE_OP]: LESS,
+  };
+};
+
+export const getData = async (mutator, loans) => {
+  const [localServers, items] = await Promise.all([
+    fetchLocalServers(mutator, loans),
+    fetchBatchItems(mutator, loans),
+  ]);
+
+  return {
+    agencyCodeMap: getAgencyCodeMap(localServers),
+    loansMap: getLoansMap(loans),
+    items,
+  };
+};
+
+export const getAgencyData = (loansMap, item, agencyCodeMap) => {
+  const holdData = loansMap.get(item.id)[HOLD];
+  const patronAgencyCode = holdData[PATRON_AGENCY_CODE];
+  const itemAgencyCode = holdData[ITEM_AGENCY_CODE];
+
+  return {
+    patronAgencyCode,
+    itemAgencyCode,
+    itemAgencyDescription: agencyCodeMap.get(itemAgencyCode),
+    patronAgencyDescription: agencyCodeMap.get(patronAgencyCode),
+    holdData,
   };
 };

@@ -35,22 +35,29 @@ import {
   ReportModal,
 } from '../../../routes/transaction/components';
 import {
+  FIELDS_OF_REPORT_MODALS,
   ICONS,
-  OVERDUE,
-  OWNING_SITE_OVERDUE_FIELDS,
-  REQUESTED_TOO_LONG,
-  REQUESTED_TOO_LONG_FIELDS,
-  SHOW_OVERDUE_REPORT_MODAL,
-  SHOW_REQUESTED_TOO_LONG_REPORT_MODAL,
+  REPORT_KINDS,
+  REPORT_MODALS,
 } from '../../../constants';
 
 const {
-  MINIMUM_DAYS_REQUESTED,
-} = REQUESTED_TOO_LONG_FIELDS;
+  SHOW_OVERDUE_REPORT_MODAL,
+  SHOW_REQUESTED_TOO_LONG_REPORT_MODAL,
+  SHOW_RETURNED_TOO_LONG_REPORT_MODAL,
+} = REPORT_MODALS;
 
 const {
+  MINIMUM_DAYS_RETURNED,
   MINIMUM_DAYS_OVERDUE,
-} = OWNING_SITE_OVERDUE_FIELDS;
+  MINIMUM_DAYS_REQUESTED,
+} = FIELDS_OF_REPORT_MODALS;
+
+const {
+  OVERDUE,
+  REQUESTED_TOO_LONG,
+  RETURNED_TOO_LONG,
+} = REPORT_KINDS;
 
 const SearchAndFilter = ({
   history,
@@ -61,6 +68,7 @@ const SearchAndFilter = ({
   statesOfModalReports: {
     [SHOW_OVERDUE_REPORT_MODAL]: showOverdueReportModal,
     [SHOW_REQUESTED_TOO_LONG_REPORT_MODAL]: showRequestedTooLongReportModal,
+    [SHOW_RETURNED_TOO_LONG_REPORT_MODAL]: showReturnedTooLongReportModal,
   },
   children,
   visibleColumns,
@@ -142,12 +150,21 @@ const SearchAndFilter = ({
     onToggleStatesOfModalReports(SHOW_REQUESTED_TOO_LONG_REPORT_MODAL);
   };
 
+  const handleReturnedTooLongReport = (record) => {
+    onGenerateReport(RETURNED_TOO_LONG, record);
+    onToggleStatesOfModalReports(SHOW_RETURNED_TOO_LONG_REPORT_MODAL);
+  };
+
   const toggleOverdueModal = () => {
     onToggleStatesOfModalReports(SHOW_OVERDUE_REPORT_MODAL);
   };
 
   const toggleRequestedTooLongModal = () => {
     onToggleStatesOfModalReports(SHOW_REQUESTED_TOO_LONG_REPORT_MODAL);
+  };
+
+  const toggleReturnedTooLongModal = () => {
+    onToggleStatesOfModalReports(SHOW_RETURNED_TOO_LONG_REPORT_MODAL);
   };
 
   const renderActionMenu = ({ onToggle }) => {
@@ -165,6 +182,13 @@ const SearchAndFilter = ({
           icon={ICONS.DOWNLOAD}
           buttonTextTranslationKey="ui-inn-reach.reports.requested-too-long.label"
           onClickHandler={toggleRequestedTooLongModal}
+          onToggle={onToggle}
+        />
+        <ActionItem
+          id="export-returned-too-long-report"
+          icon={ICONS.DOWNLOAD}
+          buttonTextTranslationKey="ui-inn-reach.reports.returned-too-long.label"
+          onClickHandler={toggleReturnedTooLongModal}
           onToggle={onToggle}
         />
       </>
@@ -188,6 +212,16 @@ const SearchAndFilter = ({
       fieldName={MINIMUM_DAYS_REQUESTED}
       onSubmit={handleRequestedTooLongReport}
       onTriggerModal={toggleRequestedTooLongModal}
+    />
+  );
+
+  const renderReturnedTooLongReportModal = () => (
+    <ReportModal
+      heading={<FormattedMessage id="ui-inn-reach.reports.modal.title.returned-too-long-report" />}
+      fieldLabel={<FormattedMessage id="ui-inn-reach.reports.modal.field.minimum-days-returned" />}
+      fieldName={MINIMUM_DAYS_RETURNED}
+      onSubmit={handleReturnedTooLongReport}
+      onTriggerModal={toggleReturnedTooLongModal}
     />
   );
 
@@ -261,6 +295,7 @@ const SearchAndFilter = ({
       { children }
       {showOverdueReportModal && renderOverdueReportModal()}
       {showRequestedTooLongReportModal && renderRequestedTooLongReportModal()}
+      {showReturnedTooLongReportModal && renderReturnedTooLongReportModal()}
     </Paneset>
   );
 };

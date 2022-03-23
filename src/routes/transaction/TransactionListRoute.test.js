@@ -8,8 +8,9 @@ import { translationsProperties } from '../../../test/jest/helpers';
 import TransactionList from '../../components/transaction/TransactionList';
 import TransactionDetailContainer from '../../components/transaction/TransactionDetails';
 import {
-  getOverdueParams,
-  getRequestedTooLongParams,
+  getParamsForOverdueReport,
+  getParamsForRequestedTooLongReport,
+  getParamsForReturnedTooLongReport,
 } from './utils';
 
 jest.mock('../../components/transaction/TransactionList', () => {
@@ -23,8 +24,9 @@ jest.mock('react', () => ({
 
 jest.mock('./utils', () => ({
   ...jest.requireActual('./utils'),
-  getOverdueParams: jest.fn(),
-  getRequestedTooLongParams: jest.fn(),
+  getParamsForOverdueReport: jest.fn(),
+  getParamsForRequestedTooLongReport: jest.fn(),
+  getParamsForReturnedTooLongReport: jest.fn(),
 }));
 
 const transactionsMock = {
@@ -236,8 +238,8 @@ describe('TransactionListRoute', () => {
 
       executeCommonTests();
 
-      it('should call getOverdueParams function', () => {
-        expect(getOverdueParams).toHaveBeenCalledWith(record);
+      it('should call getParamsForOverdueReport function', () => {
+        expect(getParamsForOverdueReport).toHaveBeenCalledWith(record);
       });
     });
 
@@ -250,8 +252,22 @@ describe('TransactionListRoute', () => {
 
       executeCommonTests();
 
-      it('should call getRequestedTooLongParams function', () => {
-        expect(getRequestedTooLongParams).toHaveBeenCalledWith(record);
+      it('should call getParamsForRequestedTooLongReport function', () => {
+        expect(getParamsForRequestedTooLongReport).toHaveBeenCalledWith(record);
+      });
+    });
+
+    describe('generate report for "returned too long"', () => {
+      const record = { minDaysReturned: 2 };
+
+      beforeEach(async () => {
+        await act(async () => { TransactionList.mock.calls[3][0].onGenerateReport('returnedTooLong', record); });
+      });
+
+      executeCommonTests();
+
+      it('should call getParamsForReturnedTooLongReport function', () => {
+        expect(getParamsForReturnedTooLongReport).toHaveBeenCalledWith(record);
       });
     });
   });
@@ -261,19 +277,30 @@ describe('TransactionListRoute', () => {
       await act(async () => { renderTransactionListRoute(); });
     });
 
-    it('should display "Owning site overdue" modal', async () => {
+    it('should display "Owning site overdue report" modal', async () => {
       await act(async () => { TransactionList.mock.calls[3][0].onToggleStatesOfModalReports('showOverdueReportModal'); });
       expect(TransactionList.mock.calls[4][0].statesOfModalReports).toEqual({
         showOverdueReportModal: true,
         showRequestedTooLongReportModal: false,
+        showReturnedTooLongReportModal: false,
       });
     });
 
-    it('should display "Owning site overdue" modal', async () => {
+    it('should display "Requested too long report" modal', async () => {
       await act(async () => { TransactionList.mock.calls[3][0].onToggleStatesOfModalReports('showRequestedTooLongReportModal'); });
       expect(TransactionList.mock.calls[4][0].statesOfModalReports).toEqual({
         showOverdueReportModal: false,
         showRequestedTooLongReportModal: true,
+        showReturnedTooLongReportModal: false,
+      });
+    });
+
+    it('should display "Returned too long report" modal', async () => {
+      await act(async () => { TransactionList.mock.calls[3][0].onToggleStatesOfModalReports('showReturnedTooLongReportModal'); });
+      expect(TransactionList.mock.calls[4][0].statesOfModalReports).toEqual({
+        showOverdueReportModal: false,
+        showRequestedTooLongReportModal: false,
+        showReturnedTooLongReportModal: true,
       });
     });
   });

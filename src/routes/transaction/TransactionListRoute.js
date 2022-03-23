@@ -31,38 +31,40 @@ import {
   CENTRAL_SERVERS_LIMITING,
   HOLD_FIELDS,
   INVENTORY_ITEM_FIELDS,
-  TRANSACTION_FIELDS,
-  OVERDUE,
-  OVERDUE_COLUMNS_FOR_CSV,
+  COLUMN_NAMES_FOR_OVERDUE_REPORT,
   METADATA,
   METADATA_FIELDS,
-  REQUESTED_TOO_LONG,
-  REQUESTED_TOO_LONG_COLUMNS_FOR_CSV,
-  SHOW_OVERDUE_REPORT_MODAL,
-  SHOW_REQUESTED_TOO_LONG_REPORT_MODAL,
+  COLUMN_NAMES_FOR_REQUESTED_TOO_LONG_REPORT,
+  COLUMN_NAMES_FOR_RETURNED_TOO_LONG_REPORT,
+  REPORT_FIELDS,
+  REPORT_KINDS,
+  REPORT_MODALS,
 } from '../../constants';
 import {
   getParams,
 } from '../../utils';
 import CsvReport from './CsvReport';
 import {
-  fetchBatchItems,
-  fetchLocalServers,
   formatDateAndTime,
-  getAgencyCodeMap,
-  getLoansMap,
-  getOverdueParams,
-  getRequestedTooLongParams,
+  getAgencyData,
+  getData,
+  getParamsForOverdueReport,
+  getParamsForRequestedTooLongReport,
+  getParamsForReturnedTooLongReport,
 } from './utils';
 
 const {
-  HOLD,
-} = TRANSACTION_FIELDS;
+  OVERDUE,
+  REQUESTED_TOO_LONG,
+  RETURNED_TOO_LONG,
+} = REPORT_KINDS;
 
 const {
-  ITEM_AGENCY_CODE,
-  PATRON_AGENCY_CODE,
   CALL_NUMBER,
+  PATRON_ID,
+  FOLIO_ITEM_BARCODE,
+  TITLE,
+  DUE_DATE_TIME,
 } = HOLD_FIELDS;
 
 const {
@@ -71,7 +73,28 @@ const {
 
 const {
   CREATED_DATE,
+  UPDATED_DATE,
 } = METADATA_FIELDS;
+
+const {
+  ITEM_TITLE,
+  ITEM_CALL_NUMBER,
+  ITEM_LOCATION,
+  ITEM_BARCODE,
+  REQUESTING_PATRON_ID,
+  PATRON_HOME_LIBRARY,
+  DATE_RETURNED,
+  DATE_REQUESTED,
+  PATRON_AGENCY,
+  PATRON_ID_FIELD,
+  LOAN_DUE_DATE,
+} = REPORT_FIELDS;
+
+const {
+  SHOW_OVERDUE_REPORT_MODAL,
+  SHOW_REQUESTED_TOO_LONG_REPORT_MODAL,
+  SHOW_RETURNED_TOO_LONG_REPORT_MODAL,
+} = REPORT_MODALS;
 
 const resetData = () => {};
 
@@ -88,6 +111,7 @@ const TransactionListRoute = ({
   const [statesOfModalReports, setStatesOfModalReports] = useState({
     [SHOW_OVERDUE_REPORT_MODAL]: false,
     [SHOW_REQUESTED_TOO_LONG_REPORT_MODAL]: false,
+    [SHOW_RETURNED_TOO_LONG_REPORT_MODAL]: false,
   });
 
   const csvReport = useMemo(() => new CsvReport({ intl }), [intl]);
@@ -126,44 +150,84 @@ const TransactionListRoute = ({
     render: props => children.props.render({ ...props, onUpdateTransactionList }),
   };
 
-  const getOverdueLoansToCsv = async (loans) => {
-    const localServers = await fetchLocalServers(mutator, loans);
-    const agencyCodeMap = getAgencyCodeMap(localServers);
-    const items = await fetchBatchItems(mutator, loans);
-    const loansMap = getLoansMap(loans);
+  const getCsvDataForOverdueReport = async (loans) => {
+    const {
+      agencyCodeMap,
+      loansMap,
+      items,
+    } = await getData(mutator, loans);
 
     return items.map(item => {
-      const patronAgencyCode = loansMap.get(item.id)[HOLD][PATRON_AGENCY_CODE];
-      const agencyDescription = agencyCodeMap.get(patronAgencyCode);
+      const {
+        patronAgencyDescription,
+        patronAgencyCode,
+        holdData,
+      } = getAgencyData(loansMap, item, agencyCodeMap);
 
       return {
-        ...loansMap.get(item.id),
-        [CALL_NUMBER]: item[CALL_NUMBER],
+        [PATRON_ID_FIELD]: holdData[PATRON_ID],
         [EFFECTIVE_LOCATION]: item[EFFECTIVE_LOCATION].name,
-        [PATRON_AGENCY_CODE]: `${agencyDescription} (${patronAgencyCode})`,
+        [ITEM_CALL_NUMBER]: item[CALL_NUMBER],
+        [ITEM_BARCODE]: holdData[FOLIO_ITEM_BARCODE],
+        [ITEM_TITLE]: holdData[TITLE],
+        [PATRON_AGENCY]: `${patronAgencyDescription} (${patronAgencyCode})`,
+        [LOAN_DUE_DATE]: formatDateAndTime(holdData[DUE_DATE_TIME] * 1000, intl.formatTime),
       };
     });
   };
 
-  const getRequestedTooLongLoansToCsv = async (loans) => {
-    const localServers = await fetchLocalServers(mutator, loans);
-    const agencyCodeMap = getAgencyCodeMap(localServers);
-    const items = await fetchBatchItems(mutator, loans);
-    const loansMap = getLoansMap(loans);
+  const getCsvDataForRequestedTooLongReport = async (loans) => {
+    const {
+      agencyCodeMap,
+      loansMap,
+      items,
+    } = await getData(mutator, loans);
 
     return items.map(item => {
-      const itemData = loansMap.get(item.id);
-      const patronAgencyCode = itemData[HOLD][PATRON_AGENCY_CODE];
-      const itemAgencyCode = itemData[HOLD][ITEM_AGENCY_CODE];
-      const itemAgencyDescription = agencyCodeMap.get(itemAgencyCode);
-      const patronAgencyDescription = agencyCodeMap.get(patronAgencyCode);
+      const {
+        itemAgencyCode,
+        itemAgencyDescription,
+        patronAgencyCode,
+        patronAgencyDescription,
+        holdData,
+      } = getAgencyData(loansMap, item, agencyCodeMap);
 
       return {
-        ...loansMap.get(item.id),
-        [ITEM_AGENCY_CODE]: `${itemAgencyDescription}(${itemAgencyCode})`,
-        [CALL_NUMBER]: item[CALL_NUMBER],
-        [PATRON_AGENCY_CODE]: `${patronAgencyDescription} (${patronAgencyCode})`,
-        [CREATED_DATE]: formatDateAndTime(item[METADATA][CREATED_DATE], intl.formatTime),
+        [ITEM_LOCATION]: `${itemAgencyDescription}(${itemAgencyCode})`,
+        [ITEM_CALL_NUMBER]: item[CALL_NUMBER],
+        [ITEM_BARCODE]: holdData[FOLIO_ITEM_BARCODE],
+        [ITEM_TITLE]: holdData[TITLE],
+        [PATRON_AGENCY]: `${patronAgencyDescription} (${patronAgencyCode})`,
+        [PATRON_ID_FIELD]: holdData[PATRON_ID],
+        [DATE_REQUESTED]: formatDateAndTime(item[METADATA][CREATED_DATE], intl.formatTime),
+      };
+    });
+  };
+
+  const getCsvDataForReturnedTooLongReport = async (loans) => {
+    const {
+      agencyCodeMap,
+      loansMap,
+      items,
+    } = await getData(mutator, loans);
+
+    return items.map(item => {
+      const {
+        itemAgencyCode,
+        itemAgencyDescription,
+        patronAgencyCode,
+        patronAgencyDescription,
+        holdData,
+      } = getAgencyData(loansMap, item, agencyCodeMap);
+
+      return {
+        [ITEM_LOCATION]: `${itemAgencyDescription}(${itemAgencyCode})`,
+        [ITEM_CALL_NUMBER]: item[CALL_NUMBER],
+        [ITEM_BARCODE]: holdData[FOLIO_ITEM_BARCODE],
+        [ITEM_TITLE]: holdData[TITLE],
+        [PATRON_HOME_LIBRARY]: `${patronAgencyDescription} (${patronAgencyCode})`,
+        [REQUESTING_PATRON_ID]: holdData[PATRON_ID],
+        [DATE_RETURNED]: formatDateAndTime(item[METADATA][UPDATED_DATE], intl.formatTime),
       };
     });
   };
@@ -175,14 +239,23 @@ const TransactionListRoute = ({
     let reportColumns;
     let params;
 
-    if (type === OVERDUE) {
-      getLoansToCsv = getOverdueLoansToCsv;
-      reportColumns = OVERDUE_COLUMNS_FOR_CSV;
-      params = getOverdueParams(record);
-    } else if (type === REQUESTED_TOO_LONG) {
-      getLoansToCsv = getRequestedTooLongLoansToCsv;
-      reportColumns = REQUESTED_TOO_LONG_COLUMNS_FOR_CSV;
-      params = getRequestedTooLongParams(record);
+    switch (type) {
+      case OVERDUE:
+        getLoansToCsv = getCsvDataForOverdueReport;
+        reportColumns = COLUMN_NAMES_FOR_OVERDUE_REPORT;
+        params = getParamsForOverdueReport(record);
+        break;
+      case REQUESTED_TOO_LONG:
+        getLoansToCsv = getCsvDataForRequestedTooLongReport;
+        reportColumns = COLUMN_NAMES_FOR_REQUESTED_TOO_LONG_REPORT;
+        params = getParamsForRequestedTooLongReport(record);
+        break;
+      case RETURNED_TOO_LONG:
+        getLoansToCsv = getCsvDataForReturnedTooLongReport;
+        reportColumns = COLUMN_NAMES_FOR_RETURNED_TOO_LONG_REPORT;
+        params = getParamsForReturnedTooLongReport(record);
+        break;
+      default:
     }
 
     setExportInProgress(true);
