@@ -11,6 +11,9 @@ export const REPORT_FIELDS = {
   DATE_REQUESTED: 'dateRequested',
   EFFECTIVE_LOCATION: 'effectiveLocation',
   LOAN_DUE_DATE: 'loanDueDate',
+  ITEM_HRID: 'itemHRID',
+  PAGED_DATE: 'pagedDate',
+  REQUESTING_PATRON_AGENCY: 'requestingPatronAgency',
 };
 
 const {
@@ -26,24 +29,30 @@ const {
   DATE_REQUESTED,
   EFFECTIVE_LOCATION,
   LOAN_DUE_DATE,
+  ITEM_HRID,
+  PAGED_DATE,
+  REQUESTING_PATRON_AGENCY,
 } = REPORT_FIELDS;
 
 export const REPORT_KINDS = {
   OVERDUE: 'overdue',
   REQUESTED_TOO_LONG: 'requestedTooLong',
   RETURNED_TOO_LONG: 'returnedTooLong',
+  PAGED_TOO_LONG: 'pagedTooLong',
 };
 
 export const REPORT_MODALS = {
   SHOW_RETURNED_TOO_LONG_REPORT_MODAL: 'showReturnedTooLongReportModal',
   SHOW_REQUESTED_TOO_LONG_REPORT_MODAL: 'showRequestedTooLongReportModal',
   SHOW_OVERDUE_REPORT_MODAL: 'showOverdueReportModal',
+  SHOW_PAGED_TOO_LONG_REPORT_MODAL: 'showPagedTooLongReportModal',
 };
 
 export const FIELDS_OF_REPORT_MODALS = {
   MINIMUM_DAYS_OVERDUE: 'minDaysOverdue',
   MINIMUM_DAYS_REQUESTED: 'minDaysRequested',
   MINIMUM_DAYS_RETURNED: 'minDaysReturned',
+  MINIMUM_DAYS_PAGED: 'minDaysPaged',
 };
 
 export const COLUMN_NAMES_FOR_OVERDUE_REPORT = [
@@ -74,4 +83,14 @@ export const COLUMN_NAMES_FOR_RETURNED_TOO_LONG_REPORT = [
   PATRON_HOME_LIBRARY,
   REQUESTING_PATRON_ID,
   DATE_RETURNED,
+];
+
+export const COLUMN_NAMES_FOR_PAGED_TOO_LONG_REPORT = [
+  ITEM_HRID,
+  EFFECTIVE_LOCATION,
+  ITEM_CALL_NUMBER,
+  ITEM_BARCODE,
+  ITEM_TITLE,
+  REQUESTING_PATRON_AGENCY,
+  PAGED_DATE,
 ];

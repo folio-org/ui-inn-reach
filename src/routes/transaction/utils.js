@@ -23,12 +23,14 @@ import {
 const {
   DUE_DATE_OP,
   UPDATED_DATE_OP,
+  CREATED_DATE_OP,
 } = TRANSACTION_OPERATIONS;
 
 const {
   MINIMUM_DAYS_RETURNED,
   MINIMUM_DAYS_OVERDUE,
   MINIMUM_DAYS_REQUESTED,
+  MINIMUM_DAYS_PAGED,
 } = FIELDS_OF_REPORT_MODALS;
 
 const {
@@ -47,6 +49,7 @@ const {
 const {
   ITEM,
   PATRON,
+  LOCAL,
 } = TRANSACTION_TYPES;
 
 const {
@@ -58,6 +61,8 @@ const {
   PATRON_HOLD,
   TRANSFER,
   RETURN_UNCIRCULATED,
+  ITEM_HOLD,
+  LOCAL_HOLD,
 } = TRANSACTION_STATUSES;
 
 const {
@@ -196,6 +201,16 @@ export const getParamsForReturnedTooLongReport = (record) => {
     [STATUS]: [ITEM_IN_TRANSIT, RETURN_UNCIRCULATED],
     [UPDATED_DATE]: getLastModifiedDate(record[MINIMUM_DAYS_RETURNED]),
     [UPDATED_DATE_OP]: LESS,
+  };
+};
+
+export const getParamsForOwningSitePagedTooLongReport = (record) => {
+  return {
+    ...GENERAL_PARAMS,
+    [TYPE]: [ITEM, LOCAL],
+    [STATUS]: [ITEM_HOLD, LOCAL_HOLD, TRANSFER],
+    [CREATED_DATE_OP]: getLastModifiedDate(record[MINIMUM_DAYS_PAGED]),
+    [CREATED_DATE_OP]: LESS,
   };
 };
 

@@ -52,10 +52,8 @@ export const HOLD_FIELDS = {
   FOLIO_PATRON_BARCODE: 'folioPatronBarcode',
   FOLIO_ITEM_BARCODE: 'folioItemBarcode',
   DUE_DATE_TIME: 'dueDateTime',
-};
-
-export const INVENTORY_ITEM_FIELDS = {
-  EFFECTIVE_LOCATION: 'effectiveLocation',
+  BARCODE: 'barcode',
+  HRID: 'hrid',
 };
 
 export const TRANSACTION_FIELDS = {

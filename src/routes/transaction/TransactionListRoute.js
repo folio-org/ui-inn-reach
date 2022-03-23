@@ -30,7 +30,6 @@ import {
   CALLOUT_ERROR_TYPE,
   CENTRAL_SERVERS_LIMITING,
   HOLD_FIELDS,
-  INVENTORY_ITEM_FIELDS,
   COLUMN_NAMES_FOR_OVERDUE_REPORT,
   METADATA,
   METADATA_FIELDS,
@@ -39,6 +38,7 @@ import {
   REPORT_FIELDS,
   REPORT_KINDS,
   REPORT_MODALS,
+  COLUMN_NAMES_FOR_PAGED_TOO_LONG_REPORT,
 } from '../../constants';
 import {
   getParams,
@@ -51,12 +51,14 @@ import {
   getParamsForOverdueReport,
   getParamsForRequestedTooLongReport,
   getParamsForReturnedTooLongReport,
+  getParamsForOwningSitePagedTooLongReport,
 } from './utils';
 
 const {
   OVERDUE,
   REQUESTED_TOO_LONG,
   RETURNED_TOO_LONG,
+  PAGED_TOO_LONG,
 } = REPORT_KINDS;
 
 const {
@@ -65,11 +67,9 @@ const {
   FOLIO_ITEM_BARCODE,
   TITLE,
   DUE_DATE_TIME,
+  BARCODE,
+  HRID,
 } = HOLD_FIELDS;
-
-const {
-  EFFECTIVE_LOCATION,
-} = INVENTORY_ITEM_FIELDS;
 
 const {
   CREATED_DATE,
@@ -88,12 +88,17 @@ const {
   PATRON_AGENCY,
   PATRON_ID_FIELD,
   LOAN_DUE_DATE,
+  ITEM_HRID,
+  REQUESTING_PATRON_AGENCY,
+  EFFECTIVE_LOCATION,
+  PAGED_DATE,
 } = REPORT_FIELDS;
 
 const {
   SHOW_OVERDUE_REPORT_MODAL,
   SHOW_REQUESTED_TOO_LONG_REPORT_MODAL,
   SHOW_RETURNED_TOO_LONG_REPORT_MODAL,
+  SHOW_PAGED_TOO_LONG_REPORT_MODAL,
 } = REPORT_MODALS;
 
 const resetData = () => {};
@@ -112,6 +117,7 @@ const TransactionListRoute = ({
     [SHOW_OVERDUE_REPORT_MODAL]: false,
     [SHOW_REQUESTED_TOO_LONG_REPORT_MODAL]: false,
     [SHOW_RETURNED_TOO_LONG_REPORT_MODAL]: false,
+    [SHOW_PAGED_TOO_LONG_REPORT_MODAL]: false,
   });
 
   const csvReport = useMemo(() => new CsvReport({ intl }), [intl]);
@@ -232,6 +238,31 @@ const TransactionListRoute = ({
     });
   };
 
+  const getPagedTooLongLoansToCsv = async (loans) => {
+    const {
+      agencyCodeMap,
+      loansMap,
+      items,
+    } = await getData(mutator, loans);
+
+    return items.map(item => {
+      const {
+        patronAgencyCode,
+        patronAgencyDescription,
+      } = getAgencyData(loansMap, item, agencyCodeMap);
+
+      return {
+        [ITEM_HRID]: item[HRID],
+        [EFFECTIVE_LOCATION]: item[EFFECTIVE_LOCATION].name,
+        [ITEM_CALL_NUMBER]: item[CALL_NUMBER],
+        [ITEM_BARCODE]: item[BARCODE],
+        [ITEM_TITLE]: item[TITLE],
+        [REQUESTING_PATRON_AGENCY]: `${patronAgencyDescription} (${patronAgencyCode})`,
+        [PAGED_DATE]: formatDateAndTime(item[METADATA][UPDATED_DATE], intl.formatTime),
+      };
+    });
+  };
+
   const generateReport = (type, record) => {
     if (exportInProgress) return;
 
@@ -254,6 +285,11 @@ const TransactionListRoute = ({
         getLoansToCsv = getCsvDataForReturnedTooLongReport;
         reportColumns = COLUMN_NAMES_FOR_RETURNED_TOO_LONG_REPORT;
         params = getParamsForReturnedTooLongReport(record);
+        break;
+      case PAGED_TOO_LONG:
+        getLoansToCsv = getPagedTooLongLoansToCsv;
+        reportColumns = COLUMN_NAMES_FOR_PAGED_TOO_LONG_REPORT;
+        params = getParamsForOwningSitePagedTooLongReport(record);
         break;
       default:
     }
