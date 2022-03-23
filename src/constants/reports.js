@@ -34,7 +34,7 @@ const {
   REQUESTING_PATRON_AGENCY,
 } = REPORT_FIELDS;
 
-export const REPORT_KINDS = {
+export const REPORT_TYPES = {
   OVERDUE: 'overdue',
   REQUESTED_TOO_LONG: 'requestedTooLong',
   RETURNED_TOO_LONG: 'returnedTooLong',

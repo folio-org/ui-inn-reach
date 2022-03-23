@@ -37,7 +37,7 @@ import {
 import {
   FIELDS_OF_REPORT_MODALS,
   ICONS,
-  REPORT_KINDS,
+  REPORT_TYPES,
   REPORT_MODALS,
 } from '../../../constants';
 
@@ -60,7 +60,7 @@ const {
   REQUESTED_TOO_LONG,
   RETURNED_TOO_LONG,
   PAGED_TOO_LONG,
-} = REPORT_KINDS;
+} = REPORT_TYPES;
 
 const SearchAndFilter = ({
   history,
