@@ -118,6 +118,7 @@ describe('TransactionDetail', () => {
       ...commonProps,
       isOpenUnshippedItemModal: true,
     });
+
     expect(screen.getByText('ReceiveUnshippedItemModal')).toBeVisible();
   });
 
