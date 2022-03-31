@@ -105,7 +105,7 @@ const params = {
   'centralPatronType': '201',
   'query': 'secrets',
   'sortBy': 'transactionTime',
-  'sortOrder': 'asc',
+  'sortOrder': 'desc',
   'state': 'ITEM_HOLD',
   'type': ['PATRON', 'ITEM'],
 };
