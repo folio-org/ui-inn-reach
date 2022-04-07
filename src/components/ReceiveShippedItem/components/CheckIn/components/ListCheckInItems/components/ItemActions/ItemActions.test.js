@@ -70,7 +70,6 @@ describe('ItemActions', () => {
         },
       });
       expect(PrintButton.mock.calls[0][0]['data-testid']).toBe('print-inn-reach-barcode');
-      expect(screen.getAllByTestId('ellipse-icon').length).toBe(2);
     });
 
     it('should display the "Print hold slip" button', () => {
