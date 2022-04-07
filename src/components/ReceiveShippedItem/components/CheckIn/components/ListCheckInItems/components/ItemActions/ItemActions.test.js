@@ -1,5 +1,6 @@
 import { renderWithIntl } from '@folio/stripes-data-transfer-components/test/jest/helpers';
 import { useStripes } from '@folio/stripes/core';
+import { screen } from '@testing-library/react';
 import ItemActions from './ItemActions';
 import { translationsProperties } from '../../../../../../../../../test/jest/helpers';
 import {
@@ -69,6 +70,7 @@ describe('ItemActions', () => {
         },
       });
       expect(PrintButton.mock.calls[0][0]['data-testid']).toBe('print-inn-reach-barcode');
+      expect(screen.getAllByTestId('ellipse-icon').length).toBe(2);
     });
 
     it('should display the "Print hold slip" button', () => {

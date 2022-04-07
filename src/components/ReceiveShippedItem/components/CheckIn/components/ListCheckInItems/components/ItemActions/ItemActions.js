@@ -50,6 +50,7 @@ const ItemActions = ({
 
     return (
       <IconButton
+        data-testid="ellipse-icon"
         {...rest}
         aria-expanded={ariaExpanded.toString()}
         aria-haspopup={ariaHaspopup.toString()}
