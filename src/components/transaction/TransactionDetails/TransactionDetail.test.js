@@ -27,6 +27,7 @@ const renderTransactionDetail = ({
   isOpenUnshippedItemModal = false,
   onCheckoutBorrowingSite,
   onCheckOutToPatron,
+  onReturnItem,
   onCancelPatronHold,
   onTriggerUnshippedItemModal,
   onFetchReceiveUnshippedItem,
@@ -51,6 +52,7 @@ const renderTransactionDetail = ({
       onFetchReceiveItem={onFetchReceiveItem}
       onCheckoutBorrowingSite={onCheckoutBorrowingSite}
       onCheckOutToPatron={onCheckOutToPatron}
+      onReturnItem={onReturnItem}
       onCancelPatronHold={onCancelPatronHold}
       onReset={onReset}
       onRenderAugmentedBarcodeModal={onRenderAugmentedBarcodeModal}
@@ -67,6 +69,7 @@ describe('TransactionDetail', () => {
   const onFetchReceiveUnshippedItem = jest.fn();
   const onFetchReceiveItem = jest.fn();
   const onCheckoutBorrowingSite = jest.fn();
+  const onReturnItem = jest.fn();
   const onCheckOutToPatron = jest.fn();
   const onCancelPatronHold = jest.fn();
   const onReset = jest.fn();
@@ -83,6 +86,7 @@ describe('TransactionDetail', () => {
     onCheckOutToPatron,
     onCancelPatronHold,
     onReset,
+    onReturnItem,
     onRenderAugmentedBarcodeModal,
     onRenderHoldModal,
     onRenderTransitModal,

@@ -1,6 +1,5 @@
 import { renderWithIntl } from '@folio/stripes-data-transfer-components/test/jest/helpers';
 import { useStripes } from '@folio/stripes/core';
-import { screen } from '@testing-library/react';
 import ItemActions from './ItemActions';
 import { translationsProperties } from '../../../../../../../../../test/jest/helpers';
 import {
