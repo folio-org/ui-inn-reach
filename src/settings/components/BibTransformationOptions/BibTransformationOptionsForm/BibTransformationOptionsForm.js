@@ -69,14 +69,10 @@ const BibTransformationOptionsForm = ({
       DEFAULT_INITIAL_VALUES[MODIFIED_FIELDS_FOR_CONTRIBUTED_RECORDS]
     );
 
-    if (isConfigActive) {
-      if (isCreatingNewConfig) {
-        const isSomeIdentifierTypeFilledIn = tabularList.some(row => row[RESOURCE_IDENTIFIER_TYPE_ID]);
+    if (isConfigActive && isCreatingNewConfig) {
+      const isSomeIdentifierTypeFilledIn = tabularList.some(row => row[RESOURCE_IDENTIFIER_TYPE_ID]);
 
-        setCanSave(isSomeIdentifierTypeFilledIn);
-      } else {
-        setCanSave(!pristine);
-      }
+      setCanSave(isSomeIdentifierTypeFilledIn);
     } else {
       setCanSave(!pristine);
     }
