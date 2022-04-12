@@ -74,25 +74,11 @@ const BibTransformationOptionsForm = ({
         const isSomeIdentifierTypeFilledIn = tabularList.some(row => row[RESOURCE_IDENTIFIER_TYPE_ID]);
 
         setCanSave(isSomeIdentifierTypeFilledIn);
-      } else if (!pristine) {
-        setCanSave(true);
       } else {
-        setCanSave(false);
+        setCanSave(!pristine);
       }
-
-      return;
-    }
-
-    if (!isConfigActive) {
-      if (!isCreatingNewConfig) {
-        if (pristine) {
-          setCanSave(false);
-        } else {
-          setCanSave(true);
-        }
-      } else {
-        setCanSave(false);
-      }
+    } else {
+      setCanSave(!pristine);
     }
   }, [values, pristine, isConfigActive]);
 
