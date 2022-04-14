@@ -113,6 +113,9 @@ const mutatorMock = {
   cancelPatronHold: {
     POST: jest.fn(() => Promise.resolve()),
   },
+  cancelItemHold: {
+    POST: jest.fn(() => Promise.resolve()),
+  },
 };
 
 const historyMock = createMemoryHistory();
@@ -172,6 +175,7 @@ describe('TransactionDetailContainer', () => {
     mutatorMock.returnPatronHoldItem.POST.mockClear();
     mutatorMock.cancellationReasons.GET.mockClear();
     mutatorMock.cancelPatronHold.POST.mockClear();
+    mutatorMock.cancelItemHold.POST.mockClear();
   });
 
   it('should be rendered', () => {
@@ -358,6 +362,21 @@ describe('TransactionDetailContainer', () => {
     it('should update the transaction list', () => {
       renderTransactionDetailContainer(commonProps);
       TransactionDetail.mock.calls[0][0].onCancelPatronHold();
+      expect(onUpdateTransactionList).toHaveBeenCalled();
+    });
+  });
+
+  describe('cancel item hold', () => {
+    beforeEach(() => {
+      renderTransactionDetailContainer(commonProps);
+      TransactionDetail.mock.calls[0][0].onCancelItemHold();
+    });
+
+    it('should update the transaction state', () => {
+      expect(mutatorMock.cancelItemHold.POST).toHaveBeenCalled();
+    });
+
+    it('should update the transaction list', () => {
       expect(onUpdateTransactionList).toHaveBeenCalled();
     });
   });

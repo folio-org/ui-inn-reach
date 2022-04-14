@@ -145,6 +145,22 @@ const TransactionDetailContainer = ({
       });
   };
 
+  const onCancelItemHold = () => {
+    mutator.cancelItemHold.POST({})
+      .then(() => {
+        onUpdateTransactionList();
+        showCallout({
+          message: <FormattedMessage id="ui-inn-reach.cancel-item-hold.callout.success.post.cancel-item-hold" />,
+        });
+      })
+      .catch(() => {
+        showCallout({
+          type: CALLOUT_ERROR_TYPE,
+          message: <FormattedMessage id="ui-inn-reach.cancel-item-hold.callout.connection-problem.post.cancel-item-hold" />,
+        });
+      });
+  };
+
   const fetchCheckOutToPatron = () => {
     mutator.checkOutToPatron.POST({})
       .then(() => {
@@ -279,6 +295,7 @@ const TransactionDetailContainer = ({
       onCheckOutToPatron={fetchCheckOutToPatron}
       onReturnItem={onReturnPatronHoldItem}
       onCancelPatronHold={handleCancelPatronHold}
+      onCancelItemHold={onCancelItemHold}
       onTriggerUnshippedItemModal={triggerUnshippedItemModal}
       onFetchReceiveUnshippedItem={handleFetchReceiveUnshippedItem}
       onFetchReceiveItem={fetchReceiveItem}
@@ -362,6 +379,14 @@ TransactionDetailContainer.manifest = Object.freeze({
     fetch: false,
     accumulate: true,
   },
+  cancelItemHold: {
+    type: 'okapi',
+    path: 'inn-reach/transactions/%{transactionId}/itemhold/cancel',
+    pk: '',
+    clientGeneratePk: false,
+    fetch: false,
+    accumulate: true,
+  },
 });
 
 TransactionDetailContainer.propTypes = {
@@ -404,6 +429,9 @@ TransactionDetailContainer.propTypes = {
       POST: PropTypes.func.isRequired,
     }),
     cancelPatronHold: PropTypes.shape({
+      POST: PropTypes.func.isRequired,
+    }),
+    cancelItemHold: PropTypes.shape({
       POST: PropTypes.func.isRequired,
     }),
     cancellationReasons: PropTypes.shape({
