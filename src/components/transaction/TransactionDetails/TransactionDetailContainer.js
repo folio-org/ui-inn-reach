@@ -145,22 +145,6 @@ const TransactionDetailContainer = ({
       });
   };
 
-  const onCancelItemHold = () => {
-    mutator.cancelItemHold.POST({})
-      .then(() => {
-        onUpdateTransactionList();
-        showCallout({
-          message: <FormattedMessage id="ui-inn-reach.cancel-item-hold.callout.success.post.cancel-item-hold" />,
-        });
-      })
-      .catch(() => {
-        showCallout({
-          type: CALLOUT_ERROR_TYPE,
-          message: <FormattedMessage id="ui-inn-reach.cancel-item-hold.callout.connection-problem.post.cancel-item-hold" />,
-        });
-      });
-  };
-
   const fetchCheckOutToPatron = () => {
     mutator.checkOutToPatron.POST({})
       .then(() => {
@@ -216,6 +200,25 @@ const TransactionDetailContainer = ({
       });
   };
 
+  const fetchCancelItemHold = (response) => {
+    mutator.cancelItemHold.POST({
+      cancellationReasonId: response.id,
+      cancellationAdditionalInformation: 'Owning site cancels request',
+    })
+      .then(() => {
+        onUpdateTransactionList();
+        showCallout({
+          message: <FormattedMessage id="ui-inn-reach.cancel-item-hold.callout.success.post.cancel-item-hold" />,
+        });
+      })
+      .catch(() => {
+        showCallout({
+          type: CALLOUT_ERROR_TYPE,
+          message: <FormattedMessage id="ui-inn-reach.cancel-item-hold.callout.connection-problem.post.cancel-item-hold" />,
+        });
+      });
+  };
+
   const handleCancelPatronHold = () => {
     mutator.cancellationReasons.GET()
       .then(response => {
@@ -229,7 +232,25 @@ const TransactionDetailContainer = ({
       .catch(() => {
         showCallout({
           type: CALLOUT_ERROR_TYPE,
-          message: <FormattedMessage id="ui-inn-reach.cancel-patron-hold.callout.connection-problem.get.cancellation-reasons" />,
+          message: <FormattedMessage id="ui-inn-reach.cancel-item-hold.callout.connection-problem.get.cancellation-reasons" />,
+        });
+      });
+  };
+
+  const handleCancelItemHold = () => {
+    mutator.cancellationReasons.GET()
+      .then(response => {
+        if (response?.length === 1) {
+          return response[0];
+        }
+
+        throw new Error();
+      })
+      .then(fetchCancelItemHold)
+      .catch(() => {
+        showCallout({
+          type: CALLOUT_ERROR_TYPE,
+          message: <FormattedMessage id="ui-inn-reach.cancel-item-hold.callout.connection-problem.post.cancel-item-hold" />,
         });
       });
   };
@@ -295,7 +316,7 @@ const TransactionDetailContainer = ({
       onCheckOutToPatron={fetchCheckOutToPatron}
       onReturnItem={onReturnPatronHoldItem}
       onCancelPatronHold={handleCancelPatronHold}
-      onCancelItemHold={onCancelItemHold}
+      onCancelItemHold={handleCancelItemHold}
       onTriggerUnshippedItemModal={triggerUnshippedItemModal}
       onFetchReceiveUnshippedItem={handleFetchReceiveUnshippedItem}
       onFetchReceiveItem={fetchReceiveItem}
