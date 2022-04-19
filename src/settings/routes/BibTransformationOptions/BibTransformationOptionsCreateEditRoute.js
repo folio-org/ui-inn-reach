@@ -92,7 +92,7 @@ const BibTransformationOptionsCreateEditRoute = ({
     const { POST, PUT } = mutator.marcTransformationOptions;
     const saveMethod = isEmpty(marcTransformationOptions) ? POST : PUT;
     const action = isEmpty(marcTransformationOptions) ? 'create' : 'update';
-    const payload = formatPayload(record);
+    const payload = formatPayload(record, isConfigActive);
 
     saveMethod(payload)
       .then(() => {
@@ -168,6 +168,7 @@ BibTransformationOptionsCreateEditRoute.manifest = Object.freeze({
     type: 'okapi',
     path: 'inn-reach/central-servers/%{selectedServerId}/marc-transformation-options',
     accumulate: true,
+    clientGeneratePk: false,
     fetch: false,
     throwErrors: false,
   },

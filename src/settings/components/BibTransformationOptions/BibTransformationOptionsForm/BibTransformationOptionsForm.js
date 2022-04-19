@@ -69,10 +69,21 @@ const BibTransformationOptionsForm = ({
       DEFAULT_INITIAL_VALUES[MODIFIED_FIELDS_FOR_CONTRIBUTED_RECORDS]
     );
 
-    if (isConfigActive && isCreatingNewConfig) {
-      const isSomeIdentifierTypeFilledIn = tabularList.some(row => row[RESOURCE_IDENTIFIER_TYPE_ID]);
+    if (isConfigActive) {
+      if (isCreatingNewConfig) {
+        const isSomeIdentifierTypeFilledIn = tabularList.some(row => row[RESOURCE_IDENTIFIER_TYPE_ID]);
 
-      setCanSave(isSomeIdentifierTypeFilledIn);
+        setCanSave(isSomeIdentifierTypeFilledIn);
+      } else {
+        const isNewRowAdded = initialValues[MODIFIED_FIELDS_FOR_CONTRIBUTED_RECORDS].length !== tabularList.length;
+
+        if (isNewRowAdded) {
+          const isEveryIdentifierType = tabularList.every(row => row[RESOURCE_IDENTIFIER_TYPE_ID])
+          setCanSave(isEveryIdentifierType);
+        } else {
+          setCanSave(!pristine);
+        }
+      }
     } else {
       setCanSave(!pristine);
     }
