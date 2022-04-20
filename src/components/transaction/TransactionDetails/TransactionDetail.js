@@ -41,6 +41,7 @@ const TransactionDetail = ({
   isOpenItemHoldModal,
   isOpenInTransitModal,
   isOpenAugmentedBarcodeModal,
+  isOpenTransferHoldModal,
   intl,
   isOpenUnshippedItemModal,
   onClose,
@@ -48,12 +49,14 @@ const TransactionDetail = ({
   onCheckOutToPatron,
   onReturnItem,
   onCancelPatronHold,
+  onTransferHold,
   onTriggerUnshippedItemModal,
   onFetchReceiveUnshippedItem,
   onFetchReceiveItem,
   onRenderAugmentedBarcodeModal,
   onRenderHoldModal,
   onRenderTransitModal,
+  onRenderTransferHoldModal,
 }) => {
   const renderActionMenu = useCallback(({ onToggle }) => (
     <ActionMenu
@@ -65,6 +68,7 @@ const TransactionDetail = ({
       onCheckOutToPatron={onCheckOutToPatron}
       onReturnItem={onReturnItem}
       onCancelPatronHold={onCancelPatronHold}
+      onTransferHold={onTransferHold}
     />
   ), [transaction]);
 
@@ -104,6 +108,7 @@ const TransactionDetail = ({
       {isOpenAugmentedBarcodeModal && onRenderAugmentedBarcodeModal()}
       {isOpenItemHoldModal && onRenderHoldModal()}
       {isOpenInTransitModal && onRenderTransitModal()}
+      {isOpenTransferHoldModal && onRenderTransferHoldModal()}
     </Pane>
   );
 };
@@ -113,6 +118,7 @@ TransactionDetail.propTypes = {
   isOpenAugmentedBarcodeModal: PropTypes.bool.isRequired,
   isOpenInTransitModal: PropTypes.bool.isRequired,
   isOpenItemHoldModal: PropTypes.bool.isRequired,
+  isOpenTransferHoldModal: PropTypes.bool.isRequired,
   isOpenUnshippedItemModal: PropTypes.bool.isRequired,
   transaction: PropTypes.object.isRequired,
   onCancelPatronHold: PropTypes.func.isRequired,
@@ -123,8 +129,10 @@ TransactionDetail.propTypes = {
   onFetchReceiveUnshippedItem: PropTypes.func.isRequired,
   onRenderAugmentedBarcodeModal: PropTypes.func.isRequired,
   onRenderHoldModal: PropTypes.func.isRequired,
+  onRenderTransferHoldModal: PropTypes.func.isRequired,
   onRenderTransitModal: PropTypes.func.isRequired,
   onReturnItem: PropTypes.func.isRequired,
+  onTransferHold: PropTypes.func.isRequired,
   onTriggerUnshippedItemModal: PropTypes.func.isRequired,
 };
 

@@ -30,6 +30,7 @@ const ActionMenu = ({
   onCheckoutBorrowingSite,
   onCheckOutToPatron,
   onCancelPatronHold,
+  onTransferHold,
 }) => {
   let actions;
 
@@ -53,6 +54,7 @@ const ActionMenu = ({
           transaction={transaction}
           onToggle={onToggle}
           onCheckoutBorrowingSite={onCheckoutBorrowingSite}
+          onTransferHold={onTransferHold}
         />
       );
       break;
@@ -76,6 +78,7 @@ ActionMenu.propTypes = {
   onReceiveUnshippedItem: PropTypes.func.isRequired,
   onReturnItem: PropTypes.func.isRequired,
   onToggle: PropTypes.func.isRequired,
+  onTransferHold: PropTypes.func.isRequired,
 };
 
 export default ActionMenu;

@@ -34,6 +34,9 @@ import {
   useCallout,
   useReceiveItemModals,
 } from '../../../hooks';
+import {
+  TransferHoldModal,
+} from './components';
 
 const {
   HOLD,
@@ -41,6 +44,9 @@ const {
 
 const {
   FOLIO_ITEM_BARCODE,
+  TITLE,
+  FOLIO_INSTANCE_ID,
+  FOLIO_ITEM_ID,
 } = HOLD_FIELDS;
 
 const TransactionDetailContainer = ({
@@ -69,6 +75,7 @@ const TransactionDetailContainer = ({
   const intl = useIntl();
 
   const [isOpenUnshippedItemModal, setIsOpenUnshippedItemModal] = useState(false);
+  const [isOpenTransferHoldModal, setIsOpenTransferHoldModal] = useState(false);
 
   const {
     isOpenAugmentedBarcodeModal,
@@ -84,6 +91,10 @@ const TransactionDetailContainer = ({
 
   const triggerUnshippedItemModal = () => {
     setIsOpenUnshippedItemModal(prevModalState => !prevModalState);
+  };
+
+  const triggerTransferHoldModal = () => {
+    setIsOpenTransferHoldModal(prev => !prev);
   };
 
   const backToList = useCallback(() => {
@@ -218,15 +229,26 @@ const TransactionDetailContainer = ({
       });
   };
 
-  useEffect(() => {
-    mutator.servicePointId.replace(servicePointId || '');
-    mutator.transactionId.replace(transaction.id || '');
-    mutator.itemBarcode.replace(folioItemBarcode || '');
-  }, [servicePointId, transaction, folioItemBarcode]);
-
   const handleFetchReceiveUnshippedItem = ({ itemBarcode }) => {
     mutator.itemBarcode.replace(itemBarcode || '');
     fetchReceiveUnshippedItem();
+  };
+
+  const fetchTransferHold = () => {
+    mutator.transferItem.POST({})
+      .then(() => {
+        triggerTransferHoldModal();
+        onUpdateTransactionList();
+        showCallout({
+          message: <FormattedMessage id="ui-inn-reach.transfer-hold.callout.success.post.transfer-hold" />,
+        });
+      })
+      .catch(() => {
+        showCallout({
+          type: CALLOUT_ERROR_TYPE,
+          message: <FormattedMessage id="ui-inn-reach.transfer-hold.callout.connection-problem.post.transfer-hold" />,
+        });
+      });
   };
 
   const renderAugmentedBarcodeModal = () => (
@@ -259,9 +281,21 @@ const TransactionDetailContainer = ({
     />
   );
 
+  const renderTransferHoldModal = () => (
+    <TransferHoldModal
+      title={transaction?.[HOLD]?.[TITLE]}
+      instanceId={transaction?.[HOLD]?.[FOLIO_INSTANCE_ID]}
+      skippedItemId={transaction?.[HOLD]?.[FOLIO_ITEM_ID]}
+      onClose={triggerTransferHoldModal}
+      onRowClick={fetchTransferHold}
+    />
+  );
+
   useEffect(() => {
     mutator.servicePointId.replace(servicePointId || '');
     mutator.transactionId.replace(transaction.id || '');
+    mutator.itemBarcode.replace(folioItemBarcode || '');
+    mutator.folioItemId.replace(transaction?.[HOLD]?.[FOLIO_ITEM_ID] || '');
   }, [servicePointId, transaction]);
 
   if (isTransactionPending) return <LoadingPane />;
@@ -272,6 +306,7 @@ const TransactionDetailContainer = ({
       isOpenAugmentedBarcodeModal={isOpenAugmentedBarcodeModal}
       isOpenItemHoldModal={isOpenItemHoldModal}
       isOpenInTransitModal={isOpenInTransitModal}
+      isOpenTransferHoldModal={isOpenTransferHoldModal}
       intl={intl}
       isOpenUnshippedItemModal={isOpenUnshippedItemModal}
       onClose={backToList}
@@ -279,12 +314,14 @@ const TransactionDetailContainer = ({
       onCheckOutToPatron={fetchCheckOutToPatron}
       onReturnItem={onReturnPatronHoldItem}
       onCancelPatronHold={handleCancelPatronHold}
+      onTransferHold={triggerTransferHoldModal}
       onTriggerUnshippedItemModal={triggerUnshippedItemModal}
       onFetchReceiveUnshippedItem={handleFetchReceiveUnshippedItem}
       onFetchReceiveItem={fetchReceiveItem}
       onRenderAugmentedBarcodeModal={renderAugmentedBarcodeModal}
       onRenderHoldModal={renderHoldModal}
       onRenderTransitModal={renderTransitModal}
+      onRenderTransferHoldModal={renderTransferHoldModal}
     />
   );
 };
@@ -293,6 +330,7 @@ TransactionDetailContainer.manifest = Object.freeze({
   servicePointId: { initialValue: '' },
   transactionId: { initialValue: '' },
   itemBarcode: { initialValue: '' },
+  folioItemId: { initialValue: '' },
   transactionView: {
     type: 'okapi',
     path: 'inn-reach/transactions/:{id}',
@@ -362,6 +400,14 @@ TransactionDetailContainer.manifest = Object.freeze({
     fetch: false,
     accumulate: true,
   },
+  transferItem: {
+    type: 'okapi',
+    path: 'inn-reach/transactions/%{transactionId}/itemhold/transfer-item/%{folioItemId}',
+    pk: '',
+    clientGeneratePk: false,
+    fetch: false,
+    accumulate: true,
+  },
 });
 
 TransactionDetailContainer.propTypes = {
@@ -388,6 +434,9 @@ TransactionDetailContainer.propTypes = {
     itemBarcode: PropTypes.shape({
       replace: PropTypes.func.isRequired,
     }).isRequired,
+    folioItemId: PropTypes.shape({
+      replace: PropTypes.func.isRequired,
+    }).isRequired,
     receiveUnshippedItem: PropTypes.shape({
       POST: PropTypes.func.isRequired,
     }),
@@ -408,6 +457,9 @@ TransactionDetailContainer.propTypes = {
     }),
     cancellationReasons: PropTypes.shape({
       GET: PropTypes.func.isRequired,
+    }),
+    transferItem: PropTypes.shape({
+      POST: PropTypes.func.isRequired,
     }),
   }),
 };
