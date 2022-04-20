@@ -218,6 +218,21 @@ const TransactionDetailContainer = ({
         });
       });
   };
+  const fetchFinalCheckInItem = () => {
+    mutator.finalCheckInItem.POST({})
+      .then(() => {
+        onUpdateTransactionList();
+        showCallout({
+          message: <FormattedMessage id="ui-inn-reach.final-check-in-item-hold.callout.success.post.final-check-in-item-hold" />,
+        });
+      })
+      .catch(() => {
+        showCallout({
+          type: CALLOUT_ERROR_TYPE,
+          message: <FormattedMessage id="ui-inn-reach.final-check-in-item-hold.connection-problem.post.final-check-in-item-hold" />,
+        });
+      });
+  };
 
   const handleCancelPatronHold = () => {
     mutator.cancellationReasons.GET()
@@ -317,6 +332,7 @@ const TransactionDetailContainer = ({
       onReturnItem={onReturnPatronHoldItem}
       onCancelPatronHold={handleCancelPatronHold}
       onCancelItemHold={handleCancelItemHold}
+      onFinalCheckIn={fetchFinalCheckInItem}
       onTriggerUnshippedItemModal={triggerUnshippedItemModal}
       onFetchReceiveUnshippedItem={handleFetchReceiveUnshippedItem}
       onFetchReceiveItem={fetchReceiveItem}
@@ -334,6 +350,15 @@ TransactionDetailContainer.manifest = Object.freeze({
   transactionView: {
     type: 'okapi',
     path: 'inn-reach/transactions/:{id}',
+    throwErrors: false,
+  },
+  finalCheckInItem: {
+    type: 'okapi',
+    path: 'inn-reach/transactions/%{transactionId}/itemhold/finalcheckin/%{servicePointId}',
+    pk: '',
+    clientGeneratePk: false,
+    fetch: false,
+    accumulate: true,
     throwErrors: false,
   },
   receiveUnshippedItem: {
@@ -434,6 +459,9 @@ TransactionDetailContainer.propTypes = {
     itemBarcode: PropTypes.shape({
       replace: PropTypes.func.isRequired,
     }).isRequired,
+    finalCheckInItem: PropTypes.shape({
+      POST: PropTypes.func.isRequired,
+    }),
     receiveUnshippedItem: PropTypes.shape({
       POST: PropTypes.func.isRequired,
     }),
