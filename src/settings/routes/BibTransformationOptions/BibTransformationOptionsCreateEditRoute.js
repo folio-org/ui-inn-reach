@@ -169,6 +169,7 @@ BibTransformationOptionsCreateEditRoute.manifest = Object.freeze({
     path: 'inn-reach/central-servers/%{selectedServerId}/marc-transformation-options',
     accumulate: true,
     clientGeneratePk: false,
+    pk: '',
     fetch: false,
     throwErrors: false,
   },

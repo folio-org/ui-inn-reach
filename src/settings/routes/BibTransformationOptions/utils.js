@@ -1,6 +1,5 @@
 import {
   isEmpty,
-  omit,
 } from 'lodash';
 import {
   BIB_TRANSFORMATION_FIELDS,
@@ -8,6 +7,7 @@ import {
 } from '../../../constants';
 
 const {
+  ID,
   CONFIG_IS_ACTIVE,
   MODIFIED_FIELDS_FOR_CONTRIBUTED_RECORDS,
   STRIP_PREFIX,
@@ -25,6 +25,7 @@ const formatTabularList = (tabularListValues) => {
 
 export const formatMARCTransformations = (response) => {
   const formattedData = {
+    ...response,
     [CONFIG_IS_ACTIVE]: false,
     [MODIFIED_FIELDS_FOR_CONTRIBUTED_RECORDS]: [NEW_ROW_VALUES],
     [EXCLUDED_MARC_FIELDS]: [],
@@ -72,10 +73,16 @@ export const formatPayload = (record, configIsActive) => {
     [EXCLUDED_MARC_FIELDS]: [],
   };
 
-  const isIdentifierTypeSelected = record[MODIFIED_FIELDS_FOR_CONTRIBUTED_RECORDS][0][RESOURCE_IDENTIFIER_TYPE_ID];
+  const isSomeIdentifierTypeSelected = record[MODIFIED_FIELDS_FOR_CONTRIBUTED_RECORDS].some(row => row[RESOURCE_IDENTIFIER_TYPE_ID]);
 
-  if (isIdentifierTypeSelected) {
-    payload[MODIFIED_FIELDS_FOR_CONTRIBUTED_RECORDS] = getFinalTabularListValues(record[MODIFIED_FIELDS_FOR_CONTRIBUTED_RECORDS]);
+  if (record[ID]) {
+    payload[ID] = record[ID];
+  }
+
+  if (isSomeIdentifierTypeSelected) {
+    const withoutEmptyRow = record[MODIFIED_FIELDS_FOR_CONTRIBUTED_RECORDS].filter(row => row[RESOURCE_IDENTIFIER_TYPE_ID]);
+
+    payload[MODIFIED_FIELDS_FOR_CONTRIBUTED_RECORDS] = getFinalTabularListValues(withoutEmptyRow);
   }
 
   if (record[EXCLUDED_MARC_FIELDS]) {
