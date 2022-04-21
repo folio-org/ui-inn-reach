@@ -30,7 +30,7 @@ export const getIdentifierTypeOptions = (identifierTypes, tabularListValues = []
   }));
 };
 
-export const validateIdentifierTypeFields = (value, allValues) => {
+export const validateIdentifierTypeFields = (_, allValues) => {
   const hasAtLeastOneIdentifierType = allValues[MODIFIED_FIELDS_FOR_CONTRIBUTED_RECORDS].some(row => row[RESOURCE_IDENTIFIER_TYPE_ID]);
 
   if (!hasAtLeastOneIdentifierType) {
