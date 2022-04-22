@@ -35,6 +35,7 @@ import {
   useReceiveItemModals,
 } from '../../../hooks';
 import {
+  ReceiveUnshippedItemModal,
   TransferHoldModal,
 } from './components';
 
@@ -251,6 +252,14 @@ const TransactionDetailContainer = ({
       });
   };
 
+  const renderReceiveUnshippedItemModal = () => (
+    <ReceiveUnshippedItemModal
+      intl={intl}
+      onSubmit={handleFetchReceiveUnshippedItem}
+      onTriggerModal={triggerUnshippedItemModal}
+    />
+  );
+
   const renderAugmentedBarcodeModal = () => (
     <AugmentedBarcodeModal
       {...checkinData}
@@ -301,28 +310,24 @@ const TransactionDetailContainer = ({
   if (isTransactionPending) return <LoadingPane />;
 
   return (
-    <TransactionDetail
-      transaction={transaction}
-      isOpenAugmentedBarcodeModal={isOpenAugmentedBarcodeModal}
-      isOpenItemHoldModal={isOpenItemHoldModal}
-      isOpenInTransitModal={isOpenInTransitModal}
-      isOpenTransferHoldModal={isOpenTransferHoldModal}
-      intl={intl}
-      isOpenUnshippedItemModal={isOpenUnshippedItemModal}
-      onClose={backToList}
-      onCheckoutBorrowingSite={onCheckoutBorroingSite}
-      onCheckOutToPatron={fetchCheckOutToPatron}
-      onReturnItem={onReturnPatronHoldItem}
-      onCancelPatronHold={handleCancelPatronHold}
-      onTransferHold={triggerTransferHoldModal}
-      onTriggerUnshippedItemModal={triggerUnshippedItemModal}
-      onFetchReceiveUnshippedItem={handleFetchReceiveUnshippedItem}
-      onFetchReceiveItem={fetchReceiveItem}
-      onRenderAugmentedBarcodeModal={renderAugmentedBarcodeModal}
-      onRenderHoldModal={renderHoldModal}
-      onRenderTransitModal={renderTransitModal}
-      onRenderTransferHoldModal={renderTransferHoldModal}
-    />
+    <>
+      <TransactionDetail
+        transaction={transaction}
+        onClose={backToList}
+        onCheckoutBorrowingSite={onCheckoutBorroingSite}
+        onCheckOutToPatron={fetchCheckOutToPatron}
+        onReturnItem={onReturnPatronHoldItem}
+        onCancelPatronHold={handleCancelPatronHold}
+        onTransferHold={triggerTransferHoldModal}
+        onReceiveUnshippedItem={triggerUnshippedItemModal}
+        onReceiveItem={fetchReceiveItem}
+      />
+      {isOpenUnshippedItemModal && renderReceiveUnshippedItemModal()}
+      {isOpenTransferHoldModal && renderTransferHoldModal()}
+      {isOpenAugmentedBarcodeModal && renderAugmentedBarcodeModal()}
+      {isOpenItemHoldModal && renderHoldModal()}
+      {isOpenInTransitModal && renderTransitModal()}
+    </>
   );
 };
 
