@@ -16,7 +16,8 @@ const {
 const {
   ITEM_HOLD,
   TRANSFER,
-  ITEM_IN_TRANSIT,
+  ITEM_RECEIVED,
+  RECEIVE_UNANNOUNCED
 } = TRANSACTION_STATUSES;
 
 const ItemActions = ({
@@ -59,7 +60,7 @@ const ItemActions = ({
         onClickHandler={onCancelItemHold}
       />
       <ActionItem
-        disabled={![ITEM_IN_TRANSIT].includes(transaction[STATUS])}
+        disabled={![ITEM_RECEIVED, RECEIVE_UNANNOUNCED].includes(transaction[STATUS])}
         icon={ICONS.CHECK_IN}
         buttonTextTranslationKey="ui-inn-reach.transaction-detail.item-type.action.final-check-in"
         onToggle={onToggle}
