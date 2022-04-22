@@ -21,6 +21,7 @@ const renderActionMenu = ({
       onCheckoutBorrowingSite={jest.fn()}
       onCheckOutToPatron={jest.fn()}
       onCancelPatronHold={jest.fn()}
+      onTransferHold={jest.fn()}
     />,
     translationsProperties,
   );
