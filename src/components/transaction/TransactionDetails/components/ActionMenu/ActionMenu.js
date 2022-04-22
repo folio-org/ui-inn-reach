@@ -10,11 +10,13 @@ import {
 import {
   PatronActions,
   ItemActions,
+  LocalActions,
 } from './components';
 
 const {
   PATRON,
   ITEM,
+  LOCAL
 } = TRANSACTION_TYPES;
 
 const {
@@ -30,6 +32,7 @@ const ActionMenu = ({
   onCheckoutBorrowingSite,
   onCheckOutToPatron,
   onCancelPatronHold,
+  onCancelItemHold,
   onTransferHold,
 }) => {
   let actions;
@@ -54,7 +57,16 @@ const ActionMenu = ({
           transaction={transaction}
           onToggle={onToggle}
           onCheckoutBorrowingSite={onCheckoutBorrowingSite}
+          onCancelItemHold={onCancelItemHold}
           onTransferHold={onTransferHold}
+        />
+      );
+      break;
+    case LOCAL:
+      actions = (
+        <LocalActions
+          transaction={transaction}
+          onToggle={onToggle}
         />
       );
       break;
@@ -71,6 +83,7 @@ const ActionMenu = ({
 
 ActionMenu.propTypes = {
   transaction: PropTypes.object.isRequired,
+  onCancelItemHold: PropTypes.func.isRequired,
   onCancelPatronHold: PropTypes.func.isRequired,
   onCheckOutToPatron: PropTypes.func.isRequired,
   onCheckoutBorrowingSite: PropTypes.func.isRequired,

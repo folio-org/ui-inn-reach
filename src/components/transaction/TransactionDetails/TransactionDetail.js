@@ -42,6 +42,7 @@ const TransactionDetail = ({
   onCheckOutToPatron,
   onReturnItem,
   onCancelPatronHold,
+  onCancelItemHold,
   onTransferHold,
   onReceiveUnshippedItem,
   onReceiveItem,
@@ -56,6 +57,7 @@ const TransactionDetail = ({
       onCheckOutToPatron={onCheckOutToPatron}
       onReturnItem={onReturnItem}
       onCancelPatronHold={onCancelPatronHold}
+      onCancelItemHold={onCancelItemHold}
       onTransferHold={onTransferHold}
     />
   ), [transaction]);
@@ -90,6 +92,7 @@ const TransactionDetail = ({
 
 TransactionDetail.propTypes = {
   transaction: PropTypes.object.isRequired,
+  onCancelItemHold: PropTypes.func.isRequired,
   onCancelPatronHold: PropTypes.func.isRequired,
   onCheckOutToPatron: PropTypes.func.isRequired,
   onCheckoutBorrowingSite: PropTypes.func.isRequired,
