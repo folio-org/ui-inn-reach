@@ -126,7 +126,7 @@ TransactionDetail.propTypes = {
   onClose: PropTypes.func.isRequired,
   onFetchReceiveItem: PropTypes.func.isRequired,
   onFetchReceiveUnshippedItem: PropTypes.func.isRequired,
-  onFinalCheckInItem: PropTypes.object.isRequired,
+  onFinalCheckInItem: PropTypes.func.isRequired,
   onRenderAugmentedBarcodeModal: PropTypes.func.isRequired,
   onRenderHoldModal: PropTypes.func.isRequired,
   onRenderTransitModal: PropTypes.func.isRequired,
