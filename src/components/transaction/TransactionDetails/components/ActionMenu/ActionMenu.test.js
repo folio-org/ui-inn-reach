@@ -16,6 +16,7 @@ const renderActionMenu = ({
     <ActionMenu
       transaction={transaction}
       onToggle={jest.fn()}
+      onRecallItem={jest.fn()}
       onReceiveUnshippedItem={jest.fn()}
       onReceiveItem={jest.fn()}
       onReturnItem={jest.fn()}
@@ -23,6 +24,8 @@ const renderActionMenu = ({
       onCheckOutToPatron={jest.fn()}
       onFinalCheckInItem={jest.fn()}
       onCancelPatronHold={jest.fn()}
+      onCancelItemHold={jest.fn()}
+      onCancelLocalHold={jest.fn()}
     />,
     translationsProperties,
   );

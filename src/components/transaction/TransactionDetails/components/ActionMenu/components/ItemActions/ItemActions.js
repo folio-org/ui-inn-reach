@@ -16,8 +16,9 @@ const {
 const {
   ITEM_HOLD,
   TRANSFER,
+  ITEM_SHIPPED,
   ITEM_RECEIVED,
-  RECEIVE_UNANNOUNCED
+  RECEIVE_UNANNOUNCED,
 } = TRANSACTION_STATUSES;
 
 const ItemActions = ({
@@ -46,7 +47,11 @@ const ItemActions = ({
         onClickHandler={onTransferHold}
       />
       <ActionItem
-        disabled
+        disabled={
+          ![ITEM_SHIPPED, ITEM_RECEIVED, RECEIVE_UNANNOUNCED].includes(
+            transaction[STATUS]
+          )
+        }
         icon={ICONS.CHECK_IN}
         buttonTextTranslationKey="ui-inn-reach.transaction-detail.item-type.action.recall-item"
         onToggle={onToggle}
@@ -72,7 +77,7 @@ const ItemActions = ({
 
 ItemActions.propTypes = {
   transaction: PropTypes.object.isRequired,
-  onCancelItemHold: PropTypes.object.isRequired,
+  onCancelItemHold: PropTypes.func.isRequired,
   onCheckoutBorrowingSite: PropTypes.func.isRequired,
   onFinalCheckInItem: PropTypes.func.isRequired,
   onToggle: PropTypes.func.isRequired,
