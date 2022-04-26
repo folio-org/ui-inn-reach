@@ -49,7 +49,9 @@ const TransactionDetail = ({
   onReturnItem,
   onCancelPatronHold,
   onCancelItemHold,
+  onCancelLocalHold,
   onTriggerUnshippedItemModal,
+  onFetchRecallItem,
   onFetchReceiveUnshippedItem,
   onFetchReceiveItem,
   onRenderAugmentedBarcodeModal,
@@ -60,6 +62,7 @@ const TransactionDetail = ({
     <ActionMenu
       transaction={transaction}
       onToggle={onToggle}
+      onRecallItem={onFetchRecallItem}
       onReceiveUnshippedItem={onTriggerUnshippedItemModal}
       onReceiveItem={onFetchReceiveItem}
       onCheckoutBorrowingSite={onCheckoutBorrowingSite}
@@ -67,6 +70,7 @@ const TransactionDetail = ({
       onReturnItem={onReturnItem}
       onCancelPatronHold={onCancelPatronHold}
       onCancelItemHold={onCancelItemHold}
+      onCancelLocalHold={onCancelLocalHold}
     />
   ), [transaction]);
 
@@ -118,10 +122,12 @@ TransactionDetail.propTypes = {
   isOpenUnshippedItemModal: PropTypes.bool.isRequired,
   transaction: PropTypes.object.isRequired,
   onCancelItemHold: PropTypes.func.isRequired,
+  onCancelLocalHold: PropTypes.func.isRequired,
   onCancelPatronHold: PropTypes.func.isRequired,
   onCheckOutToPatron: PropTypes.func.isRequired,
   onCheckoutBorrowingSite: PropTypes.func.isRequired,
   onClose: PropTypes.func.isRequired,
+  onFetchRecallItem: PropTypes.func.isRequired,
   onFetchReceiveItem: PropTypes.func.isRequired,
   onFetchReceiveUnshippedItem: PropTypes.func.isRequired,
   onRenderAugmentedBarcodeModal: PropTypes.func.isRequired,

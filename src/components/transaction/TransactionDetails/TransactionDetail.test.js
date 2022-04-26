@@ -30,7 +30,9 @@ const renderTransactionDetail = ({
   onReturnItem,
   onCancelPatronHold,
   onCancelItemHold,
+  onCancelLocalHold,
   onTriggerUnshippedItemModal,
+  onFetchRecallItem,
   onFetchReceiveUnshippedItem,
   onFetchReceiveItem,
   onClose,
@@ -49,6 +51,7 @@ const renderTransactionDetail = ({
       intl={{}}
       onClose={onClose}
       onTriggerUnshippedItemModal={onTriggerUnshippedItemModal}
+      onFetchRecallItem={onFetchRecallItem}
       onFetchReceiveUnshippedItem={onFetchReceiveUnshippedItem}
       onFetchReceiveItem={onFetchReceiveItem}
       onCheckoutBorrowingSite={onCheckoutBorrowingSite}
@@ -56,6 +59,7 @@ const renderTransactionDetail = ({
       onReturnItem={onReturnItem}
       onCancelPatronHold={onCancelPatronHold}
       onCancelItemHold={onCancelItemHold}
+      onCancelLocalHold={onCancelLocalHold}
       onReset={onReset}
       onRenderAugmentedBarcodeModal={onRenderAugmentedBarcodeModal}
       onRenderHoldModal={onRenderHoldModal}
@@ -68,6 +72,7 @@ const renderTransactionDetail = ({
 describe('TransactionDetail', () => {
   const onClose = jest.fn();
   const onTriggerUnshippedItemModal = jest.fn();
+  const onFetchRecallItem = jest.fn();
   const onFetchReceiveUnshippedItem = jest.fn();
   const onFetchReceiveItem = jest.fn();
   const onCheckoutBorrowingSite = jest.fn();
@@ -75,6 +80,7 @@ describe('TransactionDetail', () => {
   const onCheckOutToPatron = jest.fn();
   const onCancelPatronHold = jest.fn();
   const onCancelItemHold = jest.fn();
+  const onCancelLocalHold = jest.fn();
   const onReset = jest.fn();
   const onRenderAugmentedBarcodeModal = jest.fn(() => <div>AugmentedBarcodeModal</div>);
   const onRenderHoldModal = jest.fn(() => <div>HoldModal</div>);
@@ -83,12 +89,14 @@ describe('TransactionDetail', () => {
   const commonProps = {
     onClose,
     onTriggerUnshippedItemModal,
+    onFetchRecallItem,
     onFetchReceiveUnshippedItem,
     onFetchReceiveItem,
     onCheckoutBorrowingSite,
     onCheckOutToPatron,
     onCancelPatronHold,
     onCancelItemHold,
+    onCancelLocalHold,
     onReset,
     onReturnItem,
     onRenderAugmentedBarcodeModal,
