@@ -284,23 +284,6 @@ const TransactionDetailContainer = ({
       });
   };
 
-  const handleCancelLocalHold = () => {
-    mutator.cancellationReasons.GET()
-      .then(response => {
-        if (response?.length === 1) {
-          return response[0];
-        }
-        throw new Error();
-      })
-      .then(fetchCancelLocalHold)
-      .catch(() => {
-        showCallout({
-          type: CALLOUT_ERROR_TYPE,
-          message: <FormattedMessage id="ui-inn-reach.cancel-local-hold.callout.connection-problem.post.cancel-local-hold" />,
-        });
-      });
-  };
-
   const handleCancelItemHold = () => {
     mutator.cancellationReasons.GET()
       .then(response => {
@@ -315,6 +298,23 @@ const TransactionDetailContainer = ({
         showCallout({
           type: CALLOUT_ERROR_TYPE,
           message: <FormattedMessage id="ui-inn-reach.cancel-item-hold.callout.connection-problem.post.cancel-item-hold" />,
+        });
+      });
+  };
+
+  const handleCancelLocalHold = () => {
+    mutator.cancellationReasons.GET()
+      .then(response => {
+        if (response?.length === 1) {
+          return response[0];
+        }
+        throw new Error();
+      })
+      .then(fetchCancelLocalHold)
+      .catch(() => {
+        showCallout({
+          type: CALLOUT_ERROR_TYPE,
+          message: <FormattedMessage id="ui-inn-reach.cancel-local-hold.callout.connection-problem.post.cancel-local-hold" />,
         });
       });
   };
