@@ -30,6 +30,8 @@ const renderTransactionDetail = ({
   onTransferHold,
   onReceiveUnshippedItem,
   onReceiveItem,
+  onCancelLocalHold,
+  onFetchRecallItem,
 } = {}) => {
   return renderWithIntl(
     <TransactionDetail
@@ -37,9 +39,11 @@ const renderTransactionDetail = ({
       onClose={onClose}
       onCheckoutBorrowingSite={onCheckoutBorrowingSite}
       onCheckOutToPatron={onCheckOutToPatron}
+      onFetchRecallItem={onFetchRecallItem}
       onReturnItem={onReturnItem}
       onCancelPatronHold={onCancelPatronHold}
       onCancelItemHold={onCancelItemHold}
+      onCancelLocalHold={onCancelLocalHold}
       onTransferHold={onTransferHold}
       onReceiveUnshippedItem={onReceiveUnshippedItem}
       onReceiveItem={onReceiveItem}
@@ -54,19 +58,23 @@ describe('TransactionDetail', () => {
   const onReceiveUnshippedItem = jest.fn();
   const onReceiveItem = jest.fn();
   const onCheckoutBorrowingSite = jest.fn();
+  const onFetchRecallItem = jest.fn();
   const onReturnItem = jest.fn();
   const onCheckOutToPatron = jest.fn();
   const onCancelPatronHold = jest.fn();
   const onCancelItemHold = jest.fn();
+  const onCancelLocalHold = jest.fn();
 
   const commonProps = {
     onClose,
     onReceiveUnshippedItem,
     onReceiveItem,
+    onFetchRecallItem,
     onCheckoutBorrowingSite,
     onCheckOutToPatron,
     onCancelPatronHold,
     onCancelItemHold,
+    onCancelLocalHold,
     onReturnItem,
     onTransferHold,
   };

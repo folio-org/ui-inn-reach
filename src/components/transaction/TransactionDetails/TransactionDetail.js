@@ -46,11 +46,14 @@ const TransactionDetail = ({
   onTransferHold,
   onReceiveUnshippedItem,
   onReceiveItem,
+  onFetchRecallItem,
+  onCancelLocalHold,
 }) => {
   const renderActionMenu = useCallback(({ onToggle }) => (
     <ActionMenu
       transaction={transaction}
       onToggle={onToggle}
+      onRecallItem={onFetchRecallItem}
       onReceiveUnshippedItem={onReceiveUnshippedItem}
       onReceiveItem={onReceiveItem}
       onCheckoutBorrowingSite={onCheckoutBorrowingSite}
@@ -58,6 +61,7 @@ const TransactionDetail = ({
       onReturnItem={onReturnItem}
       onCancelPatronHold={onCancelPatronHold}
       onCancelItemHold={onCancelItemHold}
+      onCancelLocalHold={onCancelLocalHold}
       onTransferHold={onTransferHold}
     />
   ), [transaction]);
@@ -93,10 +97,12 @@ const TransactionDetail = ({
 TransactionDetail.propTypes = {
   transaction: PropTypes.object.isRequired,
   onCancelItemHold: PropTypes.func.isRequired,
+  onCancelLocalHold: PropTypes.func.isRequired,
   onCancelPatronHold: PropTypes.func.isRequired,
   onCheckOutToPatron: PropTypes.func.isRequired,
   onCheckoutBorrowingSite: PropTypes.func.isRequired,
   onClose: PropTypes.func.isRequired,
+  onFetchRecallItem: PropTypes.func.isRequired,
   onReceiveItem: PropTypes.func.isRequired,
   onReceiveUnshippedItem: PropTypes.func.isRequired,
   onReturnItem: PropTypes.func.isRequired,

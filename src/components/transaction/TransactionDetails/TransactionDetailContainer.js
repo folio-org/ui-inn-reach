@@ -173,6 +173,22 @@ const TransactionDetailContainer = ({
       });
   };
 
+  const fetchRecallItem = () => {
+    mutator.recallItem.POST({})
+      .then(() => {
+        onUpdateTransactionList();
+        showCallout({
+          message: <FormattedMessage id="ui-inn-reach.recall-item.callout.success.post.recall-item" />,
+        });
+      })
+      .catch(() => {
+        showCallout({
+          type: CALLOUT_ERROR_TYPE,
+          message: <FormattedMessage id="ui-inn-reach.recall-item.callout.connection-problem.post.recall-item" />,
+        });
+      });
+  };
+
   const fetchReceiveItem = () => {
     mutator.receiveItem.POST({})
       .then(response => {
@@ -231,6 +247,25 @@ const TransactionDetailContainer = ({
       });
   };
 
+  const fetchCancelLocalHold = (response) => {
+    mutator.cancelLocalHold.POST({
+      cancellationReasonId: response.id,
+      cancellationAdditionalInformation: 'Owning site cancels request',
+    })
+      .then(() => {
+        onUpdateTransactionList();
+        showCallout({
+          message: <FormattedMessage id="ui-inn-reach.cancel-local-hold.callout.success.post.cancel-local-hold" />,
+        });
+      })
+      .catch(() => {
+        showCallout({
+          type: CALLOUT_ERROR_TYPE,
+          message: <FormattedMessage id="ui-inn-reach.cancel-local-hold.callout.connection-problem.post.cancel-local-hold" />,
+        });
+      });
+  };
+
   const handleCancelPatronHold = () => {
     mutator.cancellationReasons.GET()
       .then(response => {
@@ -245,6 +280,23 @@ const TransactionDetailContainer = ({
         showCallout({
           type: CALLOUT_ERROR_TYPE,
           message: <FormattedMessage id="ui-inn-reach.cancel-item-hold.callout.connection-problem.get.cancellation-reasons" />,
+        });
+      });
+  };
+
+  const handleCancelLocalHold = () => {
+    mutator.cancellationReasons.GET()
+      .then(response => {
+        if (response?.length === 1) {
+          return response[0];
+        }
+        throw new Error();
+      })
+      .then(fetchCancelLocalHold)
+      .catch(() => {
+        showCallout({
+          type: CALLOUT_ERROR_TYPE,
+          message: <FormattedMessage id="ui-inn-reach.cancel-local-hold.callout.connection-problem.post.cancel-local-hold" />,
         });
       });
   };
@@ -356,6 +408,8 @@ const TransactionDetailContainer = ({
         onReturnItem={onReturnPatronHoldItem}
         onCancelPatronHold={handleCancelPatronHold}
         onCancelItemHold={handleCancelItemHold}
+        onCancelLocalHold={handleCancelLocalHold}
+        onFetchRecallItem={fetchRecallItem}
         onTransferHold={triggerTransferHoldModal}
         onReceiveUnshippedItem={triggerUnshippedItemModal}
         onReceiveItem={fetchReceiveItem}
@@ -382,6 +436,15 @@ TransactionDetailContainer.manifest = Object.freeze({
   receiveUnshippedItem: {
     type: 'okapi',
     path: 'inn-reach/transactions/%{transactionId}/receive-unshipped-item/%{servicePointId}/%{itemBarcode}',
+    pk: '',
+    clientGeneratePk: false,
+    fetch: false,
+    accumulate: true,
+    throwErrors: false,
+  },
+  recallItem: {
+    type: 'okapi',
+    path: 'inn-reach/transactions/%{transactionId}/itemhold/recall',
     pk: '',
     clientGeneratePk: false,
     fetch: false,
@@ -459,6 +522,14 @@ TransactionDetailContainer.manifest = Object.freeze({
     fetch: false,
     accumulate: true,
   },
+  cancelLocalHold: {
+    type: 'okapi',
+    path: 'inn-reach/transactions/%{transactionId}/localhold/cancel',
+    pk: '',
+    clientGeneratePk: false,
+    fetch: false,
+    accumulate: true,
+  },
 });
 
 TransactionDetailContainer.propTypes = {
@@ -491,6 +562,9 @@ TransactionDetailContainer.propTypes = {
     receiveUnshippedItem: PropTypes.shape({
       POST: PropTypes.func.isRequired,
     }),
+    recallItem: PropTypes.shape({
+      POST: PropTypes.func.isRequired,
+    }),
     receiveItem: PropTypes.shape({
       POST: PropTypes.func.isRequired,
     }),
@@ -507,6 +581,9 @@ TransactionDetailContainer.propTypes = {
       POST: PropTypes.func.isRequired,
     }),
     cancelItemHold: PropTypes.shape({
+      POST: PropTypes.func.isRequired,
+    }),
+    cancelLocalHold: PropTypes.shape({
       POST: PropTypes.func.isRequired,
     }),
     cancellationReasons: PropTypes.shape({
