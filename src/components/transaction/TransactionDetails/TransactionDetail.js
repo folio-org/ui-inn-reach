@@ -43,11 +43,12 @@ const TransactionDetail = ({
   onReturnItem,
   onCancelPatronHold,
   onCancelItemHold,
-  onTransferHold,
-  onReceiveUnshippedItem,
-  onReceiveItem,
-  onFetchRecallItem,
+  onFinalCheckInItem,
   onCancelLocalHold,
+  onReceiveUnshippedItem,
+  onFetchRecallItem,
+  onReceiveItem,
+  onTransferHold,
 }) => {
   const renderActionMenu = useCallback(({ onToggle }) => (
     <ActionMenu
@@ -58,6 +59,7 @@ const TransactionDetail = ({
       onReceiveItem={onReceiveItem}
       onCheckoutBorrowingSite={onCheckoutBorrowingSite}
       onCheckOutToPatron={onCheckOutToPatron}
+      onFinalCheckInItem={onFinalCheckInItem}
       onReturnItem={onReturnItem}
       onCancelPatronHold={onCancelPatronHold}
       onCancelItemHold={onCancelItemHold}
@@ -103,6 +105,7 @@ TransactionDetail.propTypes = {
   onCheckoutBorrowingSite: PropTypes.func.isRequired,
   onClose: PropTypes.func.isRequired,
   onFetchRecallItem: PropTypes.func.isRequired,
+  onFinalCheckInItem: PropTypes.func.isRequired,
   onReceiveItem: PropTypes.func.isRequired,
   onReceiveUnshippedItem: PropTypes.func.isRequired,
   onReturnItem: PropTypes.func.isRequired,

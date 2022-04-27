@@ -24,6 +24,7 @@ const renderTransactionDetail = ({
   onClose,
   onCheckoutBorrowingSite,
   onCheckOutToPatron,
+  onFinalCheckInItem,
   onReturnItem,
   onCancelPatronHold,
   onCancelItemHold,
@@ -37,16 +38,17 @@ const renderTransactionDetail = ({
     <TransactionDetail
       transaction={transaction}
       onClose={onClose}
+      onFetchRecallItem={onFetchRecallItem}
+      onReceiveUnshippedItem={onReceiveUnshippedItem}
+      onReceiveItem={onReceiveItem}
       onCheckoutBorrowingSite={onCheckoutBorrowingSite}
       onCheckOutToPatron={onCheckOutToPatron}
-      onFetchRecallItem={onFetchRecallItem}
+      onFinalCheckInItem={onFinalCheckInItem}
       onReturnItem={onReturnItem}
       onCancelPatronHold={onCancelPatronHold}
       onCancelItemHold={onCancelItemHold}
       onCancelLocalHold={onCancelLocalHold}
       onTransferHold={onTransferHold}
-      onReceiveUnshippedItem={onReceiveUnshippedItem}
-      onReceiveItem={onReceiveItem}
     />,
     translationsProperties,
   );
@@ -63,6 +65,7 @@ describe('TransactionDetail', () => {
   const onCheckOutToPatron = jest.fn();
   const onCancelPatronHold = jest.fn();
   const onCancelItemHold = jest.fn();
+  const onFinalCheckInItem = jest.fn();
   const onCancelLocalHold = jest.fn();
 
   const commonProps = {
@@ -74,6 +77,7 @@ describe('TransactionDetail', () => {
     onCheckOutToPatron,
     onCancelPatronHold,
     onCancelItemHold,
+    onFinalCheckInItem,
     onCancelLocalHold,
     onReturnItem,
     onTransferHold,

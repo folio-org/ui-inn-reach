@@ -35,7 +35,7 @@ const ItemActions = ({
   onTransferHold,
   onRecallItem,
   onCancelItemHold,
-  onFinalCheckIn,
+  onFinalCheckInItem,
 }) => {
   return (
     <>
@@ -76,11 +76,11 @@ const ItemActions = ({
         onClickHandler={onCancelItemHold}
       />
       <ActionItem
-        disabled
+        disabled={![ITEM_RECEIVED, RECEIVE_UNANNOUNCED].includes(transaction[STATUS])}
         icon={ICONS.CHECK_IN}
         buttonTextTranslationKey="ui-inn-reach.transaction-detail.item-type.action.final-check-in"
         onToggle={onToggle}
-        onClickHandler={onFinalCheckIn}
+        onClickHandler={onFinalCheckInItem}
       />
     </>
   );
@@ -90,8 +90,8 @@ ItemActions.propTypes = {
   transaction: PropTypes.object.isRequired,
   onCancelItemHold: PropTypes.func.isRequired,
   onCheckoutBorrowingSite: PropTypes.func.isRequired,
+  onFinalCheckInItem: PropTypes.func.isRequired,
   onToggle: PropTypes.func.isRequired,
-  onFinalCheckIn: PropTypes.func,
   onRecallItem: PropTypes.func,
   onTransferHold: PropTypes.func,
 };
