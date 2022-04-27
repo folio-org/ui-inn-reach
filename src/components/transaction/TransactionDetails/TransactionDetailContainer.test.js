@@ -355,7 +355,7 @@ describe('TransactionDetailContainer', () => {
   describe('recall item', () => {
     beforeEach(() => {
       renderTransactionDetailContainer(commonProps);
-      TransactionDetail.mock.calls[0][0].onFetchRecallItem();
+      TransactionDetail.mock.calls[0][0].onRecallItem();
     });
 
     it('should update the transaction state', () => {

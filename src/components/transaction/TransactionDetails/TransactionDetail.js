@@ -46,7 +46,7 @@ const TransactionDetail = ({
   onFinalCheckInItem,
   onCancelLocalHold,
   onReceiveUnshippedItem,
-  onFetchRecallItem,
+  onRecallItem,
   onReceiveItem,
   onTransferHold,
 }) => {
@@ -54,7 +54,7 @@ const TransactionDetail = ({
     <ActionMenu
       transaction={transaction}
       onToggle={onToggle}
-      onRecallItem={onFetchRecallItem}
+      onRecallItem={onRecallItem}
       onReceiveUnshippedItem={onReceiveUnshippedItem}
       onReceiveItem={onReceiveItem}
       onCheckoutBorrowingSite={onCheckoutBorrowingSite}
@@ -104,8 +104,8 @@ TransactionDetail.propTypes = {
   onCheckOutToPatron: PropTypes.func.isRequired,
   onCheckoutBorrowingSite: PropTypes.func.isRequired,
   onClose: PropTypes.func.isRequired,
-  onFetchRecallItem: PropTypes.func.isRequired,
   onFinalCheckInItem: PropTypes.func.isRequired,
+  onRecallItem: PropTypes.func.isRequired,
   onReceiveItem: PropTypes.func.isRequired,
   onReceiveUnshippedItem: PropTypes.func.isRequired,
   onReturnItem: PropTypes.func.isRequired,

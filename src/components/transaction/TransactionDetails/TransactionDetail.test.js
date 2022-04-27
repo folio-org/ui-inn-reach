@@ -32,13 +32,13 @@ const renderTransactionDetail = ({
   onReceiveUnshippedItem,
   onReceiveItem,
   onCancelLocalHold,
-  onFetchRecallItem,
+  onRecallItem,
 } = {}) => {
   return renderWithIntl(
     <TransactionDetail
       transaction={transaction}
       onClose={onClose}
-      onFetchRecallItem={onFetchRecallItem}
+      onRecallItem={onRecallItem}
       onReceiveUnshippedItem={onReceiveUnshippedItem}
       onReceiveItem={onReceiveItem}
       onCheckoutBorrowingSite={onCheckoutBorrowingSite}
@@ -60,7 +60,7 @@ describe('TransactionDetail', () => {
   const onReceiveUnshippedItem = jest.fn();
   const onReceiveItem = jest.fn();
   const onCheckoutBorrowingSite = jest.fn();
-  const onFetchRecallItem = jest.fn();
+  const onRecallItem = jest.fn();
   const onReturnItem = jest.fn();
   const onCheckOutToPatron = jest.fn();
   const onCancelPatronHold = jest.fn();
@@ -72,7 +72,7 @@ describe('TransactionDetail', () => {
     onClose,
     onReceiveUnshippedItem,
     onReceiveItem,
-    onFetchRecallItem,
+    onRecallItem,
     onCheckoutBorrowingSite,
     onCheckOutToPatron,
     onCancelPatronHold,
