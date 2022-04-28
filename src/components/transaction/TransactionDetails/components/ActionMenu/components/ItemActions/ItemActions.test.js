@@ -11,7 +11,7 @@ const transactionMock = {
 const renderItemActions = ({
   transaction = transactionMock,
   onToggle = jest.fn(),
-  onCheckoutBorrowingSite = jest.fn(),
+  onCheckOutBorrowingSite = jest.fn(),
   onFinalCheckInItem = jest.fn(),
   onCancelItemHold = jest.fn(),
 } = {}) => {
@@ -19,7 +19,7 @@ const renderItemActions = ({
     <ItemActions
       transaction={transaction}
       onToggle={onToggle}
-      onCheckoutBorrowingSite={onCheckoutBorrowingSite}
+      onCheckOutBorrowingSite={onCheckOutBorrowingSite}
       onFinalCheckInItem={onFinalCheckInItem}
       onCancelItemHold={onCancelItemHold}
     />,
