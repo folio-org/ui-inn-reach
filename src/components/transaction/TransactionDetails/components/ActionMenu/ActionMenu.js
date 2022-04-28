@@ -30,11 +30,13 @@ const ActionMenu = ({
   onReceiveUnshippedItem,
   onReceiveItem,
   onReturnItem,
+  onFinalCheckInItem,
   onCheckoutBorrowingSite,
   onCheckOutToPatron,
   onCancelPatronHold,
   onCancelItemHold,
   onCancelLocalHold,
+  onTransferHold,
 }) => {
   let actions;
 
@@ -60,6 +62,8 @@ const ActionMenu = ({
           onCheckoutBorrowingSite={onCheckoutBorrowingSite}
           onRecallItem={onRecallItem}
           onCancelItemHold={onCancelItemHold}
+          onFinalCheckInItem={onFinalCheckInItem}
+          onTransferHold={onTransferHold}
         />
       );
       break;
@@ -90,11 +94,13 @@ ActionMenu.propTypes = {
   onCancelPatronHold: PropTypes.func.isRequired,
   onCheckOutToPatron: PropTypes.func.isRequired,
   onCheckoutBorrowingSite: PropTypes.func.isRequired,
+  onFinalCheckInItem: PropTypes.func.isRequired,
   onRecallItem: PropTypes.func.isRequired,
   onReceiveItem: PropTypes.func.isRequired,
   onReceiveUnshippedItem: PropTypes.func.isRequired,
   onReturnItem: PropTypes.func.isRequired,
   onToggle: PropTypes.func.isRequired,
+  onTransferHold: PropTypes.func.isRequired,
 };
 
 export default ActionMenu;

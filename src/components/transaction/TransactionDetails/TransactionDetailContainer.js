@@ -34,6 +34,10 @@ import {
   useCallout,
   useReceiveItemModals,
 } from '../../../hooks';
+import {
+  ReceiveUnshippedItemModal,
+  TransferHoldModal,
+} from './components';
 
 const {
   HOLD,
@@ -41,6 +45,9 @@ const {
 
 const {
   FOLIO_ITEM_BARCODE,
+  TITLE,
+  FOLIO_INSTANCE_ID,
+  FOLIO_ITEM_ID,
 } = HOLD_FIELDS;
 
 const TransactionDetailContainer = ({
@@ -69,6 +76,7 @@ const TransactionDetailContainer = ({
   const intl = useIntl();
 
   const [isOpenUnshippedItemModal, setIsOpenUnshippedItemModal] = useState(false);
+  const [isOpenTransferHoldModal, setIsOpenTransferHoldModal] = useState(false);
 
   const {
     isOpenAugmentedBarcodeModal,
@@ -84,6 +92,10 @@ const TransactionDetailContainer = ({
 
   const triggerUnshippedItemModal = () => {
     setIsOpenUnshippedItemModal(prevModalState => !prevModalState);
+  };
+
+  const triggerTransferHoldModal = () => {
+    setIsOpenTransferHoldModal(prev => !prev);
   };
 
   const backToList = useCallback(() => {
@@ -234,6 +246,21 @@ const TransactionDetailContainer = ({
         });
       });
   };
+  const fetchFinalCheckInItem = () => {
+    mutator.finalCheckInItem.POST({})
+      .then(() => {
+        onUpdateTransactionList();
+        showCallout({
+          message: <FormattedMessage id="ui-inn-reach.final-check-in-item-hold.callout.success.post.final-check-in-item-hold" />,
+        });
+      })
+      .catch(() => {
+        showCallout({
+          type: CALLOUT_ERROR_TYPE,
+          message: <FormattedMessage id="ui-inn-reach.final-check-in-item-hold.connection-problem.post.final-check-in-item-hold" />,
+        });
+      });
+  };
 
   const fetchCancelLocalHold = (response) => {
     mutator.cancelLocalHold.POST({
@@ -307,16 +334,35 @@ const TransactionDetailContainer = ({
       });
   };
 
-  useEffect(() => {
-    mutator.servicePointId.replace(servicePointId || '');
-    mutator.transactionId.replace(transaction.id || '');
-    mutator.itemBarcode.replace(folioItemBarcode || '');
-  }, [servicePointId, transaction, folioItemBarcode]);
-
   const handleFetchReceiveUnshippedItem = ({ itemBarcode }) => {
     mutator.itemBarcode.replace(itemBarcode || '');
     fetchReceiveUnshippedItem();
   };
+
+  const fetchTransferHold = () => {
+    mutator.transferItem.POST({})
+      .then(() => {
+        triggerTransferHoldModal();
+        onUpdateTransactionList();
+        showCallout({
+          message: <FormattedMessage id="ui-inn-reach.transfer-hold.callout.success.post.transfer-hold" />,
+        });
+      })
+      .catch(() => {
+        showCallout({
+          type: CALLOUT_ERROR_TYPE,
+          message: <FormattedMessage id="ui-inn-reach.transfer-hold.callout.connection-problem.post.transfer-hold" />,
+        });
+      });
+  };
+
+  const renderReceiveUnshippedItemModal = () => (
+    <ReceiveUnshippedItemModal
+      intl={intl}
+      onSubmit={handleFetchReceiveUnshippedItem}
+      onTriggerModal={triggerUnshippedItemModal}
+    />
+  );
 
   const renderAugmentedBarcodeModal = () => (
     <AugmentedBarcodeModal
@@ -348,36 +394,48 @@ const TransactionDetailContainer = ({
     />
   );
 
+  const renderTransferHoldModal = () => (
+    <TransferHoldModal
+      title={transaction?.[HOLD]?.[TITLE]}
+      instanceId={transaction?.[HOLD]?.[FOLIO_INSTANCE_ID]}
+      skippedItemId={transaction?.[HOLD]?.[FOLIO_ITEM_ID]}
+      onClose={triggerTransferHoldModal}
+      onRowClick={fetchTransferHold}
+    />
+  );
+
   useEffect(() => {
     mutator.servicePointId.replace(servicePointId || '');
     mutator.transactionId.replace(transaction.id || '');
+    mutator.itemBarcode.replace(folioItemBarcode || '');
+    mutator.folioItemId.replace(transaction?.[HOLD]?.[FOLIO_ITEM_ID] || '');
   }, [servicePointId, transaction]);
 
   if (isTransactionPending) return <LoadingPane />;
 
   return (
-    <TransactionDetail
-      transaction={transaction}
-      isOpenAugmentedBarcodeModal={isOpenAugmentedBarcodeModal}
-      isOpenItemHoldModal={isOpenItemHoldModal}
-      isOpenInTransitModal={isOpenInTransitModal}
-      intl={intl}
-      isOpenUnshippedItemModal={isOpenUnshippedItemModal}
-      onClose={backToList}
-      onCheckoutBorrowingSite={onCheckoutBorroingSite}
-      onCheckOutToPatron={fetchCheckOutToPatron}
-      onReturnItem={onReturnPatronHoldItem}
-      onCancelPatronHold={handleCancelPatronHold}
-      onCancelItemHold={handleCancelItemHold}
-      onCancelLocalHold={handleCancelLocalHold}
-      onTriggerUnshippedItemModal={triggerUnshippedItemModal}
-      onFetchRecallItem={fetchRecallItem}
-      onFetchReceiveUnshippedItem={handleFetchReceiveUnshippedItem}
-      onFetchReceiveItem={fetchReceiveItem}
-      onRenderAugmentedBarcodeModal={renderAugmentedBarcodeModal}
-      onRenderHoldModal={renderHoldModal}
-      onRenderTransitModal={renderTransitModal}
-    />
+    <>
+      <TransactionDetail
+        transaction={transaction}
+        onClose={backToList}
+        onCheckoutBorrowingSite={onCheckoutBorroingSite}
+        onCheckOutToPatron={fetchCheckOutToPatron}
+        onReturnItem={onReturnPatronHoldItem}
+        onCancelPatronHold={handleCancelPatronHold}
+        onCancelItemHold={handleCancelItemHold}
+        onFinalCheckInItem={fetchFinalCheckInItem}
+        onCancelLocalHold={handleCancelLocalHold}
+        onRecallItem={fetchRecallItem}
+        onReceiveUnshippedItem={triggerUnshippedItemModal}
+        onReceiveItem={fetchReceiveItem}
+        onTransferHold={triggerTransferHoldModal}
+      />
+      {isOpenUnshippedItemModal && renderReceiveUnshippedItemModal()}
+      {isOpenTransferHoldModal && renderTransferHoldModal()}
+      {isOpenAugmentedBarcodeModal && renderAugmentedBarcodeModal()}
+      {isOpenItemHoldModal && renderHoldModal()}
+      {isOpenInTransitModal && renderTransitModal()}
+    </>
   );
 };
 
@@ -385,9 +443,19 @@ TransactionDetailContainer.manifest = Object.freeze({
   servicePointId: { initialValue: '' },
   transactionId: { initialValue: '' },
   itemBarcode: { initialValue: '' },
+  folioItemId: { initialValue: '' },
   transactionView: {
     type: 'okapi',
     path: 'inn-reach/transactions/:{id}',
+    throwErrors: false,
+  },
+  finalCheckInItem: {
+    type: 'okapi',
+    path: 'inn-reach/transactions/%{transactionId}/itemhold/finalcheckin/%{servicePointId}',
+    pk: '',
+    clientGeneratePk: false,
+    fetch: false,
+    accumulate: true,
     throwErrors: false,
   },
   receiveUnshippedItem: {
@@ -463,6 +531,14 @@ TransactionDetailContainer.manifest = Object.freeze({
     fetch: false,
     accumulate: true,
   },
+  transferItem: {
+    type: 'okapi',
+    path: 'inn-reach/transactions/%{transactionId}/itemhold/transfer-item/%{folioItemId}',
+    pk: '',
+    clientGeneratePk: false,
+    fetch: false,
+    accumulate: true,
+  },
   cancelItemHold: {
     type: 'okapi',
     path: 'inn-reach/transactions/%{transactionId}/itemhold/cancel',
@@ -505,6 +581,12 @@ TransactionDetailContainer.propTypes = {
     itemBarcode: PropTypes.shape({
       replace: PropTypes.func.isRequired,
     }).isRequired,
+    finalCheckInItem: PropTypes.shape({
+      POST: PropTypes.func.isRequired,
+    }),
+    folioItemId: PropTypes.shape({
+      replace: PropTypes.func.isRequired,
+    }).isRequired,
     receiveUnshippedItem: PropTypes.shape({
       POST: PropTypes.func.isRequired,
     }),
@@ -534,6 +616,9 @@ TransactionDetailContainer.propTypes = {
     }),
     cancellationReasons: PropTypes.shape({
       GET: PropTypes.func.isRequired,
+    }),
+    transferItem: PropTypes.shape({
+      POST: PropTypes.func.isRequired,
     }),
   }),
 };
