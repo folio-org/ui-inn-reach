@@ -32,6 +32,7 @@ const ActionMenu = ({
   onReturnItem,
   onFinalCheckInItem,
   onCheckoutBorrowingSite,
+  onCheckoutToLocalPatron,
   onCheckOutToPatron,
   onCancelPatronHold,
   onCancelItemHold,
@@ -72,6 +73,7 @@ const ActionMenu = ({
         <LocalActions
           transaction={transaction}
           onCancelLocalHold={onCancelLocalHold}
+          onCheckoutToLocalPatron={onCheckoutToLocalPatron}
           onToggle={onToggle}
         />
       );
@@ -92,6 +94,7 @@ ActionMenu.propTypes = {
   onCancelItemHold: PropTypes.func.isRequired,
   onCancelLocalHold: PropTypes.func.isRequired,
   onCancelPatronHold: PropTypes.func.isRequired,
+  onCheckoutToLocalPatron: PropTypes.func.isRequired,
   onCheckOutToPatron: PropTypes.func.isRequired,
   onCheckoutBorrowingSite: PropTypes.func.isRequired,
   onFinalCheckInItem: PropTypes.func.isRequired,

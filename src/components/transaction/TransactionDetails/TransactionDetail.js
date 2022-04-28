@@ -39,6 +39,7 @@ const TransactionDetail = ({
   transaction,
   onClose,
   onCheckoutBorrowingSite,
+  onCheckoutToLocalPatron,
   onCheckOutToPatron,
   onReturnItem,
   onCancelPatronHold,
@@ -59,6 +60,7 @@ const TransactionDetail = ({
       onReceiveItem={onReceiveItem}
       onCheckoutBorrowingSite={onCheckoutBorrowingSite}
       onCheckOutToPatron={onCheckOutToPatron}
+      onCheckoutToLocalPatron={onCheckoutToLocalPatron}
       onFinalCheckInItem={onFinalCheckInItem}
       onReturnItem={onReturnItem}
       onCancelPatronHold={onCancelPatronHold}
@@ -101,6 +103,7 @@ TransactionDetail.propTypes = {
   onCancelItemHold: PropTypes.func.isRequired,
   onCancelLocalHold: PropTypes.func.isRequired,
   onCancelPatronHold: PropTypes.func.isRequired,
+  onCheckoutToLocalPatron: PropTypes.func.isRequired,
   onCheckOutToPatron: PropTypes.func.isRequired,
   onCheckoutBorrowingSite: PropTypes.func.isRequired,
   onClose: PropTypes.func.isRequired,

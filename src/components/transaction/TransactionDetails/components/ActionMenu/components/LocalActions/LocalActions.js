@@ -14,24 +14,25 @@ const {
 } = TRANSACTION_FIELDS;
 
 const {
-  LOCAL_HOLD
+  LOCAL_HOLD,
+  TRANSFER,
 } = TRANSACTION_STATUSES;
 
 const LocalActions = ({
   transaction,
   onToggle,
-  onCheckout,
+  onCheckoutToLocalPatron,
   onTransferHold,
   onCancelLocalHold,
 }) => {
   return (
     <>
       <ActionItem
-        disabled
+        disabled={![LOCAL_HOLD, TRANSFER].includes(transaction[STATUS])}
         icon={ICONS.CHECK_OUT}
         buttonTextTranslationKey="ui-inn-reach.transaction-detail.local-type.action.check-out"
         onToggle={onToggle}
-        onClickHandler={onCheckout}
+        onClickHandler={onCheckoutToLocalPatron}
       />
       <ActionItem
         disabled
@@ -54,8 +55,8 @@ const LocalActions = ({
 LocalActions.propTypes = {
   transaction: PropTypes.object.isRequired,
   onCancelLocalHold: PropTypes.func.isRequired,
+  onCheckoutToLocalPatron: PropTypes.func.isRequired,
   onToggle: PropTypes.func.isRequired,
-  onCheckout: PropTypes.func,
   onTransferHold: PropTypes.func,
 };
 

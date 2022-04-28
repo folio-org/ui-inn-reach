@@ -151,6 +151,9 @@ const mutatorMock = {
   checkOutToPatron: {
     POST: jest.fn(() => Promise.resolve()),
   },
+  checkOutToLocalPatron: {
+    POST: jest.fn(() => Promise.resolve()),
+  },
   returnPatronHoldItem: {
     POST: jest.fn(() => Promise.resolve()),
   },
