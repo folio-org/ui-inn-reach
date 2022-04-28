@@ -432,8 +432,8 @@ const TransactionDetailContainer = ({
       <TransactionDetail
         transaction={transaction}
         onClose={backToList}
-        onCheckoutBorrowingSite={onCheckoutBorroingSite}
-        onCheckoutToLocalPatron={fetchCheckoutToLocalPatron}
+        onCheckOutBorrowingSite={onCheckoutBorroingSite}
+        onCheckOutToLocalPatron={fetchCheckoutToLocalPatron}
         onCheckOutToPatron={fetchCheckOutToPatron}
         onReturnItem={onReturnPatronHoldItem}
         onCancelPatronHold={handleCancelPatronHold}

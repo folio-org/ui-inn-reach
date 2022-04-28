@@ -31,8 +31,8 @@ const ActionMenu = ({
   onReceiveItem,
   onReturnItem,
   onFinalCheckInItem,
-  onCheckoutBorrowingSite,
-  onCheckoutToLocalPatron,
+  onCheckOutBorrowingSite,
+  onCheckOutToLocalPatron,
   onCheckOutToPatron,
   onCancelPatronHold,
   onCancelItemHold,
@@ -60,7 +60,7 @@ const ActionMenu = ({
         <ItemActions
           transaction={transaction}
           onToggle={onToggle}
-          onCheckoutBorrowingSite={onCheckoutBorrowingSite}
+          onCheckOutBorrowingSite={onCheckOutBorrowingSite}
           onRecallItem={onRecallItem}
           onCancelItemHold={onCancelItemHold}
           onFinalCheckInItem={onFinalCheckInItem}
@@ -73,7 +73,7 @@ const ActionMenu = ({
         <LocalActions
           transaction={transaction}
           onCancelLocalHold={onCancelLocalHold}
-          onCheckoutToLocalPatron={onCheckoutToLocalPatron}
+          onCheckOutToLocalPatron={onCheckOutToLocalPatron}
           onToggle={onToggle}
         />
       );
@@ -94,9 +94,9 @@ ActionMenu.propTypes = {
   onCancelItemHold: PropTypes.func.isRequired,
   onCancelLocalHold: PropTypes.func.isRequired,
   onCancelPatronHold: PropTypes.func.isRequired,
-  onCheckoutToLocalPatron: PropTypes.func.isRequired,
+  onCheckOutBorrowingSite: PropTypes.func.isRequired,
+  onCheckOutToLocalPatron: PropTypes.func.isRequired,
   onCheckOutToPatron: PropTypes.func.isRequired,
-  onCheckoutBorrowingSite: PropTypes.func.isRequired,
   onFinalCheckInItem: PropTypes.func.isRequired,
   onRecallItem: PropTypes.func.isRequired,
   onReceiveItem: PropTypes.func.isRequired,

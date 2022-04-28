@@ -373,7 +373,7 @@ describe('TransactionDetailContainer', () => {
   describe('checkout to borrowing site item', () => {
     beforeEach(() => {
       renderTransactionDetailContainer(commonProps);
-      TransactionDetail.mock.calls[0][0].onCheckoutBorrowingSite();
+      TransactionDetail.mock.calls[0][0].onCheckOutBorrowingSite();
     });
 
     it('should update the transaction state', () => {
