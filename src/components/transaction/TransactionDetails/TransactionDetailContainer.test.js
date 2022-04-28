@@ -445,7 +445,6 @@ describe('TransactionDetailContainer', () => {
     });
   });
 
-
   describe('cancel patron hold', () => {
     it('should cause cancellation reasons', () => {
       renderTransactionDetailContainer(commonProps);
