@@ -430,6 +430,22 @@ describe('TransactionDetailContainer', () => {
     });
   });
 
+  describe('checkout to local patron', () => {
+    beforeEach(() => {
+      renderTransactionDetailContainer(commonProps);
+      TransactionDetail.mock.calls[0][0].onCheckOutToLocalPatron();
+    });
+
+    it('should update the transaction state', () => {
+      expect(mutatorMock.checkOutToLocalPatron.POST).toHaveBeenCalled();
+    });
+
+    it('should update the transaction list', () => {
+      expect(onUpdateTransactionList).toHaveBeenCalled();
+    });
+  });
+
+
   describe('cancel patron hold', () => {
     it('should cause cancellation reasons', () => {
       renderTransactionDetailContainer(commonProps);
