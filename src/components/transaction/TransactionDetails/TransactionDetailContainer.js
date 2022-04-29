@@ -356,6 +356,11 @@ const TransactionDetailContainer = ({
       });
   };
 
+  const handleTransferHold = (_, selectedItem) => {
+    mutator.itemId.replace(selectedItem.id);
+    fetchTransferHold();
+  };
+
   const renderReceiveUnshippedItemModal = () => (
     <ReceiveUnshippedItemModal
       intl={intl}
@@ -400,7 +405,7 @@ const TransactionDetailContainer = ({
       instanceId={transaction?.[HOLD]?.[FOLIO_INSTANCE_ID]}
       skippedItemId={transaction?.[HOLD]?.[FOLIO_ITEM_ID]}
       onClose={triggerTransferHoldModal}
-      onRowClick={fetchTransferHold}
+      onRowClick={handleTransferHold}
     />
   );
 
@@ -408,7 +413,6 @@ const TransactionDetailContainer = ({
     mutator.servicePointId.replace(servicePointId || '');
     mutator.transactionId.replace(transaction.id || '');
     mutator.itemBarcode.replace(folioItemBarcode || '');
-    mutator.folioItemId.replace(transaction?.[HOLD]?.[FOLIO_ITEM_ID] || '');
   }, [servicePointId, transaction]);
 
   if (isTransactionPending) return <LoadingPane />;
@@ -443,7 +447,7 @@ TransactionDetailContainer.manifest = Object.freeze({
   servicePointId: { initialValue: '' },
   transactionId: { initialValue: '' },
   itemBarcode: { initialValue: '' },
-  folioItemId: { initialValue: '' },
+  itemId: { initialValue: '' },
   transactionView: {
     type: 'okapi',
     path: 'inn-reach/transactions/:{id}',
@@ -533,7 +537,7 @@ TransactionDetailContainer.manifest = Object.freeze({
   },
   transferItem: {
     type: 'okapi',
-    path: 'inn-reach/transactions/%{transactionId}/itemhold/transfer-item/%{folioItemId}',
+    path: 'inn-reach/transactions/%{transactionId}/itemhold/transfer-item/%{itemId}',
     pk: '',
     clientGeneratePk: false,
     fetch: false,
@@ -584,7 +588,7 @@ TransactionDetailContainer.propTypes = {
     finalCheckInItem: PropTypes.shape({
       POST: PropTypes.func.isRequired,
     }),
-    folioItemId: PropTypes.shape({
+    itemId: PropTypes.shape({
       replace: PropTypes.func.isRequired,
     }).isRequired,
     receiveUnshippedItem: PropTypes.shape({
