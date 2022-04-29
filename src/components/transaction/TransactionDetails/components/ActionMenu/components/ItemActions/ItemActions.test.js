@@ -1,4 +1,5 @@
 import React from 'react';
+import { screen } from '@testing-library/react';
 import { renderWithIntl } from '@folio/stripes-data-transfer-components/test/jest/helpers';
 import { translationsProperties } from '../../../../../../../../test/jest/helpers';
 import ItemActions from './ItemActions';
@@ -10,7 +11,7 @@ const transactionMock = {
 const renderItemActions = ({
   transaction = transactionMock,
   onToggle = jest.fn(),
-  onCheckoutBorrowingSite = jest.fn(),
+  onCheckOutBorrowingSite = jest.fn(),
   onFinalCheckInItem = jest.fn(),
   onCancelItemHold = jest.fn(),
 } = {}) => {
@@ -18,7 +19,7 @@ const renderItemActions = ({
     <ItemActions
       transaction={transaction}
       onToggle={onToggle}
-      onCheckoutBorrowingSite={onCheckoutBorrowingSite}
+      onCheckOutBorrowingSite={onCheckOutBorrowingSite}
       onFinalCheckInItem={onFinalCheckInItem}
       onCancelItemHold={onCancelItemHold}
     />,
@@ -27,6 +28,28 @@ const renderItemActions = ({
 };
 
 describe('ItemActions component', () => {
+  describe('cancel item hold', () => {
+    it('should be enabled with ITEM_HOLD state', () => {
+      renderItemActions({
+        transaction: {
+          ...transactionMock,
+          state: 'ITEM_HOLD',
+        },
+      });
+      expect(screen.getByRole('button', { name: 'Icon Cancel hold' })).toBeEnabled();
+    });
+
+    it('should be enabled with TRANSFER state', () => {
+      renderItemActions({
+        transaction: {
+          ...transactionMock,
+          state: 'TRANSFER',
+        },
+      });
+      expect(screen.getByRole('button', { name: 'Icon Cancel hold' })).toBeEnabled();
+    });
+  });
+
   it('should render "check out" action', () => {
     const { getByText } = renderItemActions();
 
