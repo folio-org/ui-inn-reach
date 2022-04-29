@@ -173,6 +173,22 @@ const TransactionDetailContainer = ({
       });
   };
 
+  const fetchCheckoutToLocalPatron = () => {
+    mutator.checkOutToLocalPatron.POST({})
+      .then(() => {
+        onUpdateTransactionList();
+        showCallout({
+          message: <FormattedMessage id="ui-inn-reach.check-out-to-local-patron.callout.success.post.check-out-to-local-patron" />,
+        });
+      })
+      .catch(() => {
+        showCallout({
+          type: CALLOUT_ERROR_TYPE,
+          message: <FormattedMessage id="ui-inn-reach.check-out-to-local-patron.callout.connection-problem.post.check-out-to-local-patron" />,
+        });
+      });
+  };
+
   const fetchRecallItem = () => {
     mutator.recallItem.POST({})
       .then(() => {
@@ -287,7 +303,6 @@ const TransactionDetailContainer = ({
         if (response?.length === 1) {
           return response[0];
         }
-
         throw new Error();
       })
       .then(fetchCancelPatronHold)
@@ -305,7 +320,6 @@ const TransactionDetailContainer = ({
         if (response?.length === 1) {
           return response[0];
         }
-
         throw new Error();
       })
       .then(fetchCancelItemHold)
@@ -356,6 +370,11 @@ const TransactionDetailContainer = ({
       });
   };
 
+  const handleTransferHold = (_, selectedItem) => {
+    mutator.itemId.replace(selectedItem.id);
+    fetchTransferHold();
+  };
+
   const renderReceiveUnshippedItemModal = () => (
     <ReceiveUnshippedItemModal
       intl={intl}
@@ -400,7 +419,7 @@ const TransactionDetailContainer = ({
       instanceId={transaction?.[HOLD]?.[FOLIO_INSTANCE_ID]}
       skippedItemId={transaction?.[HOLD]?.[FOLIO_ITEM_ID]}
       onClose={triggerTransferHoldModal}
-      onRowClick={fetchTransferHold}
+      onRowClick={handleTransferHold}
     />
   );
 
@@ -408,7 +427,6 @@ const TransactionDetailContainer = ({
     mutator.servicePointId.replace(servicePointId || '');
     mutator.transactionId.replace(transaction.id || '');
     mutator.itemBarcode.replace(folioItemBarcode || '');
-    mutator.folioItemId.replace(transaction?.[HOLD]?.[FOLIO_ITEM_ID] || '');
   }, [servicePointId, transaction]);
 
   if (isTransactionPending) return <LoadingPane />;
@@ -418,7 +436,8 @@ const TransactionDetailContainer = ({
       <TransactionDetail
         transaction={transaction}
         onClose={backToList}
-        onCheckoutBorrowingSite={onCheckoutBorroingSite}
+        onCheckOutBorrowingSite={onCheckoutBorroingSite}
+        onCheckOutToLocalPatron={fetchCheckoutToLocalPatron}
         onCheckOutToPatron={fetchCheckOutToPatron}
         onReturnItem={onReturnPatronHoldItem}
         onCancelPatronHold={handleCancelPatronHold}
@@ -443,7 +462,7 @@ TransactionDetailContainer.manifest = Object.freeze({
   servicePointId: { initialValue: '' },
   transactionId: { initialValue: '' },
   itemBarcode: { initialValue: '' },
-  folioItemId: { initialValue: '' },
+  itemId: { initialValue: '' },
   transactionView: {
     type: 'okapi',
     path: 'inn-reach/transactions/:{id}',
@@ -509,6 +528,14 @@ TransactionDetailContainer.manifest = Object.freeze({
     fetch: false,
     accumulate: true,
   },
+  checkOutToLocalPatron: {
+    type: 'okapi',
+    path: 'inn-reach/transactions/%{transactionId}/localhold/check-out-item/%{servicePointId}',
+    pk: '',
+    clientGeneratePk: false,
+    fetch: false,
+    accumulate: true,
+  },
   staffSlips: {
     type: 'okapi',
     records: 'staffSlips',
@@ -533,7 +560,7 @@ TransactionDetailContainer.manifest = Object.freeze({
   },
   transferItem: {
     type: 'okapi',
-    path: 'inn-reach/transactions/%{transactionId}/itemhold/transfer-item/%{folioItemId}',
+    path: 'inn-reach/transactions/%{transactionId}/itemhold/transfer-item/%{itemId}',
     pk: '',
     clientGeneratePk: false,
     fetch: false,
@@ -584,7 +611,7 @@ TransactionDetailContainer.propTypes = {
     finalCheckInItem: PropTypes.shape({
       POST: PropTypes.func.isRequired,
     }),
-    folioItemId: PropTypes.shape({
+    itemId: PropTypes.shape({
       replace: PropTypes.func.isRequired,
     }).isRequired,
     receiveUnshippedItem: PropTypes.shape({
@@ -603,6 +630,9 @@ TransactionDetailContainer.propTypes = {
       POST: PropTypes.func.isRequired,
     }),
     checkOutToPatron: PropTypes.shape({
+      POST: PropTypes.func.isRequired,
+    }),
+    checkOutToLocalPatron: PropTypes.shape({
       POST: PropTypes.func.isRequired,
     }),
     cancelPatronHold: PropTypes.shape({

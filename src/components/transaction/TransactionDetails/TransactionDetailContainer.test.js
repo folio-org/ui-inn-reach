@@ -130,7 +130,7 @@ const mutatorMock = {
   itemBarcode: {
     replace: jest.fn(),
   },
-  folioItemId: {
+  itemId: {
     replace: jest.fn(),
   },
   receiveUnshippedItem: {
@@ -149,6 +149,9 @@ const mutatorMock = {
     POST: jest.fn(() => Promise.resolve()),
   },
   checkOutToPatron: {
+    POST: jest.fn(() => Promise.resolve()),
+  },
+  checkOutToLocalPatron: {
     POST: jest.fn(() => Promise.resolve()),
   },
   returnPatronHoldItem: {
@@ -370,7 +373,7 @@ describe('TransactionDetailContainer', () => {
   describe('checkout to borrowing site item', () => {
     beforeEach(() => {
       renderTransactionDetailContainer(commonProps);
-      TransactionDetail.mock.calls[0][0].onCheckoutBorrowingSite();
+      TransactionDetail.mock.calls[0][0].onCheckOutBorrowingSite();
     });
 
     it('should update the transaction state', () => {
@@ -420,6 +423,21 @@ describe('TransactionDetailContainer', () => {
 
     it('should update the transaction state', () => {
       expect(mutatorMock.checkOutToPatron.POST).toHaveBeenCalled();
+    });
+
+    it('should update the transaction list', () => {
+      expect(onUpdateTransactionList).toHaveBeenCalled();
+    });
+  });
+
+  describe('checkout to local patron', () => {
+    beforeEach(() => {
+      renderTransactionDetailContainer(commonProps);
+      TransactionDetail.mock.calls[0][0].onCheckOutToLocalPatron();
+    });
+
+    it('should update the transaction state', () => {
+      expect(mutatorMock.checkOutToLocalPatron.POST).toHaveBeenCalled();
     });
 
     it('should update the transaction list', () => {
@@ -553,31 +571,30 @@ describe('TransactionDetailContainer', () => {
     });
   });
 
-  describe('transfer item', () => {
-    it('should write folioItemId to the redux', () => {
+  describe('transfer hold item', () => {
+    const item = { id: '777' };
+
+    beforeEach(async () => {
+      TransferHoldModal.mockClear();
       renderTransactionDetailContainer(commonProps);
-      expect(mutatorMock.folioItemId.replace).toHaveBeenCalledWith(transactionMock.hold.folioItemId);
+      await act(async () => { TransactionDetail.mock.calls[0][0].onTransferHold(); });
+      await act(async () => { TransferHoldModal.mock.calls[0][0].onRowClick('event', item); });
     });
 
-    describe('list item selection', () => {
-      beforeEach(async () => {
-        TransferHoldModal.mockClear();
-        renderTransactionDetailContainer(commonProps);
-        await act(async () => { TransactionDetail.mock.calls[0][0].onTransferHold(); });
-        await act(async () => { TransferHoldModal.mock.calls[0][0].onRowClick(); });
-      });
+    it('should write itemId to the redux', () => {
+      expect(mutatorMock.itemId.replace).toHaveBeenCalledWith(item.id);
+    });
 
-      it('should close the "Transfer hold" modal', () => {
-        expect(screen.queryByText('TransferHoldModal')).toBeNull();
-      });
+    it('should close the "Transfer hold" modal', () => {
+      expect(screen.queryByText('TransferHoldModal')).toBeNull();
+    });
 
-      it('should update the transaction', () => {
-        expect(mutatorMock.transferItem.POST).toHaveBeenCalled();
-      });
+    it('should update the transaction', () => {
+      expect(mutatorMock.transferItem.POST).toHaveBeenCalled();
+    });
 
-      it('should update the transaction list', () => {
-        expect(onUpdateTransactionList).toHaveBeenCalled();
-      });
+    it('should update the transaction list', () => {
+      expect(onUpdateTransactionList).toHaveBeenCalled();
     });
   });
 });
