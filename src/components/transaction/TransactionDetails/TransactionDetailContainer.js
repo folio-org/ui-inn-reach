@@ -29,6 +29,7 @@ import {
   getTransactionListUrl,
   TRANSACTION_FIELDS,
   HOLD_FIELDS,
+  TRANSACTION_TYPES,
 } from '../../../constants';
 import {
   useCallout,
@@ -41,6 +42,7 @@ import {
 
 const {
   HOLD,
+  TYPE,
 } = TRANSACTION_FIELDS;
 
 const {
@@ -49,6 +51,12 @@ const {
   FOLIO_INSTANCE_ID,
   FOLIO_ITEM_ID,
 } = HOLD_FIELDS;
+
+const {
+  PATRON,
+  ITEM,
+  LOCAL,
+} = TRANSACTION_TYPES;
 
 const TransactionDetailContainer = ({
   resources: {
@@ -233,13 +241,13 @@ const TransactionDetailContainer = ({
       .then(() => {
         onUpdateTransactionList();
         showCallout({
-          message: <FormattedMessage id="ui-inn-reach.cancel-patron-hold.callout.success.post.cancel-hold" />,
+          message: <FormattedMessage id="ui-inn-reach.cancel-hold.callout.success.post.cancel-hold" />,
         });
       })
       .catch(() => {
         showCallout({
           type: CALLOUT_ERROR_TYPE,
-          message: <FormattedMessage id="ui-inn-reach.cancel-patron-hold.callout.connection-problem.post.cancel-hold" />,
+          message: <FormattedMessage id="ui-inn-reach.cancel-hold.callout.connection-problem.post.cancel-hold" />,
         });
       });
   };
@@ -252,13 +260,13 @@ const TransactionDetailContainer = ({
       .then(() => {
         onUpdateTransactionList();
         showCallout({
-          message: <FormattedMessage id="ui-inn-reach.cancel-item-hold.callout.success.post.cancel-item-hold" />,
+          message: <FormattedMessage id="ui-inn-reach.cancel-hold.callout.success.post.cancel-hold" />,
         });
       })
       .catch(() => {
         showCallout({
           type: CALLOUT_ERROR_TYPE,
-          message: <FormattedMessage id="ui-inn-reach.cancel-item-hold.callout.connection-problem.post.cancel-item-hold" />,
+          message: <FormattedMessage id="ui-inn-reach.cancel-hold.callout.connection-problem.post.cancel-hold" />,
         });
       });
   };
@@ -286,64 +294,13 @@ const TransactionDetailContainer = ({
       .then(() => {
         onUpdateTransactionList();
         showCallout({
-          message: <FormattedMessage id="ui-inn-reach.cancel-local-hold.callout.success.post.cancel-local-hold" />,
+          message: <FormattedMessage id="ui-inn-reach.cancel-hold.callout.success.post.cancel-hold" />,
         });
       })
       .catch(() => {
         showCallout({
           type: CALLOUT_ERROR_TYPE,
-          message: <FormattedMessage id="ui-inn-reach.cancel-local-hold.callout.connection-problem.post.cancel-local-hold" />,
-        });
-      });
-  };
-
-  const handleCancelPatronHold = () => {
-    mutator.cancellationReasons.GET()
-      .then(response => {
-        if (response?.length === 1) {
-          return response[0];
-        }
-        throw new Error();
-      })
-      .then(fetchCancelPatronHold)
-      .catch(() => {
-        showCallout({
-          type: CALLOUT_ERROR_TYPE,
-          message: <FormattedMessage id="ui-inn-reach.cancel-item-hold.callout.connection-problem.get.cancellation-reasons" />,
-        });
-      });
-  };
-
-  const handleCancelItemHold = () => {
-    mutator.cancellationReasons.GET()
-      .then(response => {
-        if (response?.length === 1) {
-          return response[0];
-        }
-        throw new Error();
-      })
-      .then(fetchCancelItemHold)
-      .catch(() => {
-        showCallout({
-          type: CALLOUT_ERROR_TYPE,
-          message: <FormattedMessage id="ui-inn-reach.cancel-item-hold.callout.connection-problem.post.cancel-item-hold" />,
-        });
-      });
-  };
-
-  const handleCancelLocalHold = () => {
-    mutator.cancellationReasons.GET()
-      .then(response => {
-        if (response?.length === 1) {
-          return response[0];
-        }
-        throw new Error();
-      })
-      .then(fetchCancelLocalHold)
-      .catch(() => {
-        showCallout({
-          type: CALLOUT_ERROR_TYPE,
-          message: <FormattedMessage id="ui-inn-reach.cancel-local-hold.callout.connection-problem.post.cancel-local-hold" />,
+          message: <FormattedMessage id="ui-inn-reach.cancel-hold.callout.connection-problem.post.cancel-hold" />,
         });
       });
   };
@@ -353,8 +310,25 @@ const TransactionDetailContainer = ({
     fetchReceiveUnshippedItem();
   };
 
-  const fetchTransferHold = () => {
-    mutator.transferItem.POST({})
+  const fetchTransferItemHold = () => {
+    mutator.transferItemHold.POST({})
+      .then(() => {
+        triggerTransferHoldModal();
+        onUpdateTransactionList();
+        showCallout({
+          message: <FormattedMessage id="ui-inn-reach.transfer-hold.callout.success.post.transfer-hold" />,
+        });
+      })
+      .catch(() => {
+        showCallout({
+          type: CALLOUT_ERROR_TYPE,
+          message: <FormattedMessage id="ui-inn-reach.transfer-hold.callout.connection-problem.post.transfer-hold" />,
+        });
+      });
+  };
+
+  const fetchTransferLocalHold = () => {
+    mutator.transferLocalHold.POST({})
       .then(() => {
         triggerTransferHoldModal();
         onUpdateTransactionList();
@@ -372,7 +346,48 @@ const TransactionDetailContainer = ({
 
   const handleTransferHold = (_, selectedItem) => {
     mutator.itemId.replace(selectedItem.id);
-    fetchTransferHold();
+
+    switch (transaction[TYPE]) {
+      case ITEM:
+        fetchTransferItemHold();
+        break;
+      case LOCAL:
+        fetchTransferLocalHold();
+        break;
+      default:
+    }
+  };
+
+  const fetchCancelHold = (response) => {
+    switch (transaction[TYPE]) {
+      case PATRON:
+        fetchCancelPatronHold(response);
+        break;
+      case ITEM:
+        fetchCancelItemHold(response);
+        break;
+      case LOCAL:
+        fetchCancelLocalHold(response);
+        break;
+      default:
+    }
+  };
+
+  const fetchCancellationReason = () => {
+    mutator.cancellationReasons.GET()
+      .then(response => {
+        if (response?.length === 1) {
+          return response[0];
+        }
+        throw new Error();
+      })
+      .then(fetchCancelHold)
+      .catch(() => {
+        showCallout({
+          type: CALLOUT_ERROR_TYPE,
+          message: <FormattedMessage id="ui-inn-reach.cancel-hold.callout.connection-problem.get.cancellation-reasons" />,
+        });
+      });
   };
 
   const renderReceiveUnshippedItemModal = () => (
@@ -415,9 +430,9 @@ const TransactionDetailContainer = ({
 
   const renderTransferHoldModal = () => (
     <TransferHoldModal
-      title={transaction?.[HOLD]?.[TITLE]}
-      instanceId={transaction?.[HOLD]?.[FOLIO_INSTANCE_ID]}
-      skippedItemId={transaction?.[HOLD]?.[FOLIO_ITEM_ID]}
+      title={transaction[HOLD]?.[TITLE]}
+      instanceId={transaction[HOLD]?.[FOLIO_INSTANCE_ID]}
+      skippedItemId={transaction[HOLD]?.[FOLIO_ITEM_ID]}
       onClose={triggerTransferHoldModal}
       onRowClick={handleTransferHold}
     />
@@ -440,13 +455,11 @@ const TransactionDetailContainer = ({
         onCheckOutToLocalPatron={fetchCheckoutToLocalPatron}
         onCheckOutToPatron={fetchCheckOutToPatron}
         onReturnItem={onReturnPatronHoldItem}
-        onCancelPatronHold={handleCancelPatronHold}
-        onCancelItemHold={handleCancelItemHold}
         onFinalCheckInItem={fetchFinalCheckInItem}
-        onCancelLocalHold={handleCancelLocalHold}
         onRecallItem={fetchRecallItem}
         onReceiveUnshippedItem={triggerUnshippedItemModal}
         onReceiveItem={fetchReceiveItem}
+        onCancelHold={fetchCancellationReason}
         onTransferHold={triggerTransferHoldModal}
       />
       {isOpenUnshippedItemModal && renderReceiveUnshippedItemModal()}
@@ -558,9 +571,17 @@ TransactionDetailContainer.manifest = Object.freeze({
     fetch: false,
     accumulate: true,
   },
-  transferItem: {
+  transferItemHold: {
     type: 'okapi',
     path: 'inn-reach/transactions/%{transactionId}/itemhold/transfer-item/%{itemId}',
+    pk: '',
+    clientGeneratePk: false,
+    fetch: false,
+    accumulate: true,
+  },
+  transferLocalHold: {
+    type: 'okapi',
+    path: 'inn-reach/transactions/%{transactionId}/localhold/transfer-item/%{itemId}',
     pk: '',
     clientGeneratePk: false,
     fetch: false,
@@ -647,7 +668,10 @@ TransactionDetailContainer.propTypes = {
     cancellationReasons: PropTypes.shape({
       GET: PropTypes.func.isRequired,
     }),
-    transferItem: PropTypes.shape({
+    transferItemHold: PropTypes.shape({
+      POST: PropTypes.func.isRequired,
+    }),
+    transferLocalHold: PropTypes.shape({
       POST: PropTypes.func.isRequired,
     }),
   }),

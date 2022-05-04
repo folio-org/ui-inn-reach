@@ -23,7 +23,7 @@ const LocalActions = ({
   onToggle,
   onCheckOutToLocalPatron,
   onTransferHold,
-  onCancelLocalHold,
+  onCancelHold,
 }) => {
   return (
     <>
@@ -35,7 +35,7 @@ const LocalActions = ({
         onClickHandler={onCheckOutToLocalPatron}
       />
       <ActionItem
-        disabled
+        disabled={transaction[STATUS] !== LOCAL_HOLD}
         icon={ICONS.TRANSFER}
         buttonTextTranslationKey="ui-inn-reach.transaction-detail.local-type.action.transfer-hold"
         onToggle={onToggle}
@@ -46,7 +46,7 @@ const LocalActions = ({
         icon={ICONS.TIMES_CIRCLE}
         buttonTextTranslationKey="ui-inn-reach.transaction-detail.local-type.action.cancel-hold"
         onToggle={onToggle}
-        onClickHandler={onCancelLocalHold}
+        onClickHandler={onCancelHold}
       />
     </>
   );
@@ -54,10 +54,10 @@ const LocalActions = ({
 
 LocalActions.propTypes = {
   transaction: PropTypes.object.isRequired,
-  onCancelLocalHold: PropTypes.func.isRequired,
+  onCancelHold: PropTypes.func.isRequired,
   onCheckOutToLocalPatron: PropTypes.func.isRequired,
   onToggle: PropTypes.func.isRequired,
-  onTransferHold: PropTypes.func,
+  onTransferHold: PropTypes.func.isRequired,
 };
 
 export default LocalActions;
