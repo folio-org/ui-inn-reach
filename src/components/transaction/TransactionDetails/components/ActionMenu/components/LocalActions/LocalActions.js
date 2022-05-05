@@ -1,5 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
+import {
+  IfPermission,
+} from "@folio/stripes/core";
+
 import {
   ActionItem,
 } from '../../../../../../common';
@@ -34,13 +39,15 @@ const LocalActions = ({
         onToggle={onToggle}
         onClickHandler={onCheckOutToLocalPatron}
       />
-      <ActionItem
-        disabled={transaction[STATUS] !== LOCAL_HOLD}
-        icon={ICONS.TRANSFER}
-        buttonTextTranslationKey="ui-inn-reach.transaction-detail.local-type.action.transfer-hold"
-        onToggle={onToggle}
-        onClickHandler={onTransferHold}
-      />
+      <IfPermission perm="ui-inn-reach.moveRequest">
+        <ActionItem
+          disabled={transaction[STATUS] !== LOCAL_HOLD}
+          icon={ICONS.TRANSFER}
+          buttonTextTranslationKey="ui-inn-reach.transaction-detail.local-type.action.transfer-hold"
+          onToggle={onToggle}
+          onClickHandler={onTransferHold}
+        />
+      </IfPermission>
       <ActionItem
         disabled={transaction[STATUS] !== LOCAL_HOLD}
         icon={ICONS.TIMES_CIRCLE}
