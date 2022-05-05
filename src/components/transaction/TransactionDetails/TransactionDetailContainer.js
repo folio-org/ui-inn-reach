@@ -233,43 +233,6 @@ const TransactionDetailContainer = ({
       });
   };
 
-  const fetchCancelPatronHold = (response) => {
-    mutator.cancelPatronHold.POST({
-      cancellationReasonId: response.id,
-      cancellationAdditionalInformation: 'Cancelled by staff',
-    })
-      .then(() => {
-        onUpdateTransactionList();
-        showCallout({
-          message: <FormattedMessage id="ui-inn-reach.cancel-hold.callout.success.post.cancel-hold" />,
-        });
-      })
-      .catch(() => {
-        showCallout({
-          type: CALLOUT_ERROR_TYPE,
-          message: <FormattedMessage id="ui-inn-reach.cancel-hold.callout.connection-problem.post.cancel-hold" />,
-        });
-      });
-  };
-
-  const fetchCancelItemHold = (response) => {
-    mutator.cancelItemHold.POST({
-      cancellationReasonId: response.id,
-      cancellationAdditionalInformation: 'Owning site cancels request',
-    })
-      .then(() => {
-        onUpdateTransactionList();
-        showCallout({
-          message: <FormattedMessage id="ui-inn-reach.cancel-hold.callout.success.post.cancel-hold" />,
-        });
-      })
-      .catch(() => {
-        showCallout({
-          type: CALLOUT_ERROR_TYPE,
-          message: <FormattedMessage id="ui-inn-reach.cancel-hold.callout.connection-problem.post.cancel-hold" />,
-        });
-      });
-  };
   const fetchFinalCheckInItem = () => {
     mutator.finalCheckInItem.POST({})
       .then(() => {
@@ -286,49 +249,13 @@ const TransactionDetailContainer = ({
       });
   };
 
-  const fetchCancelLocalHold = (response) => {
-    mutator.cancelLocalHold.POST({
-      cancellationReasonId: response.id,
-      cancellationAdditionalInformation: 'Owning site cancels request',
-    })
-      .then(() => {
-        onUpdateTransactionList();
-        showCallout({
-          message: <FormattedMessage id="ui-inn-reach.cancel-hold.callout.success.post.cancel-hold" />,
-        });
-      })
-      .catch(() => {
-        showCallout({
-          type: CALLOUT_ERROR_TYPE,
-          message: <FormattedMessage id="ui-inn-reach.cancel-hold.callout.connection-problem.post.cancel-hold" />,
-        });
-      });
-  };
-
   const handleFetchReceiveUnshippedItem = ({ itemBarcode }) => {
     mutator.itemBarcode.replace(itemBarcode || '');
     fetchReceiveUnshippedItem();
   };
 
-  const fetchTransferItemHold = () => {
-    mutator.transferItemHold.POST({})
-      .then(() => {
-        triggerTransferHoldModal();
-        onUpdateTransactionList();
-        showCallout({
-          message: <FormattedMessage id="ui-inn-reach.transfer-hold.callout.success.post.transfer-hold" />,
-        });
-      })
-      .catch(() => {
-        showCallout({
-          type: CALLOUT_ERROR_TYPE,
-          message: <FormattedMessage id="ui-inn-reach.transfer-hold.callout.connection-problem.post.transfer-hold" />,
-        });
-      });
-  };
-
-  const fetchTransferLocalHold = () => {
-    mutator.transferLocalHold.POST({})
+  const fetchTransferHold = (transferMethod) => {
+    transferMethod.POST({})
       .then(() => {
         triggerTransferHoldModal();
         onUpdateTransactionList();
@@ -346,31 +273,61 @@ const TransactionDetailContainer = ({
 
   const handleTransferHold = (_, selectedItem) => {
     mutator.itemId.replace(selectedItem.id);
+    let transferMethod;
 
     switch (transaction[TYPE]) {
       case ITEM:
-        fetchTransferItemHold();
+        transferMethod = mutator.transferItemHold;
         break;
       case LOCAL:
-        fetchTransferLocalHold();
+        transferMethod = mutator.transferLocalHold;
         break;
       default:
     }
+
+    fetchTransferHold(transferMethod);
   };
 
-  const fetchCancelHold = (response) => {
+  const fetchCancelHold = (cancelMethod, cancellationReasonId, cancellationAdditionalInformation) => {
+    cancelMethod.POST({
+      cancellationReasonId,
+      cancellationAdditionalInformation,
+    })
+      .then(() => {
+        onUpdateTransactionList();
+        showCallout({
+          message: <FormattedMessage id="ui-inn-reach.cancel-hold.callout.success.post.cancel-hold" />,
+        });
+      })
+      .catch(() => {
+        showCallout({
+          type: CALLOUT_ERROR_TYPE,
+          message: <FormattedMessage id="ui-inn-reach.cancel-hold.callout.connection-problem.post.cancel-hold" />,
+        });
+      });
+  };
+
+  const handleCancelHold = (response) => {
+    let cancellationAdditionalInformation;
+    let cancelMethod;
+
     switch (transaction[TYPE]) {
       case PATRON:
-        fetchCancelPatronHold(response);
+        cancellationAdditionalInformation = 'Cancelled by staff';
+        cancelMethod = mutator.cancelPatronHold;
         break;
       case ITEM:
-        fetchCancelItemHold(response);
+        cancellationAdditionalInformation = 'Owning site cancels request';
+        cancelMethod = mutator.cancelItemHold;
         break;
       case LOCAL:
-        fetchCancelLocalHold(response);
+        cancellationAdditionalInformation = 'Owning site cancels request';
+        cancelMethod = mutator.cancelLocalHold;
         break;
       default:
     }
+
+    fetchCancelHold(cancelMethod, response.id, cancellationAdditionalInformation);
   };
 
   const fetchCancellationReason = () => {
@@ -381,7 +338,7 @@ const TransactionDetailContainer = ({
         }
         throw new Error();
       })
-      .then(fetchCancelHold)
+      .then(handleCancelHold)
       .catch(() => {
         showCallout({
           type: CALLOUT_ERROR_TYPE,

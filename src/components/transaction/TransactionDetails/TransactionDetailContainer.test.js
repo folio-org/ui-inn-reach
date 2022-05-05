@@ -616,11 +616,6 @@ describe('TransactionDetailContainer', () => {
       expect(screen.queryByText('TransferHoldModal')).toBeNull();
     });
 
-    it('should update the PATRON type transaction', async () => {
-      await renderForTransferHold('PATRON');
-      expect(mutatorMock.transferItemHold.POST).toHaveBeenCalled();
-    });
-
     it('should update the ITEM type transaction', async () => {
       await renderForTransferHold('ITEM');
       expect(mutatorMock.transferItemHold.POST).toHaveBeenCalled();
