@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import {
   IfPermission,
-} from "@folio/stripes/core";
+} from '@folio/stripes/core';
 
 import {
   ActionItem,
