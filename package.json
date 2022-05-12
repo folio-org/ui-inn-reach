@@ -215,11 +215,6 @@
         "visible": true
       },
       {
-        "permissionName": "ui-inn-reach.moveRequest",
-        "displayName": "Requests: Move to new item, reorder queue",
-        "visible": true
-      },
-      {
         "permissionName": "ui-inn-reach.app.all",
         "displayName": "INN-Reach App: All permissions",
         "subPermissions": [
@@ -244,8 +239,7 @@
           "inn-reach.d2ir.bib-info.all",
           "inn-reach.d2ir.patron-info.all",
           "inn-reach.central-server.sys-configuration.all",
-          "inn-reach.inn-reach-transactions.all",
-          "ui-inn-reach.moveRequest"
+          "inn-reach.inn-reach-transactions.all"
         ],
         "visible": true
       }

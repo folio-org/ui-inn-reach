@@ -39,7 +39,7 @@ const LocalActions = ({
         onToggle={onToggle}
         onClickHandler={onCheckOutToLocalPatron}
       />
-      <IfPermission perm="ui-inn-reach.moveRequest">
+      <IfPermission perm="ui-requests.moveRequest">
         <ActionItem
           disabled={transaction[STATUS] !== LOCAL_HOLD}
           icon={ICONS.TRANSFER}
