@@ -56,7 +56,6 @@ const mutatorMock = {
   pagingSlipTemplate: {
     GET: jest.fn(() => Promise.resolve()),
     PUT: jest.fn(() => Promise.resolve()),
-    POST: jest.fn(() => Promise.resolve()),
   },
 };
 
@@ -120,12 +119,6 @@ describe('renderPagingSlipTemplateRoute component', () => {
   });
 
   describe('handleSubmit', () => {
-    it('should make a POST request', async () => {
-      await act(async () => { renderPagingSlipTemplateRoute(); });
-      await act(async () => { PagingSlipTemplateForm.mock.calls[0][0].onSubmit(payload); });
-      expect(mutatorMock.pagingSlipTemplate.POST).toHaveBeenCalledWith(payload);
-    });
-
     it('should make a PUT request', async () => {
       const newMutator = cloneDeep(mutatorMock);
 

@@ -9,6 +9,7 @@ import {
 } from 'react-intl';
 import {
   isEmpty,
+  omit,
 } from 'lodash';
 
 import {
@@ -28,6 +29,7 @@ import {
 import {
   CALLOUT_ERROR_TYPE,
   CENTRAL_SERVERS_LIMITING,
+  METADATA,
   PAGING_SLIP_INITIAL_VALUES,
 } from '../../../constants';
 
@@ -71,12 +73,11 @@ const PagingSlipTemplateRoute = ({
     setPagingSlipTemplate(null);
   };
 
-  const handleSubmit = (payload) => {
-    const { POST, PUT } = mutator.pagingSlipTemplate;
-    const saveMethod = isEmpty(pagingSlipTemplate) ? POST : PUT;
+  const handleSubmit = (record) => {
+    const payload = omit(record, METADATA);
     const action = isEmpty(pagingSlipTemplate) ? 'create' : 'update';
 
-    saveMethod(payload)
+    mutator.pagingSlipTemplate.PUT(payload)
       .then(() => {
         setInitialValues(payload);
         showCallout({ message: <FormattedMessage id={`ui-inn-reach.settings.paging-slip-template.${action}.success`} /> });
