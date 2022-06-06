@@ -502,6 +502,8 @@
   "check-out-to-patron.callout.connection-problem.post.check-out-to-patron": "There was a problem checking out the item",
   "check-out-to-patron.callout.success.post.check-out-to-patron": "Item has been successfully checked out",
 
+  "loan.callout.connection-problem.get.loan": "There was a problem loading the loan",
+
   "check-out-to-local-patron.callout.connection-problem.post.check-out-to-local-patron": "There was a problem checking out the item",
   "check-out-to-local-patron.callout.success.post.check-out-to-local-patron": "Item has been successfully checked out",
 
