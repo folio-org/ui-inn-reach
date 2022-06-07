@@ -1,5 +1,4 @@
 import { createMemoryHistory } from 'history';
-import { screen } from '@testing-library/react';
 import { Router } from 'react-router';
 import { renderWithIntl } from '@folio/stripes-data-transfer-components/test/jest/helpers';
 import ItemActions from './ItemActions';
@@ -42,18 +41,25 @@ const renderItemActions = ({
 describe('ItemActions', () => {
   it('should be rendered', () => {
     const component = renderItemActions();
+
     expect(component).toBeDefined();
   });
+
   it('should render "Loan Detal" action', () => {
     const { getByText } = renderItemActions();
+
     expect(getByText('Loan detail')).toBeInTheDocument();
   });
+
   it('should render "Change due date" action', () => {
     const { getByText } = renderItemActions();
+
     expect(getByText('Change due date')).toBeInTheDocument();
   });
+
   it('should render "Inn-Reach transaction detail" action', () => {
     const { getByText } = renderItemActions();
+
     expect(getByText('Inn-Reach transaction detail')).toBeInTheDocument();
   });
 });
