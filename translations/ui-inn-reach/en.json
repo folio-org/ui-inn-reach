@@ -44,6 +44,7 @@
   "settings.inn-reach-recall-user": "INN-Reach recall user",
   "settings.visible-patron-id": "Visible patron ID",
   "settings.folio-circulation-user": "FOLIO circulation user for INN-Reach patron type",
+  "settings.pickup-locations": "Pickup locations",
   "settings.some-feature.message": "These are your settings for some app feature.",
 
   "settings.field.centralServer": "Central server",
@@ -329,6 +330,12 @@
   "settings.visible-patron-id.update.success": "Visible patron id settings updated successfully",
   "settings.visible-patron-id.callout.connectionProblem.create": "Unable to create data due to a module error. Please try again. If a problem persists please contact your system administrator",
   "settings.visible-patron-id.callout.connectionProblem.update": "Unable to updated data due to a module error. Please try again. If a problem persists please contact your system administrator",
+
+  "settings.pickup-locations.title": "Pickup locations",
+  "settings.pickup-locations.button.save": "Save",
+  "settings.pickup-locations.field.enable-local-pickup-locations": "Enable local pickup locations for item holds",
+  "settings.pickup-locations.update.success": "Local pickup locations updated successfully",
+  "settings.pickup-locations.callout.connectionProblem.update": "Unable to updated data due to a module error. Please try again. If a problem persists please contact your system administrator",
 
   "transaction.field.time": "Transaction time",
   "transaction.field.type": "Transaction type",

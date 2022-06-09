@@ -24,7 +24,6 @@ jest.mock('@folio/stripes-components', () => ({
   NavigationMenu: jest.fn(() => <div>NavigationMenu</div>),
   Icon: jest.fn(() => <div>spinner</div>),
   ItemForm: jest.fn(() => <div>ItemForm</div>),
-  ListCheckOutItems: jest.fn(() => <div>ListCheckOutItems</div>),
 }));
 
 const transactionsMock = {
@@ -93,7 +92,8 @@ const resourcesMock = {
     hasLoaded: true,
   },
   loans: {
-    records: [loanMock]
+    records: [loanMock],
+    isPending: false,
   },
   checkoutBorroingSiteItem: {
     isPending: false,
