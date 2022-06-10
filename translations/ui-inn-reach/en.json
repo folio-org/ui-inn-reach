@@ -337,8 +337,8 @@
   "settings.paging-slip-template.button.preview": "Preview",
   "settings.paging-slip-template.field.description": "Description",
   "settings.paging-slip-template.field.display": "Display",
-  "settings.paging-slip-template.create.success": "Visible patron id settings created successfully",
-  "settings.paging-slip-template.update.success": "Visible patron id settings updated successfully",
+  "settings.paging-slip-template.create.success": "INN-Reach paging slip template settings created successfully",
+  "settings.paging-slip-template.update.success": "INN-Reach paging slip template settings updated successfully",
   "settings.paging-slip-template.callout.connectionProblem.create": "Unable to create data due to a module error. Please try again. If a problem persists please contact your system administrator",
   "settings.paging-slip-template.callout.connectionProblem.update": "Unable to updated data due to a module error. Please try again. If a problem persists please contact your system administrator",
 
