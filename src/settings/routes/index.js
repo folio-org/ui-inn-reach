@@ -13,4 +13,5 @@ export { default as FolioCirculationUserRoute } from './FolioCirculationUserRout
 export { default as PatronAgencyRoute } from './PatronAgency';
 export { default as InnReachRecallUserRoute } from './InnReachRecallUserRoute';
 export { default as VisiblePatronIdRoute } from './VisiblePatronIdRoute';
+export { default as PagingSlipTemplateRoute } from './PagingSlipTemplateRoute';
 export { default as PickupLocationsRoute } from './PickupLocationsRoute';

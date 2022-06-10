@@ -13,6 +13,7 @@ import {
   CentralPatronTypeRoute,
   CentralItemTypeRoute,
   FolioCirculationUserRoute,
+  PagingSlipTemplateRoute,
   PatronAgencyRoute,
   InnReachRecallUserRoute,
   VisiblePatronIdRoute,
@@ -59,6 +60,9 @@ import {
 import {
   VISIBLE_PATRON_ID_ROUTE,
 } from './visible-patron-id';
+import {
+  PAGING_SLIP_TEMPLATE_ROUTE,
+} from './paging-slip-template';
 import {
   PICKUP_LOCATIONS_ROUTE,
 } from './pickup-locations';
@@ -117,7 +121,7 @@ export const sections = [
   },
   {
     id: CIRCULATION_MAPPINGS,
-    label: 'ui-inn-reach.settings.circulation-mappings',
+    label: 'ui-inn-reach.settings.circulation-settings',
     pages: [
       {
         route: AGENCY_TO_FOLIO_LOCATIONS_ROUTE,
@@ -138,6 +142,11 @@ export const sections = [
         route: FOLIO_CIRCULATION_USER_ROUTE,
         label: <FormattedMessage id="ui-inn-reach.settings.folio-circulation-user" />,
         component: FolioCirculationUserRoute,
+      },
+      {
+        route: PAGING_SLIP_TEMPLATE_ROUTE,
+        label: <FormattedMessage id="ui-inn-reach.settings.paging-slip-template" />,
+        component: PagingSlipTemplateRoute,
       },
       {
         route: PATRON_AGENCY_ROUTE,
