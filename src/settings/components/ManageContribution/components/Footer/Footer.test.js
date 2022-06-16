@@ -54,7 +54,7 @@ describe('Footer', () => {
           },
         });
 
-        expect(getByText('Tooltip')).toBeInTheDocument();;
+        expect(getByText('Tooltip')).toBeInTheDocument();
       });
 
       it('should be enabled', () => {
