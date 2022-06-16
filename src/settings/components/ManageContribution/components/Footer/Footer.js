@@ -38,7 +38,6 @@ const Footer = ({
   const initiateContributionBtn = () => (
     <Button
       marginBottom0
-      data-testid="initiate-contribution"
       id="clickable-initiate-contribution"
       buttonStyle="primary mega"
       disabled={!canInitiateContribution}
