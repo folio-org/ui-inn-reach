@@ -29,7 +29,7 @@ import {
   DEFAULT_PANE_WIDTH,
   PAGING_SLIP_TEMPLATE_FIELDS,
 } from '../../../../constants';
-import getTokens from './tokens';
+import getTokens from './getTokens';
 
 import css from './PagingSlipTemplateForm.css';
 
