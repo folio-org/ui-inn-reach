@@ -15,11 +15,10 @@ jest.mock('@folio/stripes-template-editor', () => ({
 }));
 
 jest.mock('./components', () => ({
-  ...jest.requireActual('./components'),
   TokensList: jest.fn(() => <div>TokensList</div>),
 }));
 
-export const tokensMock = {
+const tokensMock = {
   'effectiveLocation': [
     { 'previewValue': 'Main Library', 'token': 'item.effectiveLocationFolioName' },
   ],
@@ -108,6 +107,7 @@ describe('PagingSlipTemplateForm', () => {
 
   beforeEach(() => {
     TemplateEditor.mockClear();
+    TokensList.mockClear();
   });
 
   it('should be rendered', () => {

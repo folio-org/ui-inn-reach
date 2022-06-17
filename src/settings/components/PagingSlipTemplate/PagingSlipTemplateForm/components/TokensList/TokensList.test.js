@@ -3,12 +3,49 @@ import { renderWithIntl } from '@folio/stripes-data-transfer-components/test/jes
 import { TokensSection } from '@folio/stripes-template-editor';
 import { translationsProperties } from '../../../../../../../test/jest/helpers';
 import TokensList from './TokensList';
-import { tokensMock } from '../../PagingSlipTemplateForm.test';
 
 jest.mock('@folio/stripes-template-editor', () => ({
   ...jest.requireActual('@folio/stripes-template-editor'),
   TokensSection: jest.fn(() => <div>TokensSection</div>),
 }));
+
+const tokensMock = {
+  'effectiveLocation': [
+    { 'previewValue': 'Main Library', 'token': 'item.effectiveLocationFolioName' },
+  ],
+  'innReachAgency': [
+    { 'previewValue': 'fl1g1', 'token': 'innReachTransaction.itemAgencyCode' },
+    { 'previewValue': 'FOLIO 1 Agency 1', 'token': 'innReachTransaction.itemAgencyDescription' },
+  ],
+  'innReachPatron': [
+    { 'previewValue': 'Svoom, Liza', 'token': 'innReachTransaction.patronName' },
+    { 'previewValue': 'fl2g1', 'token': 'innReachTransaction.patronAgencyCode' },
+    { 'previewValue': 'FOLIO 2 Agency 1', 'token': 'innReachTransaction.patronAgencyDescription' },
+    { 'previewValue': '200', 'token': 'innReachTransaction.patronTypeCode' },
+    { 'previewValue': 'Patron', 'token': 'innReachTransaction.patronTypeDescription' }
+  ],
+  'innReachPickupLocation': [
+    { 'previewValue': 'fl2g1', 'token': 'innReachTransaction.pickupLocationCode' },
+    { 'previewValue': 'fli02 Agency 1', 'token': 'innReachTransaction.pickupLocationDisplayName' },
+    { 'previewValue': 'fl2g1 Delivery Stop', 'token': 'innReachTransaction.pickupLocationPrintName' },
+    { 'previewValue': 'Delivery Stop', 'token': 'innReachTransaction.pickupLocationDeliveryStop' },
+  ],
+  'innReachServer': [
+    { 'previewValue': 'd2ir', 'token': 'innReachTransaction.centralServerCode' },
+    { 'previewValue': 'fli01', 'token': 'innReachTransaction.localServerCode' }
+  ],
+  'item': [
+    { 'previewValue': 'Fool moon / Jim Butcher.', 'token': 'item.title' },
+    { 'previewValue': 'MOON2', 'token': 'item.barcode' },
+    { 'previewValue': 'Butcher, Jim, 1971', 'token': 'item.author' },
+    { 'previewValue': 'TK7871.15.F4 S67 1988', 'token': 'item.effectiveCallNumber' },
+    { 'previewValue': 'shelving order', 'token': 'item.shelvingOrder' },
+    { 'previewValue': 'it00000000029', 'token': 'item.hrid' },
+  ],
+  'staffSlip': [
+    { 'previewValue': 'INN-Reach Paging Slip - D2IR', 'token': 'staffSlip.Name' },
+  ]
+};
 
 const renderTokensList = ({
   tokens = tokensMock,
