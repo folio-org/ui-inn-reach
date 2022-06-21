@@ -211,7 +211,9 @@
           "inn-reach.central-servers.contribution-criteria-configuration.item.post",
           "inn-reach.central-servers.contribution-criteria-configuration.item.put",
           "inn-reach.central-servers.contribution-criteria-configuration.item.delete",
-          "inn-reach.central-servers.visible-patron-field-configuration.all",
+          "inn-reach.central-servers.visible-patron-field-configuration.item.post",
+          "inn-reach.central-servers.visible-patron-field-configuration.item.put",
+          "inn-reach.central-servers.visible-patron-field-configuration.item.delete",
           "inn-reach.locations.all",
           "inn-reach.material-type-mappings.all",
           "inn-reach.location-mappings.all",
@@ -294,6 +296,10 @@
           "inn-reach.central-server-patron-types.collection.post",
           "inn-reach.central-server-patron-types.collection.put",
           "inn-reach.central-server-patron-types.collection.delete",
+          "inn-reach.central-servers.visible-patron-field-configuration.item.get",
+          "inn-reach.central-servers.visible-patron-field-configuration.item.post",
+          "inn-reach.central-servers.visible-patron-field-configuration.item.put",
+          "inn-reach.central-servers.visible-patron-field-configuration.item.delete",
           "inn-reach.inn-reach-transactions.all"
         ],
         "visible": true
