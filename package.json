@@ -196,8 +196,7 @@
           "inn-reach.item-type-mappings.collection.put",
           "inn-reach.user-custom-field-mappings.item.post",
           "inn-reach.user-custom-field-mappings.item.put",
-          "inn-reach.central-patron-type-mappings.collection.put",
-          "inn-reach.central-patron-type-mappings.all"
+          "inn-reach.central-patron-type-mappings.collection.put"
         ],
         "visible": true
       },
@@ -219,7 +218,7 @@
           "inn-reach.contributions.all",
           "inn-reach.item-type-mappings.all",
           "inn-reach.user-custom-field-mappings.all",
-          "inn-reach.central-patron-type-mappings.all",
+          "inn-reach.central-patron-type-mappings.collection.put",
           "inn-reach.d2ir.bib-info.item.post",
           "inn-reach.d2ir.bib-info.item.put",
           "inn-reach.d2ir.bib-info.item.delete",
@@ -261,7 +260,8 @@
           "inn-reach.contributions.all",
           "inn-reach.item-type-mappings.all",
           "inn-reach.user-custom-field-mappings.all",
-          "inn-reach.central-patron-type-mappings.all",
+          "inn-reach.central-patron-type-mappings.collection.get",
+          "inn-reach.central-patron-type-mappings.collection.put",
           "inn-reach.d2ir.inn-reach-transaction.all",
           "inn-reach.d2ir.bib-info.item.get",
           "inn-reach.d2ir.bib-info.item.post",
