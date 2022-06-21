@@ -205,7 +205,9 @@
         "displayName": "Settings (inn-reach): All INN-Reach settings: CRUD",
         "subPermissions": [
           "ui-inn-reach.settings.view",
-          "inn-reach.central-servers.all",
+          "inn-reach.central-servers.item.post",
+          "inn-reach.central-servers.item.put",
+          "inn-reach.central-servers.item.delete",
           "inn-reach.central-servers.contribution-criteria-configuration.all",
           "inn-reach.central-servers.visible-patron-field-configuration.all",
           "inn-reach.locations.all",
@@ -245,7 +247,11 @@
         "displayName": "INN-Reach App: All permissions",
         "subPermissions": [
           "module.inn-reach.enabled",
-          "inn-reach.central-servers.all",
+          "inn-reach.central-servers.collection.get",
+          "inn-reach.central-servers.item.get",
+          "inn-reach.central-servers.item.post",
+          "inn-reach.central-servers.item.put",
+          "inn-reach.central-servers.item.delete",
           "inn-reach.central-servers.contribution-criteria-configuration.all",
           "inn-reach.locations.all",
           "inn-reach.material-type-mappings.all",
