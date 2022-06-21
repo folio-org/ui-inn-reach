@@ -341,7 +341,8 @@
           "inn-reach.central-servers.visible-patron-field-configuration.item.post",
           "inn-reach.central-servers.visible-patron-field-configuration.item.put",
           "inn-reach.central-servers.visible-patron-field-configuration.item.delete",
-          "inn-reach.inn-reach-transactions.all"
+          "inn-reach.inn-reach-transactions.collection.get",
+          "inn-reach.inn-reach-transaction.item.put"
         ],
         "visible": true
       }
