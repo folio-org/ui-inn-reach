@@ -152,6 +152,7 @@
           "inn-reach.inn-reach-transactions.collection.get",
           "inn-reach.d2ir.bib-info.item.get",
           "inn-reach.d2ir.patron-info.item.get",
+          "inn-reach.recall-user.item.get",
           "inn-reach.central-server-agencies.collection.get",
           "inn-reach.central-server-item-types.collection.get",
           "inn-reach.central-server-patron-types.collection.get"
@@ -196,6 +197,8 @@
           "inn-reach.item-type-mappings.collection.put",
           "inn-reach.user-custom-field-mappings.item.post",
           "inn-reach.user-custom-field-mappings.item.put",
+          "inn-reach.recall-user.item.post",
+          "inn-reach.recall-user.item.put",
           "inn-reach.central-patron-type-mappings.collection.put"
         ],
         "visible": true
@@ -305,6 +308,9 @@
           "inn-reach.central-servers.visible-patron-field-configuration.item.post",
           "inn-reach.central-servers.visible-patron-field-configuration.item.put",
           "inn-reach.central-servers.visible-patron-field-configuration.item.delete",
+          "inn-reach.recall-user.item.get",
+          "inn-reach.recall-user.item.post",
+          "inn-reach.recall-user.item.put",
           "inn-reach.inn-reach-transactions.collection.get",
           "inn-reach.inn-reach-transaction.item.put"
         ],
