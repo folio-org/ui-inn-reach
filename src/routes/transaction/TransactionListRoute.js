@@ -3,6 +3,7 @@ import React, {
   cloneElement,
   useState,
   useMemo,
+  useEffect,
 } from 'react';
 import {
   FormattedMessage,
@@ -106,18 +107,27 @@ const {
   SHOW_IN_TRANSIT_TOO_LONG_REPORT_MODAL,
 } = REPORT_MODALS;
 
-const resetData = () => {};
+const resetData = () => { };
 
 const TransactionListRoute = ({
   mutator,
   location,
   history,
   children,
+  stripes,
 }) => {
+
+  const servicePointId = stripes?.user?.user?.curServicePoint?.id;
+
+  useEffect(() => {
+    mutator.servicePointId.replace(servicePointId || '');
+  }, [servicePointId]);
+
   const showCallout = useCallout();
   const intl = useIntl();
 
   const [exportInProgress, setExportInProgress] = useState(false);
+  const [pagingSlipsArr, setPagingSlipsArr] = useState([]);
   const [statesOfModalReports, setStatesOfModalReports] = useState({
     [SHOW_OVERDUE_REPORT_MODAL]: false,
     [SHOW_REQUESTED_TOO_LONG_REPORT_MODAL]: false,
@@ -146,6 +156,21 @@ const TransactionListRoute = ({
   const loadTransactionsCB = useCallback((setTransactions, transactionsResponse) => {
     setTransactions((prev) => [...prev, ...transactionsResponse.transactions]);
   }, []);
+
+  const loadPagingSlips = useCallback(() => {
+    mutator.pagingSlips.reset();
+    mutator.pagingSlips.GET({})
+      .then(({ pagingSlips }) => {
+        //console.log('pagingSlips', pagingSlips);
+        setPagingSlipsArr(pagingSlips);
+      })
+      .catch(() => {
+        showCallout({
+          type: CALLOUT_ERROR_TYPE,
+          message: <FormattedMessage id="ui-inn-reach.loan.callout.connection-problem.get.loan" />,
+        });
+      });
+  }, [setPagingSlipsArr, pagingSlipsArr, servicePointId]);
 
   const {
     records: transactions,
@@ -351,10 +376,12 @@ const TransactionListRoute = ({
   return (
     <TransactionList
       isLoading={isLoading}
+      pagingSlipsArr={pagingSlipsArr}
       transactions={transactions}
       transactionsCount={transactionsCount}
       resetData={resetData}
       statesOfModalReports={statesOfModalReports}
+      loadPagingSlips={loadPagingSlips}
       onGenerateReport={generateReport}
       onToggleStatesOfModalReports={toggleStatesOfModalReports}
       onNeedMoreData={onNeedMoreData}
@@ -373,6 +400,7 @@ TransactionListRoute.manifest = Object.freeze({
   },
   query: { initialValue: {} },
   resultCount: { initialValue: RESULT_COUNT_INCREMENT },
+  servicePointId: { initialValue: '' },
   items: {
     type: 'okapi',
     path: 'inventory/items',
@@ -392,6 +420,13 @@ TransactionListRoute.manifest = Object.freeze({
     fetch: false,
     throwErrors: false,
   },
+  pagingSlips: {
+    type: 'okapi',
+    path: 'inn-reach/paging-slips/%{servicePointId}',
+    accumulate: true,
+    fetch: true,
+    throwErrors: false,
+  }
 });
 
 TransactionListRoute.propTypes = {
@@ -400,6 +435,13 @@ TransactionListRoute.propTypes = {
   children: PropTypes.node,
   mutator: PropTypes.shape({
     transactionRecords: PropTypes.shape({
+      GET: PropTypes.func.isRequired,
+      reset: PropTypes.func.isRequired,
+    }),
+    servicePointId: PropTypes.shape({
+      replace: PropTypes.func.isRequired,
+    }).isRequired,
+    pagingSlips: PropTypes.shape({
       GET: PropTypes.func.isRequired,
       reset: PropTypes.func.isRequired,
     }),

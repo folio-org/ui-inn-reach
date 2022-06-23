@@ -98,11 +98,13 @@ const resultsFormatter = {
 const TransactionListView = ({
   isLoading,
   onNeedMoreData,
+  pagingSlipsArr,
   statesOfModalReports,
   resetData,
   history,
   match,
   location,
+  loadPagingSlips,
   transactions,
   transactionsCount,
   children,
@@ -130,6 +132,8 @@ const TransactionListView = ({
       isLoading={isLoading}
       isShowAddNew={false}
       resetData={resetData}
+      loadPagingSlips={loadPagingSlips}
+      pagingSlipsArr={pagingSlipsArr}
       resultsFormatter={resultsFormatter}
       resultsPaneTitle={resultsPaneTitle}
       statesOfModalReports={statesOfModalReports}

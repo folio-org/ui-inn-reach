@@ -71,6 +71,8 @@ const SearchAndFilter = ({
   location,
   onNeedMoreData,
   resetData,
+  loadPagingSlips,
+  pagingSlipsArr,
   statesOfModalReports: {
     [SHOW_OVERDUE_REPORT_MODAL]: showOverdueReportModal,
     [SHOW_REQUESTED_TOO_LONG_REPORT_MODAL]: showRequestedTooLongReportModal,
@@ -231,6 +233,13 @@ const SearchAndFilter = ({
           onClickHandler={toggleInTransitTooLongModal}
           onToggle={onToggle}
         />
+        <ActionItem
+          id="print-slips"
+          icon={ICONS.DOWNLOAD}
+          buttonTextTranslationKey="ui-inn-reach.reports.in-transit-too-long.label"
+          onClickHandler={loadPagingSlips}
+          onToggle={onToggle}
+        />
       </>
     );
   };
@@ -308,7 +317,7 @@ const SearchAndFilter = ({
           />
 
           {getFilters()}
-
+{console.log(pagingSlipsArr)}
         </FiltersPane>
       )}
 
