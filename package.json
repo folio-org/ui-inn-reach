@@ -174,7 +174,10 @@
           "circulation-storage.loans.item.get",
           "circulation.loans.item.get",
           "inventory.instances.item.get",
-          "users.collection.get"
+          "users.collection.get",
+          "perms.users.get",
+          "perms.users.assign.immutable",
+          "circulation-storage.cancellation-reasons.collection.get"
         ],
         "visible": true
       },
@@ -222,7 +225,13 @@
           "circulation.renew-by-id.post",
           "circulation.loans.item.post",
           "circulation.loans.item.put",
-          "circulation.loans.claim-item-returned.post"
+          "circulation.loans.claim-item-returned.post",
+          "users.item.post",
+          "login.item.post",
+          "perms.users.item.post",
+          "inventory-storage.instance-types.item.post",
+          "inventory-storage.contributor-name-types.item.post",
+          "circulation-storage.cancellation-reasons.item.post"
         ],
         "visible": true
       },
@@ -331,7 +340,13 @@
           "circulation.requests.item.post",
           "circulation.requests.item.move.post",
           "users.item.get",
+          "users.item.post",
+          "login.item.post",
+          "perms.users.item.post",
+          "perms.users.get",
+          "perms.users.assign.immutable",
           "inventory-storage.service-points-users.collection.get",
+          "inventory-storage.instance-types.item.post",
           "circulation.check-out-by-barcode.post",
           "circulation-storage.loans.item.get",
           "circulation.renew-by-id.post",
@@ -340,7 +355,10 @@
           "circulation.loans.item.put",
           "circulation.loans.claim-item-returned.post",
           "inventory.instances.item.get",
-          "users.collection.get"
+          "users.collection.get",
+          "inventory-storage.contributor-name-types.item.post",
+          "circulation-storage.cancellation-reasons.collection.get",
+          "circulation-storage.cancellation-reasons.item.post"
         ],
         "visible": true
       }
