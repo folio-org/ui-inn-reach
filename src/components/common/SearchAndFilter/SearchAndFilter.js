@@ -31,6 +31,7 @@ import {
   useToggle,
 } from '../../../hooks';
 import ActionItem from '../ActionItem';
+import ActionItemPrint from './components/ActionItemPrint';
 import {
   ReportModal,
 } from '../../../routes/transaction/components';
@@ -71,8 +72,10 @@ const SearchAndFilter = ({
   location,
   onNeedMoreData,
   resetData,
-  loadPagingSlips,
   pagingSlipsArr,
+  pagingSlipTemplatesMap,
+  servicePoint,
+  onPrintPrintSlips,
   statesOfModalReports: {
     [SHOW_OVERDUE_REPORT_MODAL]: showOverdueReportModal,
     [SHOW_REQUESTED_TOO_LONG_REPORT_MODAL]: showRequestedTooLongReportModal,
@@ -120,6 +123,8 @@ const SearchAndFilter = ({
   );
   const [isFiltersOpened, toggleFilters] = useToggle(true);
   const getResultsPaneFilters = !isFiltersOpened ? filters : {};
+  const servicePointName = servicePoint?.name;
+  const disablePrintSlips =  pagingSlipsArr.length === 0; 
 
   const getFilters = useCallback(() => {
     return (
@@ -233,11 +238,17 @@ const SearchAndFilter = ({
           onClickHandler={toggleInTransitTooLongModal}
           onToggle={onToggle}
         />
-        <ActionItem
+        <ActionItemPrint
           id="print-slips"
           icon={ICONS.DOWNLOAD}
-          buttonTextTranslationKey="ui-inn-reach.reports.in-transit-too-long.label"
-          onClickHandler={loadPagingSlips}
+          disabled={disablePrintSlips}
+          buttonLabel={<FormattedMessage
+            id="ui-inn-reach.printSlips.label"
+            values={{ servicePoint: servicePointName }}
+          />}
+          templates={pagingSlipTemplatesMap}
+          templatesContext={pagingSlipsArr}
+          onClickHandler={onPrintPrintSlips}
           onToggle={onToggle}
         />
       </>
@@ -315,9 +326,7 @@ const SearchAndFilter = ({
             id="reset-filters"
             reset={resetFilters}
           />
-
           {getFilters()}
-{console.log(pagingSlipsArr)}
         </FiltersPane>
       )}
 
@@ -386,6 +395,7 @@ SearchAndFilter.propTypes = {
   onNeedMoreData: PropTypes.func.isRequired,
   onRowClick: PropTypes.func.isRequired,
   onToggleStatesOfModalReports: PropTypes.func.isRequired,
+  servicePoint: PropTypes.object.isRequired,
   children: PropTypes.node,
   contentData: PropTypes.arrayOf(PropTypes.object),
   count: PropTypes.number,

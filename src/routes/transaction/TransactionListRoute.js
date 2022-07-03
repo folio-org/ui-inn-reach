@@ -55,6 +55,8 @@ import {
   getParamsForReturnedTooLongReport,
   getParamsForOwningSitePagedTooLongReport,
   getParamsForInTransitTooLongReport,
+  convertToSlipData,
+  getSlipTempllatesMap,
 } from './utils';
 
 const {
@@ -116,8 +118,9 @@ const TransactionListRoute = ({
   children,
   stripes,
 }) => {
+  const servicePoint = stripes?.user?.user?.curServicePoint;
+  const servicePointId = servicePoint?.id;
 
-  const servicePointId = stripes?.user?.user?.curServicePoint?.id;
 
   useEffect(() => {
     mutator.servicePointId.replace(servicePointId || '');
@@ -128,6 +131,7 @@ const TransactionListRoute = ({
 
   const [exportInProgress, setExportInProgress] = useState(false);
   const [pagingSlipsArr, setPagingSlipsArr] = useState([]);
+  const [pagingSlipTemplatesMap, setPagingSlipTemplatesMap] = useState(null);
   const [statesOfModalReports, setStatesOfModalReports] = useState({
     [SHOW_OVERDUE_REPORT_MODAL]: false,
     [SHOW_REQUESTED_TOO_LONG_REPORT_MODAL]: false,
@@ -157,20 +161,40 @@ const TransactionListRoute = ({
     setTransactions((prev) => [...prev, ...transactionsResponse.transactions]);
   }, []);
 
-  const loadPagingSlips = useCallback(() => {
-    mutator.pagingSlips.reset();
+  const loadPagingSlips = () => {
     mutator.pagingSlips.GET({})
       .then(({ pagingSlips }) => {
-        //console.log('pagingSlips', pagingSlips);
-        setPagingSlipsArr(pagingSlips);
+        const slipsArr = pagingSlips.map((pagingSlip) => convertToSlipData(pagingSlip));
+        console.log('pagingSlips',slipsArr);
+        setPagingSlipsArr(slipsArr);
       })
       .catch(() => {
         showCallout({
           type: CALLOUT_ERROR_TYPE,
-          message: <FormattedMessage id="ui-inn-reach.loan.callout.connection-problem.get.loan" />,
+          message: <FormattedMessage id="ui-inn-reach.loan.callout.connection-problem.get.pagingSlip" />,
         });
       });
-  }, [setPagingSlipsArr, pagingSlipsArr, servicePointId]);
+  };
+
+  const loadPagingSlipTemplates = () => {
+    mutator.pagingSlipTemplates.GET({})
+      .then(({ pagingSlipTemplates }) => {
+        const templatesMap = getSlipTempllatesMap(pagingSlipTemplates);
+        console.log('pagingSlipTemplates', templatesMap);
+        setPagingSlipTemplatesMap(templatesMap);
+      })
+      .catch(() => {
+        showCallout({
+          type: CALLOUT_ERROR_TYPE,
+          message: <FormattedMessage id="ui-inn-reach.loan.callout.connection-problem.get.pagingSlipTemplate" />,
+        });
+      });
+  };
+
+  const onPrintPrintSlips = useEffect(() => {
+    loadPagingSlips();
+    loadPagingSlipTemplates();
+  }, []);
 
   const {
     records: transactions,
@@ -377,12 +401,14 @@ const TransactionListRoute = ({
     <TransactionList
       isLoading={isLoading}
       pagingSlipsArr={pagingSlipsArr}
+      pagingSlipTemplatesMap={pagingSlipTemplatesMap}
       transactions={transactions}
       transactionsCount={transactionsCount}
       resetData={resetData}
+      servicePoint={servicePoint}
       statesOfModalReports={statesOfModalReports}
-      loadPagingSlips={loadPagingSlips}
       onGenerateReport={generateReport}
+      onPrintPrintSlips={onPrintPrintSlips}
       onToggleStatesOfModalReports={toggleStatesOfModalReports}
       onNeedMoreData={onNeedMoreData}
     >
@@ -424,9 +450,16 @@ TransactionListRoute.manifest = Object.freeze({
     type: 'okapi',
     path: 'inn-reach/paging-slips/%{servicePointId}',
     accumulate: true,
-    fetch: true,
+    fetch: false,
     throwErrors: false,
-  }
+  },
+  pagingSlipTemplates: {
+    type: 'okapi',
+    path: `inn-reach/central-servers/paging-slip-template?limit=${CENTRAL_SERVERS_LIMITING}`,
+    accumulate: true,
+    fetch: false,
+    throwErrors: false,
+  },
 });
 
 TransactionListRoute.propTypes = {
@@ -442,6 +475,10 @@ TransactionListRoute.propTypes = {
       replace: PropTypes.func.isRequired,
     }).isRequired,
     pagingSlips: PropTypes.shape({
+      GET: PropTypes.func.isRequired,
+      reset: PropTypes.func.isRequired,
+    }),
+    pagingSlipTemplates: PropTypes.shape({
       GET: PropTypes.func.isRequired,
       reset: PropTypes.func.isRequired,
     }),
