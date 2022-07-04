@@ -10,7 +10,7 @@ import {
   Button,
 } from '@folio/stripes-components';
 
-import ComponentToPrint from '../../../../common/ComponentToPrint';
+import ComponentToPrint from '../../../ComponentToPrint';
 // eslint-disable-next-line import/no-webpack-loader-syntax
 import '!style-loader!css-loader!../../../PrintButton/quillEditor.css';
 import css from '../../../PrintButton/PrintButton.css';
@@ -18,8 +18,8 @@ import css from '../../../PrintButton/PrintButton.css';
 class PrintSlips extends React.Component {
   static propTypes = {
     children: PropTypes.node,
-    templatesContext: PropTypes.arrayOf(PropTypes.object),
     templates: PropTypes.object,
+    templatesContext: PropTypes.arrayOf(PropTypes.object),
     onAfterPrint: PropTypes.func,
     onBeforePrint: PropTypes.func,
   };
@@ -43,7 +43,8 @@ class PrintSlips extends React.Component {
 
     const renderTemplates = () => {
       return templatesContext.map((templateContext) => {
-        const templateWithBrake = templates[templateContext['innReachTransaction.centralServerId']].concat('</br>')
+        const templateWithBrake = templates[templateContext['innReachTransaction.centralServerId']].concat('</br>');
+
         return (
           <ComponentToPrint
             key={templateContext['innReachTransaction.centralServerId']}

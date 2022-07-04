@@ -110,7 +110,6 @@ const TransactionListView = ({
   transactionsCount,
   children,
   onGenerateReport,
-  onPrintPrintSlips,
   onToggleStatesOfModalReports,
 }) => {
   const openTransactionDetails = useCallback(
@@ -143,7 +142,6 @@ const TransactionListView = ({
       visibleColumns={visibleColumns}
       onGenerateReport={onGenerateReport}
       onNeedMoreData={onNeedMoreData}
-      onPrintPrintSlips={onPrintPrintSlips}
       onRowClick={openTransactionDetails}
       onToggleStatesOfModalReports={onToggleStatesOfModalReports}
     >
@@ -156,8 +154,10 @@ TransactionListView.propTypes = {
   history: ReactRouterPropTypes.history.isRequired,
   location: ReactRouterPropTypes.location.isRequired,
   match: ReactRouterPropTypes.match.isRequired,
+  pagingSlipTemplatesMap: PropTypes.object.isRequired,
+  pagingSlipsArr: PropTypes.array.isRequired,
   resetData: PropTypes.func.isRequired,
-  servicePoint:  PropTypes.object.isRequired,
+  servicePoint: PropTypes.object.isRequired,
   statesOfModalReports: PropTypes.object.isRequired,
   onGenerateReport: PropTypes.func.isRequired,
   onNeedMoreData: PropTypes.func.isRequired,

@@ -75,7 +75,6 @@ const SearchAndFilter = ({
   pagingSlipsArr,
   pagingSlipTemplatesMap,
   servicePoint,
-  onPrintPrintSlips,
   statesOfModalReports: {
     [SHOW_OVERDUE_REPORT_MODAL]: showOverdueReportModal,
     [SHOW_REQUESTED_TOO_LONG_REPORT_MODAL]: showRequestedTooLongReportModal,
@@ -124,7 +123,7 @@ const SearchAndFilter = ({
   const [isFiltersOpened, toggleFilters] = useToggle(true);
   const getResultsPaneFilters = !isFiltersOpened ? filters : {};
   const servicePointName = servicePoint?.name;
-  const disablePrintSlips =  pagingSlipsArr.length === 0; 
+  const disablePrintSlips = pagingSlipsArr.length === 0;
 
   const getFilters = useCallback(() => {
     return (
@@ -248,7 +247,6 @@ const SearchAndFilter = ({
           />}
           templates={pagingSlipTemplatesMap}
           templatesContext={pagingSlipsArr}
-          onClickHandler={onPrintPrintSlips}
           onToggle={onToggle}
         />
       </>
@@ -386,16 +384,18 @@ SearchAndFilter.propTypes = {
   id: PropTypes.string.isRequired,
   location: ReactRouterPropTypes.location.isRequired,
   match: ReactRouterPropTypes.match.isRequired,
+  pagingSlipTemplatesMap: PropTypes.object.isRequired,
+  pagingSlipsArr: PropTypes.array.isRequired,
   resetData: PropTypes.func.isRequired,
   resultsFormatter: PropTypes.object.isRequired,
   resultsPaneTitle: PropTypes.object.isRequired,
+  servicePoint: PropTypes.object.isRequired,
   statesOfModalReports: PropTypes.object.isRequired,
   visibleColumns: PropTypes.array.isRequired,
   onGenerateReport: PropTypes.func.isRequired,
   onNeedMoreData: PropTypes.func.isRequired,
   onRowClick: PropTypes.func.isRequired,
   onToggleStatesOfModalReports: PropTypes.func.isRequired,
-  servicePoint: PropTypes.object.isRequired,
   children: PropTypes.node,
   contentData: PropTypes.arrayOf(PropTypes.object),
   count: PropTypes.number,

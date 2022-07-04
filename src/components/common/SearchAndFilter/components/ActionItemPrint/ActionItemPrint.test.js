@@ -7,12 +7,6 @@ import ActionItemPrint from './ActionItemPrint';
 
 import { translationsProperties } from '../../../../../../test/jest/helpers';
 
-const templatesContextMock = [
-  {
-    test: 'test',
-  },
-];
-
 const RenderActionItemPrint = ({
   templates = {},
   templatesContext = [],

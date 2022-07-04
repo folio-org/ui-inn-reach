@@ -60,7 +60,8 @@ describe('PrintSlips', () => {
 
   it('should pass template with line break to ComponentToPrint', () => {
     renderPrintSlip(commonProps);
-    const templateMockWithBrake = templatesMock['testServerId'].concat('</br>');
+    const templateMockWithBrake = templatesMock.testServerId.concat('</br>');
+
     expect(ComponentToPrint.mock.calls[0][0].template).toEqual(templateMockWithBrake);
   });
 

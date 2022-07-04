@@ -1,8 +1,10 @@
 import React from 'react';
+import { cloneDeep } from 'lodash';
 import { act, screen } from '@testing-library/react';
 import { renderWithIntl } from '@folio/stripes-data-transfer-components/test/jest/helpers';
 import { createMemoryHistory } from 'history';
 import { Router } from 'react-router-dom';
+import { useStripes } from '@folio/stripes/core';
 import TransactionListRoute from './TransactionListRoute';
 import { translationsProperties } from '../../../test/jest/helpers';
 import TransactionList from '../../components/transaction/TransactionList';
@@ -31,6 +33,8 @@ jest.mock('./utils', () => ({
   getParamsForReturnedTooLongReport: jest.fn(),
   getParamsForOwningSitePagedTooLongReport: jest.fn(),
   getParamsForInTransitTooLongReport: jest.fn(),
+  convertToSlipData: jest.fn(),
+  getSlipTempllatesMap: jest.fn(),
 }));
 
 const transactionsMock = {
@@ -92,8 +96,20 @@ const mutatorMock = {
     GET: jest.fn(() => Promise.resolve(itemsMock)),
     reset: jest.fn(),
   },
+  pagingSlipTemplates: {
+    GET: jest.fn(() => Promise.resolve(itemsMock)),
+    reset: jest.fn(),
+  },
+  pagingSlips: {
+    GET: jest.fn(() => Promise.resolve(itemsMock)),
+    reset: jest.fn(),
+  },
+  servicePointId: {
+    replace: jest.fn(),
+  },
 };
 
+const servicePointId = 'c4c90014-c8c9-4ade-8f24-b5e313319f4b';
 const path = '/innreach/transactions?centralItemType=200&centralServerCode=demo1&itemAgencyCode=5east&patronAgencyCode=5dlpl&centralPatronType=201&query=secrets&state=ITEM_HOLD&type=PATRON&type=ITEM';
 const params = {
   'centralItemType': '200',
@@ -137,6 +153,7 @@ const renderTransactionListRoute = ({
   history = createMemoryHistory(),
   mutator = mutatorMock,
   children = childrenMock,
+  stripes,
 } = {}) => {
   return renderWithIntl(
     <Router history={history}>
@@ -144,6 +161,7 @@ const renderTransactionListRoute = ({
         mutator={mutator}
         location={{ pathname: '/' }}
         history={history}
+        stripes={stripes}
       >
         {children}
       </TransactionListRoute>
@@ -153,22 +171,27 @@ const renderTransactionListRoute = ({
 };
 
 describe('TransactionListRoute', () => {
+  let stripes;
+
   beforeEach(() => {
     TransactionList.mockClear();
+    mutatorMock.servicePointId.replace.mockClear();
+    stripes = cloneDeep(useStripes());
+    stripes.user.user.curServicePoint = { id: servicePointId };
   });
 
   it('should render TransactionList', async () => {
-    await act(async () => { renderTransactionListRoute(); });
+    await act(async () => { renderTransactionListRoute({ stripes }); });
     expect(screen.getByText('TransactionList')).toBeVisible();
   });
 
   it('should not pass any transactions ', async () => {
-    await act(async () => { renderTransactionListRoute(); });
+    await act(async () => { renderTransactionListRoute({ stripes }); });
     expect(TransactionList.mock.calls[0][0].transactions).toEqual([]);
   });
 
   it('should use React.cloneElement method for children prop', async () => {
-    await act(async () => { renderTransactionListRoute(); });
+    await act(async () => { renderTransactionListRoute({ stripes }); });
     expect(React.cloneElement).toHaveBeenCalled();
   });
 
@@ -178,7 +201,7 @@ describe('TransactionListRoute', () => {
     beforeEach(async () => {
       history = createMemoryHistory();
       history.push(path);
-      await act(async () => { renderTransactionListRoute({ history }); });
+      await act(async () => { renderTransactionListRoute({ history, stripes }); });
     });
 
     it('should pass the correct transactions list', () => {
@@ -230,6 +253,7 @@ describe('TransactionListRoute', () => {
       await act(async () => {
         renderTransactionListRoute({
           mutator: newMutator,
+          stripes,
         });
       });
     });
@@ -307,12 +331,12 @@ describe('TransactionListRoute', () => {
 
   describe('toggling states of modal reports', () => {
     beforeEach(async () => {
-      await act(async () => { renderTransactionListRoute(); });
+      await act(async () => { renderTransactionListRoute({ stripes }); });
     });
 
     it('should display "Owning site overdue report" modal', async () => {
-      await act(async () => { TransactionList.mock.calls[3][0].onToggleStatesOfModalReports('showOverdueReportModal'); });
-      expect(TransactionList.mock.calls[4][0].statesOfModalReports).toEqual({
+      await act(async () => { TransactionList.mock.calls[4][0].onToggleStatesOfModalReports('showOverdueReportModal'); });
+      expect(TransactionList.mock.calls[5][0].statesOfModalReports).toEqual({
         showOverdueReportModal: true,
         showRequestedTooLongReportModal: false,
         showReturnedTooLongReportModal: false,
@@ -322,8 +346,8 @@ describe('TransactionListRoute', () => {
     });
 
     it('should display "Requested too long report" modal', async () => {
-      await act(async () => { TransactionList.mock.calls[3][0].onToggleStatesOfModalReports('showRequestedTooLongReportModal'); });
-      expect(TransactionList.mock.calls[4][0].statesOfModalReports).toEqual({
+      await act(async () => { TransactionList.mock.calls[4][0].onToggleStatesOfModalReports('showRequestedTooLongReportModal'); });
+      expect(TransactionList.mock.calls[5][0].statesOfModalReports).toEqual({
         showOverdueReportModal: false,
         showRequestedTooLongReportModal: true,
         showReturnedTooLongReportModal: false,
@@ -333,8 +357,8 @@ describe('TransactionListRoute', () => {
     });
 
     it('should display "Returned too long report" modal', async () => {
-      await act(async () => { TransactionList.mock.calls[3][0].onToggleStatesOfModalReports('showReturnedTooLongReportModal'); });
-      expect(TransactionList.mock.calls[4][0].statesOfModalReports).toEqual({
+      await act(async () => { TransactionList.mock.calls[4][0].onToggleStatesOfModalReports('showReturnedTooLongReportModal'); });
+      expect(TransactionList.mock.calls[5][0].statesOfModalReports).toEqual({
         showOverdueReportModal: false,
         showRequestedTooLongReportModal: false,
         showReturnedTooLongReportModal: true,
@@ -344,8 +368,8 @@ describe('TransactionListRoute', () => {
     });
 
     it('should display "Owning site paged too long" modal', async () => {
-      await act(async () => { TransactionList.mock.calls[3][0].onToggleStatesOfModalReports('showPagedTooLongReportModal'); });
-      expect(TransactionList.mock.calls[4][0].statesOfModalReports).toEqual({
+      await act(async () => { TransactionList.mock.calls[4][0].onToggleStatesOfModalReports('showPagedTooLongReportModal'); });
+      expect(TransactionList.mock.calls[5][0].statesOfModalReports).toEqual({
         showOverdueReportModal: false,
         showRequestedTooLongReportModal: false,
         showReturnedTooLongReportModal: false,
@@ -355,8 +379,8 @@ describe('TransactionListRoute', () => {
     });
 
     it('should display "In-transit too long" modal', async () => {
-      await act(async () => { TransactionList.mock.calls[3][0].onToggleStatesOfModalReports('showInTransitTooLongReportModal'); });
-      expect(TransactionList.mock.calls[4][0].statesOfModalReports).toEqual({
+      await act(async () => { TransactionList.mock.calls[4][0].onToggleStatesOfModalReports('showInTransitTooLongReportModal'); });
+      expect(TransactionList.mock.calls[5][0].statesOfModalReports).toEqual({
         showOverdueReportModal: false,
         showRequestedTooLongReportModal: false,
         showReturnedTooLongReportModal: false,

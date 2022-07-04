@@ -15,7 +15,10 @@ import {
 } from 'react-router-dom';
 import ReactRouterPropTypes from 'react-router-prop-types';
 
-import { stripesConnect } from '@folio/stripes/core';
+import {
+  stripesConnect,
+  stripesShape,
+} from '@folio/stripes/core';
 
 import {
   useLocationReset,
@@ -121,7 +124,6 @@ const TransactionListRoute = ({
   const servicePoint = stripes?.user?.user?.curServicePoint;
   const servicePointId = servicePoint?.id;
 
-
   useEffect(() => {
     mutator.servicePointId.replace(servicePointId || '');
   }, [servicePointId]);
@@ -165,13 +167,13 @@ const TransactionListRoute = ({
     mutator.pagingSlips.GET({})
       .then(({ pagingSlips }) => {
         const slipsArr = pagingSlips.map((pagingSlip) => convertToSlipData(pagingSlip));
-        console.log('pagingSlips',slipsArr);
+
         setPagingSlipsArr(slipsArr);
       })
       .catch(() => {
         showCallout({
           type: CALLOUT_ERROR_TYPE,
-          message: <FormattedMessage id="ui-inn-reach.loan.callout.connection-problem.get.pagingSlip" />,
+          message: <FormattedMessage id="ui-inn-reach.paging-slips.callout.connection-problem.get.pagingSlip" />,
         });
       });
   };
@@ -180,18 +182,18 @@ const TransactionListRoute = ({
     mutator.pagingSlipTemplates.GET({})
       .then(({ pagingSlipTemplates }) => {
         const templatesMap = getSlipTempllatesMap(pagingSlipTemplates);
-        console.log('pagingSlipTemplates', templatesMap);
+
         setPagingSlipTemplatesMap(templatesMap);
       })
       .catch(() => {
         showCallout({
           type: CALLOUT_ERROR_TYPE,
-          message: <FormattedMessage id="ui-inn-reach.loan.callout.connection-problem.get.pagingSlipTemplate" />,
+          message: <FormattedMessage id="ui-inn-reach.paging-slips-template.callout.connection-problem.get.pagingSlipTemplate" />,
         });
       });
   };
 
-  const onPrintPrintSlips = useEffect(() => {
+  useEffect(() => {
     loadPagingSlips();
     loadPagingSlipTemplates();
   }, []);
@@ -408,7 +410,6 @@ const TransactionListRoute = ({
       servicePoint={servicePoint}
       statesOfModalReports={statesOfModalReports}
       onGenerateReport={generateReport}
-      onPrintPrintSlips={onPrintPrintSlips}
       onToggleStatesOfModalReports={toggleStatesOfModalReports}
       onNeedMoreData={onNeedMoreData}
     >
@@ -465,6 +466,7 @@ TransactionListRoute.manifest = Object.freeze({
 TransactionListRoute.propTypes = {
   history: ReactRouterPropTypes.history.isRequired,
   location: ReactRouterPropTypes.location.isRequired,
+  stripes: stripesShape.isRequired,
   children: PropTypes.node,
   mutator: PropTypes.shape({
     transactionRecords: PropTypes.shape({

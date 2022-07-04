@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage } from 'react-intl';
 
 import {
   Icon,
@@ -19,7 +18,6 @@ const ActionItemPrint = ({
   disabled,
   templates,
   templatesContext,
-  onClickHandler,
   onToggle,
 }) => (
   <PrintSlips
@@ -31,7 +29,6 @@ const ActionItemPrint = ({
     buttonClass={disabled ? css.button : null}
     onClick={() => {
       onToggle();
-      onClickHandler();
     }}
   >
     <Icon
@@ -47,16 +44,19 @@ ActionItemPrint.propTypes = {
   buttonLabel: PropTypes.string.isRequired,
   icon: PropTypes.string.isRequired,
   onToggle: PropTypes.func.isRequired,
+  templates: PropTypes.object,
+  templatesContext: PropTypes.array,
   buttonStyle: PropTypes.string,
   disabled: PropTypes.bool,
   id: PropTypes.string,
   size: PropTypes.string,
-  onClickHandler: PropTypes.func,
 };
 
 ActionItemPrint.defaultProps = {
   size: 'medium',
   buttonStyle: 'dropdownItem',
+  templates: {},
+  templatesContext: [],
 };
 
 export default ActionItemPrint;

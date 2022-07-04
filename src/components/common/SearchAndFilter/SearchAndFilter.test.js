@@ -46,6 +46,7 @@ const renderSearchAndFilter = ({
   isPreRenderAllData = false,
   isInsideListSearch = false,
   id = 'transactions-list',
+  pagingSlipsArr = [],
   onNeedMoreData,
   onRowClick,
   resetData,
@@ -63,6 +64,7 @@ const renderSearchAndFilter = ({
       resultsPaneTitle={resultsPaneTitle}
       isShowAddNew={isShowAddNew}
       count={count}
+      pagingSlipsArr={pagingSlipsArr}
       contentData={contentData}
       isPreRenderAllData={isPreRenderAllData}
       isInsideListSearch={isInsideListSearch}

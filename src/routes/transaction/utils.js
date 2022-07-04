@@ -257,7 +257,6 @@ export const convertToSlipData = ({
   item = {},
   slip = {},
 }) => {
-
   return {
     'innReachTransaction.patronName': innReachTransaction?.patronName,
     'innReachTransaction.patronAgencyCode': innReachTransaction?.patronAgencyCode,
@@ -286,8 +285,10 @@ export const convertToSlipData = ({
 
 export const getSlipTempllatesMap = (pagingSlipTemplates) => {
   const templatesMap = {};
-  pagingSlipTemplates.map((slipTemplate) => {
+
+  pagingSlipTemplates.forEach((slipTemplate) => {
     const centralServerId = slipTemplate.centralServerId;
+
     templatesMap[centralServerId] = slipTemplate.template;
   });
 

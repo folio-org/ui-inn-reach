@@ -555,5 +555,7 @@
   "transfer-hold.modal.list-of-items.notFound": "No items found",
   "transfer-hold.callout.success.post.transfer-hold": "Item has been successfully transferred",
   "transfer-hold.callout.connection-problem.post.transfer-hold": "There was a problem transferring the item",
-  "printSlips.label": "INN-Reach paging slips for {servicePoint}"
+  "printSlips.label": "INN-Reach paging slips for {servicePoint}",
+  "paging-slips.callout.connection-problem.get.pagingSlip": "There was a problem loading the paging slips",
+  "paging-slips-template.callout.connection-problem.get.pagingSlipTemplate": "There was a problem loading the paging slip templates"
 }

@@ -8,13 +8,19 @@ import { useStripes } from '@folio/stripes/core';
 
 import InnReach from './index';
 import { translationsProperties } from '../test/jest/helpers';
-import TransactionDetailContainer from './components/transaction/TransactionDetails';
+import { TransactionListRoute } from './routes';
 
 jest.mock('./settings', () => () => 'InnReachSettings');
-jest.mock('./components/transaction/TransactionDetails', () => jest.fn(() => <div>TransactionDetailContainer</div>));
 jest.mock('@folio/stripes-smart-components/lib/SearchAndSort/components/MultiSelectionFilter', () => {
   return jest.fn(() => <div>MultiSelectionFilter</div>);
 });
+jest.mock('./routes/transaction/TransactionListRoute', () => jest.fn(() => <div>TransactionListRoute</div>));
+
+const DEFAULT_MUTATOR = {
+  servicePointId: {
+    replace: jest.fn(),
+  },
+};
 
 const renderRoutes = (props) => {
   return renderWithIntl(
@@ -25,6 +31,7 @@ const renderRoutes = (props) => {
           params: {},
           url: '',
         }}
+        mutator={props.mutator}
         {...props}
       />
     </Router>,
@@ -36,7 +43,7 @@ describe('InnReach', () => {
   let stripes;
 
   beforeEach(() => {
-    TransactionDetailContainer.mockClear();
+    TransactionListRoute.mockClear();
     stripes = useStripes();
   });
 
@@ -65,16 +72,13 @@ describe('InnReach', () => {
               url: '/innreach',
             },
             history,
+            mutator: DEFAULT_MUTATOR
           });
         });
       });
 
       it('should be rendered', () => {
-        expect(screen.getByText('TransactionDetailContainer')).toBeVisible();
-      });
-
-      it('should have a callback to update the list of transactions', () => {
-        expect(TransactionDetailContainer.mock.calls[3][0].onUpdateTransactionList).toBeDefined();
+        expect(screen.getByText('TransactionListRoute')).toBeVisible();
       });
     });
   });
