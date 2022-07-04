@@ -35,7 +35,7 @@ jest.mock('../../../routes/transaction/components', () => ({
 const servicePointMock = {
   id: 'testId',
   name: 'test',
-}
+};
 
 const renderSearchAndFilter = ({
   isLoading = false,
@@ -122,7 +122,7 @@ describe('SearchAndFilter', () => {
   });
 
   it('should conatain print slips action', () => {
-    const { getByText } =  renderSearchAndFilter(commonProps);
+    const { getByText } = renderSearchAndFilter(commonProps);
 
     expect(getByText('INN-Reach paging slips for test')).toBeDefined();
   });

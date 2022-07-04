@@ -17,7 +17,6 @@ import css from '../../../PrintButton/PrintButton.css';
 
 class PrintSlips extends React.Component {
   static propTypes = {
-    id: PropTypes.string,
     children: PropTypes.node,
     templates: PropTypes.object,
     templatesContext: PropTypes.arrayOf(PropTypes.object),

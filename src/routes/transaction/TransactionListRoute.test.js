@@ -180,7 +180,7 @@ describe('TransactionListRoute', () => {
     stripes.user.user.curServicePoint = {
       id: servicePointId,
       name: test
-     };
+    };
   });
 
   it('should render TransactionList', async () => {
