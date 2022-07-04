@@ -44,12 +44,12 @@ ActionItemPrint.propTypes = {
   buttonLabel: PropTypes.string.isRequired,
   icon: PropTypes.string.isRequired,
   onToggle: PropTypes.func.isRequired,
-  templates: PropTypes.object,
-  templatesContext: PropTypes.array,
   buttonStyle: PropTypes.string,
   disabled: PropTypes.bool,
   id: PropTypes.string,
   size: PropTypes.string,
+  templates: PropTypes.object,
+  templatesContext: PropTypes.array,
 };
 
 ActionItemPrint.defaultProps = {
