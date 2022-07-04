@@ -177,7 +177,10 @@ describe('TransactionListRoute', () => {
     TransactionList.mockClear();
     mutatorMock.servicePointId.replace.mockClear();
     stripes = cloneDeep(useStripes());
-    stripes.user.user.curServicePoint = { id: servicePointId };
+    stripes.user.user.curServicePoint = {
+      id: servicePointId,
+      name: test
+     };
   });
 
   it('should render TransactionList', async () => {
@@ -193,6 +196,13 @@ describe('TransactionListRoute', () => {
   it('should use React.cloneElement method for children prop', async () => {
     await act(async () => { renderTransactionListRoute({ stripes }); });
     expect(React.cloneElement).toHaveBeenCalled();
+  });
+
+  it('should call a GET paging slips templates request', () => {
+    expect(mutatorMock.pagingSlipTemplates.GET).toHaveBeenCalled();
+  });
+  it('should call a GET paging slips templates request', () => {
+    expect(mutatorMock.pagingSlips.GET).toHaveBeenCalled();
   });
 
   describe('when we select filters', () => {
