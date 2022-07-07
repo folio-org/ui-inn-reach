@@ -124,16 +124,12 @@ const TransactionListRoute = ({
   const servicePoint = stripes?.user?.user?.curServicePoint;
   const servicePointId = servicePoint?.id;
 
-  useEffect(() => {
-    mutator.servicePointId.replace(servicePointId || '');
-  }, [servicePointId]);
-
   const showCallout = useCallout();
   const intl = useIntl();
 
   const [exportInProgress, setExportInProgress] = useState(false);
   const [pagingSlipsArr, setPagingSlipsArr] = useState([]);
-  const [pagingSlipTemplatesMap, setPagingSlipTemplatesMap] = useState(null);
+  const [pagingSlipTemplatesMap, setPagingSlipTemplatesMap] = useState({});
   const [statesOfModalReports, setStatesOfModalReports] = useState({
     [SHOW_OVERDUE_REPORT_MODAL]: false,
     [SHOW_REQUESTED_TOO_LONG_REPORT_MODAL]: false,
@@ -164,7 +160,7 @@ const TransactionListRoute = ({
   }, []);
 
   const loadPagingSlips = () => {
-    mutator.pagingSlips.GET({})
+    mutator.pagingSlips.GET({ path: `inn-reach/paging-slips/${servicePointId}` })
       .then(({ pagingSlips }) => {
         const slipsArr = pagingSlips.map((pagingSlip) => convertToSlipData(pagingSlip));
 
@@ -196,7 +192,7 @@ const TransactionListRoute = ({
   useEffect(() => {
     loadPagingSlips();
     loadPagingSlipTemplates();
-  }, []);
+  }, [servicePointId]);
 
   const {
     records: transactions,
@@ -427,7 +423,6 @@ TransactionListRoute.manifest = Object.freeze({
   },
   query: { initialValue: {} },
   resultCount: { initialValue: RESULT_COUNT_INCREMENT },
-  servicePointId: { initialValue: '' },
   items: {
     type: 'okapi',
     path: 'inventory/items',
@@ -473,9 +468,6 @@ TransactionListRoute.propTypes = {
       GET: PropTypes.func.isRequired,
       reset: PropTypes.func.isRequired,
     }),
-    servicePointId: PropTypes.shape({
-      replace: PropTypes.func.isRequired,
-    }).isRequired,
     pagingSlips: PropTypes.shape({
       GET: PropTypes.func.isRequired,
       reset: PropTypes.func.isRequired,

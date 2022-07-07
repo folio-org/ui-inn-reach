@@ -41,7 +41,7 @@ const ActionItemPrint = ({
 );
 
 ActionItemPrint.propTypes = {
-  buttonLabel: PropTypes.string.isRequired,
+  buttonLabel: PropTypes.object.isRequired,
   icon: PropTypes.string.isRequired,
   onToggle: PropTypes.func.isRequired,
   buttonStyle: PropTypes.string,
