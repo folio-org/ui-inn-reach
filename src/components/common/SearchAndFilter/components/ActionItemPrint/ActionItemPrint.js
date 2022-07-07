@@ -27,9 +27,7 @@ const ActionItemPrint = ({
     templates={templates}
     templatesContext={templatesContext}
     buttonClass={disabled ? css.button : null}
-    onClick={() => {
-      onToggle();
-    }}
+    onClick={onToggle}
   >
     <Icon
       icon={icon}

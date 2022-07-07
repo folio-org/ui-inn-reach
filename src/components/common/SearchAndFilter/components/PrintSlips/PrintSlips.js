@@ -22,11 +22,16 @@ class PrintSlips extends React.Component {
     templatesContext: PropTypes.arrayOf(PropTypes.object),
     onAfterPrint: PropTypes.func,
     onBeforePrint: PropTypes.func,
+    onClick: PropTypes.func
   };
 
   constructor(props) {
     super(props);
     this.printContentRef = React.createRef();
+  }
+
+  handleOnBeforeGetContent = () => {
+    this.props.onClick();
   }
 
   render() {
@@ -64,6 +69,7 @@ class PrintSlips extends React.Component {
             </Button>
           )}
           content={() => this.printContentRef.current}
+          onBeforeGetContent={this.handleOnBeforeGetContent}
           onBeforePrint={onBeforePrint}
           onAfterPrint={onAfterPrint}
         />

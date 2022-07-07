@@ -1,5 +1,8 @@
 import React from 'react';
-import { screen } from '@testing-library/react';
+import { screen, fireEvent } from '@testing-library/react';
+import {
+  FormattedMessage,
+} from 'react-intl';
 
 import { renderWithIntl } from '@folio/stripes-data-transfer-components/test/jest/helpers';
 
@@ -10,16 +13,19 @@ import { translationsProperties } from '../../../../../../test/jest/helpers';
 const RenderActionItemPrint = ({
   templates = {},
   templatesContext = [],
-  onClickHandler,
   onToggle,
 }) => {
   return (
     <ActionItemPrint
       icon='test icon'
-      buttonLabel='test'
+      buttonLabel={
+        <FormattedMessage
+          id="ui-inn-reach.printSlips.label"
+          values={{ servicePoint: 'test' }}
+        />
+      }
       templates={templates}
       templatesContext={templatesContext}
-      onClickHandler={onClickHandler}
       onToggle={onToggle}
     />
   );
@@ -27,14 +33,11 @@ const RenderActionItemPrint = ({
 
 describe('ActionItemPrint component', () => {
   const handleToggle = jest.fn();
-  const handleClickPrint = jest.fn();
 
   const renderedActionItemPrint = (
-    onClick = handleClickPrint,
     onToggle = handleToggle,
   ) => renderWithIntl(
     <RenderActionItemPrint
-      onClickHandler={onClick}
       onToggle={onToggle}
     />,
     translationsProperties,
@@ -50,5 +53,13 @@ describe('ActionItemPrint component', () => {
     renderedActionItemPrint();
 
     expect(screen.getByRole('button')).toBeInTheDocument();
+  });
+
+  it('should invoke onToggle callback', () => {
+    renderedActionItemPrint();
+    const button = screen.getByRole('button');
+
+    fireEvent.click(button);
+    expect(handleToggle).toBeCalled();
   });
 });

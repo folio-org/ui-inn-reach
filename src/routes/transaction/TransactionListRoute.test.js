@@ -201,7 +201,7 @@ describe('TransactionListRoute', () => {
   it('should call a GET paging slips templates request', () => {
     expect(mutatorMock.pagingSlipTemplates.GET).toHaveBeenCalled();
   });
-  it('should call a GET paging slips templates request', () => {
+  it('should call a GET paging slips request', () => {
     expect(mutatorMock.pagingSlips.GET).toHaveBeenCalled();
   });
 
