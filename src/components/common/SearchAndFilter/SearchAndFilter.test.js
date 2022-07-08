@@ -32,6 +32,11 @@ jest.mock('../../../routes/transaction/components', () => ({
   ReportModal: jest.fn(() => <div>ReportModal</div>),
 }));
 
+const servicePointMock = {
+  id: 'testId',
+  name: 'test',
+};
+
 const renderSearchAndFilter = ({
   isLoading = false,
   statesOfModalReports = {},
@@ -45,7 +50,9 @@ const renderSearchAndFilter = ({
   contentData = [],
   isPreRenderAllData = false,
   isInsideListSearch = false,
+  servicePoint = servicePointMock,
   id = 'transactions-list',
+  pagingSlipsArr = [],
   onNeedMoreData,
   onRowClick,
   resetData,
@@ -63,6 +70,8 @@ const renderSearchAndFilter = ({
       resultsPaneTitle={resultsPaneTitle}
       isShowAddNew={isShowAddNew}
       count={count}
+      servicePoint={servicePoint}
+      pagingSlipsArr={pagingSlipsArr}
       contentData={contentData}
       isPreRenderAllData={isPreRenderAllData}
       isInsideListSearch={isInsideListSearch}
@@ -110,6 +119,12 @@ describe('SearchAndFilter', () => {
       isShowAddNew: true,
     });
     expect(screen.getByText('ResultListLastMenu')).toBeVisible();
+  });
+
+  it('should conatain print slips action', () => {
+    const { getByText } = renderSearchAndFilter(commonProps);
+
+    expect(getByText('INN-Reach paging slips for test')).toBeDefined();
   });
 
   describe('ReportModal', () => {

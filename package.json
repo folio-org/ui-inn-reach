@@ -389,7 +389,8 @@
           "user-settings.custom-fields.collection.get",
           "usergroups.collection.get",
           "okapi.version.get",
-          "configuration.entries.collection.get"
+          "configuration.entries.collection.get",
+          "inn-reach.paging-slips.collection.get"
         ],
         "visible": true
       }

@@ -98,7 +98,10 @@ const resultsFormatter = {
 const TransactionListView = ({
   isLoading,
   onNeedMoreData,
+  pagingSlipsArr,
+  pagingSlipTemplatesMap,
   statesOfModalReports,
+  servicePoint,
   resetData,
   history,
   match,
@@ -130,6 +133,9 @@ const TransactionListView = ({
       isLoading={isLoading}
       isShowAddNew={false}
       resetData={resetData}
+      pagingSlipsArr={pagingSlipsArr}
+      pagingSlipTemplatesMap={pagingSlipTemplatesMap}
+      servicePoint={servicePoint}
       resultsFormatter={resultsFormatter}
       resultsPaneTitle={resultsPaneTitle}
       statesOfModalReports={statesOfModalReports}
@@ -148,7 +154,10 @@ TransactionListView.propTypes = {
   history: ReactRouterPropTypes.history.isRequired,
   location: ReactRouterPropTypes.location.isRequired,
   match: ReactRouterPropTypes.match.isRequired,
+  pagingSlipTemplatesMap: PropTypes.object.isRequired,
+  pagingSlipsArr: PropTypes.array.isRequired,
   resetData: PropTypes.func.isRequired,
+  servicePoint: PropTypes.object.isRequired,
   statesOfModalReports: PropTypes.object.isRequired,
   onGenerateReport: PropTypes.func.isRequired,
   onNeedMoreData: PropTypes.func.isRequired,

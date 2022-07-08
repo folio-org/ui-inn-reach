@@ -3,6 +3,7 @@ import React, {
   cloneElement,
   useState,
   useMemo,
+  useEffect,
 } from 'react';
 import {
   FormattedMessage,
@@ -14,7 +15,10 @@ import {
 } from 'react-router-dom';
 import ReactRouterPropTypes from 'react-router-prop-types';
 
-import { stripesConnect } from '@folio/stripes/core';
+import {
+  stripesConnect,
+  stripesShape,
+} from '@folio/stripes/core';
 
 import {
   useLocationReset,
@@ -54,6 +58,8 @@ import {
   getParamsForReturnedTooLongReport,
   getParamsForOwningSitePagedTooLongReport,
   getParamsForInTransitTooLongReport,
+  convertToSlipData,
+  getSlipTempllatesMap,
 } from './utils';
 
 const {
@@ -106,18 +112,24 @@ const {
   SHOW_IN_TRANSIT_TOO_LONG_REPORT_MODAL,
 } = REPORT_MODALS;
 
-const resetData = () => {};
+const resetData = () => { };
 
 const TransactionListRoute = ({
   mutator,
   location,
   history,
   children,
+  stripes,
 }) => {
+  const servicePoint = stripes?.user?.user?.curServicePoint;
+  const servicePointId = servicePoint?.id;
+
   const showCallout = useCallout();
   const intl = useIntl();
 
   const [exportInProgress, setExportInProgress] = useState(false);
+  const [pagingSlipsArr, setPagingSlipsArr] = useState([]);
+  const [pagingSlipTemplatesMap, setPagingSlipTemplatesMap] = useState({});
   const [statesOfModalReports, setStatesOfModalReports] = useState({
     [SHOW_OVERDUE_REPORT_MODAL]: false,
     [SHOW_REQUESTED_TOO_LONG_REPORT_MODAL]: false,
@@ -146,6 +158,41 @@ const TransactionListRoute = ({
   const loadTransactionsCB = useCallback((setTransactions, transactionsResponse) => {
     setTransactions((prev) => [...prev, ...transactionsResponse.transactions]);
   }, []);
+
+  const loadPagingSlips = () => {
+    mutator.pagingSlips.GET({ path: `inn-reach/paging-slips/${servicePointId}` })
+      .then(({ pagingSlips }) => {
+        const slipsArr = pagingSlips.map((pagingSlip) => convertToSlipData(pagingSlip));
+
+        setPagingSlipsArr(slipsArr);
+      })
+      .catch(() => {
+        showCallout({
+          type: CALLOUT_ERROR_TYPE,
+          message: <FormattedMessage id="ui-inn-reach.paging-slips.callout.connection-problem.get.pagingSlip" />,
+        });
+      });
+  };
+
+  const loadPagingSlipTemplates = () => {
+    mutator.pagingSlipTemplates.GET({})
+      .then(({ pagingSlipTemplates }) => {
+        const templatesMap = getSlipTempllatesMap(pagingSlipTemplates);
+
+        setPagingSlipTemplatesMap(templatesMap);
+      })
+      .catch(() => {
+        showCallout({
+          type: CALLOUT_ERROR_TYPE,
+          message: <FormattedMessage id="ui-inn-reach.paging-slips-template.callout.connection-problem.get.pagingSlipTemplate" />,
+        });
+      });
+  };
+
+  useEffect(() => {
+    loadPagingSlips();
+    loadPagingSlipTemplates();
+  }, [servicePointId]);
 
   const {
     records: transactions,
@@ -351,9 +398,12 @@ const TransactionListRoute = ({
   return (
     <TransactionList
       isLoading={isLoading}
+      pagingSlipsArr={pagingSlipsArr}
+      pagingSlipTemplatesMap={pagingSlipTemplatesMap}
       transactions={transactions}
       transactionsCount={transactionsCount}
       resetData={resetData}
+      servicePoint={servicePoint}
       statesOfModalReports={statesOfModalReports}
       onGenerateReport={generateReport}
       onToggleStatesOfModalReports={toggleStatesOfModalReports}
@@ -392,14 +442,37 @@ TransactionListRoute.manifest = Object.freeze({
     fetch: false,
     throwErrors: false,
   },
+  pagingSlips: {
+    type: 'okapi',
+    path: 'inn-reach/paging-slips/%{servicePointId}',
+    accumulate: true,
+    fetch: false,
+    throwErrors: false,
+  },
+  pagingSlipTemplates: {
+    type: 'okapi',
+    path: `inn-reach/central-servers/paging-slip-template?limit=${CENTRAL_SERVERS_LIMITING}`,
+    accumulate: true,
+    fetch: false,
+    throwErrors: false,
+  },
 });
 
 TransactionListRoute.propTypes = {
   history: ReactRouterPropTypes.history.isRequired,
   location: ReactRouterPropTypes.location.isRequired,
+  stripes: stripesShape.isRequired,
   children: PropTypes.node,
   mutator: PropTypes.shape({
     transactionRecords: PropTypes.shape({
+      GET: PropTypes.func.isRequired,
+      reset: PropTypes.func.isRequired,
+    }),
+    pagingSlips: PropTypes.shape({
+      GET: PropTypes.func.isRequired,
+      reset: PropTypes.func.isRequired,
+    }),
+    pagingSlipTemplates: PropTypes.shape({
       GET: PropTypes.func.isRequired,
       reset: PropTypes.func.isRequired,
     }),
