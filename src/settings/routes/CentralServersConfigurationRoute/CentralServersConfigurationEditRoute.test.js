@@ -68,7 +68,7 @@ jest.mock('./CentralServersConfigurationCreateEditContainer', () => {
   return jest.fn(() => 'CentralServersConfigurationCreateEditContainer');
 });
 
-jest.mock('@folio/stripes/components/lib/Loading/LoadingPane', () => {
+jest.mock('@folio/stripes-components/lib/Loading/LoadingPane', () => {
   return jest.fn(() => 'LoadingPane');
 });
 
