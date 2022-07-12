@@ -9,12 +9,12 @@ import {
 } from 'react-final-form';
 
 import {
+  Button,
   Pane,
   PaneFooter,
   Checkbox,
   Selection,
 } from '@folio/stripes/components';
-import { Button } from '@folio/stripes/components';
 import stripesFinalForm from '@folio/stripes/final-form';
 
 import {

@@ -9,13 +9,13 @@ import {
 } from '@folio/stripes/core';
 import stripesFinalForm from '@folio/stripes/final-form';
 import {
+  Button,
   Loading,
   Pane,
   PaneFooter,
   Selection,
   TextField,
 } from '@folio/stripes/components';
-import { Button } from '@folio/stripes/components';
 import {
   CENTRAL_SERVER_ID,
   DEFAULT_PANE_WIDTH,

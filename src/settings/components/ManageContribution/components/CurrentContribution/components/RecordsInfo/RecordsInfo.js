@@ -7,8 +7,6 @@ import {
 import {
   Col,
   Row,
-} from '@folio/stripes/components';
-import {
   NoValue,
 } from '@folio/stripes/components';
 import {

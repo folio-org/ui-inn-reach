@@ -2,8 +2,6 @@ import React from 'react';
 import {
   Col,
   Row,
-} from '@folio/stripes/components';
-import {
   FormattedDate,
   KeyValue,
 } from '@folio/stripes/components';

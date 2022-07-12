@@ -7,12 +7,12 @@ import {
   Field,
 } from 'react-final-form';
 import {
+  Button,
   Loading,
   Pane,
   PaneFooter,
   Selection,
 } from '@folio/stripes/components';
-import { Button } from '@folio/stripes/components';
 import stripesFinalForm from '@folio/stripes/final-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 import {
