@@ -19,8 +19,8 @@ jest.mock('./components', () => ({
   ListCheckOutItems: jest.fn(() => <div>ListCheckOutItems</div>),
 }));
 
-jest.mock('@folio/stripes-components', () => ({
-  ...jest.requireActual('@folio/stripes-components'),
+jest.mock('@folio/stripes/components', () => ({
+  ...jest.requireActual('@folio/stripes/components'),
   NavigationMenu: jest.fn(() => <div>NavigationMenu</div>),
   Icon: jest.fn(() => <div>spinner</div>),
   ItemForm: jest.fn(() => <div>ItemForm</div>),

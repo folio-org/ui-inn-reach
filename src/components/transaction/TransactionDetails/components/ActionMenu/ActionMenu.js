@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {
   MenuSection,
-} from '@folio/stripes-components';
+} from '@folio/stripes/components';
 import {
   TRANSACTION_FIELDS,
   TRANSACTION_TYPES,

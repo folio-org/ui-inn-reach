@@ -13,7 +13,7 @@ jest.mock('../../components/BibTransformationOptions/BibTransformationOptionsFor
   return jest.fn(() => <div>BibTransformationOptionsForm</div>);
 });
 
-jest.mock('@folio/stripes-components', () => ({
+jest.mock('@folio/stripes/components', () => ({
   LoadingPane: jest.fn(() => <div>LoadingPane</div>),
 }));
 

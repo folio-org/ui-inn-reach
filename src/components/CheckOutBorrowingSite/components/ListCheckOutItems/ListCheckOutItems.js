@@ -7,7 +7,7 @@ import {
   MultiColumnList,
   FormattedDate,
   FormattedTime,
-} from '@folio/stripes-components';
+} from '@folio/stripes/components';
 
 import {
   CHECK_OUT_ITEM_FIELDS,

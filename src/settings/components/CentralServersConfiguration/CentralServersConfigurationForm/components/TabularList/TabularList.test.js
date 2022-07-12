@@ -6,14 +6,14 @@ import { renderWithIntl } from '@folio/stripes-data-transfer-components/test/jes
 import StripesFinalFormWrapper from '@folio/stripes-final-form/lib/StripesFinalFormWrapper';
 import userEvent from '@testing-library/user-event';
 
-import { MultiSelection } from '@folio/stripes-components';
+import { MultiSelection } from '@folio/stripes/components';
 import TabularList from './TabularList';
 import { translationsProperties } from '../../../../../../../test/jest/helpers';
 import { validateLocalAgency } from '../../utils';
 import { DEFAULT_VALUES } from '../../../../../routes/CentralServersConfigurationRoute/CentralServersConfigurationCreateEditContainer';
 
-jest.mock('@folio/stripes-components', () => ({
-  ...jest.requireActual('@folio/stripes-components'),
+jest.mock('@folio/stripes/components', () => ({
+  ...jest.requireActual('@folio/stripes/components'),
   MultiSelection: jest.fn(() => <div>MultiSelection</div>),
 }));
 

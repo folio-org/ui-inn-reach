@@ -9,7 +9,7 @@ import {
   TextArea,
   Select,
   SRStatus,
-} from '@folio/stripes-components';
+} from '@folio/stripes/components';
 import {
   Field,
 } from 'react-final-form';

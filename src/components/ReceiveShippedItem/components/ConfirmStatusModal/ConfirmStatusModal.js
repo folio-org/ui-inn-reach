@@ -7,13 +7,13 @@ import {
 } from 'react-intl';
 
 import {
+  Button,
   Modal,
   ModalFooter,
-  Button,
   Checkbox,
   Row,
   Col,
-} from '@folio/stripes-components';
+} from '@folio/stripes/components';
 
 import {
   PrintButton,

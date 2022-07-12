@@ -6,7 +6,7 @@ import {
 import {
   FormattedDate,
   KeyValue,
-} from '@folio/stripes-components';
+} from '@folio/stripes/components';
 import {
   FormattedMessage,
   FormattedNumber,

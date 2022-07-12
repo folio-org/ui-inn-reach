@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   exportToCsv,
-} from '@folio/stripes-components';
+} from '@folio/stripes/components';
 import CsvReport from './CsvReport';
 
 const scvReport = new CsvReport({
@@ -11,8 +11,8 @@ const scvReport = new CsvReport({
   },
 });
 
-jest.mock('@folio/stripes-components', () => ({
-  ...jest.requireActual('@folio/stripes-components'),
+jest.mock('@folio/stripes/components', () => ({
+  ...jest.requireActual('@folio/stripes/components'),
   exportToCsv: jest.fn(),
 }));
 

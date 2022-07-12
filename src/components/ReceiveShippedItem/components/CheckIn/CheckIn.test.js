@@ -17,8 +17,8 @@ jest.mock('./components', () => ({
   ListCheckInItems: jest.fn(() => <div>ListCheckInItems</div>),
 }));
 
-jest.mock('@folio/stripes-components', () => ({
-  ...jest.requireActual('@folio/stripes-components'),
+jest.mock('@folio/stripes/components', () => ({
+  ...jest.requireActual('@folio/stripes/components'),
   Icon: jest.fn(() => <div>spinner</div>),
 }));
 

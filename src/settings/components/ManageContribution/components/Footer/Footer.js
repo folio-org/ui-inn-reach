@@ -3,7 +3,7 @@ import {
   Button,
   PaneFooter,
   Tooltip,
-} from '@folio/stripes-components';
+} from '@folio/stripes/components';
 import { FormattedMessage } from 'react-intl';
 import {
   CONTRIBUTION_STATUSES,

@@ -5,7 +5,7 @@ import {
 } from '@folio/stripes/core';
 import {
   NavListItem,
-} from '@folio/stripes-components';
+} from '@folio/stripes/components';
 
 const SectionItem = ({
   setting,

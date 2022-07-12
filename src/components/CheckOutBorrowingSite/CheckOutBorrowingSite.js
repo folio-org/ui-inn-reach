@@ -20,7 +20,7 @@ import {
   Pane,
   PaneFooter,
   Icon,
-} from '@folio/stripes-components';
+} from '@folio/stripes/components';
 import {
   stripesConnect,
   stripesShape,

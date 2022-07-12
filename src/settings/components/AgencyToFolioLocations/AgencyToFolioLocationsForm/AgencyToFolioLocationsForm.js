@@ -19,7 +19,7 @@ import {
   PaneFooter,
   Selection,
   MessageBanner,
-} from '@folio/stripes-components';
+} from '@folio/stripes/components';
 
 import {
   AGENCY_TO_FOLIO_LOCATIONS_FIELDS,

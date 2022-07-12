@@ -15,7 +15,7 @@ import {
   TextField,
   Row,
   Col,
-} from '@folio/stripes-components';
+} from '@folio/stripes/components';
 
 const ItemForm = ({
   isLoading,

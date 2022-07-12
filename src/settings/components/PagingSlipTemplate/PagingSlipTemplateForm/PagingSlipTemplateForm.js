@@ -12,13 +12,13 @@ import {
   TemplateEditor,
 } from '@folio/stripes-template-editor';
 import {
-  Pane,
   Button,
+  Pane,
   PaneFooter,
   Selection,
   Loading,
   TextArea,
-} from '@folio/stripes-components';
+} from '@folio/stripes/components';
 import stripesFinalForm from '@folio/stripes/final-form';
 
 import {

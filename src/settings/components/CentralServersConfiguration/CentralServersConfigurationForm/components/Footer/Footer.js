@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {
   Button,
   PaneFooter,
-} from '@folio/stripes-components';
+} from '@folio/stripes/components';
 import {
   FormattedMessage,
 } from 'react-intl';

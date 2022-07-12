@@ -7,7 +7,7 @@ import { createMemoryHistory } from 'history';
 import { screen, act } from '@testing-library/react';
 
 import { renderWithIntl } from '@folio/stripes-data-transfer-components/test/jest/helpers';
-import { ConfirmationModal } from '@folio/stripes-components';
+import { ConfirmationModal } from '@folio/stripes/components';
 
 import { FormattedMessage } from 'react-intl';
 import { translationsProperties } from '../../../../test/jest/helpers';
@@ -19,7 +19,7 @@ jest.mock('../../components/AgencyToFolioLocations/AgencyToFolioLocationsForm', 
   return jest.fn(() => <div>AgencyToFolioLocationsForm</div>);
 });
 
-jest.mock('@folio/stripes-components', () => ({
+jest.mock('@folio/stripes/components', () => ({
   ConfirmationModal: jest.fn(() => 'ConfirmationModal'),
   LoadingPane: jest.fn(() => 'LoadingPane'),
 }));

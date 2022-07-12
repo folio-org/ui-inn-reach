@@ -6,7 +6,7 @@ import {
   Row,
   Col,
   KeyValue,
-} from '@folio/stripes-components';
+} from '@folio/stripes/components';
 import {
   Link,
 } from 'react-router-dom';

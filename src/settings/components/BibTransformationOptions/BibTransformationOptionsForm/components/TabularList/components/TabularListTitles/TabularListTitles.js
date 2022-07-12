@@ -5,7 +5,7 @@ import {
   Col,
   Label,
   Row,
-} from '@folio/stripes-components';
+} from '@folio/stripes/components';
 import css from '../../TabularList.css';
 
 const TabularListTitles = () => {

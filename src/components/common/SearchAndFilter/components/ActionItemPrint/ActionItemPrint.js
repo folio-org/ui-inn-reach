@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import {
   Icon,
-} from '@folio/stripes-components';
+} from '@folio/stripes/components';
 
 import PrintSlips from '../PrintSlips';
 

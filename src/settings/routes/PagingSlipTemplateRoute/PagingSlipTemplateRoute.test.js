@@ -13,8 +13,8 @@ jest.mock('../../components/PagingSlipTemplate/PagingSlipTemplateForm', () => {
   return jest.fn(() => <div>PagingSlipTemplateForm</div>);
 });
 
-jest.mock('@folio/stripes-components', () => ({
-  ...jest.requireActual('@folio/stripes-components'),
+jest.mock('@folio/stripes/components', () => ({
+  ...jest.requireActual('@folio/stripes/components'),
   LoadingPane: jest.fn(() => <div>LoadingPane</div>),
 }));
 

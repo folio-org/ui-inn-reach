@@ -7,7 +7,7 @@ import ReactRouterPropTypes from 'react-router-prop-types';
 import { FormattedMessage } from 'react-intl';
 import {
   LoadingPane,
-} from '@folio/stripes-components';
+} from '@folio/stripes/components';
 import {
   stripesConnect,
 } from '@folio/stripes/core';

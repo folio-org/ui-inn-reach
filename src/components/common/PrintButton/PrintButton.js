@@ -7,7 +7,7 @@ import ReactToPrint from 'react-to-print';
 
 import {
   Button,
-} from '@folio/stripes-components';
+} from '@folio/stripes/components';
 
 import ComponentToPrint from '../ComponentToPrint';
 // eslint-disable-next-line import/no-webpack-loader-syntax

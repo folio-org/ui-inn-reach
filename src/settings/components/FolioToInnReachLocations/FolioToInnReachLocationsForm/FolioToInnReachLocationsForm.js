@@ -6,13 +6,13 @@ import stripesFinalForm from '@folio/stripes/final-form';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import {
-  Button,
   Loading,
   Pane,
   PaneFooter,
   Select,
   Selection,
-} from '@folio/stripes-components';
+} from '@folio/stripes/components';
+import { Button } from '@folio/stripes/components';
 import {
   CENTRAL_SERVER_CONFIGURATION_FIELDS,
   CENTRAL_SERVER_ID,

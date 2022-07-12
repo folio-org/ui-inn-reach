@@ -15,7 +15,7 @@ jest.mock('../../components/InnReachRecallUser/InnReachRecallUserForm', () => {
   return jest.fn(() => <div>InnReachRecallUserForm</div>);
 });
 
-jest.mock('@folio/stripes-components', () => ({
+jest.mock('@folio/stripes/components', () => ({
   LoadingPane: jest.fn(() => <div>LoadingPane</div>),
 }));
 

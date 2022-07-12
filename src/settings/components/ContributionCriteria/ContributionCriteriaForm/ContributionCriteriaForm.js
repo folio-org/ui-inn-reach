@@ -10,7 +10,6 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import PropTypes from 'prop-types';
 
 import {
-  Button,
   Col,
   MultiSelection,
   Pane,
@@ -19,7 +18,8 @@ import {
   Select,
   Selection,
   Loading,
-} from '@folio/stripes-components';
+} from '@folio/stripes/components';
+import { Button } from '@folio/stripes/components';
 import stripesFinalForm from '@folio/stripes/final-form';
 
 import {

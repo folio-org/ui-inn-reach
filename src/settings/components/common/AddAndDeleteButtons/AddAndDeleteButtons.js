@@ -5,7 +5,7 @@ import {
   Col,
   IconButton,
   Row,
-} from '@folio/stripes-components';
+} from '@folio/stripes/components';
 import {
   ICONS,
 } from '../../../../constants';

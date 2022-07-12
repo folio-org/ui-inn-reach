@@ -7,7 +7,7 @@ import {
   Col,
   Row,
   TextField,
-} from '@folio/stripes-components';
+} from '@folio/stripes/components';
 import {
   Pluggable,
 } from '@folio/stripes/core';

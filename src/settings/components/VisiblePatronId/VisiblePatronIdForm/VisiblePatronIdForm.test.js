@@ -7,8 +7,8 @@ import userEvent from '@testing-library/user-event';
 import { translationsProperties } from '../../../../../test/jest/helpers';
 import VisiblePatronIdForm from './VisiblePatronIdForm';
 
-jest.mock('@folio/stripes-components', () => ({
-  ...jest.requireActual('@folio/stripes-components'),
+jest.mock('@folio/stripes/components', () => ({
+  ...jest.requireActual('@folio/stripes/components'),
   MessageBanner: jest.fn(() => <div>MessageBanner</div>),
   MultiSelection: jest.fn(() => <div>MultiSelection</div>),
 }));

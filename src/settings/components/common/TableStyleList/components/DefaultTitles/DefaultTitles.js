@@ -3,7 +3,7 @@ import {
   Col,
   Label,
   Row,
-} from '@folio/stripes-components';
+} from '@folio/stripes/components';
 import PropTypes from 'prop-types';
 import css from '../../TableStyleList.css';
 

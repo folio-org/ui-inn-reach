@@ -10,11 +10,11 @@ import {
 
 import {
   Pane,
-  Button,
   PaneFooter,
   Checkbox,
   Selection,
-} from '@folio/stripes-components';
+} from '@folio/stripes/components';
+import { Button } from '@folio/stripes/components';
 import stripesFinalForm from '@folio/stripes/final-form';
 
 import {

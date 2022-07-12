@@ -17,7 +17,7 @@ import {
 } from '@folio/stripes/core';
 import {
   LoadingPane,
-} from '@folio/stripes-components';
+} from '@folio/stripes/components';
 
 import {
   PagingSlipTemplateForm,

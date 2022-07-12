@@ -10,7 +10,7 @@ import {
 } from '@folio/stripes/components';
 import {
   NoValue,
-} from '@folio/stripes-components';
+} from '@folio/stripes/components';
 import {
   MANAGE_CONTRIBUTION_FIELDS,
 } from '../../../../../../../constants';

@@ -10,7 +10,7 @@ import {
   NavListSection,
   Pane,
   PaneBackLink,
-} from '@folio/stripes-components';
+} from '@folio/stripes/components';
 
 import SectionItem from './components/SectionItem';
 import {

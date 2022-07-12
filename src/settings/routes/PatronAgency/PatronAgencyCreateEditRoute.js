@@ -10,7 +10,7 @@ import ReactRouterPropTypes from 'react-router-prop-types';
 import PropTypes from 'prop-types';
 import {
   LoadingPane,
-} from '@folio/stripes-components';
+} from '@folio/stripes/components';
 import {
   stripesConnect,
   useCustomFields,

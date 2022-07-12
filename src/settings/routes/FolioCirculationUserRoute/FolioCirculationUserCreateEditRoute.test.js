@@ -13,7 +13,7 @@ jest.mock('../../components/FolioCirculationUser/FolioCirculationUserForm', () =
   return jest.fn(() => <div>FolioCirculationUserForm</div>);
 });
 
-jest.mock('@folio/stripes-components', () => ({
+jest.mock('@folio/stripes/components', () => ({
   LoadingPane: jest.fn(() => <div>LoadingPane</div>),
 }));
 

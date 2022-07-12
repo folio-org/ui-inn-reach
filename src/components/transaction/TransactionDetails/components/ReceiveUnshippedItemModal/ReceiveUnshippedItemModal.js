@@ -8,13 +8,13 @@ import {
 
 import stripesFinalForm from '@folio/stripes/final-form';
 import {
+  Button,
   Row,
   Col,
-  Button,
   Modal,
   TextField,
   ModalFooter,
-} from '@folio/stripes-components';
+} from '@folio/stripes/components';
 
 import {
   required,

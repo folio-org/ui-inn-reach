@@ -4,13 +4,13 @@ import {
   FormattedMessage,
 } from 'react-intl';
 import {
-  Accordion,
   Button,
+  Accordion,
   Col,
   Label,
   Row,
   TextField,
-} from '@folio/stripes-components';
+} from '@folio/stripes/components';
 import {
   Field,
 } from 'react-final-form';

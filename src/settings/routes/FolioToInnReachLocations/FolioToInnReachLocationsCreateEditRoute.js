@@ -9,7 +9,7 @@ import {
 import PropTypes from 'prop-types';
 import {
   LoadingPane,
-} from '@folio/stripes-components';
+} from '@folio/stripes/components';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { stripesConnect } from '@folio/stripes/core';
 import FolioToInnReachLocationsForm from '../../components/FolioToInnReachLocations/FolioToInnReachLocationsForm';

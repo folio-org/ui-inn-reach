@@ -18,7 +18,7 @@ import {
   Col,
   Modal,
   ModalFooter,
-} from '@folio/stripes-components';
+} from '@folio/stripes/components';
 
 const ItemForm = ({
   isOpenModal,
