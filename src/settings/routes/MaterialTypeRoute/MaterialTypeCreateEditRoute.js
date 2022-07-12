@@ -14,7 +14,7 @@ import {
 
 import {
   ConfirmationModal,
-} from '@folio/stripes-components';
+} from '@folio/stripes/components';
 import { stripesConnect } from '@folio/stripes/core';
 
 import {

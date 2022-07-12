@@ -15,7 +15,7 @@ jest.mock('../../components/PatronAgency/PatronAgencyForm', () => {
   return jest.fn(() => <div>PatronAgencyForm</div>);
 });
 
-jest.mock('@folio/stripes-components', () => ({
+jest.mock('@folio/stripes/components', () => ({
   LoadingPane: jest.fn(() => <div>LoadingPane</div>),
 }));
 

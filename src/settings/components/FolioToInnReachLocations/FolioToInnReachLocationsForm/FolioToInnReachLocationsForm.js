@@ -12,7 +12,7 @@ import {
   PaneFooter,
   Select,
   Selection,
-} from '@folio/stripes-components';
+} from '@folio/stripes/components';
 import {
   CENTRAL_SERVER_CONFIGURATION_FIELDS,
   CENTRAL_SERVER_ID,

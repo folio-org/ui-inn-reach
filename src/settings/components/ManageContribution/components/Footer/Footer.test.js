@@ -4,8 +4,8 @@ import { screen } from '@testing-library/react';
 import { translationsProperties } from '../../../../../../test/jest/helpers';
 import Footer from './Footer';
 
-jest.mock('@folio/stripes-components', () => ({
-  ...jest.requireActual('@folio/stripes-components'),
+jest.mock('@folio/stripes/components', () => ({
+  ...jest.requireActual('@folio/stripes/components'),
   Tooltip: jest.fn(() => <div>Tooltip</div>),
 }));
 

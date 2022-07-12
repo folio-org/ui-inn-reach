@@ -4,9 +4,9 @@ import ReactRouterPropTypes from 'react-router-prop-types';
 import { FormattedMessage } from 'react-intl';
 
 import {
-  PaneMenu,
   Button,
-} from '@folio/stripes-components';
+  PaneMenu,
+} from '@folio/stripes/components';
 
 import {
   getCentralServerConfigurationCreateUrl,

@@ -9,7 +9,7 @@ import {
   IconButton,
   Dropdown,
   DropdownMenu,
-} from '@folio/stripes-components';
+} from '@folio/stripes/components';
 
 import {
   ICONS,

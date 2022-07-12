@@ -5,7 +5,7 @@ import {
 
 import {
   MultiColumnList,
-} from '@folio/stripes-components';
+} from '@folio/stripes/components';
 import {
   stripesShape,
 } from '@folio/stripes/core';

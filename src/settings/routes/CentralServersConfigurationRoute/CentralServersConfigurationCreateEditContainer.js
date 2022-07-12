@@ -10,7 +10,7 @@ import {
   ConfirmationModal,
   Layer,
   Paneset,
-} from '@folio/stripes-components';
+} from '@folio/stripes/components';
 
 import CentralServersConfigurationForm from '../../components/CentralServersConfiguration/CentralServersConfigurationForm';
 import {

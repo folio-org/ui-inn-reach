@@ -13,7 +13,7 @@ jest.mock('../../components/VisiblePatronId/VisiblePatronIdForm', () => {
   return jest.fn(() => <div>VisiblePatronIdForm</div>);
 });
 
-jest.mock('@folio/stripes-components', () => ({
+jest.mock('@folio/stripes/components', () => ({
   LoadingPane: jest.fn(() => <div>LoadingPane</div>),
 }));
 

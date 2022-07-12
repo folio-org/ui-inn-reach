@@ -4,14 +4,14 @@ import { createMemoryHistory } from 'history';
 import { Router } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
 import { screen } from '@testing-library/react';
-import { MultiSelection } from '@folio/stripes-components';
+import { MultiSelection } from '@folio/stripes/components';
 import { translationsProperties } from '../../../../../test/jest/helpers';
 import { DEFAULT_VALUES } from '../../../routes/ContributionCriteriaRoute/utils';
 import ContributionCriteriaForm from './ContributionCriteriaForm';
 import { CENTRAL_SERVER_ID } from '../../../../constants';
 
-jest.mock('@folio/stripes-components', () => ({
-  ...jest.requireActual('@folio/stripes-components'),
+jest.mock('@folio/stripes/components', () => ({
+  ...jest.requireActual('@folio/stripes/components'),
   MultiSelection: jest.fn(() => <div>MultiSelection</div>),
 }));
 

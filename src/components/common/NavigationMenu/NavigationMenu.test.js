@@ -5,8 +5,8 @@ import { Select } from '@folio/stripes/components';
 import { translationsProperties } from '../../../../test/jest/helpers';
 import NavigationMenu from './NavigationMenu';
 
-jest.mock('@folio/stripes-components', () => ({
-  ...jest.requireActual('@folio/stripes-components'),
+jest.mock('@folio/stripes/components', () => ({
+  ...jest.requireActual('@folio/stripes/components'),
   Select: jest.fn(() => <div>Select</div>),
 }));
 

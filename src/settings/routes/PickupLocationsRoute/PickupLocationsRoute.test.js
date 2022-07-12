@@ -14,8 +14,8 @@ jest.mock('../../components/PickupLocations/PickupLocationsForm', () => {
   return jest.fn(() => <div>PickupLocationsForm</div>);
 });
 
-jest.mock('@folio/stripes-components', () => ({
-  ...jest.requireActual('@folio/stripes-components'),
+jest.mock('@folio/stripes/components', () => ({
+  ...jest.requireActual('@folio/stripes/components'),
   LoadingPane: jest.fn(() => <div>LoadingPane</div>),
 }));
 

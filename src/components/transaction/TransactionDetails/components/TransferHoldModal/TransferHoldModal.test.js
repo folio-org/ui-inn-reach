@@ -5,12 +5,12 @@ import { createMemoryHistory } from 'history';
 import { Router } from 'react-router';
 import {
   MultiColumnList,
-} from '@folio/stripes-components';
+} from '@folio/stripes/components';
 import TransferHoldModal from './TransferHoldModal';
 import { translationsProperties } from '../../../../../../test/jest/helpers';
 
-jest.mock('@folio/stripes-components', () => ({
-  ...jest.requireActual('@folio/stripes-components'),
+jest.mock('@folio/stripes/components', () => ({
+  ...jest.requireActual('@folio/stripes/components'),
   Loading: jest.fn(() => <div>Loading</div>),
   MultiColumnList: jest.fn(() => <div>MultiColumnList</div>),
 }));

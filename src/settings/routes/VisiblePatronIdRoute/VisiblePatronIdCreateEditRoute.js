@@ -14,7 +14,7 @@ import {
 
 import {
   LoadingPane,
-} from '@folio/stripes-components';
+} from '@folio/stripes/components';
 import {
   stripesConnect,
   useCustomFields,

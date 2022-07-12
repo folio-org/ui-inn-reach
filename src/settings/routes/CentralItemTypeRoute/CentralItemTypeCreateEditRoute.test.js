@@ -13,7 +13,7 @@ jest.mock('../../components/CentralItemType/CentralItemTypeForm', () => {
   return jest.fn(() => <div>CentralItemTypeForm</div>);
 });
 
-jest.mock('@folio/stripes-components', () => ({
+jest.mock('@folio/stripes/components', () => ({
   LoadingPane: jest.fn(() => <div>LoadingPane</div>),
 }));
 

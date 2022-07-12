@@ -15,7 +15,7 @@ jest.mock('../../components/ManageContribution/ManageContributionView', () => {
   return jest.fn(() => <div>ManageContributionView</div>);
 });
 
-jest.mock('@folio/stripes-components', () => ({
+jest.mock('@folio/stripes/components', () => ({
   LoadingPane: jest.fn(() => <div>LoadingPane</div>),
 }));
 

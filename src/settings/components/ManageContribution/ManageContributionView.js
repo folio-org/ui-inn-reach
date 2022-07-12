@@ -7,7 +7,7 @@ import {
   Pane,
   Selection,
   Loading,
-} from '@folio/stripes-components';
+} from '@folio/stripes/components';
 import {
   DEFAULT_PANE_WIDTH,
   CENTRAL_SERVER_ID,

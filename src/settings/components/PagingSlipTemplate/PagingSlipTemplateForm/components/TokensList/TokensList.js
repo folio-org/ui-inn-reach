@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import {
   Row,
   Col,
-} from '@folio/stripes-components';
+} from '@folio/stripes/components';
 import {
   TokensSection,
 } from '@folio/stripes-template-editor';

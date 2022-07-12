@@ -12,7 +12,7 @@ import {
   Pane,
   PaneFooter,
   Selection,
-} from '@folio/stripes-components';
+} from '@folio/stripes/components';
 import stripesFinalForm from '@folio/stripes/final-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 import {

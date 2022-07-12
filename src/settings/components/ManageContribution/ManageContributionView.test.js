@@ -5,8 +5,8 @@ import { Router } from 'react-router-dom';
 import { translationsProperties } from '../../../../test/jest/helpers';
 import ManageContributionView from './ManageContributionView';
 
-jest.mock('@folio/stripes-components', () => ({
-  ...jest.requireActual('@folio/stripes-components'),
+jest.mock('@folio/stripes/components', () => ({
+  ...jest.requireActual('@folio/stripes/components'),
   Tooltip: jest.fn(() => <div>Tooltip</div>),
 }));
 

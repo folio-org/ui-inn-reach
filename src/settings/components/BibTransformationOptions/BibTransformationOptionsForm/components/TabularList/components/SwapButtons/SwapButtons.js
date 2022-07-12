@@ -4,7 +4,7 @@ import {
   Col,
   IconButton,
   Row,
-} from '@folio/stripes-components';
+} from '@folio/stripes/components';
 import { FormattedMessage } from 'react-intl';
 import {
   ICONS,

@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { FieldArray } from 'react-final-form-arrays';
 import {
   Col,
-} from '@folio/stripes-components';
+} from '@folio/stripes/components';
 import {
   DefaultRow,
   DefaultTitles,

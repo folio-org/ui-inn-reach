@@ -10,8 +10,8 @@ import {
   STATUSES_LIST_OPTIONS,
 } from '../../../../constants';
 
-jest.mock('@folio/stripes-components', () => ({
-  ...jest.requireActual('@folio/stripes-components'),
+jest.mock('@folio/stripes/components', () => ({
+  ...jest.requireActual('@folio/stripes/components'),
   MultiSelection: jest.fn(() => <div>MultiSelection</div>),
 }));
 

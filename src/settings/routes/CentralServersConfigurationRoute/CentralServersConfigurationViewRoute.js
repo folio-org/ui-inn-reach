@@ -14,7 +14,7 @@ import {
 import {
   LoadingPane,
   ConfirmationModal,
-} from '@folio/stripes-components';
+} from '@folio/stripes/components';
 
 import {
   CentralServersConfigurationView,

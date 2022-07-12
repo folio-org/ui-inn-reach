@@ -21,7 +21,7 @@ import {
   Pane,
   Loading,
   MultiColumnList,
-} from '@folio/stripes-components';
+} from '@folio/stripes/components';
 
 import {
   FILL_PANE_WIDTH,

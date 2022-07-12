@@ -6,12 +6,12 @@ import {
 } from 'lodash';
 
 import {
+  Button,
   Paneset,
   Pane,
   Icon,
   PaneFooter,
-  Button,
-} from '@folio/stripes-components';
+} from '@folio/stripes/components';
 
 import {
   NavigationMenu,

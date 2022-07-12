@@ -12,7 +12,7 @@ import {
   Col,
   AccordionSet,
   Headline,
-} from '@folio/stripes-components';
+} from '@folio/stripes/components';
 
 import {
   PatronInformation,

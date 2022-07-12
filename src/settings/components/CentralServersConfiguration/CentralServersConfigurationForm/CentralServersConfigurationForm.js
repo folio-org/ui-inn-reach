@@ -16,7 +16,7 @@ import {
   Row,
   Col,
   ExpandAllButton,
-} from '@folio/stripes-components';
+} from '@folio/stripes/components';
 import stripesFinalForm from '@folio/stripes/final-form';
 import {
   CentralServersConfigurationContext,

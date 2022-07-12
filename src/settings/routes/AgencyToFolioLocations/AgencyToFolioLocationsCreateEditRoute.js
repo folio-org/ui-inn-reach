@@ -12,7 +12,7 @@ import PropTypes from 'prop-types';
 import {
   ConfirmationModal,
   LoadingPane,
-} from '@folio/stripes-components';
+} from '@folio/stripes/components';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { stripesConnect } from '@folio/stripes/core';
 import { AgencyToFolioLocationsForm } from '../../components/AgencyToFolioLocations';

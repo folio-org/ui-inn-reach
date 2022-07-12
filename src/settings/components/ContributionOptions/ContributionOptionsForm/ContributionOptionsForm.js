@@ -19,7 +19,7 @@ import {
   Row,
   Selection,
   Loading,
-} from '@folio/stripes-components';
+} from '@folio/stripes/components';
 import stripesFinalForm from '@folio/stripes/final-form';
 
 import {

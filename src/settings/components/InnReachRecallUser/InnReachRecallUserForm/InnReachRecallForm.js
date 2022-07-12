@@ -15,7 +15,7 @@ import {
   PaneFooter,
   Selection,
   TextField,
-} from '@folio/stripes-components';
+} from '@folio/stripes/components';
 import {
   CENTRAL_SERVER_ID,
   DEFAULT_PANE_WIDTH,
