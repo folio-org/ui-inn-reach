@@ -507,5 +507,8 @@
     "settings.paging-slip-template.token-header.inn-reach-pickup-location": "INN-Reach pickup location",
     "settings.paging-slip-template.token-header.item": "Item",
     "settings.paging-slip-template.token-header.effective-location": "Effective location",
-    "settings.paging-slip-template.token-header.staff-slip": "Staff slip"
+    "settings.paging-slip-template.token-header.staff-slip": "Staff slip",
+    "printSlips.label": "INN-Reach paging slips for {servicePoint}",
+    "paging-slips.callout.connection-problem.get.pagingSlip": "There was a problem loading the paging slips",
+    "paging-slips-template.callout.connection-problem.get.pagingSlipTemplate": "There was a problem loading the paging slip templates"
 }
