@@ -1,6 +1,6 @@
 import React from 'react';
 
-jest.mock('@folio/stripes/components/lib/Icon', () => {
+jest.mock('@folio/stripes/components/Icon', () => {
   return ({ children }) => (
     <span>
       Icon
