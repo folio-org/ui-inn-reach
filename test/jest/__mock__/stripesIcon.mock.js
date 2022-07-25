@@ -1,12 +1,15 @@
 import React from 'react';
 
-jest.mock('@folio/stripes-components/lib/Icon', () => {
-  return ({ children }) => (
-    <span>
-      Icon
+jest.mock('@folio/stripes/components', () => ({
+  ...jest.requireActual('@folio/stripes/components'),
+  Icon: jest.fn(() => (
+    ({ children }) => (
       <span>
-        {children}
+        Icon
+        <span>
+          {children}
+        </span>
       </span>
-    </span>
-  );
-});
+    )
+  )),
+}));
