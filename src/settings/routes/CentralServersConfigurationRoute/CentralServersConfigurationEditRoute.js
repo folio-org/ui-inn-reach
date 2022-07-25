@@ -9,7 +9,8 @@ import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 
 import { stripesConnect } from '@folio/stripes/core';
-import LoadingPane from '@folio/stripes-components/lib/Loading/LoadingPane';
+// eslint-disable-next-line import/no-unresolved
+import LoadingPane from '@folio/stripes/components/lib/Loading/LoadingPane';
 
 import CentralServersConfigurationCreateEditContainer from './CentralServersConfigurationCreateEditContainer';
 import { EntityNotFound } from '../../components/common';
