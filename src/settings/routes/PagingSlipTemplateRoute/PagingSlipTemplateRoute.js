@@ -77,7 +77,7 @@ const PagingSlipTemplateRoute = ({
     const payload = omit(record, METADATA);
     const action = isEmpty(pagingSlipTemplate) ? 'create' : 'update';
 
-    mutator.pagingSlipTemplate.PUT(payload)
+    return mutator.pagingSlipTemplate.PUT(payload)
       .then(() => {
         setInitialValues(payload);
         showCallout({ message: <FormattedMessage id={`ui-inn-reach.settings.paging-slip-template.${action}.success`} /> });
