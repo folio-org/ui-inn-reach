@@ -508,7 +508,7 @@
     "settings.paging-slip-template.token-header.item": "单件",
     "settings.paging-slip-template.token-header.effective-location": "有效馆藏地",
     "settings.paging-slip-template.token-header.staff-slip": "员工单",
-    "printSlips.label": "INN-Reach paging slips for {servicePoint}",
-    "paging-slips.callout.connection-problem.get.pagingSlip": "There was a problem loading the paging slips",
-    "paging-slips-template.callout.connection-problem.get.pagingSlipTemplate": "There was a problem loading the paging slip templates"
+    "printSlips.label": "{servicePoint}的 INN-Reach 传呼单",
+    "paging-slips.callout.connection-problem.get.pagingSlip": "加载传呼单时出现问题",
+    "paging-slips-template.callout.connection-problem.get.pagingSlipTemplate": "加载传呼单模板时出现问题"
 }
