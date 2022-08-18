@@ -1,7 +1,25 @@
 # Change history for ui-inn-reach
-## [1.4.0] (IN PROGRESS)
-* After entering an invalid server name in the server selection field, the "INN-Reach paging slip templates" panel closes and an error message appears. Refs UIINREACH-179
+
+## (in progress)
+
+## [2.0.0] (https://github.com/folio-org/ui-inn-reach/tree/v2.0.0) (2022-08-18)
+[Full Changelog](https://github.com/folio-org/ui-inn-reach/compare/v1.3.0...v2.0.0)
+
+* STRIPESFF-19: Reset for after submission Refs UIINREACH-193
 * components are incorrectly imported directly from stripes-* packages. Refs UIINREACH-191
+* Transactions List Action Menu Item: INN-Reach paging s… Refs UIINREACH-164
+* Add missing permissions. Refs UIINREACH-187
+* BE integration: FOLIO to INN-Reach Locations Settings... Refs UIINREACH-150
+* After entering an invalid server name in the server selection field, the "INN-Reach paging slip templates" panel closes and an error message appears. Refs UIINREACH-179
+* refactor psets away from backend ".all" permissions. Refs UIINREACH-182
+* Edit INN-Reach Paging Slip Templates. Refs UIINREACH-162
+* Manage contribution updates Refs UIINREACH-55
+* Provide setting to enable/disable lookup of FOLIO serv… Refs UIINREACH-173
+* INN-Reach Settings: Manage INN-Reach Paging Slip Templ… Refs UIINREACH-161
+* Checkout borrowing site loan actions Refs UIINREACH-170
+* INN-Reach Staff Interface: INN-Reach Transaction Detail… Refs  UIINREACH-92
+* The List of Local Servers and Their Associated Agencie… Refs UIINREACH-155
+* replace babel-eslint with @babel/eslint-parser. Refs UIINREACH-165
 
 ## [1.3.0] (https://github.com/folio-org/ui-inn-reach/tree/v1.3.0) (2022-05-03)
 
