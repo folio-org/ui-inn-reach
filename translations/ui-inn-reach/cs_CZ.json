@@ -137,7 +137,7 @@
     "settings.agency-to-folio-locations.create.success": "Mapování agentury INN-Reach na umístění FOLIO pro {name} bylo úspěšně vytvořeno.",
     "settings.agency-to-folio-locations.update.success": "Mapování agentury INN-Reach na umístění FOLIO pro {name} bylo úspěšně aktualizováno.",
     "no-selection": "No selection",
-    "modal.heading.areYouSure": "Jste si jistý?",
+    "modal.heading.areYouSure": "Opravdu?",
     "modal.message.unsavedChanges": "Existují neuložené změny",
     "modal.confirmLabel.keepEditing": "Pokračujte v úpravách",
     "modal.cancelLabel.closeWithoutSaving": "Zavřít bez uložení",
