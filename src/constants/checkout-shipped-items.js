@@ -2,7 +2,7 @@ export const FOLIO_CHECK_OUT_FIELDS = {
   ITEM: 'item',
   LOAN_POLICY: 'loanPolicy',
   DUE_DATE: 'dueDate',
-  TIME: 'loanDate',
+  TIME: 'time',
 };
 
 export const LOAN_POLICY_FIELDS = {
