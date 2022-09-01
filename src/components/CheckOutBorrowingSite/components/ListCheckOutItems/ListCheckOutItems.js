@@ -73,6 +73,7 @@ const ListCheckOutItems = ({
   const items = scannedItems.map((item, index) => ({
     ...item,
     [NO]: index + 1,
+    time: item.dueDate
   }));
 
   const renderActions = (loan) => {
