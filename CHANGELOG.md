@@ -3,12 +3,13 @@
 ## (in progress)
 
 
-## [2.0.0] (https://github.com/folio-org/ui-inn-reach/tree/v2.0.0) (2022-09-08)
+## [2.0.1] (https://github.com/folio-org/ui-inn-reach/tree/v2.0.0) (2022-09-08)
 [Full Changelog](https://github.com/folio-org/ui-inn-reach/compare/v2.0.0...v2.0.1)
 
 * FOLIO circulation user for INN-Reach patron type only accepts 10 barcodes as valid (FOLIO implicit limit=10 bug). Refs UIINREACH-195.
 * INN-Reach Central Patron Type Mapping Does Not Display all FOLIO Patron Groups for Mapping. Refs UIINREACH-194.
 
+* update FOLIO_CHECK_OUT_FIELDS. Refs UIINREACH-188.
 ## [2.0.0] (https://github.com/folio-org/ui-inn-reach/tree/v2.0.0) (2022-08-18)
 [Full Changelog](https://github.com/folio-org/ui-inn-reach/compare/v1.3.0...v2.0.0)
 
