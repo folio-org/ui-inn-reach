@@ -29,6 +29,7 @@ const simpleMemoize = (fn) => {
 const fetchUsersByBarcode = simpleMemoize(async (barcodesFromTable, parentMutator) => {
   const { users } = await parentMutator.users.GET({
     params: {
+      limit: 1000,
       query: barcodesFromTable
         .map(barcode => `barcode==${barcode}`)
         .join(' or '),
