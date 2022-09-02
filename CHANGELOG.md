@@ -1,7 +1,11 @@
 # Change history for ui-inn-reach
 
 ## (in progress)
+
 * update FOLIO_CHECK_OUT_FIELDS. Refs UIINREACH-188.
+* FOLIO circulation user for INN-Reach patron type only accepts 10 barcodes as valid (FOLIO implicit limit=10 bug). Refs UIINREACH-195.
+* INN-Reach Central Patron Type Mapping Does Not Display all FOLIO Patron Groups for Mapping. Refs UIINREACH-194.
+
 ## [2.0.0] (https://github.com/folio-org/ui-inn-reach/tree/v2.0.0) (2022-08-18)
 [Full Changelog](https://github.com/folio-org/ui-inn-reach/compare/v1.3.0...v2.0.0)
 
@@ -60,7 +64,7 @@
 * INN-Reach Staff Interface: Print Slips and Transaction List Action Menus on Receive Shipped Item. Refs UIINREACH-109.
 * Checkout to borrowing site. Refs UIINREACH-107.
 * Use supported `uuid`. Refs UIINREACH-127.
-* UIINREACH-80: INN-Reach Staff Interface: INN-Reach Transaction Detail View Action Menu (Patron hold) - Receive Unshipped Item 
+* UIINREACH-80: INN-Reach Staff Interface: INN-Reach Transaction Detail View Action Menu (Patron hold) - Receive Unshipped Item
 * UIINREACH-78: INN-Reach Staff Interface: Receive Shipped Item (replace query with parameter)
 * UIINREACH-78: INN-Reach Staff Interface: Receive Shipped Item
 * BE integration for 'INN-Reach Recall User' setting. Refs UIINREACH-125.
