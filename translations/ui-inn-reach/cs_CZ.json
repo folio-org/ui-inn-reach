@@ -136,7 +136,7 @@
     "settings.agency-to-folio-locations.callout.connection-problem.put": "Došlo k problému a vaše aktualizace nebyla uložena: {message}, stavový kód {code}",
     "settings.agency-to-folio-locations.create.success": "Mapování agentury INN-Reach na umístění FOLIO pro {name} bylo úspěšně vytvořeno.",
     "settings.agency-to-folio-locations.update.success": "Mapování agentury INN-Reach na umístění FOLIO pro {name} bylo úspěšně aktualizováno.",
-    "no-selection": "No selection",
+    "no-selection": "Žádný výběr",
     "modal.heading.areYouSure": "Opravdu?",
     "modal.message.unsavedChanges": "Existují neuložené změny",
     "modal.confirmLabel.keepEditing": "Pokračujte v úpravách",
