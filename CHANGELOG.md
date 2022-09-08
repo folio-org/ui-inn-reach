@@ -3,6 +3,7 @@
 ## (in progress)
 
 * update FOLIO_CHECK_OUT_FIELDS. Refs UIINREACH-188.
+
 ## [2.0.1] (https://github.com/folio-org/ui-inn-reach/tree/v2.0.1) (2022-09-08)
 [Full Changelog](https://github.com/folio-org/ui-inn-reach/compare/v2.0.0...v2.0.1)
 
