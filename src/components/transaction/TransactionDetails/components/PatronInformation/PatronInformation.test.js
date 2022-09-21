@@ -1,6 +1,6 @@
 import React from 'react';
 import { createMemoryHistory } from 'history';
-import { screen } from '@testing-library/react';
+import { screen, fireEvent  } from '@testing-library/react';
 import { renderWithIntl } from '@folio/stripes-data-transfer-components/test/jest/helpers';
 import { Router } from 'react-router';
 import { translationsProperties } from '../../../../../../test/jest/helpers';
@@ -23,6 +23,8 @@ const transactionMock = {
 };
 
 const history = createMemoryHistory();
+
+history.push = jest.fn();
 
 const renderPatronInformation = (transaction) => {
   return renderWithIntl(
@@ -66,6 +68,12 @@ describe('PatronInformation', () => {
     it('should show the transaction patron id as a link', () => {
       expect(screen.getByRole('link')).toBeDefined();
     });
+
+    it('should redirect to users app on clicking the link', () => {
+      fireEvent.click(screen.getByText(/patron1/i));
+
+      expect(history.push).toHaveBeenCalledWith('/users/preview/b4cee18d-f862-4ef1-95a5-879fdd619603');
+    });
   });
 
   describe('render patron information with patron id as just a text', () => {
@@ -77,7 +85,6 @@ describe('PatronInformation', () => {
       const links = screen.queryAllByRole('link');
 
       expect(links.length).toBe(0);
-      expect(screen.getByText('patron1')).toBeVisible();
     });
 
     it('should show the transaction patron id is a text', () => {
