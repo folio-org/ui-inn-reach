@@ -1,15 +1,10 @@
 import React from 'react';
 import { createMemoryHistory } from 'history';
-import { screen, fireEvent  } from '@testing-library/react';
+import { screen, fireEvent } from '@testing-library/react';
 import { renderWithIntl } from '@folio/stripes-data-transfer-components/test/jest/helpers';
 import { Router } from 'react-router';
 import { translationsProperties } from '../../../../../../test/jest/helpers';
 import PatronInformation from './PatronInformation';
-
-// jest.mock('react-router-dom', () => ({
-//   ...jest.requireActual('react-router-dom'),
-//   Link: jest.fn(() => <div>Users</div>)
-// }));
 
 const transactionMock = {
   centralServerCode: 'd2ir',
