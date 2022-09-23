@@ -2,6 +2,7 @@
 
 ## (in progress)
 
+* support `users` interface version `16.0`. Refs UIINREACH-192.
 * update FOLIO_CHECK_OUT_FIELDS. Refs UIINREACH-188.
 * Transactions with a link in the Patron ID field are not included in the list of search results by Patron ID. Fixes UIINREACH-200
 
