@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import {
   ViewMetaData,
-} from '@folio/stripes-smart-components';
+} from '@folio/stripes/smart-components';
 import {
   Accordion,
   Row,
