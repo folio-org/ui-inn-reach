@@ -388,7 +388,7 @@
     "shipped-items.modal.barcode-augmented.heading": "Čárový kód pro tuto jednotku ve FOLIO již existuje",
     "shipped-items.modal.hold.heading": "Čekání na vyzvednutí žádanky",
     "shipped-items.modal.hold.comment": "<strong>Komentáře čtenáře:</strong> {comment}",
-    "shipped-items.modal.hold.message": "Umístěte <strong>{title} ({materialType})</strong> (Čárový kód: {barcode}) na polici rezervací <strong>{pickupServicePoint}</strong> na vyžádání.",
+    "shipped-items.modal.hold.message": "Umístěte <strong>{title} ({materialType})</strong> (Čárový kód: {barcode}) na regál rezervací <strong>{pickupServicePoint}</strong> na vyžádání.",
     "shipped-items.modal.transit.heading": "Na cestě",
     "shipped-items.modal.transit.message": "Trasa <strong>{title} ({materialType})</strong> (Čárový kód: {barcode}) do <strong>{servicePoint}</strong>.",
     "shipped-items.modal.message.no-transaction": "Tato jednotka možná nebyla odhlášena vlastníkem webu. Vyhledejte prosím transakci pro tuto jednotku pomocí funkce vyhledávání „INN-Reach transakce“ na vstupní stránce a proveďte akci „Přijmout nezaslanou jednotku“.",

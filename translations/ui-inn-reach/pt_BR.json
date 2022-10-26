@@ -318,7 +318,7 @@
     "transaction-detail.patron-type.action.cancel-hold": "Cancelar reserva",
     "transaction-detail.item-type.action.check-out": "Emprestar para local de empréstimo",
     "transaction-detail.item-type.action.transfer-hold": "Transferir reserva para outro item",
-    "transaction-detail.item-type.action.recall-item": "Recall no item",
+    "transaction-detail.item-type.action.recall-item": "Devolução antecipada do item",
     "transaction-detail.item-type.action.cancel-hold": "Cancelar reserva",
     "transaction-detail.item-type.action.final-check-in": "Devolução final",
     "transaction.itemAgency": "Agência do item",
