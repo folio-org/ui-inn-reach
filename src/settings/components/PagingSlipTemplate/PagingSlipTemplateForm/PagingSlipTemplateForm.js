@@ -47,6 +47,7 @@ const PagingSlipTemplateForm = ({
   submitting,
   handleSubmit,
   onChangeServer,
+  form,
 }) => {
   const tokens = getTokens();
   const { formatMessage } = useIntl();
@@ -58,7 +59,7 @@ const PagingSlipTemplateForm = ({
         buttonStyle="primary mega"
         type="submit"
         disabled={pristine || submitting}
-        onClick={handleSubmit}
+        onClick={event => handleSubmit(event).then(form.reset)}
       >
         <FormattedMessage id="ui-inn-reach.settings.paging-slip-template.button.save" />
       </Button>
@@ -116,6 +117,7 @@ PagingSlipTemplateForm.propTypes = {
   serverOptions: PropTypes.arrayOf(PropTypes.object).isRequired,
   submitting: PropTypes.bool.isRequired,
   onChangeServer: PropTypes.func.isRequired,
+  form: PropTypes.object,
   pagingSlipTemplate: PropTypes.object,
 };
 

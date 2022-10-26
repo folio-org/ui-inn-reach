@@ -40,6 +40,11 @@ const patronGroups = [
     group: 'testing',
     id: '21a7f3ce-d40d-4fc3-bf25-f1b0bbcb236f',
   },
+  {
+    desc: 'test not mapped',
+    group: 'no mapping',
+    id: '23a7f3ce-d40d-4fc3-bf25-f1b0bbcb236f',
+  },
 ];
 
 const patronTypes = {
@@ -184,7 +189,11 @@ describe('renderCentralPatronTypeCreateEditRoute component', () => {
             patronGroupId: '21a7f3ce-d40d-4fc3-bf25-f1b0bbcb236f',
             patronGroupLabel: 'testing',
             id: '6a58f3d5-5933-4941-b3fa-ff6f7395557e'
-          }
+          },
+          {
+            patronGroupId: '23a7f3ce-d40d-4fc3-bf25-f1b0bbcb236f',
+            patronGroupLabel: 'no mapping',
+          },
         ],
       });
     });

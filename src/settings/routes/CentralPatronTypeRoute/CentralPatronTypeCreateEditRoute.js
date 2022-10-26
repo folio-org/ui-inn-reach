@@ -37,6 +37,7 @@ import {
 const {
   PATRON_TYPE_MAPPINGS,
 } = CENTRAL_PATRON_TYPE_FIELDS;
+const LIMIT = 2000;
 
 const CentralPatronTypeCreateEditRoute = ({
   resources: {
@@ -73,7 +74,7 @@ const CentralPatronTypeCreateEditRoute = ({
   const fetchPatronTypeMappings = () => {
     setIsPatronTypeMappingsPending(true);
 
-    mutator.patronTypeMappings.GET()
+    mutator.patronTypeMappings.GET({ params: { limit: LIMIT } })
       .then(response => setPatronTypeMappings(response.patronTypeMappings))
       .catch(() => setPatronTypeMappings([]))
       .finally(() => setIsPatronTypeMappingsPending(false));
@@ -82,7 +83,7 @@ const CentralPatronTypeCreateEditRoute = ({
   const fetchPatronTypes = () => {
     setIsPatronTypesPending(true);
 
-    mutator.patronTypes.GET()
+    mutator.patronTypes.GET({ params: { limit: LIMIT } })
       .then(response => setPatronTypes(response.patronTypeList))
       .catch(() => {
         setPatronTypesFailed(true);

@@ -508,7 +508,7 @@
     "settings.paging-slip-template.token-header.item": "Item",
     "settings.paging-slip-template.token-header.effective-location": "Localização efetiva",
     "settings.paging-slip-template.token-header.staff-slip": "Ficha para equipe",
-    "printSlips.label": "INN-Reach paging slips for {servicePoint}",
+    "printSlips.label": "Recibos de solicitações INN-Reach para {servicePoint}",
     "paging-slips.callout.connection-problem.get.pagingSlip": "Ocorreu um problema ao carregar as guias de paginação",
-    "paging-slips-template.callout.connection-problem.get.pagingSlipTemplate": "There was a problem loading the paging slip templates"
+    "paging-slips-template.callout.connection-problem.get.pagingSlipTemplate": "Ocorreu um problema ao carregar os modelos de recibos de solicitação"
 }

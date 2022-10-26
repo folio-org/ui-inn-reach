@@ -53,7 +53,7 @@ const PatronInformation = ({
               transaction[TYPE] === PATRON
                 ? (
                   <Link to={`/users/preview/${transaction[HOLD][FOLIO_PATRON_ID]}`}>
-                    {transaction[HOLD][FOLIO_PATRON_ID]}
+                    {transaction[HOLD][PATRON_ID]}
                   </Link>
                 )
                 : transaction[HOLD]?.[PATRON_ID]

@@ -1,6 +1,6 @@
 {
   "name": "@folio/inn-reach",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Description for inn-reach",
   "main": "src/index.js",
   "repository": "",
@@ -60,7 +60,7 @@
     "stylelint-junit-formatter": "^0.2.2"
   },
   "dependencies": {
-    "@folio/stripes-data-transfer-components": "^4.1.0",
+    "@folio/stripes-data-transfer-components": "^5.2.0",
     "@folio/stripes-template-editor": "^3.0.0",
     "classnames": "^2.2.5",
     "html-to-react": "^1.3.3",
@@ -106,7 +106,7 @@
       "statistical-code-types": "1.0",
       "statistical-codes": "1.0",
       "location-units": "2.0",
-      "users": "15.0"
+      "users": "15.0 16.0"
     },
     "permissionSets": [
       {
