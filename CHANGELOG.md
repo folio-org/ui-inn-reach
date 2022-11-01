@@ -5,6 +5,7 @@
 * support `users` interface version `16.0`. Refs UIINREACH-192.
 * update FOLIO_CHECK_OUT_FIELDS. Refs UIINREACH-188.
 * Transactions with a link in the Patron ID field are not included in the list of search results by Patron ID. Fixes UIINREACH-200
+* @folio/plugin-find-user version is incompatible (out of date). Fixes UIINREACH-201
 
 ## [2.0.1] (https://github.com/folio-org/ui-inn-reach/tree/v2.0.1) (2022-09-08)
 [Full Changelog](https://github.com/folio-org/ui-inn-reach/compare/v2.0.0...v2.0.1)
