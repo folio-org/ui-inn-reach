@@ -69,7 +69,7 @@ const VisiblePatronIdCreateEditRoute = ({
   const customFieldPatronOptions = useMemo(() => getCustomFieldPatronIdentifiers(customFields), [customFields]);
 
   const processInitialValues = (response) => {
-    if (response[USER_C_FIELDS]) {
+    if (response[USER_C_FIELDS].length) {
       setIsCheckedUserCustomField(true);
     }
     const primaryValues = getPrimaryValues(response, customFieldPatronOptions);
