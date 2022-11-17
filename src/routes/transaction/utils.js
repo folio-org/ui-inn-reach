@@ -18,6 +18,7 @@ import {
   TRANSACTION_STATUSES,
   TRANSACTION_TYPES,
   FIELDS_OF_REPORT_MODALS,
+  REPORT_TYPES,
 } from '../../constants';
 
 const {
@@ -67,6 +68,7 @@ const {
 } = TRANSACTION_STATUSES;
 
 const {
+  CREATED_DATE,
   UPDATED_DATE,
 } = METADATA_FIELDS;
 
@@ -79,6 +81,8 @@ const GENERAL_PARAMS = {
   [SORT_PARAMETER]: TRANSACTION_LIST_DEFAULT_SORT_FIELD,
   [SORT_ORDER_PARAMETER]: ASC_ORDER,
 };
+
+const { REQUESTED_TOO_LONG } = REPORT_TYPES;
 
 export const formatDateAndTime = (date, formatter) => {
   return date ? formatter(date, { day: 'numeric', month: 'numeric', year: 'numeric' }) : '';
@@ -192,6 +196,9 @@ export const getParamsForRequestedTooLongReport = (record) => {
     [STATUS]: [PATRON_HOLD, TRANSFER],
     [UPDATED_DATE]: getLastModifiedDate(record[MINIMUM_DAYS_REQUESTED]),
     [UPDATED_DATE_OP]: LESS,
+    [CREATED_DATE]: getLastModifiedDate(record[MINIMUM_DAYS_REQUESTED]),
+    [CREATED_DATE_OP]: LESS,
+    [REQUESTED_TOO_LONG]: true
   };
 };
 
