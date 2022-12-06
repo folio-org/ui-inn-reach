@@ -178,14 +178,14 @@ CentralItemTypeCreateEditRoute.manifest = Object.freeze({
   },
   innReachItemTypes: {
     type: 'okapi',
-    path: 'inn-reach/central-servers/%{selectedServerId}/d2r/contribution/itemtypes',
+    path: 'inn-reach/central-servers/%{selectedServerId}/d2r/contribution/itemtypes?limit=1000',
     accumulate: true,
     fetch: false,
     throwErrors: false,
   },
   itemTypeMappings: {
     type: 'okapi',
-    path: 'inn-reach/central-servers/%{selectedServerId}/item-type-mappings',
+    path: 'inn-reach/central-servers/%{selectedServerId}/item-type-mappings?limit=1000',
     accumulate: true,
     fetch: false,
     throwErrors: false,
