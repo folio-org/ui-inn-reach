@@ -69,11 +69,11 @@
     "react-final-form": "^6.3.0",
     "react-final-form-arrays": "^3.1.0",
     "react-to-print": "^2.3.2",
-    "uuid": "^8.3.2"
+    "uuid": "^8.3.2",
+    "query-string": "^5.0.0"
   },
   "peerDependencies": {
     "@folio/stripes": "^7.0.0",
-    "query-string": "^5.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-intl": "^5.8.0",
@@ -81,7 +81,7 @@
     "react-router-dom": "^5.2.0"
   },
   "optionalDependencies": {
-    "@folio/plugin-find-user": "^5.0.1"
+    "@folio/plugin-find-user": "^6.3.0"
   },
   "stripes": {
     "actsAs": [
@@ -106,7 +106,7 @@
       "statistical-code-types": "1.0",
       "statistical-codes": "1.0",
       "location-units": "2.0",
-      "users": "15.0"
+      "users": "15.0 16.0"
     },
     "permissionSets": [
       {

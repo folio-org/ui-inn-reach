@@ -1,14 +1,22 @@
 # Change history for ui-inn-reach
 
 ## (in progress)
+=======
+* update FOLIO_CHECK_OUT_FIELDS. Refs UIINREACH-188.
+* Transactions with a link in the Patron ID field are not included in the list of search results by Patron ID. Fixes UIINREACH-200
+* support `users` interface version `16.0`. Refs UIINREACH-192.
+* @folio/plugin-find-user version is incompatible (out of date). Fixes UIINREACH-201
+* query-string is incorrectly listed as a peer-dependency. Fixes UIINREACH-202
+* Visible patron ID configuration always includes "User custom fields" selected. Fixes UIINREACH-199
+* "Request too long" report does not include PATRON_HOLD transactions without updatedDate. Fixes UIINREACH-205
 
-
-## [2.0.0] (https://github.com/folio-org/ui-inn-reach/tree/v2.0.0) (2022-09-08)
+## [2.0.1] (https://github.com/folio-org/ui-inn-reach/tree/v2.0.0) (2022-09-08)
 [Full Changelog](https://github.com/folio-org/ui-inn-reach/compare/v2.0.0...v2.0.1)
 
 * FOLIO circulation user for INN-Reach patron type only accepts 10 barcodes as valid (FOLIO implicit limit=10 bug). Refs UIINREACH-195.
 * INN-Reach Central Patron Type Mapping Does Not Display all FOLIO Patron Groups for Mapping. Refs UIINREACH-194.
 
+* update FOLIO_CHECK_OUT_FIELDS. Refs UIINREACH-188.
 ## [2.0.0] (https://github.com/folio-org/ui-inn-reach/tree/v2.0.0) (2022-08-18)
 [Full Changelog](https://github.com/folio-org/ui-inn-reach/compare/v1.3.0...v2.0.0)
 
