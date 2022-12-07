@@ -2,14 +2,18 @@
 
 ## (in progress)
 
-* support `users` interface version `16.0`. Refs UIINREACH-192.
+* INN-Reach: Item type to material type mappings (circulation settings) not appearing correctly in Setting UI. Fixes UIINREACH-210
+
+## [2.0.2] (https://github.com/folio-org/ui-inn-reach/tree/v2.0.2) (2022-12-07)
+[Full Changelog](https://github.com/folio-org/ui-inn-reach/compare/v2.0.1...v2.0.2)
+
 * update FOLIO_CHECK_OUT_FIELDS. Refs UIINREACH-188.
 * Transactions with a link in the Patron ID field are not included in the list of search results by Patron ID. Fixes UIINREACH-200
+* support `users` interface version `16.0`. Refs UIINREACH-192.
 * @folio/plugin-find-user version is incompatible (out of date). Fixes UIINREACH-201
 * query-string is incorrectly listed as a peer-dependency. Fixes UIINREACH-202
 * Visible patron ID configuration always includes "User custom fields" selected. Fixes UIINREACH-199
 * "Request too long" report does not include PATRON_HOLD transactions without updatedDate. Fixes UIINREACH-205
-* INN-Reach: Item type to material type mappings (circulation settings) not appearing correctly in Setting UI. Fixes UIINREACH-210
 
 ## [2.0.1] (https://github.com/folio-org/ui-inn-reach/tree/v2.0.1) (2022-09-08)
 [Full Changelog](https://github.com/folio-org/ui-inn-reach/compare/v2.0.0...v2.0.1)
