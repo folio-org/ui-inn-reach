@@ -215,7 +215,7 @@ MaterialTypeCreateEditRoute.manifest = Object.freeze({
   },
   innReachItemTypes: {
     type: 'okapi',
-    path: 'inn-reach/central-servers/%{selectedServerId}/d2r/contribution/itemtypes',
+    path: 'inn-reach/central-servers/%{selectedServerId}/d2r/contribution/itemtypes?limit=1000',
     throwErrors: false,
     accumulate: true,
     fetch: false,
@@ -224,7 +224,7 @@ MaterialTypeCreateEditRoute.manifest = Object.freeze({
   materialTypeMappings: {
     type: 'okapi',
     clientGeneratePk: false,
-    path: 'inn-reach/central-servers/%{selectedServerId}/material-type-mappings',
+    path: 'inn-reach/central-servers/%{selectedServerId}/material-type-mappings?limit=1000',
     accumulate: true,
     fetch: false,
     throwErrors: false,
