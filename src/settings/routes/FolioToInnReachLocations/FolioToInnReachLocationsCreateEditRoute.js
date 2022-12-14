@@ -399,7 +399,7 @@ FolioToInnReachLocationsCreateEditRoute.manifest = Object.freeze({
   },
   innReachLocations: {
     type: 'okapi',
-    path: 'inn-reach/locations',
+    path: 'inn-reach/locations?limit=2000',
     throwErrors: false,
   },
   libraryMappings: {
