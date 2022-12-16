@@ -15,6 +15,8 @@
 * Visible patron ID configuration always includes "User custom fields" selected. Fixes UIINREACH-199
 * "Request too long" report does not include PATRON_HOLD transactions without updatedDate. Fixes UIINREACH-205
 * INN-Reach: Material to item type mapping settings not displaying correctly. Fixes UIINREACH-207
+* INN-Reach: FOLIO to INN-Reach locations mapping configuration not displaying properly. Fixes UIINREACH-208
+
 ## [2.0.1] (https://github.com/folio-org/ui-inn-reach/tree/v2.0.1) (2022-09-08)
 [Full Changelog](https://github.com/folio-org/ui-inn-reach/compare/v2.0.0...v2.0.1)
 
