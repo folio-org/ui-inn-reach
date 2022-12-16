@@ -39,6 +39,8 @@ const {
   MATERIAL_TYPE_MAPPING_LIST,
 } = MATERIAL_TYPE_FIELDS;
 
+const LIMIT = 1000;
+
 const MaterialTypeCreateEditRoute = ({
   resources: {
     centralServerRecords: {
@@ -154,12 +156,12 @@ const MaterialTypeCreateEditRoute = ({
       setIsMaterialTypeMappingsPending(true);
       setIsInnReachItemTypesPending(true);
 
-      mutator.materialTypeMappings.GET()
+      mutator.materialTypeMappings.GET({ params: { limit: LIMIT } })
         .then(response => setMaterialTypeMappings(response.materialTypeMappings || []))
         .catch(() => null)
         .finally(() => setIsMaterialTypeMappingsPending(false));
 
-      mutator.innReachItemTypes.GET()
+      mutator.innReachItemTypes.GET({ params: { limit: LIMIT } })
         .then(response => setInnReachItemTypes(response.itemTypeList))
         .catch(() => {
           setInnReachItemTypesFailed(true);
