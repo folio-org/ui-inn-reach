@@ -57,6 +57,8 @@ const {
   FOLIO_LIBRARY_IDS,
 } = LOCAL_AGENCIES_FIELDS;
 
+const LIMIT = 2000;
+
 const FolioToInnReachLocationsCreateEditRoute = ({
   resources: {
     selectedLibraryId,
@@ -168,7 +170,7 @@ const FolioToInnReachLocationsCreateEditRoute = ({
   };
 
   const fetchLibraryMappings = () => {
-    return mutator.libraryMappings.GET()
+    return mutator.libraryMappings.GET({ params: { limit: LIMIT } })
       .then(response => {
         setLibraryMappings(response.libraryMappings);
 
@@ -179,7 +181,7 @@ const FolioToInnReachLocationsCreateEditRoute = ({
 
   const fetchLocationMappings = () => {
     setIsMappingsPending(true);
-    mutator.locationMappings.GET()
+    mutator.locationMappings.GET({ params: { limit: LIMIT } })
       .then(response => setLocationMappings(response.locationMappings))
       .catch(() => setLocationMappings([]))
       .finally(() => setIsMappingsPending(false));
@@ -200,7 +202,7 @@ const FolioToInnReachLocationsCreateEditRoute = ({
 
   const fetchBatchMappings = () => {
     setIsBatchMappingsPending(true);
-    Promise.all([fetchLibraryMappings(), mutator.locationMappingsForAllLibraries.GET()])
+    Promise.all([fetchLibraryMappings(), mutator.locationMappingsForAllLibraries.GET({ params: { limit: LIMIT } })])
       .then(response => {
         const libraryIdsSetOfSelectedServer = getLibraryIdsSetOfSelectedServer(selectedServer[LOCAL_AGENCIES]);
         const allMappings = response.flat().filter(mapping => libraryIdsSetOfSelectedServer.has(mapping.libraryId));
@@ -399,7 +401,7 @@ FolioToInnReachLocationsCreateEditRoute.manifest = Object.freeze({
   },
   innReachLocations: {
     type: 'okapi',
-    path: 'inn-reach/locations',
+    path: `inn-reach/locations?limit=${LIMIT}`,
     throwErrors: false,
   },
   libraryMappings: {
