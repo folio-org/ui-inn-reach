@@ -16,63 +16,50 @@ const {
   LOCAL_SERVER_LOCATION_ID,
 } = AGENCY_TO_FOLIO_LOCATIONS_FIELDS;
 
-const getMapByCampusId = (folioLibraries) => {
-  const mapByCampusId = new Map();
+const getCampusMap = (campuses) => {
+  const campusMap = new Map();
 
-  folioLibraries.forEach(({ id, code, campusId }) => {
-    mapByCampusId.set(campusId, {
-      libId: id,
-      libCode: code,
+  campuses.forEach(({ id, code, institutionId }) => {
+    campusMap.set(id, {
+      code,
+      institutionId,
     });
   });
 
-  return mapByCampusId;
+  return campusMap;
 };
 
-const getMapByInstitutionId = (campuses, mapByCampusId) => {
-  const mapByInstitutionId = new Map();
+const getInstitutionMap = (institutions) => {
+  const institutionMap = new Map();
 
-  campuses.forEach(({ id, code, institutionId }) => {
-    if (mapByCampusId.has(id)) {
-      mapByInstitutionId.set(institutionId, {
-        ...mapByCampusId.get(id),
-        campusCode: code,
-      });
-    }
+  institutions.forEach(({ id, code }) => {
+    institutionMap.set(id, code);
   });
 
-  return mapByInstitutionId;
+  return institutionMap;
 };
 
-export const getFolioLibraryOptions = (folioLibraries, campuses, institutions) => {
+export const getFolioLibraryOptions = (libraries, campuses, institutions) => {
   const libOptions = [];
-  const mapByCampusId = getMapByCampusId(folioLibraries);
-  const mapByInstitutionId = getMapByInstitutionId(campuses, mapByCampusId);
+  const campusMap = getCampusMap(campuses);
+  const institutionMap = getInstitutionMap(institutions);
   const noValueOption = {
     label: <FormattedMessage id="ui-inn-reach.settings.agency-to-folio-locations.placeholder.folio-library" />,
     value: NO_VALUE_OPTION_VALUE,
   };
 
-  institutions.forEach(({ id, code: institutionCode }) => {
-    if (mapByInstitutionId.has(id)) {
-      const {
-        libId,
-        libCode,
-        campusCode,
-      } = mapByInstitutionId.get(id);
+  libraries.forEach(({ id, code, campusId }) => {
+    const option = {
+      id,
+      label: `${institutionMap.get(campusMap.get(campusId).institutionId)} > ${campusMap.get(campusId).code} > ${code}`,
+      value: id,
+    };
 
-      const option = {
-        id: libId,
-        label: `${institutionCode} > ${campusCode} > ${libCode}`,
-        value: libId,
-      };
-
-      if (!libOptions.length) {
-        libOptions.push(noValueOption);
-      }
-
-      libOptions.push(option);
+    if (!libOptions.length) {
+      libOptions.push(noValueOption);
     }
+
+    libOptions.push(option);
   });
 
   return libOptions;
