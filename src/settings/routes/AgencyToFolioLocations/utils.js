@@ -16,7 +16,7 @@ const {
   LOCAL_SERVER_LOCATION_ID,
 } = AGENCY_TO_FOLIO_LOCATIONS_FIELDS;
 
-const getcampusMap = (campuses) => {
+const getCampusMap = (campuses) => {
   const campusMap = new Map();
 
   campuses.forEach(({ id, code, institutionId }) => {
@@ -41,7 +41,7 @@ const getInstitutionMap = (institutions) => {
 
 export const getFolioLibraryOptions = (libraries, campuses, institutions) => {
   const libOptions = [];
-  const campusMap = getcampusMap(campuses);
+  const campusMap = getCampusMap(campuses);
   const institutionMap = getInstitutionMap(institutions);
   const noValueOption = {
     label: <FormattedMessage id="ui-inn-reach.settings.agency-to-folio-locations.placeholder.folio-library" />,
