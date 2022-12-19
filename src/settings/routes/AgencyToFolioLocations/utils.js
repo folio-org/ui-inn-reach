@@ -16,7 +16,7 @@ const {
   LOCAL_SERVER_LOCATION_ID,
 } = AGENCY_TO_FOLIO_LOCATIONS_FIELDS;
 
-const getcampusMap = (campuses) => {
+const getCampusMap = (campuses) => {
   const campusMap = new Map();
 
   campuses.forEach(({ id, code, institutionId }) => {
