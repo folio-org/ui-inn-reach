@@ -2,6 +2,9 @@
 
 ## (in progress)
 
+## [2.0.3] (https://github.com/folio-org/ui-inn-reach/tree/v2.0.3) (2022-12-22)
+[Full Changelog](https://github.com/folio-org/ui-inn-reach/compare/v2.0.2...v2.0.3)
+
 * INN-Reach: Item type to material type mappings (circulation settings) not appearing correctly in Setting UI. Fixes UIINREACH-210
 * INN-Reach: Material to item type mapping settings not displaying correctly. Fixes UIINREACH-207
 * INN-Reach: FOLIO to INN-Reach locations mapping configuration not displaying properly. Fixes UIINREACH-208
