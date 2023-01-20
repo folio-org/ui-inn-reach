@@ -53,7 +53,8 @@ class PrintSlips extends React.Component {
             key={templateContext['innReachTransaction.centralServerId']}
             template={templateWithBrake}
             dataSource={templateContext}
-          />);
+          />
+        );
       });
     };
 
