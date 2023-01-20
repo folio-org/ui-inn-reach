@@ -114,8 +114,8 @@ describe('CentralServerConfigurationForm component', () => {
       renderForm(commonProps);
       section1 = document.querySelector('#accordion-toggle-button-section1');
       section2 = document.querySelector('#accordion-toggle-button-section2');
-      toggleButton = document.querySelector('[data-tast-expand-button]');
-      act(() => { userEvent.click(toggleButton); });
+      toggleButton = document.querySelector('[data-test-expand-button]');
+      userEvent.click(toggleButton);
     });
 
     it('should be opened', () => {
@@ -124,7 +124,7 @@ describe('CentralServerConfigurationForm component', () => {
     });
 
     it('should be closed', () => {
-      act(() => { userEvent.click(toggleButton); });
+      userEvent.click(toggleButton);
       expect(section1.getAttribute('aria-expanded')).toBe('true');
       expect(section2.getAttribute('aria-expanded')).toBe('true');
     });
