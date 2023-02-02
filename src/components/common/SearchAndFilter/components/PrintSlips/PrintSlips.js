@@ -46,15 +46,14 @@ class PrintSlips extends React.Component {
 
     const renderTemplates = () => {
       return templatesContext.map((templateContext, idx) => {
-        const templateWithBrake = templates[templateContext['innReachTransaction.centralServerId']].concat('</br>');
+        const templateWithBrake = templates[templateContext['innReachTransaction.centralServerId']];
 
         return (
           <div
             key={idx}
-            style={{ pageBreakAfter: 'always' }}
+            className={css.pageBreakAfter}
           >
             <ComponentToPrint
-              key={templateContext['innReachTransaction.centralServerId']}
               template={templateWithBrake}
               dataSource={templateContext}
             />
