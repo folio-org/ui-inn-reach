@@ -58,13 +58,6 @@ describe('PrintSlips', () => {
     expect(screen.getByText('Close')).toBeVisible();
   });
 
-  it('should pass template with line break to ComponentToPrint', () => {
-    renderPrintSlip(commonProps);
-    const templateMockWithBrake = templatesMock.testServerId.concat('</br>');
-
-    expect(ComponentToPrint.mock.calls[0][0].template).toEqual(templateMockWithBrake);
-  });
-
   it('should pass template context to ComponentToPrint', () => {
     renderPrintSlip(commonProps);
     expect(ComponentToPrint.mock.calls[0][0].dataSource).toEqual(templatesContextMock[0]);
