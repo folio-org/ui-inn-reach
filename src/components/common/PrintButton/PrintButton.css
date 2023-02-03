@@ -5,3 +5,7 @@
 .qlEditor {
   overflow-y: unset !important;
 }
+
+.pageBreakAfter {
+  page-break-after: always;
+}

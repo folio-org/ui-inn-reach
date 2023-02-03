@@ -4,6 +4,7 @@
 * Bump stripes to 8.0.0 for Orchid/2023-R1. Refs. UIINREACH-215
 * Fix test failures caused due to changes in STCOM-1079. Refs. UIINREACH-217
 * Upgrade `react-redux` to `v8`. Refs UIINREACH-216.
+* INN-Reach paging slips not breaking pages between slips. Fixes UIINREACH-219.
 
 ## [2.0.3] (https://github.com/folio-org/ui-inn-reach/tree/v2.0.3) (2022-12-22)
 [Full Changelog](https://github.com/folio-org/ui-inn-reach/compare/v2.0.2...v2.0.3)
