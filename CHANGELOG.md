@@ -1,6 +1,10 @@
 # Change history for ui-inn-reach
 
-## (3.0.0 in progress)
+## (in progress)
+
+
+## [3.0.0] (https://github.com/folio-org/ui-inn-reach/tree/v3.0.0) (2022-02-23)
+[Full Changelog](https://github.com/folio-org/ui-inn-reach/compare/v2.0.3...v3.0.0)
 * Bump stripes to 8.0.0 for Orchid/2023-R1. Refs. UIINREACH-215
 * Fix test failures caused due to changes in STCOM-1079. Refs. UIINREACH-217
 * Upgrade `react-redux` to `v8`. Refs UIINREACH-216.
