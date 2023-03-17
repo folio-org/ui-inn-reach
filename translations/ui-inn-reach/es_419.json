@@ -478,7 +478,7 @@
     "transfer-hold.callout.success.post.transfer-hold": "El ejemplar ha sido transferido con éxito",
     "transfer-hold.callout.connection-problem.post.transfer-hold": "There was a problem transferring the item",
     "check-out-to-local-patron.callout.connection-problem.post.check-out-to-local-patron": "Hubo un problema al prestar el ejemplar.",
-    "check-out-to-local-patron.callout.success.post.check-out-to-local-patron": "Item has been successfully checked out",
+    "check-out-to-local-patron.callout.success.post.check-out-to-local-patron": "El ejemplar ha sido prestado exitosamente",
     "cancel-hold.callout.connection-problem.get.cancellation-reasons": "Could not retrieve cancellation reasons!",
     "cancel-hold.callout.connection-problem.post.cancel-hold": "There was a problem canceling the item",
     "cancel-hold.callout.success.post.cancel-hold": "Item has been successfully canceled",
