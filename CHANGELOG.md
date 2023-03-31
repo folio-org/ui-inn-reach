@@ -1,7 +1,7 @@
 # Change history for ui-inn-reach
 
 ## (in progress)
-* Remove innReachTransaction.pickupLocationPrintName token from staff slips. Refs. UIINREACH-222.
+* Remove innReachTransaction.pickupLocationDisplayName token from staff slips. Refs. UIINREACH-222.
 
 ## [3.0.0] (https://github.com/folio-org/ui-inn-reach/tree/v3.0.0) (2022-02-23)
 [Full Changelog](https://github.com/folio-org/ui-inn-reach/compare/v2.0.3...v3.0.0)

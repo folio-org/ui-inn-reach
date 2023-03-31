@@ -61,8 +61,8 @@ const getTokens = () => ({
       previewValue: 'fl2g1',
     },
     {
-      token: 'innReachTransaction.pickupLocationDisplayName',
-      previewValue: 'fli02 Agency 1',
+      token: 'innReachTransaction.pickupLocationPrintName',
+      previewValue: 'fl2g1 Delivery Stop',
     },
     {
       token: 'innReachTransaction.pickupLocationDeliveryStop',
