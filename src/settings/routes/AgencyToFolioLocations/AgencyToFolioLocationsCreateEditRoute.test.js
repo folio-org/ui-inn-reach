@@ -6,11 +6,10 @@ import {
 import { createMemoryHistory } from 'history';
 import { screen, act } from '@testing-library/react';
 
-import { renderWithIntl } from '@folio/stripes-data-transfer-components/test/jest/helpers';
 import { ConfirmationModal } from '@folio/stripes/components';
 
 import { FormattedMessage } from 'react-intl';
-import { translationsProperties } from '../../../../test/jest/helpers';
+import { translationsProperties, renderWithIntl } from '../../../../test/jest/helpers';
 import AgencyToFolioLocationsCreateEditRoute from './AgencyToFolioLocationsCreateEditRoute';
 import AgencyToFolioLocationsForm from '../../components/AgencyToFolioLocations/AgencyToFolioLocationsForm';
 import { NO_VALUE_OPTION_VALUE } from '../../../constants';

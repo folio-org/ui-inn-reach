@@ -2,11 +2,9 @@ import React from 'react';
 import { act, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { renderWithIntl } from '@folio/stripes-data-transfer-components/test/jest/helpers';
-
 import GeneralInformation from './GeneralInformation';
 
-import { translationsProperties } from '../../../../../../../test/jest/helpers';
+import { translationsProperties, renderWithIntl } from '../../../../../../../test/jest/helpers';
 
 import {
   CENTRAL_SERVER_CONFIGURATION_FIELDS,

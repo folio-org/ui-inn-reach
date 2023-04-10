@@ -4,11 +4,9 @@ import {
   FormattedMessage,
 } from 'react-intl';
 
-import { renderWithIntl } from '@folio/stripes-data-transfer-components/test/jest/helpers';
-
 import ActionItemPrint from './ActionItemPrint';
 
-import { translationsProperties } from '../../../../../../test/jest/helpers';
+import { translationsProperties, renderWithIntl } from '../../../../../../test/jest/helpers';
 
 const RenderActionItemPrint = ({
   templates = {},

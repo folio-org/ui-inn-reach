@@ -1,11 +1,10 @@
 import React from 'react';
-import { renderWithIntl } from '@folio/stripes-data-transfer-components/test/jest/helpers';
 import { createMemoryHistory } from 'history';
 import { Router } from 'react-router-dom';
 import StripesFinalFormWrapper from '@folio/stripes-final-form/lib/StripesFinalFormWrapper';
 import userEvent from '@testing-library/user-event';
 import { screen, waitFor } from '@testing-library/react';
-import { translationsProperties } from '../../../../../test/jest/helpers';
+import { translationsProperties, renderWithIntl } from '../../../../../test/jest/helpers';
 import FolioToInnReachLocationsForm from './FolioToInnReachLocationsForm';
 import {
   FOLIO_TO_INN_REACH_LOCATION_FIELDS,

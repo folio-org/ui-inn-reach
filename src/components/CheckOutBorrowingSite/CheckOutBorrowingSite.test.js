@@ -1,9 +1,8 @@
 import { cloneDeep } from 'lodash';
 import { createMemoryHistory } from 'history';
 import { act, screen } from '@testing-library/react';
-import { renderWithIntl } from '@folio/stripes-data-transfer-components/test/jest/helpers';
 import { useStripes } from '@folio/stripes/core';
-import { translationsProperties } from '../../../test/jest/helpers';
+import { translationsProperties, renderWithIntl } from '../../../test/jest/helpers';
 import CheckOutBorrowingSite from './CheckOutBorrowingSite';
 import {
   ItemForm,

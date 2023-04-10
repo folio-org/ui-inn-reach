@@ -1,11 +1,10 @@
 import React from 'react';
 import { screen, act } from '@testing-library/react';
-import { renderWithIntl } from '@folio/stripes-data-transfer-components/test/jest/helpers';
 import { createMemoryHistory } from 'history';
 import { Router } from 'react-router-dom';
 import { TemplateEditor } from '@folio/stripes-template-editor';
 import userEvent from '@testing-library/user-event';
-import { translationsProperties } from '../../../../../test/jest/helpers';
+import { translationsProperties, renderWithIntl } from '../../../../../test/jest/helpers';
 import PagingSlipTemplateForm from './PagingSlipTemplateForm';
 import { TokensList } from './components';
 import getTokens from './getTokens';

@@ -5,10 +5,9 @@ import {
 import { createMemoryHistory } from 'history';
 import { screen, act } from '@testing-library/react';
 
-import { renderWithIntl } from '@folio/stripes-data-transfer-components/test/jest/helpers';
 import { ConfirmationModal } from '@folio/stripes/components';
 
-import { translationsProperties } from '../../../../test/jest/helpers';
+import { translationsProperties, renderWithIntl } from '../../../../test/jest/helpers';
 import FolioToInnReachLocationsCreateEditRoute from './FolioToInnReachLocationsCreateEditRoute';
 import FolioToInnReachLocationsForm from '../../components/FolioToInnReachLocations/FolioToInnReachLocationsForm';
 import { NO_VALUE_LIBRARY_OPTION } from '../../../constants';

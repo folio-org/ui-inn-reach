@@ -1,9 +1,8 @@
 import React from 'react';
 import { screen } from '@testing-library/react';
-import { renderWithIntl } from '@folio/stripes-data-transfer-components/test/jest/helpers';
 import MultiSelectionFilter from '@folio/stripes-smart-components/lib/SearchAndSort/components/MultiSelectionFilter';
 import MultiChoiceFilter from './MultiChoiceFilter';
-import { translationsProperties } from '../../../../../test/jest/helpers';
+import { translationsProperties, renderWithIntl } from '../../../../../test/jest/helpers';
 
 jest.mock('@folio/stripes-smart-components/lib/SearchAndSort/components/MultiSelectionFilter', () => {
   return jest.fn(() => <div>MultiSelectionFilter</div>);

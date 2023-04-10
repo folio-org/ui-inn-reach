@@ -1,7 +1,6 @@
 import React from 'react';
-import { renderWithIntl } from '@folio/stripes-data-transfer-components/test/jest/helpers';
 import { TokensSection } from '@folio/stripes-template-editor';
-import { translationsProperties } from '../../../../../../../test/jest/helpers';
+import { translationsProperties, renderWithIntl } from '../../../../../../../test/jest/helpers';
 import TokensList from './TokensList';
 
 jest.mock('@folio/stripes-template-editor', () => ({

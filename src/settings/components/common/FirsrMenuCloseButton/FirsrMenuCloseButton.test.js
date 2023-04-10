@@ -2,11 +2,9 @@ import React from 'react';
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { renderWithIntl } from '@folio/stripes-data-transfer-components/test/jest/helpers';
-
 import FirsrMenuCloseButton from './FirsrMenuCloseButton';
 
-import { translationsProperties } from '../../../../../test/jest/helpers';
+import { translationsProperties, renderWithIntl } from '../../../../../test/jest/helpers';
 
 const RenderFirsrMenuCloseButton = ({
   onClickHandler,

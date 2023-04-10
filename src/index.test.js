@@ -1,13 +1,12 @@
 import React from 'react';
 import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
-import { renderWithIntl } from '@folio/stripes-data-transfer-components/test/jest/helpers';
 import { screen, act } from '@testing-library/react';
 
 import { useStripes } from '@folio/stripes/core';
 
 import InnReach from './index';
-import { translationsProperties } from '../test/jest/helpers';
+import { translationsProperties, renderWithIntl } from '../test/jest/helpers';
 import { TransactionListRoute } from './routes';
 
 jest.mock('./settings', () => () => 'InnReachSettings');

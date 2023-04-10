@@ -1,7 +1,6 @@
 import React from 'react';
-import { renderWithIntl } from '@folio/stripes-data-transfer-components/test/jest/helpers';
 import { screen } from '@testing-library/react';
-import { translationsProperties } from '../../../../../../test/jest/helpers';
+import { translationsProperties, renderWithIntl } from '../../../../../../test/jest/helpers';
 import Footer from './Footer';
 
 jest.mock('@folio/stripes/components', () => ({

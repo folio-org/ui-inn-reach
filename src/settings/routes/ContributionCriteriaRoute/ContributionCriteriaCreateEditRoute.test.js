@@ -6,10 +6,9 @@ import {
 import { createMemoryHistory } from 'history';
 import { waitFor, screen, act } from '@testing-library/react';
 
-import { renderWithIntl } from '@folio/stripes-data-transfer-components/test/jest/helpers';
 import { ConfirmationModal } from '@folio/stripes/components';
 
-import { translationsProperties } from '../../../../test/jest/helpers';
+import { translationsProperties, renderWithIntl } from '../../../../test/jest/helpers';
 import ContributionCriteriaCreateEditRoute from './ContributionCriteriaCreateEditRoute';
 import ContributionCriteriaForm from '../../components/ContributionCriteria/ContributionCriteriaForm';
 import { useCentralServers } from '../../../hooks';

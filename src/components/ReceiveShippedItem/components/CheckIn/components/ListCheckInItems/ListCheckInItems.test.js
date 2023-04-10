@@ -1,8 +1,7 @@
 import { screen } from '@testing-library/react';
-import { renderWithIntl } from '@folio/stripes-data-transfer-components/test/jest/helpers';
 import { useStripes } from '@folio/stripes/core';
 import ListCheckInItems from './ListCheckInItems';
-import { translationsProperties } from '../../../../../../../test/jest/helpers';
+import { translationsProperties, renderWithIntl } from '../../../../../../../test/jest/helpers';
 import {
   ItemActions,
 } from './components';

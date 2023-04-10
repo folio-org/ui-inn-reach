@@ -1,7 +1,6 @@
 import React from 'react';
-import { renderWithIntl } from '@folio/stripes-data-transfer-components/test/jest/helpers';
 import userEvent from '@testing-library/user-event';
-import { translationsProperties } from '../../../../../test/jest/helpers';
+import { translationsProperties, renderWithIntl } from '../../../../../test/jest/helpers';
 import AddAndDeleteButtons from './AddAndDeleteButtons';
 
 const fields = {

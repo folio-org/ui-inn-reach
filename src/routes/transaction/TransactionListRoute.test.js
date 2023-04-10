@@ -1,12 +1,11 @@
 import React from 'react';
 import { cloneDeep } from 'lodash';
 import { act, screen } from '@testing-library/react';
-import { renderWithIntl } from '@folio/stripes-data-transfer-components/test/jest/helpers';
 import { createMemoryHistory } from 'history';
 import { Router } from 'react-router-dom';
 import { useStripes } from '@folio/stripes/core';
 import TransactionListRoute from './TransactionListRoute';
-import { translationsProperties } from '../../../test/jest/helpers';
+import { translationsProperties, renderWithIntl } from '../../../test/jest/helpers';
 import TransactionList from '../../components/transaction/TransactionList';
 import TransactionDetailContainer from '../../components/transaction/TransactionDetails';
 import {

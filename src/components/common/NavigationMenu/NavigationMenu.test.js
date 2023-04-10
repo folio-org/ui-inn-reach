@@ -1,8 +1,7 @@
 import { createMemoryHistory } from 'history';
 import { screen } from '@testing-library/react';
-import { renderWithIntl } from '@folio/stripes-data-transfer-components/test/jest/helpers';
 import { Select } from '@folio/stripes/components';
-import { translationsProperties } from '../../../../test/jest/helpers';
+import { translationsProperties, renderWithIntl } from '../../../../test/jest/helpers';
 import NavigationMenu from './NavigationMenu';
 
 jest.mock('@folio/stripes/components', () => ({

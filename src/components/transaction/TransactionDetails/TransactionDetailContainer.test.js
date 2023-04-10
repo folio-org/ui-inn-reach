@@ -1,11 +1,10 @@
 import React from 'react';
 import { createMemoryHistory } from 'history';
 import { act, screen } from '@testing-library/react';
-import { renderWithIntl } from '@folio/stripes-data-transfer-components/test/jest/helpers';
 import { cloneDeep } from 'lodash';
 import { useStripes } from '@folio/stripes/core';
 import * as hooks from '../../../hooks';
-import { translationsProperties } from '../../../../test/jest/helpers';
+import { translationsProperties, renderWithIntl } from '../../../../test/jest/helpers';
 import TransactionDetailContainer from './TransactionDetailContainer';
 import TransactionDetail from './TransactionDetail';
 import {

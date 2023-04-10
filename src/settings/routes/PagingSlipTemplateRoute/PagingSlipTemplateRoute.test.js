@@ -3,9 +3,8 @@ import {
   cloneDeep,
 } from 'lodash';
 import { screen, act } from '@testing-library/react';
-import { renderWithIntl } from '@folio/stripes-data-transfer-components/test/jest/helpers';
 import { createMemoryHistory } from 'history';
-import { translationsProperties } from '../../../../test/jest/helpers';
+import { translationsProperties, renderWithIntl } from '../../../../test/jest/helpers';
 import PagingSlipTemplateRoute from './PagingSlipTemplateRoute';
 import PagingSlipTemplateForm from '../../components/PagingSlipTemplate/PagingSlipTemplateForm';
 

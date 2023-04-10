@@ -4,9 +4,8 @@ import {
 } from 'lodash';
 import { screen, act } from '@testing-library/react';
 
-import { renderWithIntl } from '@folio/stripes-data-transfer-components/test/jest/helpers';
 import { createMemoryHistory } from 'history';
-import { translationsProperties } from '../../../../test/jest/helpers';
+import { translationsProperties, renderWithIntl } from '../../../../test/jest/helpers';
 import InnReachRecallUserRoute from './InnReachRecallUserCreateEditRoute';
 import InnReachRecallUserForm from '../../components/InnReachRecallUser/InnReachRecallUserForm';
 import { useCentralServers } from '../../../hooks';

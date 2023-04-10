@@ -5,11 +5,7 @@ import { createMemoryHistory } from 'history';
 import { act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import {
-  renderWithIntl,
-} from '@folio/stripes-data-transfer-components/test/jest/helpers';
-
-import { translationsProperties } from '../../../../test/jest/helpers';
+import { translationsProperties, renderWithIntl } from '../../../../test/jest/helpers';
 import CentralServersConfigurationCreateEditContainer from './CentralServersConfigurationCreateEditContainer';
 import CentralServersConfigurationForm from '../../components/CentralServersConfiguration/CentralServersConfigurationForm';
 

@@ -1,13 +1,10 @@
 import React from 'react';
 
-import {
-  renderWithIntl,
-} from '@folio/stripes-data-transfer-components/test/jest/helpers';
 import { useStripes } from '@folio/stripes/core';
 import { ControlledVocab } from '@folio/stripes/smart-components';
 
 import InnreachLocations from './InnreachLocations';
-import { translationsProperties } from '../../../../test/jest/helpers';
+import { translationsProperties, renderWithIntl } from '../../../../test/jest/helpers';
 
 const renderInnreachLocations = ({ stripes }) => renderWithIntl(
   <InnreachLocations

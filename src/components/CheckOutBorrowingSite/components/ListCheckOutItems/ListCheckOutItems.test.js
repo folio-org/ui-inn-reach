@@ -1,10 +1,9 @@
 import { screen } from '@testing-library/react';
-import { renderWithIntl } from '@folio/stripes-data-transfer-components/test/jest/helpers';
 import ListCheckOutItems from './ListCheckOutItems';
 import {
   ItemActions,
 } from './components';
-import { translationsProperties } from '../../../../../test/jest/helpers';
+import { translationsProperties, renderWithIntl } from '../../../../../test/jest/helpers';
 
 jest.mock('./components', () => ({
   ItemActions: jest.fn(() => <div>ItemActions</div>),

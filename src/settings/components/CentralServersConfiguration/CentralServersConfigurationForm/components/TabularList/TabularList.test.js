@@ -2,13 +2,12 @@ import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 
 import { screen } from '@testing-library/react';
-import { renderWithIntl } from '@folio/stripes-data-transfer-components/test/jest/helpers';
 import StripesFinalFormWrapper from '@folio/stripes-final-form/lib/StripesFinalFormWrapper';
 import userEvent from '@testing-library/user-event';
 
 import { MultiSelection } from '@folio/stripes/components';
 import TabularList from './TabularList';
-import { translationsProperties } from '../../../../../../../test/jest/helpers';
+import { translationsProperties, renderWithIntl } from '../../../../../../../test/jest/helpers';
 import { validateLocalAgency } from '../../utils';
 import { DEFAULT_VALUES } from '../../../../../routes/CentralServersConfigurationRoute/CentralServersConfigurationCreateEditContainer';
 
