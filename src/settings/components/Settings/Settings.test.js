@@ -6,6 +6,7 @@ import Settings from './Settings';
 import { translationsProperties, renderWithIntl } from '../../../../test/jest/helpers';
 
 jest.mock('@folio/stripes/core', () => ({
+  ...jest.requireActual('@folio/stripes/core'),
   IfInterface: jest.fn(() => <div>IfInterface</div>),
 }));
 

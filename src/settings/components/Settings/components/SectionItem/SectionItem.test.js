@@ -6,6 +6,7 @@ import { translationsProperties, renderWithIntl } from '../../../../../../test/j
 import SectionItem from './SectionItem';
 
 jest.mock('@folio/stripes/core', () => ({
+  ...jest.requireActual('@folio/stripes/core'),
   IfInterface: () => 'IfInterface',
   IfPermission: () => 'IfPermission',
 }));
