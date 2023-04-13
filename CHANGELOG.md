@@ -2,6 +2,7 @@
 
 ## (in progress)
 * Remove innReachTransaction.pickupLocationDisplayName token from staff slips. Refs. UIINREACH-222.
+* Jest tests failure on master branch. Refs. UIINREACH-224.
 
 ## [3.0.0] (https://github.com/folio-org/ui-inn-reach/tree/v3.0.0) (2022-02-23)
 [Full Changelog](https://github.com/folio-org/ui-inn-reach/compare/v2.0.3...v3.0.0)
