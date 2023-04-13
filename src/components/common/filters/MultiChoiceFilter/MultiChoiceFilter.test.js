@@ -1,12 +1,13 @@
 import React from 'react';
 import { screen } from '@testing-library/react';
-import MultiSelectionFilter from '@folio/stripes-smart-components/lib/SearchAndSort/components/MultiSelectionFilter';
+import { MultiSelectionFilter } from '@folio/stripes/smart-components';
 import MultiChoiceFilter from './MultiChoiceFilter';
 import { translationsProperties, renderWithIntl } from '../../../../../test/jest/helpers';
 
-jest.mock('@folio/stripes-smart-components/lib/SearchAndSort/components/MultiSelectionFilter', () => {
-  return jest.fn(() => <div>MultiSelectionFilter</div>);
-});
+jest.mock('@folio/stripes/smart-components', () => ({
+  ...jest.requireActual('@folio/stripes/smart-components'),
+  MultiSelectionFilter: jest.fn(() => <div>MultiSelectionFilter</div>),
+}));
 
 const dataOptionsMock = [
   { label: 'central server1', value: 'central server1' },
