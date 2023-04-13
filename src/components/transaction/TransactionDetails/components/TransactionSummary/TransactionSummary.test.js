@@ -5,7 +5,8 @@ import { Router } from 'react-router';
 import { translationsProperties, renderWithIntl } from '../../../../../../test/jest/helpers';
 import TransactionSummary from './TransactionSummary';
 
-jest.mock('@folio/stripes-smart-components', () => ({
+jest.mock('@folio/stripes/smart-components', () => ({
+  ...jest.requireActual('@folio/stripes/smart-components'),
   ViewMetaData: jest.fn(() => <div>ViewMetaData</div>),
 }));
 

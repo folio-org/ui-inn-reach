@@ -10,9 +10,10 @@ import { translationsProperties, renderWithIntl } from '../test/jest/helpers';
 import { TransactionListRoute } from './routes';
 
 jest.mock('./settings', () => () => 'InnReachSettings');
-jest.mock('@folio/stripes-smart-components/lib/SearchAndSort/components/MultiSelectionFilter', () => {
-  return jest.fn(() => <div>MultiSelectionFilter</div>);
-});
+jest.mock('@folio/stripes/smart-components', () => ({
+  ...jest.requireActual('@folio/stripes/smart-components'),
+  MultiSelectionFilter: jest.fn(() => <div>MultiSelectionFilter</div>),
+}));
 jest.mock('./routes/transaction/TransactionListRoute', () => jest.fn(() => <div>TransactionListRoute</div>));
 
 const DEFAULT_MUTATOR = {
