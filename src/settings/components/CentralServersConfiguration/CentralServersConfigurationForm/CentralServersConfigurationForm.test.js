@@ -3,11 +3,9 @@ import { MemoryRouter } from 'react-router-dom';
 import { act, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { renderWithIntl } from '@folio/stripes-data-transfer-components/test/jest/helpers';
-
 import CentralServersConfigurationForm from './CentralServersConfigurationForm';
 
-import { translationsProperties } from '../../../../../test/jest/helpers';
+import { translationsProperties, renderWithIntl } from '../../../../../test/jest/helpers';
 import {
   CENTRAL_SERVER_CONFIGURATION_FIELDS,
 } from '../../../../constants';

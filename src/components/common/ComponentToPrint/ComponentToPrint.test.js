@@ -1,7 +1,6 @@
 import { screen } from '@testing-library/react';
-import { renderWithIntl } from '@folio/stripes-data-transfer-components/test/jest/helpers';
 import ComponentToPrint from './ComponentToPrint';
-import { translationsProperties } from '../../../../test/jest/helpers';
+import { translationsProperties, renderWithIntl } from '../../../../test/jest/helpers';
 import { AUGMENTED_BARCODE_TEMPLATE } from '../../../constants';
 
 const dataSourceMock = {

@@ -1,8 +1,7 @@
 import React from 'react';
-import { renderWithIntl } from '@folio/stripes-data-transfer-components/test/jest/helpers';
 import { createMemoryHistory } from 'history';
 import { Router } from 'react-router-dom';
-import { translationsProperties } from '../../../../../test/jest/helpers';
+import { translationsProperties, renderWithIntl } from '../../../../../test/jest/helpers';
 
 import MaterialTypeForm from './MaterialTypeForm';
 import { CENTRAL_SERVER_ID } from '../../../../constants';

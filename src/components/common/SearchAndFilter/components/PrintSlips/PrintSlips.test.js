@@ -1,7 +1,6 @@
 import { screen } from '@testing-library/react';
-import { renderWithIntl } from '@folio/stripes-data-transfer-components/test/jest/helpers';
 import PrintSlips from './PrintSlips';
-import { translationsProperties } from '../../../../../../test/jest/helpers';
+import { translationsProperties, renderWithIntl } from '../../../../../../test/jest/helpers';
 import ComponentToPrint from '../../../ComponentToPrint';
 
 jest.mock('../../../ComponentToPrint', () => jest.fn(() => <div>ComponentToPrint</div>));

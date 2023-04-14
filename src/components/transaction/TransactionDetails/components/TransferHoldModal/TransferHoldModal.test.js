@@ -1,13 +1,12 @@
 import React from 'react';
 import { act } from '@testing-library/react';
-import { renderWithIntl } from '@folio/stripes-data-transfer-components/test/jest/helpers';
 import { createMemoryHistory } from 'history';
 import { Router } from 'react-router';
 import {
   MultiColumnList,
 } from '@folio/stripes/components';
 import TransferHoldModal from './TransferHoldModal';
-import { translationsProperties } from '../../../../../../test/jest/helpers';
+import { translationsProperties, renderWithIntl } from '../../../../../../test/jest/helpers';
 
 jest.mock('@folio/stripes/components', () => ({
   ...jest.requireActual('@folio/stripes/components'),

@@ -1,10 +1,9 @@
 import React from 'react';
-import { renderWithIntl } from '@folio/stripes-data-transfer-components/test/jest/helpers';
 import { createMemoryHistory } from 'history';
 import { Router } from 'react-router-dom';
 import { screen } from '@testing-library/react';
 import { FormattedMessage } from 'react-intl';
-import { translationsProperties } from '../../../../../test/jest/helpers';
+import { translationsProperties, renderWithIntl } from '../../../../../test/jest/helpers';
 import AgencyToFolioLocationsForm from './AgencyToFolioLocationsForm';
 import {
   NO_VALUE_LOCAL_SERVER_OPTION,

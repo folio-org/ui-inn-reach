@@ -1,19 +1,19 @@
 import React from 'react';
 import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
-import { renderWithIntl } from '@folio/stripes-data-transfer-components/test/jest/helpers';
 import { screen, act } from '@testing-library/react';
 
 import { useStripes } from '@folio/stripes/core';
 
 import InnReach from './index';
-import { translationsProperties } from '../test/jest/helpers';
+import { translationsProperties, renderWithIntl } from '../test/jest/helpers';
 import { TransactionListRoute } from './routes';
 
 jest.mock('./settings', () => () => 'InnReachSettings');
-jest.mock('@folio/stripes-smart-components/lib/SearchAndSort/components/MultiSelectionFilter', () => {
-  return jest.fn(() => <div>MultiSelectionFilter</div>);
-});
+jest.mock('@folio/stripes/smart-components', () => ({
+  ...jest.requireActual('@folio/stripes/smart-components'),
+  MultiSelectionFilter: jest.fn(() => <div>MultiSelectionFilter</div>),
+}));
 jest.mock('./routes/transaction/TransactionListRoute', () => jest.fn(() => <div>TransactionListRoute</div>));
 
 const DEFAULT_MUTATOR = {

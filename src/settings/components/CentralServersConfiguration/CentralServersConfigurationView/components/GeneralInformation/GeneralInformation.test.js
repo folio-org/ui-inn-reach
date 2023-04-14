@@ -2,11 +2,9 @@ import React from 'react';
 import { act, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { renderWithIntl } from '@folio/stripes-data-transfer-components/test/jest/helpers';
-
 import GeneralInformation from './GeneralInformation';
 
-import { translationsProperties } from '../../../../../../../test/jest/helpers';
+import { translationsProperties, renderWithIntl } from '../../../../../../../test/jest/helpers';
 
 import {
   CENTRAL_SERVER_CONFIGURATION_FIELDS,
@@ -14,7 +12,10 @@ import {
 
 import CentralServersConfigurationContext from '../../../../../../contexts/CentralServersConfigurationContext';
 
-jest.mock('@folio/stripes-smart-components', () => ({ ViewMetaData: jest.fn(() => <div>ViewMetaData</div>) }));
+jest.mock('@folio/stripes/smart-components', () => ({
+  ...jest.requireActual('@folio/stripes/smart-components'),
+  ViewMetaData: jest.fn(() => <div>ViewMetaData</div>),
+}));
 
 const onlineLibraryId = 'c2549bb4-19c7-4fcc-8b52-39e612fb7dbe';
 const welcomeLibraryId = 'c2549bb4-19c7-4fcc-8b52-39e612fpgfkj';

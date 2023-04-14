@@ -1,9 +1,8 @@
 import React from 'react';
 import { createMemoryHistory } from 'history';
 import { screen, fireEvent } from '@testing-library/react';
-import { renderWithIntl } from '@folio/stripes-data-transfer-components/test/jest/helpers';
 import { Router } from 'react-router';
-import { translationsProperties } from '../../../../../../test/jest/helpers';
+import { translationsProperties, renderWithIntl } from '../../../../../../test/jest/helpers';
 import PatronInformation from './PatronInformation';
 
 const transactionMock = {

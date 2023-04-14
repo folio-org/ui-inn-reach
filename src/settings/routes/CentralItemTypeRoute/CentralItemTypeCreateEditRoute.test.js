@@ -4,8 +4,7 @@ import {
 } from 'lodash';
 import { screen, act } from '@testing-library/react';
 
-import { renderWithIntl } from '@folio/stripes-data-transfer-components/test/jest/helpers';
-import { translationsProperties } from '../../../../test/jest/helpers';
+import { translationsProperties, renderWithIntl } from '../../../../test/jest/helpers';
 import CentralItemTypeCreateEditRoute from './CentralItemTypeCreateEditRoute';
 import CentralItemTypeForm from '../../components/CentralItemType/CentralItemTypeForm';
 

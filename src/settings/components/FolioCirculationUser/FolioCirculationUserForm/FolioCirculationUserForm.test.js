@@ -1,10 +1,9 @@
 import React from 'react';
-import { renderWithIntl } from '@folio/stripes-data-transfer-components/test/jest/helpers';
 import { createMemoryHistory } from 'history';
 import { Router } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
 import { act, screen } from '@testing-library/react';
-import { translationsProperties } from '../../../../../test/jest/helpers';
+import { translationsProperties, renderWithIntl } from '../../../../../test/jest/helpers';
 import FolioCirculationUserForm from './FolioCirculationUserForm';
 
 const serverOptions = [

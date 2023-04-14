@@ -1,7 +1,6 @@
 import React from 'react';
 import { screen } from '@testing-library/react';
-import { renderWithIntl } from '@folio/stripes-data-transfer-components/test/jest/helpers';
-import { translationsProperties } from '../../../../../../../../test/jest/helpers';
+import { translationsProperties, renderWithIntl } from '../../../../../../../../test/jest/helpers';
 import ItemActions from './ItemActions';
 
 const transactionMock = {

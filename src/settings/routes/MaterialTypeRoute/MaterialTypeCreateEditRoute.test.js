@@ -4,10 +4,9 @@ import { cloneDeep } from 'lodash';
 import { createMemoryHistory } from 'history';
 import { waitFor, screen, act } from '@testing-library/react';
 
-import { renderWithIntl } from '@folio/stripes-data-transfer-components/test/jest/helpers';
 import { ConfirmationModal } from '@folio/stripes/components';
 
-import { translationsProperties } from '../../../../test/jest/helpers';
+import { translationsProperties, renderWithIntl } from '../../../../test/jest/helpers';
 import MaterialTypeCreateEditRoute from './MaterialTypeCreateEditRoute';
 import MaterialTypeForm from '../../components/MaterialType/MaterialTypeForm';
 import { useCentralServers } from '../../../hooks';
