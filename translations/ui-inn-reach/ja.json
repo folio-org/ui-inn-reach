@@ -223,7 +223,7 @@
     "settings.manage-contribution.label.contributed": "Contributed",
     "settings.manage-contribution.label.updated": "Updated",
     "settings.manage-contribution.label.decontributed": "De-contributed",
-    "settings.manage-contribution.label.error": "Error",
+    "settings.manage-contribution.label.error": "エラー",
     "settings.manage-contribution.navigation.current": "Current contribution",
     "settings.manage-contribution.navigation.history": "Contribution history",
     "settings.manage-contribution.history.list.no.history": "No contribution history records",
