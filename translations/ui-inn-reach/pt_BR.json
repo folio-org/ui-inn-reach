@@ -469,7 +469,7 @@
     "transfer-hold.modal.title": "Outros exemplares em {title}",
     "transfer-hold.modal.result-count": "{count, number} {count, plural, one {Registro encontrado} other {Registros encontrados}}",
     "transfer-hold.modal.column.barcode": "Código de barras",
-    "transfer-hold.modal.column.item-status": "Estado do item",
+    "transfer-hold.modal.column.item-status": "Status do item",
     "transfer-hold.modal.column.request-queue": "Fila de solicitações",
     "transfer-hold.modal.column.location": "Localização",
     "transfer-hold.modal.column.material-type": "Tipo de material",
