@@ -1,8 +1,9 @@
 # Change history for ui-inn-reach
 
-## (in progress)
+## 4.0.0 (in progress)
 * Remove innReachTransaction.pickupLocationDisplayName token from staff slips. Refs. UIINREACH-222.
 * Jest tests failure on master branch. Refs. UIINREACH-224.
+* *BREAKING* Upgrade React to v18. Refs. UIINREACH-227.
 
 ## [3.0.0] (https://github.com/folio-org/ui-inn-reach/tree/v3.0.0) (2022-02-23)
 [Full Changelog](https://github.com/folio-org/ui-inn-reach/compare/v2.0.3...v3.0.0)
