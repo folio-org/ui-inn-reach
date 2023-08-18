@@ -262,12 +262,12 @@ describe('renderPatronAgencyCreateEditRoute component', () => {
       const newMutator = cloneDeep(mutatorMock);
 
       newMutator.userCustomFieldMappings.GET = jest.fn(() => Promise.resolve(userCustomFieldMappings));
-      await renderPatronAgencyCreateEditRoute({ mutator: newMutator });
-      await act(async () => {
-        await PatronAgencyForm.mock.calls[0][0].onChangeServer(servers[0].name);
-        await PatronAgencyForm.mock.calls[1][0].onChangeCustomField(customFields[0].refId);
-        PatronAgencyForm.mock.calls[3][0].onSubmit(record);
-      });
+
+      await act(async () => { renderPatronAgencyCreateEditRoute({ mutator: newMutator }); });
+      await act(async () => { PatronAgencyForm.mock.calls[0][0].onChangeServer(servers[0].name); });
+      await act(async () => { PatronAgencyForm.mock.calls[1][0].onChangeCustomField(customFields[0].refId); });
+      await act(async () => { PatronAgencyForm.mock.calls[3][0].onSubmit(record); });
+
       expect(mutatorMock.userCustomFieldMappings.PUT).toHaveBeenCalledWith(payload);
     });
   });

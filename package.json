@@ -1,6 +1,6 @@
 {
   "name": "@folio/inn-reach",
-  "version": "3.0.0",
+  "version": "4.0.0",
   "description": "Description for inn-reach",
   "main": "src/index.js",
   "repository": "",
@@ -21,11 +21,11 @@
     "@babel/core": "^7.17.10",
     "@babel/eslint-parser": "^7.17.0",
     "@babel/preset-react": "^7.10.4",
-    "@folio/eslint-config-stripes": "^6.1.0",
-    "@folio/stripes": "^8.0.0",
-    "@folio/stripes-cli": "^2.5.0",
-    "@folio/stripes-core": "^9.0.0",
-    "@folio/stripes-connect": "^8.2.0",
+    "@folio/eslint-config-stripes": "^7.0.0",
+    "@folio/stripes": "^9.0.0",
+    "@folio/stripes-cli": "^3.0.0",
+    "@folio/stripes-core": "^10.0.0",
+    "@folio/stripes-connect": "^9.0.0",
     "@formatjs/cli": "^4.2.10",
     "@testing-library/jest-dom": "^5.11.1",
     "@testing-library/react": "^11.0.2",
@@ -41,8 +41,8 @@
     "inflected": "^2.0.4",
     "jest": "^26.4.2",
     "jest-junit": "^12.0.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "react-intl": "^5.8.0",
     "react-redux": "^8.0.5",
     "react-router-dom": "^5.2.0",
@@ -55,7 +55,7 @@
     "stylelint-junit-formatter": "^0.2.2"
   },
   "dependencies": {
-    "@folio/stripes-data-transfer-components": "^5.2.0",
+    "@folio/stripes-data-transfer-components": "^6.0.0",
     "@folio/stripes-template-editor": "^3.0.0",
     "classnames": "^2.2.5",
     "html-to-react": "^1.3.3",
@@ -69,15 +69,15 @@
   },
   "peerDependencies": {
     "@folio/stripes": "^8.0.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "react-intl": "^5.8.0",
     "react-redux": "^8.0.5",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0"
   },
   "optionalDependencies": {
-    "@folio/plugin-find-user": "^6.3.0"
+    "@folio/plugin-find-user": "^7.0.0"
   },
   "stripes": {
     "actsAs": [
