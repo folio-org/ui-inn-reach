@@ -68,7 +68,7 @@
     "query-string": "^5.0.0"
   },
   "peerDependencies": {
-    "@folio/stripes": "^8.0.0",
+    "@folio/stripes": "^9.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-intl": "^6.4.4",
@@ -98,11 +98,11 @@
     "route": "/innreach",
     "okapiInterfaces": {
       "inn-reach": "1.0",
-      "loan-types": "2.0",
+      "loan-types": "2.3",
       "statistical-code-types": "1.0",
       "statistical-codes": "1.0",
       "location-units": "2.0",
-      "users": "15.0 16.0"
+      "users": "16.0"
     },
     "permissionSets": [
       {
