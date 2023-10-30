@@ -422,7 +422,7 @@
     "reports.modal.field.minimum-days-returned": "Mínimo de dias de retorno",
     "reports.patronIdField": "ID do usuário INN-Reach",
     "reports.itemCallNumber": "Número de chamada do exemplar",
-    "reports.itemBarcode": "Código de barras do exemplar",
+    "reports.itemBarcode": "Código de barras do item",
     "reports.itemTitle": "Título do exemplar",
     "reports.patronAgency": "Agência do usuário",
     "reports.loanDueDate": "Data de vencimento do empréstimo",
