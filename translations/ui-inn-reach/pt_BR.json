@@ -432,7 +432,7 @@
     "reports.patronHomeLibrary": "Biblioteca base do usuário",
     "reports.requestingPatronId": "ID do usuário solicitante",
     "reports.requestingPatronAgency": "Agência do Usuário Solicitante",
-    "reports.itemHRID": "HRID do exemplar",
+    "reports.itemHRID": "HRID do item",
     "reports.pagedDate": "Data da solicitação",
     "settings.visible-patron-id": "ID de usuário visível",
     "settings.visible-patron-id.title": "ID de usuário visível",

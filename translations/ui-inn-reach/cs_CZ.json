@@ -238,7 +238,7 @@
     "settings.manage-contribution.updatedDatePattern": "{date} {time}",
     "settings.manage-contribution.tooltip.check-mappings": "K zahájení příspěvku jsou vyžadována platná mapování",
     "banner.patron-types": "Nelze načíst hodnoty centrálního typu čtenáře. Ověřte prosím konfiguraci vybraného centrálního serveru.",
-    "patron-lookup": "Vyhledání čtenáře",
+    "patron-lookup": "Vyhledat čtenáře",
     "not-valid": "Neplatný",
     "settings.folio-circulation-user": "Uživatel cirkulace FOLIO pro typ čtenáře INN-Reach",
     "settings.folio-circulation-user.title": "Uživatel cirkulace FOLIO pro typ čtenáře INN-Reach",
