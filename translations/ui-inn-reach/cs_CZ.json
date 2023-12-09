@@ -280,7 +280,7 @@
     "transaction.field.status": "Stav transakce (INN-Reach)",
     "transaction.field.label.time": "{date} {time}",
     "title.list.transactions": "Transakce INN-Reach",
-    "search": "Vyhledávání",
+    "search": "Vyhledat",
     "resetAllFilters": "Obnovit vše",
     "searchAndFilter": "Zvolte aktivitu",
     "settings.central-server-configuration.callout.invalidData": "Neplatná data centrálního serveru",
