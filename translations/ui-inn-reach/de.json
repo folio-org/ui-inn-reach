@@ -432,7 +432,7 @@
     "reports.patronHomeLibrary": "Patron Home Library",
     "reports.requestingPatronId": "Requesting Patron ID",
     "reports.requestingPatronAgency": "Requesting Patron Agency",
-    "reports.itemHRID": "Item HRID",
+    "reports.itemHRID": "Exemplar-HRID",
     "reports.pagedDate": "Paged Date",
     "settings.visible-patron-id": "Visible patron ID",
     "settings.visible-patron-id.title": "Visible patron ID",
