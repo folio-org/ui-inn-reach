@@ -469,7 +469,7 @@
     "transfer-hold.modal.title": "Otros items en {title}",
     "transfer-hold.modal.result-count": "{count, number} {count, plural, one {Record found} other {Records found}}",
     "transfer-hold.modal.column.barcode": "Código de barras",
-    "transfer-hold.modal.column.item-status": "Estado del ejemplar",
+    "transfer-hold.modal.column.item-status": "Estado del ítem",
     "transfer-hold.modal.column.request-queue": "Reserva en cola",
     "transfer-hold.modal.column.location": "Ubicación",
     "transfer-hold.modal.column.material-type": "Tipo de material",
