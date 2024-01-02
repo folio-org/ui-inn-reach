@@ -58,7 +58,7 @@
     "settings.central-server-configuration.edit.modal-button.confirm": "确认",
     "settings.central-server.locations": "INN-Reach馆藏地",
     "settings.central-server.location": "INN-Reach馆藏地",
-    "settings.innreach-locations.location-code": "馆藏地代码",
+    "settings.innreach-locations.location-code": "位置代码",
     "settings.innreach-locations.description": "描述",
     "settings.innreach-locations.last-updated": "上次更新",
     "settings.innreach-locations.actions": "操作",
