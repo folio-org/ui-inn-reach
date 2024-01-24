@@ -395,7 +395,7 @@
     "shipped-items.modal.message.barcode-augmented": "The agency code for this item has been appended to the barcode. You will need to use this updated barcode to perform circulation actions on this transaction",
     "shipped-items.modal.button.close": "Schließen",
     "shipped-items.action.print-inn-reach-barcode": "Print INN-Reach barcode",
-    "shipped-items.action.print-hold-slip": "Print hold slip",
+    "shipped-items.action.print-hold-slip": "Bereitstellungszettel drucken",
     "shipped-items.action.print-transit-slip": "Transportzettel drucken",
     "shipped-items.field.print-barcode-slip": "Print barcode slip",
     "shipped-items.field.print-slip": "Print slip",
