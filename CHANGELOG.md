@@ -1,8 +1,13 @@
 # Change history for ui-inn-reach
 
-## 5.0.0 (in progress)
+## 4.2.0 (in progress)
 
-## [4.0.0] (https://github.com/folio-org/ui-inn-reach/tree/v4.0.0) (2022-10-13)
+## [4.1.0] (https://github.com/folio-org/ui-inn-reach/tree/v4.1.0) (2024-03-20)
+[Full Changelog](https://github.com/folio-org/ui-inn-reach/compare/v4.0.0...v4.1.0)
+
+* Several translations have been introduced/updated.
+
+## [4.0.0] (https://github.com/folio-org/ui-inn-reach/tree/v4.0.0) (2023-10-13)
 [Full Changelog](https://github.com/folio-org/ui-inn-reach/compare/v3.0.0...v4.0.0)
 
 * Remove innReachTransaction.pickupLocationDisplayName token from staff slips. Refs. UIINREACH-222.
