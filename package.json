@@ -1,6 +1,6 @@
 {
   "name": "@folio/inn-reach",
-  "version": "4.0.0",
+  "version": "4.1.0",
   "description": "Description for inn-reach",
   "main": "src/index.js",
   "repository": "",
@@ -102,7 +102,7 @@
       "statistical-code-types": "1.0",
       "statistical-codes": "1.0",
       "location-units": "2.0",
-      "users": "16.0"
+      "users": "16.0 16.1"
     },
     "permissionSets": [
       {
