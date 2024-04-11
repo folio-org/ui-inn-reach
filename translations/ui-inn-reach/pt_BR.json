@@ -68,7 +68,7 @@
     "settings.contribution-criteria.title": "Critérios de contribuição",
     "settings.contribution-criteria.button.save": "Salvar",
     "settings.contribution-criteria.field.locations": "Locais FOLIO para excluir da contribuição",
-    "settings.contribution-criteria.field.contributeButSuppress": "Código estatístico FOLIO para contribuir, mas suprimir a partir da descoberta central",
+    "settings.contribution-criteria.field.contributeButSuppress": "Código estatístico FOLIO para contribuir, mas ocultar a partir da descoberta central",
     "settings.contribution-criteria.field.doNotContribute": "Código estatístico FOLIO para excluir da contribuição",
     "settings.contribution-criteria.field.contributeAsSystemOwned": "Código estatístico FOLIO para indicação de recursos de propriedade do sistema INN-Reach",
     "settings.contribution-criteria.callout.connectionProblem.post": "Não foi possível criar dados devido a um erro do módulo. Por favor, tente novamente. Se o problema persistir, entre em contato com o administrador do sistema.",
