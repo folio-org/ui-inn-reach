@@ -93,7 +93,7 @@
     "settings.folio-to-inn-reach-locations.create-edit.update.success": "FOLIO to INN-Reach locations settings updated successfully",
     "settings.contribution-options": "Circulation status mapping",
     "settings.contribution-options.status.awaiting-delivery": "Awaiting delivery",
-    "settings.contribution-options.status.claimed-returned": "Claimed returned",
+    "settings.contribution-options.status.claimed-returned": "Zapewnienie o zwrocie",
     "settings.contribution-options.status.lost-and-paid": "Lost and paid",
     "settings.contribution-options.status.long-missing": "Long missing",
     "settings.contribution-options.status.missing": "Zaginiony",
