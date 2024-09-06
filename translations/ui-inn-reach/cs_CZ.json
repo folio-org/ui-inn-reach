@@ -331,7 +331,7 @@
     "transaction.type.local": "Místní",
     "transaction.status": "Stav transakce",
     "settings.inn-reach-recall-user": "INN-Reach stažení z výpůjček uživatele",
-    "settings.inn-reach-recall-user.title": "Uživatelské nastavení pro stažení z výpůjček INN-Reach",
+    "settings.inn-reach-recall-user.title": "Uživatelská nastavení pro stažení z výpůjček INN-Reach",
     "settings.inn-reach-recall-user.button.save": "Uložit",
     "settings.inn-reach-recall-user.field.recall-inn-reach-items-as-user": "Stáhnout INN-Reach jednotky z výpůjček jako uživatel",
     "settings.inn-reach-recall-user.create.success": "Uživatelská nastavení pro stažení z výpůjček INN-Reach byla úspěšně vytvořena",
