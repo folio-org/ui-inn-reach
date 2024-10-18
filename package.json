@@ -333,6 +333,20 @@
           "inn-reach.marc-record-transformation.item.get",
           "inn-reach.central-servers.paging-slip-template.item.get",
           "inn-reach.central-servers.paging-slip-template.item.put",
+          "inn-reach.paging-slips.collection.get",
+          "inn-reach.transactions.transfer-item.post",
+          "inn-reach.d2ir.inn-reach-transaction.item-receive.post",
+          "inn-reach.d2ir.inn-reach-transaction.receive-unshipped-item.post",
+          "inn-reach.d2ir.inn-reach-transaction.check-out-item.post",
+          "inn-reach.d2ir.inn-reach-transaction.patron.check-out-item.post",
+          "inn-reach.d2ir.inn-reach-transaction.localhold.check-out-item.post",
+          "inn-reach.d2ir.inn-reach-transaction.patron-hold.cancel.post",
+          "inn-reach.d2ir.inn-reach-transaction.item-hold.cancel.post",
+          "inn-reach.d2ir.inn-reach-transaction.localhold.cancel.post",
+          "inn-reach.d2ir.inn-reach-transaction.item-hold.recall.post",
+          "inn-reach.d2ir.inn-reach-transaction.patron-hold.return-item.post",
+          "inn-reach.d2ir.inn-reach-transaction.item-hold.final-checkin.post",
+          "inn-reach.location-mappings.libraries.collection.get",
           "inventory-storage.instance-types.collection.get",
           "inventory-storage.contributor-name-types.collection.get",
           "inventory-storage.holdings.item.post",
@@ -385,8 +399,7 @@
           "user-settings.custom-fields.collection.get",
           "usergroups.collection.get",
           "okapi.version.get",
-          "configuration.entries.collection.get",
-          "inn-reach.paging-slips.collection.get"
+          "configuration.entries.collection.get"
         ],
         "visible": true
       }
