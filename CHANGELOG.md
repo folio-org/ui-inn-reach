@@ -3,6 +3,7 @@
 ## 4.2.0 (in progress)
 
 * Refactor away from postcss-color-function. Refs. UIINREACH-233.
+* Add several sub-permissions to permission 'INN-Reach App: All permissions'. Refs. UIINREACH-237.
 
 ## [4.1.0] (https://github.com/folio-org/ui-inn-reach/tree/v4.1.0) (2024-03-20)
 [Full Changelog](https://github.com/folio-org/ui-inn-reach/compare/v4.0.0...v4.1.0)
