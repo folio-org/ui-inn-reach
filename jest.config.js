@@ -16,8 +16,8 @@ module.exports = {
   transformIgnorePatterns: [`/node_modules/(?!${esModules})`],
   moduleNameMapper: {
     '^.+\\.(css)$': 'identity-obj-proxy',
-    '^.+\\.(svg)$': 'identity-obj-proxy',
     'ky': 'ky/umd',
+    '\\.(jpg|jpeg|png|gif|svg)$': 'identity-obj-proxy',
   },
   testMatch: ['**/(lib|src)/**/?(*.)test.{js,jsx}'],
   testPathIgnorePatterns: ['/node_modules/'],

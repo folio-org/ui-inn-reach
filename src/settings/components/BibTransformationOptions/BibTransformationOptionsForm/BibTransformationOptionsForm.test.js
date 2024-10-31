@@ -1,11 +1,10 @@
-import React from 'react';
-import { screen } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import { createMemoryHistory } from 'history';
 import { Router } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
 import { translationsProperties, renderWithIntl } from '../../../../../test/jest/helpers';
 import BibTransformationOptionsForm from './BibTransformationOptionsForm';
-import { DEFAULT_INITIAL_VALUES } from '../../../../constants';
+import { DEFAULT_INITIAL_VALUES, CENTRAL_SERVER_ID } from '../../../../constants';
 
 const serverOptions = [
   {
@@ -84,10 +83,12 @@ describe('BibTransformationOptionsForm', () => {
   });
 
   describe('handleChangeServer', () => {
-    it('should cause onChangeServer callback', () => {
+    it('should cause onChangeServer callback', async () => {
       renderBibTransformationOptionsForm(commonProps);
-      document.getElementById('option-centralServerId-0-f8723a94-25d5-4f19-9043-cc3c306d54a1').click();
-      expect(onChangeServer).toHaveBeenCalled();
+      document.querySelector(`[id=${CENTRAL_SERVER_ID}]`).click();
+      await waitFor(() => expect(screen.getByText(selectedServerMock.name)).toBeDefined());
+      screen.getAllByRole('option')[0].click();
+      await waitFor(() => expect(onChangeServer).toHaveBeenCalled());
     });
   });
 

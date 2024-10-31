@@ -1,5 +1,4 @@
-import React from 'react';
-import { screen } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import { createMemoryHistory } from 'history';
 import { Router } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
@@ -81,10 +80,12 @@ describe('VisiblePatronIdForm', () => {
     expect(container).toBeVisible();
   });
 
-  it('should cause onChangeServer callback', () => {
+  it('should cause onChangeServer callback', async () => {
     renderVisiblePatronIdForm(commonProps);
-    screen.getByText('centralServer1').click();
-    expect(onChangeServer).toHaveBeenCalled();
+    document.querySelector('[id="centralServerId"]').click();
+    await waitFor(() => expect(document.querySelector('[id="selected-centralServerId-item"]')).toBeDefined());
+    screen.getAllByRole('option')[0].click();
+    await waitFor(() => expect(onChangeServer).toHaveBeenCalled());
   });
 
   describe('banner', () => {

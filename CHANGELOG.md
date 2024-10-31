@@ -3,6 +3,7 @@
 ## 4.2.0 (in progress)
 
 * Refactor away from postcss-color-function. Refs. UIINREACH-233.
+* Fix failing unit tests. Refs. UIINREACH-242.
 
 ## [4.1.0] (https://github.com/folio-org/ui-inn-reach/tree/v4.1.0) (2024-03-20)
 [Full Changelog](https://github.com/folio-org/ui-inn-reach/compare/v4.0.0...v4.1.0)

@@ -1,10 +1,11 @@
-import React from 'react';
-import { screen } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import { createMemoryHistory } from 'history';
 import { Router } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
 import { translationsProperties, renderWithIntl } from '../../../../../test/jest/helpers';
 import PickupLocationsForm from './PickupLocationsForm';
+
+import { CENTRAL_SERVER_ID } from '../../../../constants';
 
 const serverOptions = [
   {
@@ -51,10 +52,12 @@ describe('PickupLocationsForm', () => {
     onChangeServer,
   };
 
-  it('should cause onChangeServer callback', () => {
+  it('should cause onChangeServer callback', async () => {
     renderComponent(commonProps);
-    screen.getByText('centralServer1').click();
-    expect(onChangeServer).toHaveBeenCalled();
+    document.querySelector(`[id=${CENTRAL_SERVER_ID}]`).click();
+    await waitFor(() => expect(screen.getByText('centralServer1')).toBeDefined());
+    screen.getAllByRole('option')[0].click();
+    await waitFor(() => expect(onChangeServer).toHaveBeenCalled());
   });
 
   describe('"Save" button conditions', () => {
