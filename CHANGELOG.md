@@ -1,6 +1,7 @@
 # Change history for ui-inn-reach
 
-## 4.2.0 (in progress)
+## [4.2.0] (https://github.com/folio-org/ui-inn-reach/tree/v4.2.0) (2024-10-31)
+[Full Changelog](https://github.com/folio-org/ui-inn-reach/compare/v4.1.0...v4.2.0)
 
 * Refactor away from postcss-color-function. Refs. UIINREACH-233.
 * Fix failing unit tests. Refs. UIINREACH-242.
