@@ -1,10 +1,11 @@
 import React from 'react';
-import { screen } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import { createMemoryHistory } from 'history';
 import { Router } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
 import { translationsProperties, renderWithIntl } from '../../../../../test/jest/helpers';
 import InnReachRecallForm from './InnReachRecallForm';
+import { CENTRAL_SERVER_ID } from '../../../../constants';
 
 const serverOptions = [
   {
@@ -81,15 +82,20 @@ describe('InnReachRecallForm', () => {
     expect(container).toBeVisible();
   });
 
-  it('should cause onChangeServer callback', () => {
+  it('should cause onChangeServer callback', async () => {
     renderInnReachRecallForm(commonProps);
-    screen.getByText('centralServer1').click();
-    expect(onChangeServer).toHaveBeenCalled();
+    document.querySelector(`[id=${CENTRAL_SERVER_ID}]`).click();
+    await waitFor(() => expect(screen.getByText('centralServer1')).toBeDefined());
+    screen.getAllByRole('option')[0].click();
+
+    await waitFor(() => expect(onChangeServer).toHaveBeenCalled());
   });
 
-  it('should retrieve a user data', () => {
+  it('should retrieve a user data', async () => {
     renderInnReachRecallForm(commonProps);
-    screen.getByText('centralServer1').click();
+    document.querySelector(`[id=${CENTRAL_SERVER_ID}]`).click();
+    await waitFor(() => expect(screen.getByText('centralServer1')).toBeDefined());
+    screen.getAllByRole('option')[0].click();
     const field = screen.getByRole('textbox', { name: 'Recall INN-Reach items as user' });
 
     userEvent.type(field, 'e2f5ebb7-9285-58f8-bc1e-608ac2080861');
@@ -97,23 +103,31 @@ describe('InnReachRecallForm', () => {
   });
 
   describe('button conditions', () => {
-    it('should be enabled', () => {
+    it('should be enabled', async () => {
       renderInnReachRecallForm(commonProps);
-      screen.getByText('centralServer1').click();
+
+      document.querySelector(`[id=${CENTRAL_SERVER_ID}]`).click();
+      await waitFor(() => expect(screen.getByText('centralServer1')).toBeDefined());
+      screen.getAllByRole('option')[0].click();
       const field = screen.getByRole('textbox', { name: 'Recall INN-Reach items as user' });
 
       userEvent.type(field, 'e2f5ebb7-9285-58f8-bc1e-608ac2080861');
+
       expect(screen.getByRole('button', { name: 'Save' })).toBeEnabled();
     });
 
-    it('should be disabled', () => {
+    it('should be disabled', async () => {
       renderInnReachRecallForm({
         ...commonProps,
         initialValues: {
           userId: 'e2f5ebb7-9285-58f8-bc1e-608ac2080861',
         },
       });
-      screen.getByText('centralServer1').click();
+
+      document.querySelector(`[id=${CENTRAL_SERVER_ID}]`).click();
+      await waitFor(() => expect(screen.getByText('centralServer1')).toBeDefined());
+      screen.getAllByRole('option')[0].click();
+
       expect(screen.getByRole('button', { name: 'Save' })).toBeDisabled();
     });
   });

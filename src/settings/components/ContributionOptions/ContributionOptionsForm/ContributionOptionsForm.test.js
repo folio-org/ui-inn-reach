@@ -1,4 +1,4 @@
-import React from 'react';
+import { screen, waitFor } from '@testing-library/react';
 import { createMemoryHistory } from 'history';
 import { Router } from 'react-router-dom';
 import { translationsProperties, renderWithIntl } from '../../../../../test/jest/helpers';
@@ -122,11 +122,13 @@ describe('ContributionOptionsForm', () => {
   });
 
   describe('Selection', () => {
-    it('should call onChangeServer', () => {
+    it('should call onChangeServer', async () => {
       renderContributionOptionsForm(commonProps);
 
-      document.getElementById(`option-${CENTRAL_SERVER_ID}-1-testName2`).click();
-      expect(onChangeServer).toHaveBeenCalled();
+      document.querySelector(`[id=${CENTRAL_SERVER_ID}]`).click();
+      await waitFor(() => expect(screen.getByText('testName')).toBeDefined());
+      screen.getAllByRole('option')[0].click();
+      await waitFor(() => expect(onChangeServer).toHaveBeenCalled());
     });
   });
 

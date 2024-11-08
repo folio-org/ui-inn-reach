@@ -2,7 +2,7 @@ import React from 'react';
 import { createMemoryHistory } from 'history';
 import { Router } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
-import { screen } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import { MultiSelection } from '@folio/stripes/components';
 import { translationsProperties, renderWithIntl } from '../../../../../test/jest/helpers';
 import { DEFAULT_VALUES } from '../../../routes/ContributionCriteriaRoute/utils';
@@ -131,11 +131,13 @@ describe('ContributionCriteriaForm', () => {
   });
 
   describe('Selection', () => {
-    it('should call onChangeServer', () => {
+    it('should call onChangeServer', async () => {
       renderContributionCriteriaForm(commonProps);
 
-      document.getElementById(`option-${CENTRAL_SERVER_ID}-1-testName2`).click();
-      expect(onChangeServer).toHaveBeenCalled();
+      document.querySelector(`[id=${CENTRAL_SERVER_ID}]`).click();
+      await waitFor(() => expect(document.querySelector('[id="selected-centralServerId-item"]')).toBeDefined());
+      screen.getAllByRole('option')[0].click();
+      await waitFor(() => expect(onChangeServer).toHaveBeenCalled());
     });
   });
 

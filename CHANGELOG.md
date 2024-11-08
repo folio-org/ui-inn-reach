@@ -1,9 +1,14 @@
 # Change history for ui-inn-reach
 
-## 4.2.0 (in progress)
+## [4.2.1] In progress
+
+* Add several sub-permissions to permission 'INN-Reach App: All permissions'. Refs. UIINREACH-237.
+
+## [4.2.0] (https://github.com/folio-org/ui-inn-reach/tree/v4.2.0) (2024-10-31)
+[Full Changelog](https://github.com/folio-org/ui-inn-reach/compare/v4.1.0...v4.2.0)
 
 * Refactor away from postcss-color-function. Refs. UIINREACH-233.
-* Add several sub-permissions to permission 'INN-Reach App: All permissions'. Refs. UIINREACH-237.
+* Fix failing unit tests. Refs. UIINREACH-242.
 
 ## [4.1.0] (https://github.com/folio-org/ui-inn-reach/tree/v4.1.0) (2024-03-20)
 [Full Changelog](https://github.com/folio-org/ui-inn-reach/compare/v4.0.0...v4.1.0)

@@ -2,7 +2,7 @@ import React from 'react';
 import { createMemoryHistory } from 'history';
 import { Router } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
-import { act, screen } from '@testing-library/react';
+import { act, screen, waitFor } from '@testing-library/react';
 import { translationsProperties, renderWithIntl } from '../../../../../test/jest/helpers';
 import FolioCirculationUserForm from './FolioCirculationUserForm';
 
@@ -100,10 +100,12 @@ describe('FolioCirculationUserForm', () => {
   });
 
   describe('handleChangeServer', () => {
-    it('should cause onChangeServer callback', () => {
+    it('should cause onChangeServer callback', async () => {
       renderFolioCirculationUserForm(commonProps);
-      document.getElementById('option-centralServerId-0-f8723a94-25d5-4f19-9043-cc3c306d54a1').click();
-      expect(onChangeServer).toHaveBeenCalled();
+      document.querySelector('[id="centralServerId"]').click();
+      await waitFor(() => expect(document.querySelector('[id="selected-centralServerId-item"]')).toBeDefined());
+      screen.getAllByRole('option')[0].click();
+      await waitFor(() => expect(onChangeServer).toHaveBeenCalled());
     });
   });
 
