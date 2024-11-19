@@ -280,7 +280,7 @@
     "transaction.field.status": "Status da transação (INN-Reach)",
     "transaction.field.label.time": "{date} {time}",
     "title.list.transactions": "Transações INN-Reach",
-    "search": "Pesquisa",
+    "search": "Buscar",
     "resetAllFilters": "Reiniciar tudo",
     "searchAndFilter": "Selecionar atividade",
     "settings.central-server-configuration.callout.invalidData": "Dados inválidos do servidor central",
