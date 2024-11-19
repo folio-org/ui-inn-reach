@@ -60,7 +60,7 @@
     "settings.central-server.location": "INN-Reach location",
     "settings.innreach-locations.location-code": "Kod lokalizacji",
     "settings.innreach-locations.description": "Opis",
-    "settings.innreach-locations.last-updated": "Ostatnio modyfikowany",
+    "settings.innreach-locations.last-updated": "Ostatnia aktualizacja",
     "settings.innreach-locations.actions": "Akcje",
     "settings.innreach-locations.locations": "Loc",
     "settings.record-contribution": "Record contribution",
