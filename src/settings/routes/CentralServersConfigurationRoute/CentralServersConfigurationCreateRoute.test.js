@@ -1,14 +1,9 @@
-import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import {
   act,
 } from '@testing-library/react';
 
-import {
-  renderWithIntl,
-} from '@folio/stripes-data-transfer-components/test/jest/helpers';
-
-import { translationsProperties } from '../../../../test/jest/helpers';
+import { translationsProperties, renderWithIntl } from '../../../../test/jest/helpers';
 import CentralServersConfigurationCreateRoute from './CentralServersConfigurationCreateRoute';
 import CentralServersConfigurationCreateEditContainer from './CentralServersConfigurationCreateEditContainer';
 import {

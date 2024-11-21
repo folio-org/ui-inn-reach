@@ -1,10 +1,5 @@
-import React from 'react';
-import {
-  renderWithIntl,
-} from '@folio/stripes-data-transfer-components/test/jest/helpers';
-
 import { getFiltersCount } from '../../../../../utils';
-import { translationsProperties } from '../../../../../../test/jest/helpers';
+import { translationsProperties, renderWithIntl } from '../../../../../../test/jest/helpers';
 import ResultsPane from './ResultsPane';
 
 jest.mock('../../../../../utils', () => ({

@@ -1,11 +1,7 @@
-import React from 'react';
-import {
-  renderWithIntl,
-} from '@folio/stripes-data-transfer-components/test/jest/helpers';
 import user from '@testing-library/user-event';
 
 import FiltersPane from './FiltersPane';
-import { translationsProperties } from '../../../../../../test/jest/helpers';
+import { translationsProperties, renderWithIntl } from '../../../../../../test/jest/helpers';
 
 const FILTERS = 'Filters';
 const COLLAPSE_FILTERS_BUTTON = 'Icon';
