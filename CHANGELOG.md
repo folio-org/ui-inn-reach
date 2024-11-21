@@ -3,6 +3,7 @@
 ## [5.0.0] In progress
 
 * *BREAKING* Add several sub-permissions to permission 'INN-Reach App: All permissions'. Refs. UIINREACH-237.
+* Leverage local `renderWIthIntl` utility for unit tests. Refs. UIINREACH-245.
 
 ## [4.2.0] (https://github.com/folio-org/ui-inn-reach/tree/v4.2.0) (2024-10-31)
 [Full Changelog](https://github.com/folio-org/ui-inn-reach/compare/v4.1.0...v4.2.0)

@@ -1,12 +1,7 @@
-import React from 'react';
-
-import {
-  renderWithIntl,
-} from '@folio/stripes-data-transfer-components/test/jest/helpers';
 import {
   SearchField,
 } from '@folio/stripes/components';
-import { translationsProperties } from '../../../../../../test/jest/helpers';
+import { translationsProperties, renderWithIntl } from '../../../../../../test/jest/helpers';
 import SearchForm from './SearchForm';
 
 jest.mock('@folio/stripes/components', () => {
