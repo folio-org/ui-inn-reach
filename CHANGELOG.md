@@ -1,6 +1,7 @@
 # Change history for ui-inn-reach
 
-## [5.0.0] In progress
+## [5.0.0] (https://github.com/folio-org/ui-inn-reach/tree/v5.0.0) (2024-11-21)
+[Full Changelog](https://github.com/folio-org/ui-inn-reach/compare/v4.2.0...v5.0.0)
 
 * *BREAKING* Add several sub-permissions to permission 'INN-Reach App: All permissions'. Refs. UIINREACH-237.
 * Leverage local `renderWIthIntl` utility for unit tests. Refs. UIINREACH-245.
