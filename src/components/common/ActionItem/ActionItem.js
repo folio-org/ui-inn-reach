@@ -11,9 +11,9 @@ import css from './ActionItem.css';
 
 const ActionItem = ({
   id,
-  buttonStyle,
+  buttonStyle = 'dropdownItem',
   icon,
-  size,
+  size = 'medium',
   buttonTextTranslationKey,
   disabled,
   onClickHandler,
@@ -47,11 +47,6 @@ ActionItem.propTypes = {
   id: PropTypes.string,
   size: PropTypes.string,
   onClickHandler: PropTypes.func,
-};
-
-ActionItem.defaultProps = {
-  size: 'medium',
-  buttonStyle: 'dropdownItem',
 };
 
 export default ActionItem;

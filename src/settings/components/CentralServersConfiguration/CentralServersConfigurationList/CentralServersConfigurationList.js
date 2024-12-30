@@ -19,7 +19,7 @@ import {
 } from '../../../../utils';
 
 const CentralServersConfigurationList = ({
-  centralServers,
+  centralServers = [],
   children,
 }) => {
   return (
@@ -49,10 +49,6 @@ const CentralServersConfigurationList = ({
 CentralServersConfigurationList.propTypes = {
   centralServers: PropTypes.arrayOf(PropTypes.object),
   children: PropTypes.node,
-};
-
-CentralServersConfigurationList.defaultProps = {
-  centralServers: [],
 };
 
 export default CentralServersConfigurationList;

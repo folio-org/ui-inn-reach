@@ -68,7 +68,7 @@ const {
 
 const SearchAndFilter = ({
   history,
-  isLoading,
+  isLoading = false,
   location,
   onNeedMoreData,
   resetData,
@@ -87,12 +87,12 @@ const SearchAndFilter = ({
   columnMapping,
   resultsFormatter,
   resultsPaneTitle,
-  isShowAddNew,
-  count,
-  contentData,
+  isShowAddNew = false,
+  count = 0,
+  contentData = [],
   onRowClick,
-  isPreRenderAllData,
-  isInsideListSearch,
+  isPreRenderAllData = false,
+  isInsideListSearch = false,
   id,
   onGenerateReport,
   onToggleStatesOfModalReports,
@@ -403,15 +403,6 @@ SearchAndFilter.propTypes = {
   isLoading: PropTypes.bool,
   isPreRenderAllData: PropTypes.bool,
   isShowAddNew: PropTypes.bool,
-};
-
-SearchAndFilter.defaultProps = {
-  count: 0,
-  isLoading: false,
-  isShowAddNew: false,
-  isInsideListSearch: false,
-  isPreRenderAllData: false,
-  contentData: [],
 };
 
 export default withRouter(SearchAndFilter);

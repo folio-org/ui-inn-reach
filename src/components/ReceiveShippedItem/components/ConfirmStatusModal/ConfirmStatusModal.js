@@ -21,11 +21,11 @@ import {
 import css from './ConfirmStatusModal.css';
 
 const ConfirmStatusModal = ({
-  open,
+  open = true,
   label,
   showPrintButton,
   isPrintable,
-  slipTemplate,
+  slipTemplate = '',
   slipData,
   message,
   checkboxLabel,
@@ -117,11 +117,6 @@ ConfirmStatusModal.propTypes = {
   onAfterPrint: PropTypes.func,
   onBeforePrint: PropTypes.func,
   onClickClose: PropTypes.func,
-};
-
-ConfirmStatusModal.defaultProps = {
-  open: true,
-  slipTemplate: '',
 };
 
 export default ConfirmStatusModal;

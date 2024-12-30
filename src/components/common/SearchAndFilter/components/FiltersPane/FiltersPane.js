@@ -14,7 +14,7 @@ const paneTitle = <FormattedMessage id="ui-inn-reach.searchAndFilter" />;
 
 const FiltersPane = ({
   children,
-  width,
+  width = FILTER_PANE_WIDTH,
   toggleFilters,
 }) => {
   const lastMenu = (
@@ -39,10 +39,6 @@ FiltersPane.propTypes = {
   children: PropTypes.node.isRequired,
   toggleFilters: PropTypes.func.isRequired,
   width: PropTypes.string,
-};
-
-FiltersPane.defaultProps = {
-  width: FILTER_PANE_WIDTH,
 };
 
 export default FiltersPane;

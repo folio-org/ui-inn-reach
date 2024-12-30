@@ -96,7 +96,7 @@ const resultsFormatter = {
 };
 
 const TransactionListView = ({
-  isLoading,
+  isLoading = false,
   onNeedMoreData,
   pagingSlipsArr,
   pagingSlipTemplatesMap,
@@ -106,8 +106,8 @@ const TransactionListView = ({
   history,
   match,
   location,
-  transactions,
-  transactionsCount,
+  transactions = [],
+  transactionsCount = 0,
   children,
   onGenerateReport,
   onToggleStatesOfModalReports,
@@ -166,12 +166,6 @@ TransactionListView.propTypes = {
   isLoading: PropTypes.bool,
   transactions: PropTypes.arrayOf(PropTypes.object),
   transactionsCount: PropTypes.number,
-};
-
-TransactionListView.defaultProps = {
-  transactionsCount: 0,
-  isLoading: false,
-  transactions: [],
 };
 
 export default withRouter(withStripes(TransactionListView));

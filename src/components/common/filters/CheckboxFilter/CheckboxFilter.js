@@ -11,8 +11,8 @@ import { CheckboxFilter as Checkbox } from '@folio/stripes/smart-components';
 import { handleClearFilter } from '../../../../utils';
 
 const CheckboxFilter = ({
-  activeFilters,
-  closedByDefault,
+  activeFilters = [],
+  closedByDefault = false,
   id,
   labelId,
   name,
@@ -44,11 +44,6 @@ CheckboxFilter.propTypes = {
   onChange: PropTypes.func.isRequired,
   activeFilters: PropTypes.array,
   closedByDefault: PropTypes.bool
-};
-
-CheckboxFilter.defaultProps = {
-  activeFilters: [],
-  closedByDefault: false
 };
 
 export default CheckboxFilter;

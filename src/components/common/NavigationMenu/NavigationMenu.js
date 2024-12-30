@@ -15,7 +15,7 @@ import css from './NavigationMenu.css';
 const NavigationMenu = ({
   history,
   location,
-  value,
+  value = getTransactionListUrl(),
   dataOptions,
   separator,
 }) => {
@@ -67,10 +67,6 @@ const NavigationMenu = ({
       }
     </>
   );
-};
-
-NavigationMenu.defaultProps = {
-  value: getTransactionListUrl(),
 };
 
 NavigationMenu.propTypes = {

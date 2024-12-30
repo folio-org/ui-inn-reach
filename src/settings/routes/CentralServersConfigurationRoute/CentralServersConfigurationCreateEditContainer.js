@@ -34,13 +34,13 @@ export const DEFAULT_VALUES = {
 
 const CentralServersConfigurationCreateEditContainer = ({
   history,
-  initialValues,
+  initialValues = {},
   showPrevLocalServerValue,
   onFormCancel,
   onSubmit,
   openModal,
-  isEditMode,
-  modalContent,
+  isEditMode = false,
+  modalContent = {},
   onShowPreviousLocalServerValue,
   onModalCancel,
   onModalConfirm,
@@ -117,12 +117,6 @@ CentralServersConfigurationCreateEditContainer.propTypes = {
   showPrevLocalServerValue: PropTypes.bool,
   onChangeModalState: PropTypes.func,
   onShowPreviousLocalServerValue: PropTypes.func,
-};
-
-CentralServersConfigurationCreateEditContainer.defaultProps = {
-  initialValues: {},
-  modalContent: {},
-  isEditMode: false,
 };
 
 export default CentralServersConfigurationCreateEditContainer;

@@ -14,7 +14,7 @@ import {
 
 const defaultLabel = <FormattedMessage id="ui-inn-reach.resetAllFilters" />;
 
-const ResetButton = ({ id, disabled, label, reset }) => {
+const ResetButton = ({ id, disabled, label = defaultLabel, reset }) => {
   return (
     <div>
       <Button
@@ -41,10 +41,6 @@ ResetButton.propTypes = {
   disabled: PropTypes.bool,
   id: PropTypes.string,
   label: PropTypes.node,
-};
-
-ResetButton.defaultProps = {
-  label: defaultLabel,
 };
 
 export default ResetButton;
