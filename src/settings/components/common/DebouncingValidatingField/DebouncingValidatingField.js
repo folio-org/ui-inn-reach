@@ -6,7 +6,7 @@ class DebouncingValidatingField extends Component {
   validate = (...args) => {
     const {
       validate,
-      wait,
+      wait = 300,
     } = this.props;
 
     return (
@@ -45,9 +45,6 @@ DebouncingValidatingField.propTypes = {
   validate: PropTypes.func.isRequired,
   children: PropTypes.func,
   wait: PropTypes.number,
-};
-DebouncingValidatingField.defaultProps = {
-  wait: 300,
 };
 
 export default DebouncingValidatingField;

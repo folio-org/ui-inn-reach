@@ -15,10 +15,10 @@ import css from './SearchForm.css';
 const SearchForm = ({
   applySearch,
   changeSearch,
-  searchQuery,
-  isLoading,
-  autoFocus,
-  isInsideListSearch,
+  searchQuery = '',
+  isLoading = false,
+  autoFocus = true,
+  isInsideListSearch = false,
 }) => {
   const insideFormClass = classNames({ [css.insideForm]: isInsideListSearch });
   const insideBtnClass = classNames({ [css.insideBtn]: isInsideListSearch });
@@ -85,13 +85,6 @@ SearchForm.propTypes = {
   isInsideListSearch: PropTypes.bool,
   isLoading: PropTypes.bool,
   searchQuery: PropTypes.string,
-};
-
-SearchForm.defaultProps = {
-  searchQuery: '',
-  isLoading: false,
-  autoFocus: true,
-  isInsideListSearch: false,
 };
 
 export default SearchForm;

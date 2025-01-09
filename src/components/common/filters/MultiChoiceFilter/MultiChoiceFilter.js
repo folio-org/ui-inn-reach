@@ -10,7 +10,7 @@ const MultiChoiceFilter = ({
   activeFilters,
   dataOptions,
   closedByDefault,
-  disabled,
+  disabled = false,
   onChange,
 }) => {
   return (
@@ -44,10 +44,6 @@ MultiChoiceFilter.propTypes = {
   activeFilters: PropTypes.arrayOf(PropTypes.string),
   closedByDefault: PropTypes.bool,
   disabled: PropTypes.bool,
-};
-
-MultiChoiceFilter.defaultProps = {
-  disabled: false,
 };
 
 export default MultiChoiceFilter;

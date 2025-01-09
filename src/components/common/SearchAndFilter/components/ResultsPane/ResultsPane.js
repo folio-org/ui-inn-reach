@@ -20,14 +20,14 @@ import { getFiltersCount } from '../../../../../utils';
 
 const ResultsPane = ({
   children,
-  width,
+  width = FILL_PANE_WIDTH,
   title,
-  subTitle,
-  count,
+  subTitle = '',
+  count = 0,
   renderLastMenu,
   renderActionMenu,
   toggleFiltersPane,
-  isFiltersOpened,
+  isFiltersOpened = true,
   filters,
 }) => {
   const paneSub = (
@@ -90,13 +90,6 @@ ResultsPane.propTypes = {
   subTitle: PropTypes.node,
   toggleFiltersPane: PropTypes.func,
   width: PropTypes.string,
-};
-
-ResultsPane.defaultProps = {
-  isFiltersOpened: true,
-  width: FILL_PANE_WIDTH,
-  subTitle: '',
-  count: 0,
 };
 
 export default ResultsPane;

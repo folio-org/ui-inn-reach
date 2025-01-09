@@ -10,8 +10,8 @@ import {
 const FilterAccordion = ({
   activeFilters,
   children,
-  closedByDefault,
-  disabled,
+  closedByDefault = false,
+  disabled = false,
   id,
   label,
   labelId,
@@ -46,11 +46,6 @@ FilterAccordion.propTypes = {
   disabled: PropTypes.bool,
   label: PropTypes.node,
   labelId: PropTypes.string,
-};
-
-FilterAccordion.defaultProps = {
-  closedByDefault: false,
-  disabled: false,
 };
 
 export default FilterAccordion;

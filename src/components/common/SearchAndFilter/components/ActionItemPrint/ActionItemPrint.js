@@ -11,13 +11,13 @@ import css from './ActionItemPrint.css';
 
 const ActionItemPrint = ({
   id,
-  buttonStyle,
+  buttonStyle = 'dropdownItem',
   icon,
-  size,
+  size = 'medium',
   buttonLabel,
   disabled,
-  templates,
-  templatesContext,
+  templates = {},
+  templatesContext = [],
   onToggle,
 }) => (
   <PrintSlips
@@ -48,13 +48,6 @@ ActionItemPrint.propTypes = {
   size: PropTypes.string,
   templates: PropTypes.object,
   templatesContext: PropTypes.array,
-};
-
-ActionItemPrint.defaultProps = {
-  size: 'medium',
-  buttonStyle: 'dropdownItem',
-  templates: {},
-  templatesContext: [],
 };
 
 export default ActionItemPrint;
