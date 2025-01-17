@@ -74,6 +74,7 @@ const {
 
 const {
   LESS,
+  GREATER,
 } = CREATED_DATE_OPERATIONS;
 
 const TOMORROW = 1;
@@ -217,8 +218,8 @@ export const getParamsForOwningSitePagedTooLongReport = (record) => {
     ...GENERAL_PARAMS,
     [TYPE]: [ITEM, LOCAL],
     [STATUS]: [ITEM_HOLD, LOCAL_HOLD, TRANSFER],
-    [CREATED_DATE_OP]: getLastModifiedDate(record[MINIMUM_DAYS_PAGED]),
-    [CREATED_DATE_OP]: LESS,
+    [CREATED_DATE]: getLastModifiedDate(record[MINIMUM_DAYS_PAGED]),
+    [CREATED_DATE_OP]: GREATER,
   };
 };
 
