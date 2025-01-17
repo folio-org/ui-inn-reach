@@ -4,6 +4,7 @@
 
 * Leverage local `renderWIthIntl` utility for unit tests. Refs. UIINREACH-245.
 * React v19: refactor away from default props for functional components. Refs UIINREACH-235.
+* Owning site paged too long report not honoring "minimum days paged" value. Refs UIINREACH-236.
 
 ## [5.0.0] (https://github.com/folio-org/ui-inn-reach/tree/v5.0.0) (2024-11-21)
 [Full Changelog](https://github.com/folio-org/ui-inn-reach/compare/v4.2.0...v5.0.0)
