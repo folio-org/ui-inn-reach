@@ -1,10 +1,12 @@
 # Change history for ui-inn-reach
 
-## [5.1.0] In progress
+## [6.0.0] In progress
 
 * Leverage local `renderWIthIntl` utility for unit tests. Refs. UIINREACH-245.
 * React v19: refactor away from default props for functional components. Refs UIINREACH-235.
 * Owning site paged too long report not honoring "minimum days paged" value. Refs UIINREACH-236.
+* *BREAKING* Migrate stripes dependencies to their Sunflower versions. Refs UIINREACH-250.
+* *BREAKING* Migrate react-intl to v7. Refs UIINREACH-251.
 
 ## [5.0.0] (https://github.com/folio-org/ui-inn-reach/tree/v5.0.0) (2024-11-21)
 [Full Changelog](https://github.com/folio-org/ui-inn-reach/compare/v4.2.0...v5.0.0)
