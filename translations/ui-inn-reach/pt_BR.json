@@ -500,7 +500,7 @@
     "settings.pickup-locations.update.success": "Localizações de retirada local atualizados com sucesso",
     "settings.pickup-locations.callout.connectionProblem.update": "Não foi possível atualizar os dados devido a um erro do módulo. Por favor, tente novamente. Se o problema persistir, entre em contato com o administrador do sistema",
     "settings.manage-contribution.current.refresh": "Atualizar",
-    "settings.paging-slip-template.preview-modal-header": "Pré-visualização do Slip de Paging INN-Reach",
+    "settings.paging-slip-template.preview-modal-header": "Prévia do recibo de paginação INN-Reach",
     "settings.paging-slip-template.token-header.inn-reach-patron": "Usuário INN-Reach",
     "settings.paging-slip-template.token-header.inn-reach-server": "Servidor INN-Reach",
     "settings.paging-slip-template.token-header.inn-reach-agency": "Agência INN-Reach",
