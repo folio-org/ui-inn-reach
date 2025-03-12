@@ -93,7 +93,7 @@
     "settings.folio-to-inn-reach-locations.create-edit.update.success": "Nastavení lokací FOLIO na INN-Reach bylo úspěšně aktualizováno",
     "settings.contribution-options": "Mapování stavu cirkulace",
     "settings.contribution-options.status.awaiting-delivery": "Čeká na doručení",
-    "settings.contribution-options.status.claimed-returned": "Údajně vráceno",
+    "settings.contribution-options.status.claimed-returned": "Prohlášeno za vrácené",
     "settings.contribution-options.status.lost-and-paid": "Ztraceno a zaplaceno",
     "settings.contribution-options.status.long-missing": "Dlouho chybějící",
     "settings.contribution-options.status.missing": "Chybějící",
