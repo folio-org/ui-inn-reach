@@ -1,6 +1,7 @@
 # Change history for ui-inn-reach
 
-## [6.0.0] In progress
+## [6.0.0] (https://github.com/folio-org/ui-inn-reach/tree/v6.0.0) (2025-03-14)
+[Full Changelog](https://github.com/folio-org/ui-inn-reach/compare/v5.0.0...v6.0.0)
 
 * Leverage local `renderWIthIntl` utility for unit tests. Refs. UIINREACH-245.
 * React v19: refactor away from default props for functional components. Refs UIINREACH-235.
