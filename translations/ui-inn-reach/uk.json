@@ -483,7 +483,7 @@
     "cancel-hold.callout.connection-problem.post.cancel-hold": "There was a problem canceling the item",
     "cancel-hold.callout.success.post.cancel-hold": "Item has been successfully canceled",
     "loan.callout.connection-problem.get.loan": "There was a problem loading the loan",
-    "settings.circulation-settings": "Circulation settings",
+    "settings.circulation-settings": "Налаштування книговидачі",
     "settings.paging-slip-template": "INN-Reach paging slip templates",
     "settings.paging-slip-template.title": "INN-Reach paging slip templates",
     "settings.paging-slip-template.button.save": "Зберегти",
