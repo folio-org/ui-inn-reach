@@ -1,5 +1,9 @@
 # Change history for ui-inn-reach
 
+## IN PROGRESS 
+
+* `FOLIO to INN-Reach locations` settings - filter FOLIO locations by the selected library id, to avoid displaying locations with the same campus but a different library. Fixes UIINREACH-246.
+
 ## [6.0.0] (https://github.com/folio-org/ui-inn-reach/tree/v6.0.0) (2025-03-14)
 [Full Changelog](https://github.com/folio-org/ui-inn-reach/compare/v5.0.0...v6.0.0)
 
