@@ -1,9 +1,9 @@
-import React from 'react';
+import { act } from 'react';
 import {
   cloneDeep,
 } from 'lodash';
 import { createMemoryHistory } from 'history';
-import { screen, act } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 
 import { ConfirmationModal } from '@folio/stripes/components';
 
@@ -410,6 +410,123 @@ describe('FolioToInnReachLocationsCreateEditRoute component', () => {
       await act(async () => { await FolioToInnReachLocationsForm.mock.calls[1][0].onChangeMappingType('Locations'); });
       await act(async () => { await FolioToInnReachLocationsForm.mock.calls[2][0].onChangeLibrary(loclibs[3].name); });
       expect(FolioToInnReachLocationsForm.mock.calls[8][0].initialValues).toEqual(recordForLocationMappings);
+    });
+  });
+
+  describe('when the locationMappings is not empty', () => {
+    it('should display FOLIO locations of only the selected library', async () => {
+      const getLocationMappings = jest.fn(() => Promise.resolve({
+        locationMappings: [
+          {
+            id: '95fd9c8b-ed1b-4661-9079-c467c289463c',
+            locationId: 'ff357dab-1446-4e34-a78c-cf0478a10c75',
+          },
+        ],
+        totalRecords: 1,
+      }));
+      const newMutator = cloneDeep(mutatorMock);
+      const newFOLIOLocations = {
+        records: [{
+          locations: [
+            ...locations,
+            {
+              id: 'b0fc186f-5c09-495a-b6db-4654ae5ec95f',
+              campusId: '1a7d928b-4a04-4466-a2e4-3c5cf564cf3f',
+              code: 'code7',
+              libraryId: 'bbb4f74c-1f53-499e-a40d-bf97fc3f58fb',
+              name: 'FOLIOname2',
+            },
+          ],
+        }],
+        isPending: false,
+        failed: false,
+      };
+
+      newMutator.locationMappings.GET = getLocationMappings;
+
+      renderFolioToInnReachLocationsCreateEditRoute({
+        history,
+        resources: {
+          ...resourcesMock,
+          selectedLibraryId: loclibs[1].id,
+          folioLocations: newFOLIOLocations,
+        },
+        mutator: newMutator,
+      });
+
+      await act(async () => FolioToInnReachLocationsForm.mock.calls[0][0].onChangeServer(servers[0].name));
+      await act(async () => FolioToInnReachLocationsForm.mock.calls.at(-1)[0].onChangeMappingType('Locations'));
+      await act(async () => FolioToInnReachLocationsForm.mock.calls.at(-1)[0].onChangeLibrary(loclibs[3].name));
+
+      expect(FolioToInnReachLocationsForm).toHaveBeenCalledWith(expect.objectContaining({
+        initialValues: {
+          locationsTabularList: [
+            {
+              folioLocation: 'folioName5 (code5)',
+              code: 'code5',
+            },
+            {
+              folioLocation: 'FOLIOname1 (7sdfe)',
+              code: '7sdfe',
+            }
+          ],
+        },
+      }), {});
+    });
+  });
+
+  describe('when the locationMappings is empty', () => {
+    it('should display FOLIO locations of only the selected library', async () => {
+      const getLocationMappings = jest.fn(() => Promise.resolve(locationMappingsResponseMock));
+      const newMutator = cloneDeep(mutatorMock);
+      const locationsOfFOLIO = {
+        records: [{
+          locations: [
+            ...locations,
+            {
+              id: 'b0fc186f-5c09-495a-b6db-4654ae5ec95f',
+              campusId: '1a7d928b-4a04-4466-a2e4-3c5cf564cf3f',
+              code: 'code7',
+              libraryId: 'bbb4f74c-1f53-499e-a40d-bf97fc3f58fb',
+              name: 'FOLIOname2',
+            },
+          ],
+        }],
+        isPending: false,
+        failed: false,
+      };
+
+      newMutator.locationMappings.GET = getLocationMappings;
+
+      renderFolioToInnReachLocationsCreateEditRoute({
+        history,
+        resources: {
+          ...resourcesMock,
+          selectedLibraryId: loclibs[1].id,
+          folioLocations: locationsOfFOLIO,
+        },
+        mutator: newMutator,
+      });
+
+      await act(async () => FolioToInnReachLocationsForm.mock.calls[0][0].onChangeServer(servers[0].name));
+      await act(async () => FolioToInnReachLocationsForm.mock.calls.at(-1)[0].onChangeMappingType('Locations'));
+      await act(async () => FolioToInnReachLocationsForm.mock.calls.at(-1)[0].onChangeLibrary(loclibs[3].name));
+
+      expect(FolioToInnReachLocationsForm).toHaveBeenCalledWith(expect.objectContaining({
+        initialValues: {
+          locationsTabularList: [
+            {
+              folioLocation: 'folioName5 (code5)',
+              innReachLocations: '7fab623d-1947-4413-b315-eae9ba9bb0c0',
+              code: 'code5',
+            },
+            {
+              folioLocation: 'FOLIOname1 (7sdfe)',
+              code: '7sdfe',
+            },
+          ],
+        },
+      }), {});
     });
   });
 
