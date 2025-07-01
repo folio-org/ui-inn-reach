@@ -46,13 +46,6 @@ export const getServerLibraries = (localAgencies, folioLibraries) => {
   return formattedLibraries;
 };
 
-const getCampusId = ({
-  selectedLibraryId,
-  folioLibraries,
-}) => {
-  return folioLibraries.find(library => library.id === selectedLibraryId).campusId;
-};
-
 export const getFinalLocationMappings = ({
   folioLocations,
   tabularListMap,
@@ -147,8 +140,12 @@ export const getLibrariesMappingsMap = (libraryMappings) => {
   return libraryMappingsMap;
 };
 
-const getFOLIOLocationsOfOptedLibrary = (folioLocations, selectedLibraryId) => {
-  return folioLocations.filter(location => location.libraryId === selectedLibraryId);
+const filterLocationsByLibraryAndCampusId = (folioLibraries, folioLocations, selectedLibraryId) => {
+  const selectedLibraryCampusId = folioLibraries.find(library => library.id === selectedLibraryId).campusId;
+
+  return folioLocations
+    .filter(({ libraryId }) => libraryId === selectedLibraryId)
+    .filter(({ campusId }) => campusId === selectedLibraryCampusId);
 };
 
 export const getLeftColumnLocations = ({
@@ -156,20 +153,12 @@ export const getLeftColumnLocations = ({
   folioLocations,
   folioLibraries,
 }) => {
-  const selectedLibraryCampusId = getCampusId({ selectedLibraryId, folioLibraries });
-  // several libraries can have the same campus, so we also need to filter locations by the selected library id
-  const folioLocationsOfOptedLibrary = getFOLIOLocationsOfOptedLibrary(folioLocations, selectedLibraryId);
+  const filteredLocations = filterLocationsByLibraryAndCampusId(folioLibraries, folioLocations, selectedLibraryId);
 
-  return folioLocationsOfOptedLibrary.reduce((accum, { name, code, campusId }) => {
-    if (campusId === selectedLibraryCampusId) {
-      accum.push({
-        [FOLIO_LOCATION]: `${name} (${code})`,
-        [CODE]: code,
-      });
-    }
-
-    return accum;
-  }, []);
+  return filteredLocations.map(({ name, code }) => ({
+    [FOLIO_LOCATION]: `${name} (${code})`,
+    [CODE]: code,
+  }));
 };
 
 const getFolioLibraryIdsSet = (folioLibraryIds) => {
@@ -197,29 +186,24 @@ export const getTabularListForLocations = ({
   folioLocations,
   folioLibraries,
 }) => {
-  const selectedLibraryCampusId = getCampusId({ selectedLibraryId, folioLibraries });
-  // several libraries can have the same campus, so we also need to filter locations by the selected library id
-  const folioLocationsOfOptedLibrary = getFOLIOLocationsOfOptedLibrary(folioLocations, selectedLibraryId);
+  const filteredLocations = filterLocationsByLibraryAndCampusId(folioLibraries, folioLocations, selectedLibraryId);
 
-  return folioLocationsOfOptedLibrary.reduce((accum, { id, name, code, campusId }) => {
-    if (campusId === selectedLibraryCampusId) {
-      const option = {
-        [FOLIO_LOCATION]: `${name} (${code})`,
-        [CODE]: code,
-      };
-      const isCodeSelected = locMappingsMap.has(id);
+  return filteredLocations.map(({ id, name, code }) => {
+    const option = {
+      [FOLIO_LOCATION]: `${name} (${code})`,
+      [CODE]: code,
+    };
 
-      if (isCodeSelected) {
-        const innReachLocationId = locMappingsMap.get(id).innReachLocationId;
+    const isCodeSelected = locMappingsMap.has(id);
 
-        option[INN_REACH_LOCATIONS] = innReachLocationId;
-      }
+    if (isCodeSelected) {
+      const innReachLocationId = locMappingsMap.get(id).innReachLocationId;
 
-      accum.push(option);
+      option[INN_REACH_LOCATIONS] = innReachLocationId;
     }
 
-    return accum;
-  }, []);
+    return option;
+  });
 };
 
 export const getLibrariesTabularList = ({
