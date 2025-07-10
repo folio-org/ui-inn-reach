@@ -1,6 +1,6 @@
 {
   "name": "@folio/inn-reach",
-  "version": "6.0.0",
+  "version": "6.1.0",
   "description": "Description for inn-reach",
   "main": "src/index.js",
   "repository": "",
@@ -26,6 +26,7 @@
     "@folio/stripes-cli": "^4.0.0",
     "@folio/stripes-core": "^11.0.0",
     "@folio/stripes-connect": "^10.0.0",
+    "@folio/stripes-util": "^7.0.0",
     "@testing-library/jest-dom": "^5.11.1",
     "@testing-library/react": "^11.0.2",
     "@testing-library/react-hooks": "^5.1.2",

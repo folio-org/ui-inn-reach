@@ -1,6 +1,9 @@
 import {
   chunk,
 } from 'lodash';
+
+import { effectiveCallNumber } from '@folio/stripes/util';
+
 import {
   roundHours,
 } from '../../utils';
@@ -283,7 +286,7 @@ export const convertToSlipData = ({
     'item.title': item?.title,
     'item.barcode': item?.barcode,
     'item.author': item?.author,
-    'item.effectiveCallNumber': item?.effectiveCallNumber,
+    'item.effectiveCallNumber': effectiveCallNumber(item),
     'item.shelvingOrder': item?.shelvingOrder,
     'item.hrid': item?.hrid,
     'item.effectiveLocationFolioName': item?.effectiveLocationFolioName,
