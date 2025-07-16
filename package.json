@@ -248,8 +248,9 @@
         "visible": true
       },
       {
-        "permissionName": "ui-inn-reach.settings.crud",
+        "permissionName": "ui-inn-reach.settings.all",
         "displayName": "Settings (inn-reach): All INN-Reach settings: CRUD",
+        "replaces": ["ui-inn-reach.settings.crud"],
         "subPermissions": [
           "ui-inn-reach.settings.edit",
           "inn-reach.central-servers.item.delete",
