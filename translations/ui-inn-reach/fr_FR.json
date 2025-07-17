@@ -438,7 +438,7 @@
     "settings.visible-patron-id.title": "Visible patron ID",
     "settings.visible-patron-id.button.save": "Sauvegarder",
     "settings.visible-patron-id.field.BARCODE": "Code-barres",
-    "settings.visible-patron-id.field.EXTERNAL_SYSTEM_ID": "External system ID",
+    "settings.visible-patron-id.field.EXTERNAL_SYSTEM_ID": "ID système externe",
     "settings.visible-patron-id.field.FOLIO_RECORD_NUMBER": "FOLIO record number (UUID)",
     "settings.visible-patron-id.field.USERNAME": "Nom d'utilisateur",
     "settings.visible-patron-id.field.user-custom-fields": "Champs personnalisés de l'utilisateur",
