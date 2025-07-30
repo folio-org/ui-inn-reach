@@ -447,7 +447,7 @@
     "settings.visible-patron-id.validate.select-to-continue": "Виберіть, щоб продовжити",
     "settings.visible-patron-id.create.success": "Visible patron id settings created successfully",
     "settings.visible-patron-id.update.success": "Налаштування видимого ід користувача успішно оновлено",
-    "settings.visible-patron-id.callout.connectionProblem.create": "Unable to create data due to a module error. Please try again. If a problem persists please contact your system administrator",
+    "settings.visible-patron-id.callout.connectionProblem.create": "Не вдалося створити дані через помилку модуля. Спробуйте ще раз. Якщо проблема не зникає, зверніться до системного адміністратора.",
     "settings.visible-patron-id.callout.connectionProblem.update": "Unable to updated data due to a module error. Please try again. If a problem persists please contact your system administrator",
     "reports.in-transit-too-long.label": "Звіт про занадто довгу доставку (CSV)",
     "reports.modal.title.in-transit-too-long-report": "Звіт про занадто довгу доставку",
