@@ -4,6 +4,7 @@
 
 * `FOLIO to INN-Reach locations` settings - filter FOLIO locations by the selected library id, to avoid displaying locations with the same campus but a different library. Fixes UIINREACH-246.
 * Use the `effectiveCallNumber` function from `@folio/stripes/util` to build `effectiveCallNumber` in `convertToSlipData`. Fixes UIINREACH-255.
+* Rename `ui-inn-reach.settings.crud` to `ui-inn-reach.settings.all`, add old permission to `replaces` to make it backward compatible with OKAPI. Refs UIINREACH-259.
 
 ## [6.0.0] (https://github.com/folio-org/ui-inn-reach/tree/v6.0.0) (2025-03-14)
 [Full Changelog](https://github.com/folio-org/ui-inn-reach/compare/v5.0.0...v6.0.0)
