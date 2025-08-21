@@ -48,14 +48,22 @@ const LibraryTabularLists = ({
 }) => {
   const handleLocationChange = (locId, index, fields, localAgencyCode) => {
     const prevLocId = fields.value[index][INN_REACH_LOCATIONS];
-    const pickedLocations = pickedLocationsByAgencyCode[localAgencyCode];
+    const pickedLocations = pickedLocationsByAgencyCode[localAgencyCode] || [];
     const prevLocationIndex = pickedLocations.findIndex(locationId => locationId === prevLocId);
     const updatedPickedLocations = {
       ...pickedLocationsByAgencyCode,
-      [localAgencyCode]: [...pickedLocationsByAgencyCode[localAgencyCode], locId],
+      [localAgencyCode]: [...pickedLocations, locId],
     };
 
-    updatedPickedLocations[localAgencyCode].splice(prevLocationIndex, 1);
+    // Each location may only be associated with one agency, whether that's at the library or location level/mapping type.
+    // Selected locations in one agency shouldn't be available for selection in other agencies. Once a location is deselected,
+    // it becomes available for selection in all agencies.
+    if (pickedLocations.length && prevLocationIndex !== -1) {
+      updatedPickedLocations[localAgencyCode].splice(prevLocationIndex, 1);
+    }
+
+    // `updatedPickedLocations` is used only in this component to filter out already selected locations to make them unavailable
+    // to other agencies in the `innReachLocationOptions` field. Each location can only be associated with one agency.
     onSetPickedLocations(updatedPickedLocations);
 
     const rowData = {
@@ -74,7 +82,10 @@ const LibraryTabularLists = ({
     });
 
     return (
-      <section key={`${localAgency[CODE]}${index}`}>
+      <section
+        key={`${localAgency[CODE]}${index}`}
+        data-testid={`section-${localAgency[CODE]}`}
+      >
         <Headline
           tag="h2"
           margin="none"
