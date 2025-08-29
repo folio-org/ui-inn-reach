@@ -378,7 +378,7 @@
     "check-out-borrowing-site.column.title": "Tytuł",
     "check-out-borrowing-site.column.loan-policy": "Loan Policy",
     "check-out-borrowing-site.column.due-date": "Termin zwrotu",
-    "check-out-borrowing-site.column.time": "Time",
+    "check-out-borrowing-site.column.time": "Godzina",
     "check-out-borrowing-site.column.destination": "Destination",
     "check-out-borrowing-site.column.actions": "Akcje",
     "check-out-borrowing-site.button.end-session": "End session",
