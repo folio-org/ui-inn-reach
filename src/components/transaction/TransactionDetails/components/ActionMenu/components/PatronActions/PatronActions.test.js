@@ -1,5 +1,6 @@
 import React from 'react';
 import { screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { translationsProperties, renderWithIntl } from '../../../../../../../../test/jest/helpers';
 import PatronActions from './PatronActions';
 
@@ -18,6 +19,7 @@ const renderPatronActions = ({
   onReturnItem = jest.fn(),
   onCheckOutToPatron = jest.fn(),
   onCancelHold = jest.fn(),
+  onRemoveHold = jest.fn(),
 } = {}) => {
   return renderWithIntl(
     <PatronActions
@@ -28,6 +30,7 @@ const renderPatronActions = ({
       onReturnItem={onReturnItem}
       onCheckOutToPatron={onCheckOutToPatron}
       onCancelHold={onCancelHold}
+      onRemoveHold={onRemoveHold}
     />,
     translationsProperties,
   );
@@ -165,6 +168,112 @@ describe('PatronActions component', () => {
         },
       });
       expect(screen.getByRole('button', { name: 'Icon Cancel hold' })).toBeDisabled();
+    });
+  });
+
+  describe('Remove patron hold', () => {
+    it('should render "Remove hold" action', () => {
+      const { getByText } = renderPatronActions();
+
+      expect(getByText('Remove hold')).toBeVisible();
+    });
+
+    it('should be enabled when transaction is PATRON_HOLD with no FOLIO IDs', () => {
+      renderPatronActions({
+        transaction: {
+          ...transactionMock,
+          state: 'PATRON_HOLD',
+          hold: {
+            folioItemId: null,
+            folioRequestId: null,
+            folioLoanId: null,
+          },
+        },
+      });
+      expect(screen.getByRole('button', { name: 'Icon Remove hold' })).toBeEnabled();
+    });
+
+    it('should be disabled when transaction has folioItemId', () => {
+      renderPatronActions({
+        transaction: {
+          ...transactionMock,
+          state: 'PATRON_HOLD',
+          hold: {
+            folioItemId: '123',
+            folioRequestId: null,
+            folioLoanId: null,
+          },
+        },
+      });
+      expect(screen.getByRole('button', { name: 'Icon Remove hold' })).toBeDisabled();
+    });
+
+    it('should be disabled when transaction has folioRequestId', () => {
+      renderPatronActions({
+        transaction: {
+          ...transactionMock,
+          state: 'PATRON_HOLD',
+          hold: {
+            folioItemId: null,
+            folioRequestId: '123',
+            folioLoanId: null,
+          },
+        },
+      });
+      expect(screen.getByRole('button', { name: 'Icon Remove hold' })).toBeDisabled();
+    });
+
+    it('should be disabled when transaction has folioLoanId', () => {
+      renderPatronActions({
+        transaction: {
+          ...transactionMock,
+          state: 'PATRON_HOLD',
+          hold: {
+            folioItemId: null,
+            folioRequestId: null,
+            folioLoanId: '123',
+          },
+        },
+      });
+      expect(screen.getByRole('button', { name: 'Icon Remove hold' })).toBeDisabled();
+    });
+
+    it('should be disabled when transaction state is not PATRON_HOLD', () => {
+      renderPatronActions({
+        transaction: {
+          ...transactionMock,
+          state: 'ITEM_RECEIVED',
+          hold: {
+            folioItemId: null,
+            folioRequestId: null,
+            folioLoanId: null,
+          },
+        },
+      });
+      expect(screen.getByRole('button', { name: 'Icon Remove hold' })).toBeDisabled();
+    });
+
+    it('should call onRemoveHold when clicked', () => {
+      const onRemoveHoldMock = jest.fn();
+
+      renderPatronActions({
+        transaction: {
+          ...transactionMock,
+          state: 'PATRON_HOLD',
+          hold: {
+            folioItemId: null,
+            folioRequestId: null,
+            folioLoanId: null,
+          },
+        },
+        onRemoveHold: onRemoveHoldMock,
+      });
+
+      const removeButton = screen.getByRole('button', { name: 'Icon Remove hold' });
+
+      userEvent.click(removeButton);
+
+      expect(onRemoveHoldMock).toHaveBeenCalledTimes(1);
     });
   });
 });

@@ -347,6 +347,7 @@
           "inn-reach.d2ir.inn-reach-transaction.item-hold.recall.post",
           "inn-reach.d2ir.inn-reach-transaction.patron-hold.return-item.post",
           "inn-reach.d2ir.inn-reach-transaction.item-hold.final-checkin.post",
+          "inn-reach.d2ir.inn-reach-transaction.patron-hold.remove.post",
           "inn-reach.location-mappings.libraries.collection.get",
           "inventory-storage.instance-types.collection.get",
           "inventory-storage.contributor-name-types.collection.get",

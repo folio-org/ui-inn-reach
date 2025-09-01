@@ -347,6 +347,24 @@ const TransactionDetailContainer = ({
       });
   };
 
+  const fetchRemoveHold = () => {
+    mutator.removePatronHold.POST({})
+      .then(() => {
+        onUpdateTransactionList();
+        showCallout({
+          message: <FormattedMessage id="ui-inn-reach.remove-hold.callout.success.post.remove-hold" />,
+        });
+        // Navigate back to transaction list after successful removal
+        backToList();
+      })
+      .catch(() => {
+        showCallout({
+          type: CALLOUT_ERROR_TYPE,
+          message: <FormattedMessage id="ui-inn-reach.remove-hold.callout.connection-problem.post.remove-hold" />,
+        });
+      });
+  };
+
   const renderReceiveUnshippedItemModal = () => (
     <ReceiveUnshippedItemModal
       intl={intl}
@@ -418,6 +436,7 @@ const TransactionDetailContainer = ({
         onReceiveItem={fetchReceiveItem}
         onCancelHold={fetchCancellationReason}
         onTransferHold={triggerTransferHoldModal}
+        onRemoveHold={fetchRemoveHold}
       />
       {isOpenUnshippedItemModal && renderReceiveUnshippedItemModal()}
       {isOpenTransferHoldModal && renderTransferHoldModal()}
@@ -560,6 +579,15 @@ TransactionDetailContainer.manifest = Object.freeze({
     fetch: false,
     accumulate: true,
   },
+  removePatronHold: {
+    type: 'okapi',
+    path: 'inn-reach/transactions/%{transactionId}/patronhold/remove',
+    pk: '',
+    clientGeneratePk: false,
+    fetch: false,
+    accumulate: true,
+    throwErrors: false,
+  },
 });
 
 TransactionDetailContainer.propTypes = {
@@ -629,6 +657,9 @@ TransactionDetailContainer.propTypes = {
       POST: PropTypes.func.isRequired,
     }),
     transferLocalHold: PropTypes.shape({
+      POST: PropTypes.func.isRequired,
+    }),
+    removePatronHold: PropTypes.shape({
       POST: PropTypes.func.isRequired,
     }),
   }),

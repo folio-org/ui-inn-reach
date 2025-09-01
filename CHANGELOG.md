@@ -6,6 +6,7 @@
 * Use the `effectiveCallNumber` function from `@folio/stripes/util` to build `effectiveCallNumber` in `convertToSlipData`. Fixes UIINREACH-255.
 * Rename `ui-inn-reach.settings.crud` to `ui-inn-reach.settings.all`, add old permission to `replaces` to make it backward compatible with OKAPI. Refs UIINREACH-259.
 * LibraryTabularLists: Prevent page crash when `pickedLocationsByAgencyCode` is empty, while still ensuring locations are uniquely associated with agencies. Fixes UIINREACH-258.
+* Add remove hold functionality for patron transactions. Refs UIINREACH-262.
 
 ## [6.0.0] (https://github.com/folio-org/ui-inn-reach/tree/v6.0.0) (2025-03-14)
 [Full Changelog](https://github.com/folio-org/ui-inn-reach/compare/v5.0.0...v6.0.0)
