@@ -48,6 +48,7 @@ const TransactionDetail = ({
   onReceiveItem,
   onTransferHold,
   onCancelHold,
+  onRemoveHold,
 }) => {
   const renderActionMenu = useCallback(({ onToggle }) => (
     <ActionMenu
@@ -63,6 +64,7 @@ const TransactionDetail = ({
       onReturnItem={onReturnItem}
       onTransferHold={onTransferHold}
       onCancelHold={onCancelHold}
+      onRemoveHold={onRemoveHold}
     />
   ), [transaction]);
 
@@ -105,6 +107,7 @@ TransactionDetail.propTypes = {
   onRecallItem: PropTypes.func.isRequired,
   onReceiveItem: PropTypes.func.isRequired,
   onReceiveUnshippedItem: PropTypes.func.isRequired,
+  onRemoveHold: PropTypes.func.isRequired,
   onReturnItem: PropTypes.func.isRequired,
   onTransferHold: PropTypes.func.isRequired,
 };

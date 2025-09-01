@@ -25,10 +25,8 @@ const {
 
 const {
   FOLIO_LOAN_ID,
-} = HOLD_FIELDS;
-
-const {
   FOLIO_REQUEST_ID,
+  FOLIO_ITEM_ID,
 } = HOLD_FIELDS;
 
 const PatronActions = ({
@@ -39,6 +37,7 @@ const PatronActions = ({
   onReceiveUnshippedItem,
   onReturnItem,
   onCancelHold,
+  onRemoveHold,
 }) => {
   return (
     <>
@@ -83,6 +82,18 @@ const PatronActions = ({
         onToggle={onToggle}
         onClickHandler={onCancelHold}
       />
+      <ActionItem
+        disabled={!(
+          transaction[STATUS] === PATRON_HOLD &&
+          !transaction?.[HOLD]?.[FOLIO_ITEM_ID] &&
+          !transaction?.[HOLD]?.[FOLIO_REQUEST_ID] &&
+          !transaction?.[HOLD]?.[FOLIO_LOAN_ID]
+        )}
+        icon={ICONS.DELETE}
+        buttonTextTranslationKey="ui-inn-reach.transaction-detail.patron-type.action.remove-hold"
+        onToggle={onToggle}
+        onClickHandler={onRemoveHold}
+      />
     </>
   );
 };
@@ -93,6 +104,7 @@ PatronActions.propTypes = {
   onCheckOutToPatron: PropTypes.func.isRequired,
   onReceiveItem: PropTypes.func.isRequired,
   onReceiveUnshippedItem: PropTypes.func.isRequired,
+  onRemoveHold: PropTypes.func.isRequired,
   onReturnItem: PropTypes.func.isRequired,
   onToggle: PropTypes.func.isRequired,
 };

@@ -1,12 +1,15 @@
 import React from 'react';
 import { translationsProperties, renderWithIntl } from '../../../../../../test/jest/helpers';
 import ActionMenu from './ActionMenu';
+import { PatronActions } from './components';
 
 jest.mock('./components', () => ({
   PatronActions: jest.fn(() => <div>PatronActions</div>),
   ItemActions: jest.fn(() => <div>ItemActions</div>),
   LocalActions: jest.fn(() => <div>LocalActions</div>),
 }));
+
+const mockOnRemoveHold = jest.fn();
 
 const renderActionMenu = ({
   transaction,
@@ -25,6 +28,7 @@ const renderActionMenu = ({
       onCancelHold={jest.fn()}
       onTransferHold={jest.fn()}
       onCheckOutToLocalPatron={jest.fn()}
+      onRemoveHold={mockOnRemoveHold}
     />,
     translationsProperties,
   );
@@ -47,5 +51,18 @@ describe('ActionMenu', () => {
     const { getByText } = renderActionMenu({ transaction: { type: 'LOCAL' } });
 
     expect(getByText('LocalActions')).toBeInTheDocument();
+  });
+
+  it('should pass onRemoveHold prop to PatronActions', () => {
+    renderActionMenu({
+      transaction: { type: 'PATRON' },
+    });
+
+    expect(PatronActions).toHaveBeenCalledWith(
+      expect.objectContaining({
+        onRemoveHold: expect.any(Function)
+      }),
+      expect.anything()
+    );
   });
 });

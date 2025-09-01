@@ -421,6 +421,7 @@
   "transaction-detail.item-type.action.recall-item": "Recall item",
   "transaction-detail.item-type.action.cancel-hold": "Cancel hold",
   "transaction-detail.item-type.action.final-check-in": "Final check-in",
+  "transaction-detail.patron-type.action.remove-hold": "Remove hold",
   "transaction-detail.local-type.action.check-out": "Check out to local patron",
   "transaction-detail.local-type.action.cancel-hold": "Cancel hold",
   "transaction-detail.local-type.action.transfer-hold": "Transfer hold to another item",
@@ -555,6 +556,10 @@
   "transfer-hold.modal.list-of-items.notFound": "No items found",
   "transfer-hold.callout.success.post.transfer-hold": "Item has been successfully transferred",
   "transfer-hold.callout.connection-problem.post.transfer-hold": "There was a problem transferring the item",
+
+  "remove-hold.callout.success.post.remove-hold": "Hold has been successfully removed",
+  "remove-hold.callout.connection-problem.post.remove-hold": "There was a problem removing the hold",
+
   "printSlips.label": "INN-Reach paging slips for {servicePoint}",
   "paging-slips.callout.connection-problem.get.pagingSlip": "There was a problem loading the paging slips",
   "paging-slips-template.callout.connection-problem.get.pagingSlipTemplate": "There was a problem loading the paging slip templates"
