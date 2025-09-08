@@ -175,6 +175,9 @@ const mutatorMock = {
   cancelLocalHold: {
     POST: jest.fn(() => Promise.resolve()),
   },
+  removePatronHold: {
+    POST: jest.fn(() => Promise.resolve()),
+  },
 };
 
 const historyMock = createMemoryHistory();
@@ -221,6 +224,7 @@ describe('TransactionDetailContainer', () => {
     mutatorMock.cancelPatronHold.POST.mockClear();
     mutatorMock.cancelItemHold.POST.mockClear();
     mutatorMock.cancelLocalHold.POST.mockClear();
+    mutatorMock.removePatronHold.POST.mockClear();
     onUpdateTransactionList.mockClear();
   });
 
@@ -629,6 +633,95 @@ describe('TransactionDetailContainer', () => {
     it('should update the transaction list', async () => {
       await renderForTransferHold();
       expect(onUpdateTransactionList).toHaveBeenCalled();
+    });
+  });
+
+  describe('remove hold', () => {
+    const renderForRemoveHold = () => {
+      const resources = cloneDeep(resourcesMock);
+
+      resources.transactionView.records = [{
+        ...transactionMock,
+        type: 'PATRON',
+      }];
+
+      renderTransactionDetailContainer({
+        ...commonProps,
+        resources,
+      });
+    };
+
+    it('should call removePatronHold POST when onRemoveHold is triggered', async () => {
+      renderForRemoveHold();
+
+      await act(async () => {
+        TransactionDetail.mock.calls[0][0].onRemoveHold();
+      });
+
+      expect(mutatorMock.removePatronHold.POST).toHaveBeenCalledWith({});
+    });
+
+    it('should update the transaction list after successful removal', async () => {
+      renderForRemoveHold();
+
+      await act(async () => {
+        TransactionDetail.mock.calls[0][0].onRemoveHold();
+      });
+
+      expect(onUpdateTransactionList).toHaveBeenCalled();
+    });
+
+    it('should navigate back to transaction list after successful removal', async () => {
+      const history = createMemoryHistory();
+      const resources = cloneDeep(resourcesMock);
+
+      resources.transactionView.records = [{
+        ...transactionMock,
+        type: 'PATRON',
+      }];
+
+      renderTransactionDetailContainer({
+        ...commonProps,
+        resources,
+        history,
+      });
+
+      await act(async () => {
+        TransactionDetail.mock.calls[0][0].onRemoveHold();
+      });
+
+      expect(history.location.pathname).toBe('/innreach/transactions');
+    });
+
+    it('should handle remove hold failure', async () => {
+      const failingMutator = {
+        ...mutatorMock,
+        removePatronHold: {
+          POST: jest.fn(() => Promise.reject(new Error('Network error'))),
+        },
+      };
+
+      const resources = cloneDeep(resourcesMock);
+
+      resources.transactionView.records = [{
+        ...transactionMock,
+        type: 'PATRON',
+      }];
+
+      renderTransactionDetailContainer({
+        ...commonProps,
+        resources,
+        mutator: failingMutator,
+      });
+
+      await act(async () => {
+        TransactionDetail.mock.calls[0][0].onRemoveHold();
+      });
+
+      // Should still try to call the API
+      expect(failingMutator.removePatronHold.POST).toHaveBeenCalledWith({});
+      // But should not update the transaction list on failure
+      expect(onUpdateTransactionList).not.toHaveBeenCalled();
     });
   });
 });

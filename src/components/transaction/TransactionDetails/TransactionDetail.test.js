@@ -32,6 +32,7 @@ const renderTransactionDetail = ({
   onReceiveUnshippedItem,
   onReceiveItem,
   onRecallItem,
+  onRemoveHold,
 } = {}) => {
   return renderWithIntl(
     <TransactionDetail
@@ -47,6 +48,7 @@ const renderTransactionDetail = ({
       onReturnItem={onReturnItem}
       onCancelHold={onCancelHold}
       onTransferHold={onTransferHold}
+      onRemoveHold={onRemoveHold}
     />,
     translationsProperties,
   );
@@ -64,6 +66,7 @@ describe('TransactionDetail', () => {
   const onCheckOutToLocalPatron = jest.fn();
   const onCancelHold = jest.fn();
   const onFinalCheckInItem = jest.fn();
+  const onRemoveHold = jest.fn();
 
   const commonProps = {
     onClose,
@@ -77,6 +80,7 @@ describe('TransactionDetail', () => {
     onFinalCheckInItem,
     onReturnItem,
     onTransferHold,
+    onRemoveHold,
   };
 
   it('should be rendered', () => {
