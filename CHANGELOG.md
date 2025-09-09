@@ -2,6 +2,10 @@
 
 ## [6.1.0] IN PROGRESS 
 
+
+## [6.0.2] (https://github.com/folio-org/ui-inn-reach/tree/v6.0.2) (2025-09-08)
+[Full Changelog](https://github.com/folio-org/ui-inn-reach/compare/v6.0.1...v6.0.2)
+
 * Add remove hold functionality for patron transactions. Refs UIINREACH-262.
 
 ## [6.0.1] (https://github.com/folio-org/ui-inn-reach/tree/v6.0.1) (2025-08-29)
