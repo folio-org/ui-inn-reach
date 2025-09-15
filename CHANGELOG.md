@@ -1,7 +1,7 @@
 # Change history for ui-inn-reach
 
 ## [6.1.0] IN PROGRESS 
-
+* Use `itemAgencyCode` and `patronAgencyCode` in `TRANSACTION_FIELDS` to fix sorting. Fixes UIINREACH-265.
 
 ## [6.0.2] (https://github.com/folio-org/ui-inn-reach/tree/v6.0.2) (2025-09-08)
 [Full Changelog](https://github.com/folio-org/ui-inn-reach/compare/v6.0.1...v6.0.2)

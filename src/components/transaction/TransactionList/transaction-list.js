@@ -27,16 +27,16 @@ const resultsPaneTitle = <FormattedMessage id="ui-inn-reach.title.list.transacti
 const visibleColumns = [
   TRANSACTION_FIELDS.TIME,
   TRANSACTION_FIELDS.TYPE,
-  TRANSACTION_FIELDS.ITEM_TITLE,
-  TRANSACTION_FIELDS.PATRON_NAME,
+  TRANSACTION_FIELDS.ITEM_AGENCY_CODE,
+  TRANSACTION_FIELDS.PATRON_AGENCY_CODE,
   TRANSACTION_FIELDS.STATUS,
 ];
 
 const columnMapping = {
   [TRANSACTION_FIELDS.TIME]: <FormattedMessage id="ui-inn-reach.transaction.field.time" />,
   [TRANSACTION_FIELDS.TYPE]: <FormattedMessage id="ui-inn-reach.transaction.field.type" />,
-  [TRANSACTION_FIELDS.ITEM_TITLE]: <FormattedMessage id="ui-inn-reach.transaction.field.itemTitle" />,
-  [TRANSACTION_FIELDS.PATRON_NAME]: <FormattedMessage id="ui-inn-reach.transaction.field.patronName" />,
+  [TRANSACTION_FIELDS.ITEM_AGENCY_CODE]: <FormattedMessage id="ui-inn-reach.transaction.field.itemTitle" />,
+  [TRANSACTION_FIELDS.PATRON_AGENCY_CODE]: <FormattedMessage id="ui-inn-reach.transaction.field.patronName" />,
   [TRANSACTION_FIELDS.STATUS]: <FormattedMessage id="ui-inn-reach.transaction.field.status" />,
 };
 
@@ -57,7 +57,7 @@ const resultsFormatter = {
   [TRANSACTION_FIELDS.TYPE]: data => (
     <FormattedMessage id={`ui-inn-reach.transaction.type.${data[TRANSACTION_FIELDS.TYPE].toLowerCase()}`} />
   ),
-  [TRANSACTION_FIELDS.ITEM_TITLE]: data => {
+  [TRANSACTION_FIELDS.ITEM_AGENCY_CODE]: data => {
     const hold = data[TRANSACTION_FIELDS.HOLD];
     const itemTitle = hold[HOLD_FIELDS.TITLE] || <NoValue />;
     const itemAgencyCode = hold[HOLD_FIELDS.ITEM_AGENCY_CODE] || <NoValue />;
@@ -73,7 +73,7 @@ const resultsFormatter = {
       />
     );
   },
-  [TRANSACTION_FIELDS.PATRON_NAME]: data => {
+  [TRANSACTION_FIELDS.PATRON_AGENCY_CODE]: data => {
     const hold = data[TRANSACTION_FIELDS.HOLD];
     const patronName = hold[HOLD_FIELDS.PATRON_NAME] || <NoValue />;
     const patronAgencyCode = hold[HOLD_FIELDS.PATRON_AGENCY_CODE] || <NoValue />;

@@ -353,6 +353,7 @@ const SearchAndFilter = ({
         <MultiColumnList
           autosize
           virtualize
+          showSortIndicator
           columnMapping={columnMapping}
           contentData={contentData}
           formatter={resultsFormatter}
