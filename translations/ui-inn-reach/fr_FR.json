@@ -510,5 +510,8 @@
     "settings.paging-slip-template.token-header.staff-slip": "Bordereau du personnel",
     "printSlips.label": "INN-Reach paging slips for {servicePoint}",
     "paging-slips.callout.connection-problem.get.pagingSlip": "There was a problem loading the paging slips",
-    "paging-slips-template.callout.connection-problem.get.pagingSlipTemplate": "There was a problem loading the paging slip templates"
+    "paging-slips-template.callout.connection-problem.get.pagingSlipTemplate": "There was a problem loading the paging slip templates",
+    "transaction-detail.patron-type.action.remove-hold": "Remove hold",
+    "remove-hold.callout.success.post.remove-hold": "Hold has been successfully removed",
+    "remove-hold.callout.connection-problem.post.remove-hold": "There was a problem removing the hold"
 }

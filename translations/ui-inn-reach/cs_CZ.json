@@ -510,5 +510,8 @@
     "settings.paging-slip-template.token-header.staff-slip": "Cirkulační lístek",
     "printSlips.label": "Stránkovací listy INN-Reach pro {servicePoint}",
     "paging-slips.callout.connection-problem.get.pagingSlip": "Došlo k problému s načítáním stránkovacích lístků",
-    "paging-slips-template.callout.connection-problem.get.pagingSlipTemplate": "Došlo k problému s načítáním šablon stránkovacích lístků"
+    "paging-slips-template.callout.connection-problem.get.pagingSlipTemplate": "Došlo k problému s načítáním šablon stránkovacích lístků",
+    "transaction-detail.patron-type.action.remove-hold": "Zrušit rezervaci",
+    "remove-hold.callout.success.post.remove-hold": "Rezervace byla úspěšně zrušena",
+    "remove-hold.callout.connection-problem.post.remove-hold": "Při rušení rezervace došlo k problému."
 }
