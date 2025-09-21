@@ -510,5 +510,8 @@
     "settings.paging-slip-template.token-header.staff-slip": "Medewerkersbon",
     "printSlips.label": "INN-Reach paging slips voor {servicePoint}",
     "paging-slips.callout.connection-problem.get.pagingSlip": "Er is een probleem opgetreden bij het invoeren van de Invoerbonnen.",
-    "paging-slips-template.callout.connection-problem.get.pagingSlipTemplate": "Er is een probleem opgetreden bij het Invoeren van de sjablonen voor inlegstroken."
+    "paging-slips-template.callout.connection-problem.get.pagingSlipTemplate": "Er is een probleem opgetreden bij het Invoeren van de sjablonen voor inlegstroken.",
+    "transaction-detail.patron-type.action.remove-hold": "Reservering verwijderen",
+    "remove-hold.callout.success.post.remove-hold": "Reservering is succesvol verwijderd",
+    "remove-hold.callout.connection-problem.post.remove-hold": "Er is een probleem opgetreden bij het verwijderen van de Reservering."
 }

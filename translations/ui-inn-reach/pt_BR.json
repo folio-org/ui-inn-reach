@@ -510,5 +510,8 @@
     "settings.paging-slip-template.token-header.staff-slip": "Ficha para equipe",
     "printSlips.label": "Recibos de requisições INN-Reach para {servicePoint}",
     "paging-slips.callout.connection-problem.get.pagingSlip": "Ocorreu um problema ao carregar as guias de paginação",
-    "paging-slips-template.callout.connection-problem.get.pagingSlipTemplate": "Ocorreu um problema ao carregar os modelos de recibos de requisição"
+    "paging-slips-template.callout.connection-problem.get.pagingSlipTemplate": "Ocorreu um problema ao carregar os modelos de recibos de requisição",
+    "transaction-detail.patron-type.action.remove-hold": "Remover reserva",
+    "remove-hold.callout.success.post.remove-hold": "A reserva foi removida com sucesso",
+    "remove-hold.callout.connection-problem.post.remove-hold": "Ocorreu um problema ao remover a reserva"
 }
