@@ -511,7 +511,7 @@
     "printSlips.label": "{servicePoint}的 INN-Reach 传呼单",
     "paging-slips.callout.connection-problem.get.pagingSlip": "加载传呼单时出现问题",
     "paging-slips-template.callout.connection-problem.get.pagingSlipTemplate": "加载传呼单模板时出现问题",
-    "transaction-detail.patron-type.action.remove-hold": "Remove hold",
-    "remove-hold.callout.success.post.remove-hold": "Hold has been successfully removed",
-    "remove-hold.callout.connection-problem.post.remove-hold": "There was a problem removing the hold"
+    "transaction-detail.patron-type.action.remove-hold": "移除预约",
+    "remove-hold.callout.success.post.remove-hold": "预约已成功移除",
+    "remove-hold.callout.connection-problem.post.remove-hold": "移除预约时遇到问题"
 }
