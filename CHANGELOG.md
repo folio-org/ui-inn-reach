@@ -26,6 +26,11 @@
 * *BREAKING* Migrate react-intl to v7. Refs UIINREACH-251.
 * *BREAKING* Upgrade plugin-find-user to v8. Refs UIINREACH-252.
 
+## [5.0.1] (https://github.com/folio-org/ui-inn-reach/tree/v5.0.1) (2025-10-21)
+[Full Changelog](https://github.com/folio-org/ui-inn-reach/compare/v5.0.0...v5.0.1)
+
+* Owning site paged too long report not honoring "minimum days paged" value. Refs UIINREACH-236.
+
 ## [5.0.0] (https://github.com/folio-org/ui-inn-reach/tree/v5.0.0) (2024-11-21)
 [Full Changelog](https://github.com/folio-org/ui-inn-reach/compare/v4.2.0...v5.0.0)
 
