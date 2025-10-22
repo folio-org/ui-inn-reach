@@ -26,6 +26,11 @@
 * *BREAKING* Migrate react-intl to v7. Refs UIINREACH-251.
 * *BREAKING* Upgrade plugin-find-user to v8. Refs UIINREACH-252.
 
+## [5.0.2] (https://github.com/folio-org/ui-inn-reach/tree/v5.0.2) (2025-10-22)
+[Full Changelog](https://github.com/folio-org/ui-inn-reach/compare/v5.0.1...v5.0.2)
+
+* Use the `effectiveCallNumber` function to build `item.effectiveCallNumber` in `convertToSlipData`. Fixes UIINREACH-255.
+
 ## [5.0.1] (https://github.com/folio-org/ui-inn-reach/tree/v5.0.1) (2025-10-21)
 [Full Changelog](https://github.com/folio-org/ui-inn-reach/compare/v5.0.0...v5.0.1)
 
