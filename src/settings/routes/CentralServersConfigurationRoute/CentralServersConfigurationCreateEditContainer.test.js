@@ -128,15 +128,15 @@ describe('CentralServersConfigurationCreateEditContainer', () => {
           history,
           openModal: true,
           modalContent: {
-            heading: <FormattedMessage id="ui-inn-reach.settings.central-server-configuration.edit.modal-heading.updateLocalServerKeyConfirmation" />,
-            message: <FormattedMessage id="ui-inn-reach.settings.central-server-configuration.edit.modal-message.updateLocalServerKeypair" />,
+            heading: <FormattedMessage id="ui-inn-reach.settings.central-server-configuration.edit.modal-heading.updateLocalServerSecretConfirmation" />,
+            message: <FormattedMessage id="ui-inn-reach.settings.central-server-configuration.edit.modal-message.updateLocalServerSecret" />,
             cancelLabel: <FormattedMessage id="ui-inn-reach.settings.central-server-configuration.edit.modal-button.confirm" />,
             confirmLabel: <FormattedMessage id="ui-inn-reach.settings.central-server-configuration.edit.modal-button.keepEditing" />,
           }
         });
 
-        expect(getByText('Update Local Server Key Confirmation')).toBeDefined();
-        expect(getByText('You have updated the Local Server Key/Secret pair. INN-Reach circulation functions will be interrupted until this information is updated by the Central Server administrator. Click “Confirm” to save your changes and download a JSON file with the new key and secret values.')).toBeDefined();
+        expect(getByText('Update Local Server Secret')).toBeDefined();
+        expect(getByText('You have updated the Local Server Secret. INN-Reach circulation functions will be interrupted until this information is updated by the Central Server administrator. Click "Confirm" to save your changes and download a JSON file with the existing key and new secret values.')).toBeDefined();
         expect(getByText('Keep editing')).toBeDefined();
         expect(getByText('Confirm')).toBeDefined();
       });
