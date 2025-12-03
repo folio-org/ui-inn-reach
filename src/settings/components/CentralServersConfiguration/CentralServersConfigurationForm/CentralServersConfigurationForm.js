@@ -78,7 +78,10 @@ const CentralConfigurationForm = ({
   };
 
   const generateKeyAndSecret = () => {
-    const localServerKey = uuidv4();
+    // In edit mode, preserve the existing local server key and only generate a new secret
+    const localServerKey = isEditMode
+      ? form.getState().values[LOCAL_SERVER_KEY]
+      : uuidv4();
     const localServerSecret = uuidv4();
 
     changeLocalServerKeypair(localServerKey, localServerSecret);

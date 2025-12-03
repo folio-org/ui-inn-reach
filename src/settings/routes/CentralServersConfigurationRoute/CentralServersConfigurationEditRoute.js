@@ -63,8 +63,7 @@ const CentralServersConfigurationEditRoute = ({
     setOpenModal(value);
   };
 
-  const isLocalServerKeypairChanged = (record) => (
-    initialValues.localServerKey !== record.localServerKey &&
+  const isLocalServerSecretChanged = (record) => (
     initialValues.localServerSecret !== record.localServerSecret
   );
 
@@ -87,7 +86,7 @@ const CentralServersConfigurationEditRoute = ({
 
     mutator.centralServerRecord.PUT(finalData)
       .then(() => {
-        if (isLocalServerKeypairChanged(actualFormData)) {
+        if (isLocalServerSecretChanged(actualFormData)) {
           const fileName = `${name}-local-server-keypair`;
           const exportData = { localServerKey, localServerSecret };
 
@@ -112,7 +111,7 @@ const CentralServersConfigurationEditRoute = ({
   };
 
   const handleModalCancel = () => {
-    if (isLocalServerKeypairChanged(formData)) {
+    if (isLocalServerSecretChanged(formData)) {
       setOpenModal(false);
       saveData(formData);
     } else {
@@ -121,7 +120,7 @@ const CentralServersConfigurationEditRoute = ({
   };
 
   const handleModalConfirm = () => {
-    if (isLocalServerKeypairChanged(formData)) {
+    if (isLocalServerSecretChanged(formData)) {
       setShowPrevLocalServerValue(true);
     }
 
@@ -138,7 +137,7 @@ const CentralServersConfigurationEditRoute = ({
       ...record,
     };
 
-    if (isLocalServerKeypairChanged(record)) {
+    if (isLocalServerSecretChanged(record)) {
       setModalContent({
         heading: <FormattedMessage id="ui-inn-reach.settings.central-server-configuration.edit.modal-heading.updateLocalServerKeyConfirmation" />,
         message: <FormattedMessage id="ui-inn-reach.settings.central-server-configuration.edit.modal-message.updateLocalServerKeypair" />,
