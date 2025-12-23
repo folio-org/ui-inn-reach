@@ -85,6 +85,10 @@ describe('CentralServerConfigurationForm component', () => {
     onChangePristineState,
   };
 
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
   it('should display "edit" title', () => {
     renderForm({
       ...commonProps,
@@ -226,25 +230,54 @@ describe('CentralServerConfigurationForm component', () => {
     });
 
     describe('edit mode', () => {
-      let localServerSecret;
-
-      beforeEach(() => {
+      it('should have "password" type', () => {
         renderForm({
           ...commonProps,
           isEditMode: true,
         });
-        localServerSecret = screen.getByTestId(CENTRAL_SERVER_CONFIGURATION_FIELDS.LOCAL_SERVER_SECRET);
-      });
 
-      it('should have "password" type', () => {
+        const localServerSecret = screen.getByTestId(CENTRAL_SERVER_CONFIGURATION_FIELDS.LOCAL_SERVER_SECRET);
+
         expect(localServerSecret.type).toBe('password');
       });
 
       it('should have "text" type', async () => {
+        renderForm({
+          ...commonProps,
+          isEditMode: true,
+        });
+
+        const localServerSecret = screen.getByTestId(CENTRAL_SERVER_CONFIGURATION_FIELDS.LOCAL_SERVER_SECRET);
         const showSecretButton = screen.getByTestId('toggle-secret-mask');
 
         await act(async () => userEvent.click(showSecretButton));
         expect(localServerSecret.type).toBe('text');
+      });
+
+      it('should preserve local server key in edit mode when generating secret', async () => {
+        const originalKey = 'original-key-12345';
+        const initialWithKey = {
+          ...initValues,
+          id: '777',
+          [CENTRAL_SERVER_CONFIGURATION_FIELDS.LOCAL_SERVER_KEY]: originalKey,
+          [CENTRAL_SERVER_CONFIGURATION_FIELDS.LOCAL_SERVER_SECRET]: 'secret-12345',
+        };
+
+        renderForm({
+          ...commonProps,
+          initialValues: initialWithKey,
+          isEditMode: true,
+        });
+
+        const localServerKey = screen.getByTestId(CENTRAL_SERVER_CONFIGURATION_FIELDS.LOCAL_SERVER_KEY);
+        const localServerSecret = screen.getByTestId(CENTRAL_SERVER_CONFIGURATION_FIELDS.LOCAL_SERVER_SECRET);
+
+        expect(localServerKey).toHaveValue(originalKey);
+
+        await act(() => userEvent.click(screen.getByTestId('generate-keypair')));
+
+        expect(localServerKey).toHaveValue(originalKey);
+        expect(localServerSecret.value.length).toBe(36);
       });
     });
   });
