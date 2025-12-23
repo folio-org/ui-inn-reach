@@ -1,6 +1,6 @@
 import React from 'react';
 import { createMemoryHistory } from 'history';
-import { screen } from '@testing-library/react';
+import { screen } from '@folio/jest-config-stripes/testing-library/react';
 import { Router } from 'react-router';
 import { translationsProperties, renderWithIntl } from '../../../../../../test/jest/helpers';
 import TransactionSummary from './TransactionSummary';

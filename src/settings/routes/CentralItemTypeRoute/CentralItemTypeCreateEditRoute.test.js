@@ -2,7 +2,7 @@ import React from 'react';
 import {
   cloneDeep,
 } from 'lodash';
-import { screen, act } from '@testing-library/react';
+import { screen, act } from '@folio/jest-config-stripes/testing-library/react';
 
 import { translationsProperties, renderWithIntl } from '../../../../test/jest/helpers';
 import CentralItemTypeCreateEditRoute from './CentralItemTypeCreateEditRoute';
@@ -154,11 +154,11 @@ describe('renderCentralItemTypeCreateEditRoute component', () => {
     });
 
     it('should pass the selected server', () => {
-      expect(CentralItemTypeForm.mock.calls[7][0].selectedServer).toEqual(servers[0]);
+      expect(CentralItemTypeForm.mock.calls.at(-1)[0].selectedServer).toEqual(servers[0]);
     });
 
     it('should pass the correct initialValues', () => {
-      expect(CentralItemTypeForm.mock.calls[7][0].initialValues).toEqual({
+      expect(CentralItemTypeForm.mock.calls.at(-1)[0].initialValues).toEqual({
         itemTypeMappings: [
           {
             id: '508657aa-927a-4515-91d8-a4e7a759b3db',
@@ -175,7 +175,7 @@ describe('renderCentralItemTypeCreateEditRoute component', () => {
     it('should make a PUT request', async () => {
       renderCentralItemTypeCreateEditRoute();
       await act(async () => { await CentralItemTypeForm.mock.calls[1][0].onChangeServer(servers[0].name); });
-      await act(async () => { await CentralItemTypeForm.mock.calls[7][0].onSubmit(record); });
+      await act(async () => { await CentralItemTypeForm.mock.calls.at(-1)[0].onSubmit(record); });
       expect(mutatorMock.itemTypeMappings.PUT).toHaveBeenCalledWith(payload);
     });
   });
@@ -187,13 +187,13 @@ describe('renderCentralItemTypeCreateEditRoute component', () => {
       newMutatorMock.innReachItemTypes.GET = jest.fn(() => Promise.reject());
       renderCentralItemTypeCreateEditRoute({ mutator: newMutatorMock });
       await act(async () => { await CentralItemTypeForm.mock.calls[1][0].onChangeServer(servers[0].name); });
-      expect(CentralItemTypeForm.mock.calls[8][0].innReachItemTypesFailed).toBeTruthy();
+      expect(CentralItemTypeForm.mock.calls.at(-1)[0].innReachItemTypesFailed).toBeTruthy();
     });
 
     it('should be invisible', async () => {
       renderCentralItemTypeCreateEditRoute();
       await act(async () => { await CentralItemTypeForm.mock.calls[1][0].onChangeServer(servers[0].name); });
-      expect(CentralItemTypeForm.mock.calls[7][0].innReachItemTypesFailed).toBeFalsy();
+      expect(CentralItemTypeForm.mock.calls.at(-1)[0].innReachItemTypesFailed).toBeFalsy();
     });
   });
 });

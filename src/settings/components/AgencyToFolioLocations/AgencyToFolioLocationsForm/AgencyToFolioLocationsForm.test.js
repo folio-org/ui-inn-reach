@@ -1,6 +1,6 @@
 import { createMemoryHistory } from 'history';
 import { Router } from 'react-router-dom';
-import { screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@folio/jest-config-stripes/testing-library/react';
 import { FormattedMessage } from 'react-intl';
 import { translationsProperties, renderWithIntl } from '../../../../../test/jest/helpers';
 import AgencyToFolioLocationsForm from './AgencyToFolioLocationsForm';

@@ -1,6 +1,6 @@
 import React from 'react';
 import { createMemoryHistory } from 'history';
-import { act, screen } from '@testing-library/react';
+import { act, screen } from '@folio/jest-config-stripes/testing-library/react';
 import { cloneDeep } from 'lodash';
 import { useStripes } from '@folio/stripes/core';
 import * as hooks from '../../../hooks';

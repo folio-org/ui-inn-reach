@@ -1,4 +1,4 @@
-import { screen } from '@testing-library/react';
+import { screen } from '@folio/jest-config-stripes/testing-library/react';
 import ConfirmStatusModal from './ConfirmStatusModal';
 import { translationsProperties, renderWithIntl } from '../../../../../test/jest/helpers';
 

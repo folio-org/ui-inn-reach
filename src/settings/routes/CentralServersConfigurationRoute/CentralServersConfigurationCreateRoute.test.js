@@ -1,7 +1,7 @@
 import { MemoryRouter } from 'react-router-dom';
 import {
   act,
-} from '@testing-library/react';
+} from '@folio/jest-config-stripes/testing-library/react';
 
 import { translationsProperties, renderWithIntl } from '../../../../test/jest/helpers';
 import CentralServersConfigurationCreateRoute from './CentralServersConfigurationCreateRoute';

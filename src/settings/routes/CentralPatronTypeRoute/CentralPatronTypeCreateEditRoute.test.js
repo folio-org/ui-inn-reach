@@ -2,7 +2,7 @@ import React from 'react';
 import {
   cloneDeep,
 } from 'lodash';
-import { screen, act } from '@testing-library/react';
+import { screen, act } from '@folio/jest-config-stripes/testing-library/react';
 
 import { translationsProperties, renderWithIntl } from '../../../../test/jest/helpers';
 import CentralPatronTypeCreateEditRoute from './CentralPatronTypeCreateEditRoute';
@@ -171,11 +171,11 @@ describe('renderCentralPatronTypeCreateEditRoute component', () => {
     });
 
     it('should pass the selected server', () => {
-      expect(CentralPatronTypeForm.mock.calls[7][0].selectedServer).toEqual(servers[0]);
+      expect(CentralPatronTypeForm.mock.calls.at(-1)[0].selectedServer).toEqual(servers[0]);
     });
 
     it('should pass the correct initialValues', () => {
-      expect(CentralPatronTypeForm.mock.calls[7][0].initialValues).toEqual({
+      expect(CentralPatronTypeForm.mock.calls.at(-1)[0].initialValues).toEqual({
         patronTypeMappings: [
           {
             patronType: '202',
@@ -202,7 +202,7 @@ describe('renderCentralPatronTypeCreateEditRoute component', () => {
     it('should make a PUT request', async () => {
       renderCentralPatronTypeCreateEditRoute();
       await act(async () => { await CentralPatronTypeForm.mock.calls[1][0].onChangeServer(servers[0].name); });
-      await act(async () => { await CentralPatronTypeForm.mock.calls[7][0].onSubmit(record); });
+      await act(async () => { await CentralPatronTypeForm.mock.calls.at(-1)[0].onSubmit(record); });
       expect(mutatorMock.patronTypeMappings.PUT).toHaveBeenCalledWith(payload);
     });
   });
@@ -214,13 +214,13 @@ describe('renderCentralPatronTypeCreateEditRoute component', () => {
       newMutatorMock.patronTypes.GET = jest.fn(() => Promise.reject());
       renderCentralPatronTypeCreateEditRoute({ mutator: newMutatorMock });
       await act(async () => { await CentralPatronTypeForm.mock.calls[1][0].onChangeServer(servers[0].name); });
-      expect(CentralPatronTypeForm.mock.calls[8][0].patronTypesFailed).toBeTruthy();
+      expect(CentralPatronTypeForm.mock.calls.at(-1)[0].patronTypesFailed).toBeTruthy();
     });
 
     it('should be invisible', async () => {
       renderCentralPatronTypeCreateEditRoute();
       await act(async () => { await CentralPatronTypeForm.mock.calls[1][0].onChangeServer(servers[0].name); });
-      expect(CentralPatronTypeForm.mock.calls[7][0].patronTypesFailed).toBeFalsy();
+      expect(CentralPatronTypeForm.mock.calls.at(-1)[0].patronTypesFailed).toBeFalsy();
     });
   });
 });

@@ -1,8 +1,8 @@
 import React from 'react';
 import { createMemoryHistory } from 'history';
 import { Router } from 'react-router-dom';
-import userEvent from '@testing-library/user-event';
-import { act, screen, waitFor } from '@testing-library/react';
+import userEvent from '@folio/jest-config-stripes/testing-library/user-event';
+import { screen, waitFor } from '@folio/jest-config-stripes/testing-library/react';
 import { translationsProperties, renderWithIntl } from '../../../../../test/jest/helpers';
 import FolioCirculationUserForm from './FolioCirculationUserForm';
 
@@ -113,21 +113,19 @@ describe('FolioCirculationUserForm', () => {
     let barcodeField1;
     let barcodeField2;
 
-    beforeEach(() => {
-      act(() => {
-        renderFolioCirculationUserForm(commonProps);
-        barcodeField1 = document.getElementById('centralPatronTypeMappings[0].barcode-0');
-        barcodeField2 = document.getElementById('centralPatronTypeMappings[1].barcode-1');
-        userEvent.type(barcodeField1, '1630029773640558945');
-      });
+    beforeEach(async () => {
+      renderFolioCirculationUserForm(commonProps);
+      barcodeField1 = document.getElementById('centralPatronTypeMappings[0].barcode-0');
+      barcodeField2 = document.getElementById('centralPatronTypeMappings[1].barcode-1');
+      await userEvent.type(barcodeField1, '1630029773640558945');
     });
 
-    it('should be enabled when all barcode fields are filled', () => {
-      userEvent.type(barcodeField2, '111111');
+    it('should be enabled when all barcode fields are filled', async () => {
+      await userEvent.type(barcodeField2, '111111');
       expect(screen.getByRole('button', { name: 'Save' })).toBeEnabled();
     });
 
-    it('should not be enabled when not all required fields are filled in', () => {
+    it('should not be enabled when not all required fields are filled in', async () => {
       expect(screen.getByRole('button', { name: 'Save' })).toBeDisabled();
     });
   });

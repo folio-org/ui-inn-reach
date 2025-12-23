@@ -1,4 +1,4 @@
-import { screen } from '@testing-library/react';
+import { screen } from '@folio/jest-config-stripes/testing-library/react';
 import PrintSlips from './PrintSlips';
 import { translationsProperties, renderWithIntl } from '../../../../../../test/jest/helpers';
 import ComponentToPrint from '../../../ComponentToPrint';

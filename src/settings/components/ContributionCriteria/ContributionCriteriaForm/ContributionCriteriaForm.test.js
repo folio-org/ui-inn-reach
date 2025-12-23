@@ -1,8 +1,8 @@
 import React from 'react';
 import { createMemoryHistory } from 'history';
 import { Router } from 'react-router-dom';
-import userEvent from '@testing-library/user-event';
-import { screen, waitFor } from '@testing-library/react';
+import userEvent from '@folio/jest-config-stripes/testing-library/user-event';
+import { screen, waitFor } from '@folio/jest-config-stripes/testing-library/react';
 import { MultiSelection } from '@folio/stripes/components';
 import { translationsProperties, renderWithIntl } from '../../../../../test/jest/helpers';
 import { DEFAULT_VALUES } from '../../../routes/ContributionCriteriaRoute/utils';
@@ -164,17 +164,17 @@ describe('ContributionCriteriaForm', () => {
         renderContributionCriteriaForm(commonProps);
       });
 
-      it('should have disabled a selected option', () => {
+      it('should have disabled a selected option', async () => {
         const selectedOption = document.querySelector('option[value="7a82f404-07df-4e5e-8e8f-a15f3b6ddffa"]');
 
         expect(selectedOption).toBeEnabled();
-        userEvent.selectOptions(screen.getByRole('combobox', { name: 'FOLIO statistical code to exclude from contribution' }), '7a82f404-07df-4e5e-8e8f-a15f3b6ddffa');
+        await userEvent.selectOptions(screen.getByRole('combobox', { name: 'FOLIO statistical code to exclude from contribution' }), '7a82f404-07df-4e5e-8e8f-a15f3b6ddffa');
         expect(selectedOption).toBeDisabled();
       });
 
-      it('should change the value of isPristine when selected', () => {
+      it('should change the value of isPristine when selected', async () => {
         expect(onChangePristineState).toHaveBeenCalledWith(true);
-        userEvent.selectOptions(screen.getByRole('combobox', { name: 'FOLIO statistical code to exclude from contribution' }), '7a82f404-07df-4e5e-8e8f-a15f3b6ddffa');
+        await userEvent.selectOptions(screen.getByRole('combobox', { name: 'FOLIO statistical code to exclude from contribution' }), '7a82f404-07df-4e5e-8e8f-a15f3b6ddffa');
         expect(onChangePristineState).toHaveBeenCalledWith(false);
       });
     });

@@ -1,6 +1,6 @@
 import { cloneDeep } from 'lodash';
 import { createMemoryHistory } from 'history';
-import { act, screen } from '@testing-library/react';
+import { act, screen } from '@folio/jest-config-stripes/testing-library/react';
 import { useStripes } from '@folio/stripes/core';
 import { translationsProperties, renderWithIntl } from '../../../test/jest/helpers';
 import CheckOutBorrowingSite from './CheckOutBorrowingSite';
@@ -225,7 +225,7 @@ describe('CheckOutBorrowingSite', () => {
 
         it('should pass the received item to the list', async () => {
           await renderReceiveItem();
-          expect(ListCheckOutItems.mock.calls[2][0].scannedItems).toEqual([{
+          expect(ListCheckOutItems.mock.calls.at(-1)[0].scannedItems).toEqual([{
             item: {
               barcode: '1234567',
               title: 'God Emperor of Dune: Sianoq!',
@@ -256,8 +256,8 @@ describe('CheckOutBorrowingSite', () => {
     it('should reset data', async () => {
       renderCheckOutBorrowingSite({ stripes });
       await act(async () => { ItemForm.mock.calls[0][0].onSubmit({ itemBarcode }); });
-      screen.getByRole('button', { name: 'End session' }).click();
-      expect(ListCheckOutItems.mock.calls[3][0].scannedItems).toEqual([]);
+      await act(() => screen.getByRole('button', { name: 'End session' }).click());
+      expect(ListCheckOutItems.mock.calls.at(-1)[0].scannedItems).toEqual([]);
     });
   });
 });

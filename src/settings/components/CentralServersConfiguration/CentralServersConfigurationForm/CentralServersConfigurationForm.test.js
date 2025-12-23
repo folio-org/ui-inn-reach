@@ -1,7 +1,7 @@
-import React from 'react';
+import { act } from 'react';
 import { MemoryRouter } from 'react-router-dom';
-import { act, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { screen, waitFor } from '@folio/jest-config-stripes/testing-library/react';
+import userEvent from '@folio/jest-config-stripes/testing-library/user-event';
 
 import CentralServersConfigurationForm from './CentralServersConfigurationForm';
 
@@ -108,12 +108,12 @@ describe('CentralServerConfigurationForm component', () => {
     let section2;
     let toggleButton;
 
-    beforeEach(() => {
+    beforeEach(async () => {
       renderForm(commonProps);
       section1 = document.querySelector('#accordion-toggle-button-section1');
       section2 = document.querySelector('#accordion-toggle-button-section2');
       toggleButton = document.querySelector('[data-test-expand-button]');
-      userEvent.click(toggleButton);
+      await userEvent.click(toggleButton);
     });
 
     it('should be opened', () => {
@@ -121,8 +121,8 @@ describe('CentralServerConfigurationForm component', () => {
       expect(section2.getAttribute('aria-expanded')).toBe('false');
     });
 
-    it('should be closed', () => {
-      userEvent.click(toggleButton);
+    it('should be closed', async () => {
+      await userEvent.click(toggleButton);
       expect(section1.getAttribute('aria-expanded')).toBe('true');
       expect(section2.getAttribute('aria-expanded')).toBe('true');
     });
@@ -133,9 +133,9 @@ describe('CentralServerConfigurationForm component', () => {
     expect(screen.getByTestId('central-server-configuration-form')).toBeInTheDocument();
   });
 
-  it('should invoke onCancel callback', () => {
+  it('should invoke onCancel callback', async () => {
     renderForm(commonProps);
-    userEvent.click(screen.getByRole('button', { name: 'Close' }));
+    await userEvent.click(screen.getByRole('button', { name: 'Close' }));
     expect(handleCancel).toBeCalled();
   });
 
@@ -171,23 +171,29 @@ describe('CentralServerConfigurationForm component', () => {
       expect(screen.getByRole('textbox', { name: 'Local server code' })).not.toHaveValue();
     });
 
-    it('should show "Required" error message', () => {
+    it('should show "Required" error message', async () => {
       renderForm(commonProps);
       const field = screen.getByRole('textbox', { name: 'Local server code' });
 
       field.focus();
       expect(field).toHaveFocus();
       field.blur();
-      expect(screen.getByText('Required')).toBeDefined();
+
+      await waitFor(() => {
+        expect(screen.getByText('Required')).toBeDefined();
+      });
     });
 
-    it('should show "Please enter a 5 character string in lower case"', () => {
+    it('should show "Please enter a 5 character string in lower case"', async () => {
       renderForm(commonProps);
       const field = screen.getByRole('textbox', { name: 'Local server code' });
 
-      act(() => { userEvent.type(field, 'abc'); });
+      await act(async () => userEvent.type(field, 'abc'));
       field.blur();
-      expect(screen.getByText('Please enter a 5 character string in lower case')).toBeDefined();
+
+      await waitFor(() => {
+        expect(screen.getByText('Please enter a 5 character string in lower case')).toBeDefined();
+      });
     });
   });
 
@@ -212,8 +218,8 @@ describe('CentralServerConfigurationForm component', () => {
         expect(localServerSecret).toBeDisabled();
       });
 
-      it('should have an uuid after clicking on the "Generate keypair" button', () => {
-        act(() => { userEvent.click(screen.getByTestId('generate-keypair')); });
+      it('should have an uuid after clicking on the "Generate keypair" button', async () => {
+        await act(async () => userEvent.click(screen.getByTestId('generate-keypair')));
         expect(localServerKey.value.length).toBe(36);
         expect(localServerSecret.value.length).toBe(36);
       });
@@ -234,10 +240,10 @@ describe('CentralServerConfigurationForm component', () => {
         expect(localServerSecret.type).toBe('password');
       });
 
-      it('should have "text" type', () => {
+      it('should have "text" type', async () => {
         const showSecretButton = screen.getByTestId('toggle-secret-mask');
 
-        act(() => { userEvent.click(showSecretButton); });
+        await act(async () => userEvent.click(showSecretButton));
         expect(localServerSecret.type).toBe('text');
       });
     });
@@ -270,14 +276,14 @@ describe('CentralServerConfigurationForm component', () => {
       expect(getByText('Show secrets')).toBeDefined();
     });
 
-    it('should have a "Hide secrets" name', () => {
+    it('should have a "Hide secrets" name', async () => {
       const { getByText, getByTestId } = renderForm({
         ...commonProps,
         isEditMode: true,
       });
       const showSecretButton = getByTestId('toggle-secret-mask');
 
-      act(() => { userEvent.click(showSecretButton); });
+      await act(async () => userEvent.click(showSecretButton));
       expect(getByText('Hide secrets')).toBeDefined();
     });
   });

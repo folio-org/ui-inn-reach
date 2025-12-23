@@ -1,4 +1,4 @@
-import { screen } from '@testing-library/react';
+import { screen } from '@folio/jest-config-stripes/testing-library/react';
 import ComponentToPrint from './ComponentToPrint';
 import { translationsProperties, renderWithIntl } from '../../../../test/jest/helpers';
 import { AUGMENTED_BARCODE_TEMPLATE } from '../../../constants';

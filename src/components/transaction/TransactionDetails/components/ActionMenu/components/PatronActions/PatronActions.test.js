@@ -1,6 +1,6 @@
 import React from 'react';
-import { screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { screen } from '@folio/jest-config-stripes/testing-library/react';
+import userEvent from '@folio/jest-config-stripes/testing-library/user-event';
 import { translationsProperties, renderWithIntl } from '../../../../../../../../test/jest/helpers';
 import PatronActions from './PatronActions';
 
@@ -253,7 +253,7 @@ describe('PatronActions component', () => {
       expect(screen.getByRole('button', { name: 'Icon Remove hold' })).toBeDisabled();
     });
 
-    it('should call onRemoveHold when clicked', () => {
+    it('should call onRemoveHold when clicked', async () => {
       const onRemoveHoldMock = jest.fn();
 
       renderPatronActions({
@@ -271,7 +271,7 @@ describe('PatronActions component', () => {
 
       const removeButton = screen.getByRole('button', { name: 'Icon Remove hold' });
 
-      userEvent.click(removeButton);
+      await userEvent.click(removeButton);
 
       expect(onRemoveHoldMock).toHaveBeenCalledTimes(1);
     });

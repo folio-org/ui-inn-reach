@@ -1,9 +1,9 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 
-import { screen } from '@testing-library/react';
+import { screen, waitFor } from '@folio/jest-config-stripes/testing-library/react';
 import StripesFinalFormWrapper from '@folio/stripes-final-form/lib/StripesFinalFormWrapper';
-import userEvent from '@testing-library/user-event';
+import userEvent from '@folio/jest-config-stripes/testing-library/user-event';
 
 import { MultiSelection } from '@folio/stripes/components';
 import TabularList from './TabularList';
@@ -65,34 +65,42 @@ describe('TabularList component', () => {
     expect(screen.getByRole('button', { name: 'Remove fields for row 1' })).toBeVisible();
   });
 
-  it('should have focused on the first field on a new row after clicking the "add" button', () => {
-    userEvent.click(screen.getByRole('button', { name: 'Add a new row' }));
+  it('should have focused on the first field on a new row after clicking the "add" button', async () => {
+    await userEvent.click(screen.getByRole('button', { name: 'Add a new row' }));
     expect(document.querySelector('[id="localAgencies[1].localAgency-1"]')).toHaveFocus();
   });
 
   describe('field validation', () => {
-    it('should appear "Required" message after defocused if field is empty', () => {
+    it('should appear "Required" message after defocused if field is empty', async () => {
       const field = document.querySelector('[id="localAgencies[0].localAgency-0"]');
 
       field.focus();
       expect(field).toHaveFocus();
+
       field.blur();
-      expect(field).not.toHaveFocus();
-      expect(screen.getByText('Required')).toBeDefined();
+
+      await waitFor(() => {
+        expect(field).not.toHaveFocus();
+        expect(screen.getByText('Required')).toBeDefined();
+      });
     });
 
-    it('should appear "Please enter a 5 character string in lower case"', () => {
+    it('should appear "Please enter a 5 character string in lower case"', async () => {
       const field = document.querySelector('[id="localAgencies[0].localAgency-0"]');
 
-      userEvent.type(field, 'abc');
+      await userEvent.type(field, 'abc');
+
       field.blur();
-      expect(screen.getByText('Please enter a 5 character string in lower case')).toBeDefined();
+
+      await waitFor(() => {
+        expect(screen.getByText('Please enter a 5 character string in lower case')).toBeDefined();
+      });
     });
 
-    it('should not appear a validation message', () => {
+    it('should not appear a validation message', async () => {
       const field = document.querySelector('[id="localAgencies[0].localAgency-0"]');
 
-      userEvent.type(field, 'abcde');
+      await userEvent.type(field, 'abcde');
       expect(document.querySelector('div[class^="feedbackError---"]')).toBeNull();
     });
   });
@@ -102,19 +110,19 @@ describe('TabularList component', () => {
       expect(screen.getByRole('button', { name: 'Remove fields for row 1' })).toBeDisabled();
     });
 
-    it('should have enabled the "remove" button when there are two or more field rows', () => {
-      userEvent.click(screen.getByRole('button', { name: 'Add a new row' }));
+    it('should have enabled the "remove" button when there are two or more field rows', async () => {
+      await userEvent.click(screen.getByRole('button', { name: 'Add a new row' }));
       expect(screen.getByRole('button', { name: 'Remove fields for row 1' })).toBeEnabled();
     });
 
-    it('should add new field row by clicking on "add" button', () => {
-      userEvent.click(screen.getByRole('button', { name: 'Add a new row' }));
+    it('should add new field row by clicking on "add" button', async () => {
+      await userEvent.click(screen.getByRole('button', { name: 'Add a new row' }));
       expect(screen.getAllByTestId('row')).toHaveLength(2);
     });
 
-    it('should remove one field row by clicking on "remove" button', () => {
-      userEvent.click(screen.getByRole('button', { name: 'Add a new row' }));
-      userEvent.click(screen.getByRole('button', { name: 'Remove fields for row 1' }));
+    it('should remove one field row by clicking on "remove" button', async () => {
+      await userEvent.click(screen.getByRole('button', { name: 'Add a new row' }));
+      await userEvent.click(screen.getByRole('button', { name: 'Remove fields for row 1' }));
       expect(screen.getAllByTestId('row')).toHaveLength(1);
     });
   });

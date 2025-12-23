@@ -1,4 +1,4 @@
-import user from '@testing-library/user-event';
+import user from '@folio/jest-config-stripes/testing-library/user-event';
 import { translationsProperties, renderWithIntl } from '../../../../../../test/jest/helpers';
 import ResetButton from './ResetButton';
 
@@ -10,12 +10,11 @@ const renderResetButton = (props = {}) => (renderWithIntl(
 ));
 
 describe('ResetButton', () => {
-  it('should call reset prop when button is pressed', () => {
+  it('should call reset prop when button is pressed', async () => {
     const reset = jest.fn();
     const { getByTestId } = renderResetButton({ reset });
 
-    user.click(getByTestId('reset-button'));
-
+    await user.click(getByTestId('reset-button'));
     expect(reset).toHaveBeenCalled();
   });
 

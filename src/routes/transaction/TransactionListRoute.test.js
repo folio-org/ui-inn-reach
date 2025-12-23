@@ -1,6 +1,6 @@
 import React from 'react';
 import { cloneDeep } from 'lodash';
-import { act, screen } from '@testing-library/react';
+import { act, screen } from '@folio/jest-config-stripes/testing-library/react';
 import { createMemoryHistory } from 'history';
 import { Router } from 'react-router-dom';
 import { useStripes } from '@folio/stripes/core';
@@ -214,7 +214,7 @@ describe('TransactionListRoute', () => {
     });
 
     it('should pass the correct transactions list', () => {
-      expect(TransactionList.mock.calls[4][0].transactions).toEqual(transactionsMock.transactions);
+      expect(TransactionList.mock.calls.at(-1)[0].transactions).toEqual(transactionsMock.transactions);
     });
 
     it('should call a GET request with the correct path', () => {
@@ -222,11 +222,11 @@ describe('TransactionListRoute', () => {
     });
 
     it('should path the correct count of the transactions', async () => {
-      expect(TransactionList.mock.calls[4][0].transactionsCount).toEqual(transactionsMock.totalRecords);
+      expect(TransactionList.mock.calls.at(-1)[0].transactionsCount).toEqual(transactionsMock.totalRecords);
     });
 
     it('should trigger a GET request with the correct offset number', async () => {
-      await act(async () => { TransactionList.mock.calls[4][0].onNeedMoreData(); });
+      await act(async () => { TransactionList.mock.calls.at(-1)[0].onNeedMoreData(); });
       expect(mutatorMock.transactionRecords.GET).toHaveBeenLastCalledWith({
         params: {
           ...params,
@@ -271,7 +271,7 @@ describe('TransactionListRoute', () => {
       const record = { minDaysOverdue: 2 };
 
       beforeEach(async () => {
-        await act(async () => { TransactionList.mock.calls[3][0].onGenerateReport('overdue', record); });
+        await act(async () => { TransactionList.mock.calls.at(-1)[0].onGenerateReport('overdue', record); });
       });
 
       executeCommonTests();
@@ -285,7 +285,7 @@ describe('TransactionListRoute', () => {
       const record = { minDaysRequested: 2 };
 
       beforeEach(async () => {
-        await act(async () => { TransactionList.mock.calls[3][0].onGenerateReport('requestedTooLong', record); });
+        await act(async () => { TransactionList.mock.calls.at(-1)[0].onGenerateReport('requestedTooLong', record); });
       });
 
       executeCommonTests();
@@ -299,7 +299,7 @@ describe('TransactionListRoute', () => {
       const record = { minDaysReturned: 2 };
 
       beforeEach(async () => {
-        await act(async () => { TransactionList.mock.calls[3][0].onGenerateReport('returnedTooLong', record); });
+        await act(async () => { TransactionList.mock.calls.at(-1)[0].onGenerateReport('returnedTooLong', record); });
       });
 
       executeCommonTests();
@@ -313,7 +313,7 @@ describe('TransactionListRoute', () => {
       const record = { minDaysReturned: 2 };
 
       beforeEach(async () => {
-        await act(async () => { TransactionList.mock.calls[3][0].onGenerateReport('inTransitTooLong', record); });
+        await act(async () => { TransactionList.mock.calls.at(-1)[0].onGenerateReport('inTransitTooLong', record); });
       });
 
       executeCommonTests();
@@ -327,7 +327,7 @@ describe('TransactionListRoute', () => {
       const record = { minDaysPaged: 2 };
 
       beforeEach(async () => {
-        await act(async () => { TransactionList.mock.calls[3][0].onGenerateReport('pagedTooLong', record); });
+        await act(async () => { TransactionList.mock.calls.at(-1)[0].onGenerateReport('pagedTooLong', record); });
       });
 
       executeCommonTests();
@@ -344,8 +344,8 @@ describe('TransactionListRoute', () => {
     });
 
     it('should display "Owning site overdue report" modal', async () => {
-      await act(async () => { TransactionList.mock.calls[4][0].onToggleStatesOfModalReports('showOverdueReportModal'); });
-      expect(TransactionList.mock.calls[5][0].statesOfModalReports).toEqual({
+      await act(async () => { TransactionList.mock.calls.at(-1)[0].onToggleStatesOfModalReports('showOverdueReportModal'); });
+      expect(TransactionList.mock.calls.at(-1)[0].statesOfModalReports).toEqual({
         showOverdueReportModal: true,
         showRequestedTooLongReportModal: false,
         showReturnedTooLongReportModal: false,
@@ -355,8 +355,8 @@ describe('TransactionListRoute', () => {
     });
 
     it('should display "Requested too long report" modal', async () => {
-      await act(async () => { TransactionList.mock.calls[4][0].onToggleStatesOfModalReports('showRequestedTooLongReportModal'); });
-      expect(TransactionList.mock.calls[5][0].statesOfModalReports).toEqual({
+      await act(async () => { TransactionList.mock.calls.at(-1)[0].onToggleStatesOfModalReports('showRequestedTooLongReportModal'); });
+      expect(TransactionList.mock.calls.at(-1)[0].statesOfModalReports).toEqual({
         showOverdueReportModal: false,
         showRequestedTooLongReportModal: true,
         showReturnedTooLongReportModal: false,
@@ -366,8 +366,8 @@ describe('TransactionListRoute', () => {
     });
 
     it('should display "Returned too long report" modal', async () => {
-      await act(async () => { TransactionList.mock.calls[4][0].onToggleStatesOfModalReports('showReturnedTooLongReportModal'); });
-      expect(TransactionList.mock.calls[5][0].statesOfModalReports).toEqual({
+      await act(async () => { TransactionList.mock.calls.at(-1)[0].onToggleStatesOfModalReports('showReturnedTooLongReportModal'); });
+      expect(TransactionList.mock.calls.at(-1)[0].statesOfModalReports).toEqual({
         showOverdueReportModal: false,
         showRequestedTooLongReportModal: false,
         showReturnedTooLongReportModal: true,
@@ -377,8 +377,8 @@ describe('TransactionListRoute', () => {
     });
 
     it('should display "Owning site paged too long" modal', async () => {
-      await act(async () => { TransactionList.mock.calls[4][0].onToggleStatesOfModalReports('showPagedTooLongReportModal'); });
-      expect(TransactionList.mock.calls[5][0].statesOfModalReports).toEqual({
+      await act(async () => { TransactionList.mock.calls.at(-1)[0].onToggleStatesOfModalReports('showPagedTooLongReportModal'); });
+      expect(TransactionList.mock.calls.at(-1)[0].statesOfModalReports).toEqual({
         showOverdueReportModal: false,
         showRequestedTooLongReportModal: false,
         showReturnedTooLongReportModal: false,
@@ -388,8 +388,8 @@ describe('TransactionListRoute', () => {
     });
 
     it('should display "In-transit too long" modal', async () => {
-      await act(async () => { TransactionList.mock.calls[4][0].onToggleStatesOfModalReports('showInTransitTooLongReportModal'); });
-      expect(TransactionList.mock.calls[5][0].statesOfModalReports).toEqual({
+      await act(async () => { TransactionList.mock.calls.at(-1)[0].onToggleStatesOfModalReports('showInTransitTooLongReportModal'); });
+      expect(TransactionList.mock.calls.at(-1)[0].statesOfModalReports).toEqual({
         showOverdueReportModal: false,
         showRequestedTooLongReportModal: false,
         showReturnedTooLongReportModal: false,

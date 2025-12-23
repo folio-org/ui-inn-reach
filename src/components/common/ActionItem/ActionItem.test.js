@@ -1,6 +1,6 @@
 import React from 'react';
-import { screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { screen } from '@folio/jest-config-stripes/testing-library/react';
+import userEvent from '@folio/jest-config-stripes/testing-library/user-event';
 
 import ActionItem from './ActionItem';
 
@@ -73,24 +73,24 @@ describe('ActionItem component', () => {
     expect(screen.getByRole('button', { name: /Delete/ })).toBeInTheDocument();
   });
 
-  it('should invoke onEdit callback', () => {
+  it('should invoke onEdit callback', async () => {
     renderedActionItem();
 
-    userEvent.click(screen.getByRole('button', { name: /Edit/ }));
+    await userEvent.click(screen.getByRole('button', { name: /Edit/ }));
     expect(handleClickEdit).toBeCalled();
   });
 
-  it('should invoke onDelete callback', () => {
+  it('should invoke onDelete callback', async () => {
     renderedActionItem(idDelete, buttonTextTranslationKeyDelete, handleClickDelete);
 
-    userEvent.click(screen.getByRole('button', { name: /Delete/ }));
+    await userEvent.click(screen.getByRole('button', { name: /Delete/ }));
     expect(handleClickDelete).toBeCalled();
   });
 
-  it('should invoke onToggle callback', () => {
+  it('should invoke onToggle callback', async () => {
     renderedActionItem();
 
-    userEvent.click(screen.getByRole('button', { name: /Edit/ }));
+    await userEvent.click(screen.getByRole('button', { name: /Edit/ }));
     expect(handleToggle).toBeCalled();
   });
 });

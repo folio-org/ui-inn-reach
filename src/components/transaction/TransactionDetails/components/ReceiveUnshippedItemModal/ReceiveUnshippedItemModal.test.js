@@ -1,8 +1,8 @@
 import React from 'react';
-import { screen } from '@testing-library/react';
+import { screen } from '@folio/jest-config-stripes/testing-library/react';
 import { createMemoryHistory } from 'history';
 import { Router } from 'react-router';
-import userEvent from '@testing-library/user-event';
+import userEvent from '@folio/jest-config-stripes/testing-library/user-event';
 import ReceiveUnshippedItemModal from './ReceiveUnshippedItemModal';
 import { translationsProperties, renderWithIntl } from '../../../../../../test/jest/helpers';
 
@@ -40,16 +40,16 @@ describe('ReceiveUnshippedItemModal', () => {
   });
 
   describe('submit', () => {
-    it('should be called by hitting enter', () => {
+    it('should be called by hitting enter', async () => {
       renderReceiveUnshippedItemModal(commonProps);
-      userEvent.type(screen.getByTestId('itemBarcode'), '12345{enter}');
+      await userEvent.type(screen.getByTestId('itemBarcode'), '12345{enter}');
       expect(onSubmit).toBeCalled();
     });
 
-    it('should be called by pressing submit', () => {
+    it('should be called by pressing submit', async () => {
       renderReceiveUnshippedItemModal(commonProps);
-      userEvent.type(screen.getByTestId('itemBarcode'), '12345');
-      userEvent.click(screen.getByRole('button', { name: 'Submit' }));
+      await userEvent.type(screen.getByTestId('itemBarcode'), '12345');
+      await userEvent.click(screen.getByRole('button', { name: 'Submit' }));
       expect(onSubmit).toBeCalled();
     });
   });

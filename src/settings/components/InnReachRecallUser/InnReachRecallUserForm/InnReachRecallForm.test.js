@@ -1,8 +1,8 @@
 import React from 'react';
-import { screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@folio/jest-config-stripes/testing-library/react';
 import { createMemoryHistory } from 'history';
 import { Router } from 'react-router-dom';
-import userEvent from '@testing-library/user-event';
+import userEvent from '@folio/jest-config-stripes/testing-library/user-event';
 import { translationsProperties, renderWithIntl } from '../../../../../test/jest/helpers';
 import InnReachRecallForm from './InnReachRecallForm';
 import { CENTRAL_SERVER_ID } from '../../../../constants';
@@ -98,7 +98,7 @@ describe('InnReachRecallForm', () => {
     screen.getAllByRole('option')[0].click();
     const field = screen.getByRole('textbox', { name: 'Recall INN-Reach items as user' });
 
-    userEvent.type(field, 'e2f5ebb7-9285-58f8-bc1e-608ac2080861');
+    await userEvent.type(field, 'e2f5ebb7-9285-58f8-bc1e-608ac2080861');
     expect(screen.getByRole('button', { name: 'Save' })).toBeEnabled();
   });
 
@@ -111,7 +111,7 @@ describe('InnReachRecallForm', () => {
       screen.getAllByRole('option')[0].click();
       const field = screen.getByRole('textbox', { name: 'Recall INN-Reach items as user' });
 
-      userEvent.type(field, 'e2f5ebb7-9285-58f8-bc1e-608ac2080861');
+      await userEvent.type(field, 'e2f5ebb7-9285-58f8-bc1e-608ac2080861');
 
       expect(screen.getByRole('button', { name: 'Save' })).toBeEnabled();
     });

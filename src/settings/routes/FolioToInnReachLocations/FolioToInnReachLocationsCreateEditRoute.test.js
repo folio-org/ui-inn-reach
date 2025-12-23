@@ -3,7 +3,7 @@ import {
   cloneDeep,
 } from 'lodash';
 import { createMemoryHistory } from 'history';
-import { screen } from '@testing-library/react';
+import { screen } from '@folio/jest-config-stripes/testing-library/react';
 
 import { ConfirmationModal } from '@folio/stripes/components';
 
@@ -307,7 +307,7 @@ describe('FolioToInnReachLocationsCreateEditRoute component', () => {
       renderFolioToInnReachLocationsCreateEditRoute({ history });
       act(() => { FolioToInnReachLocationsForm.mock.calls[0][0].onChangeServer(servers[0].name); });
       await act(async () => { await FolioToInnReachLocationsForm.mock.calls[1][0].onChangeMappingType('Libraries'); });
-      expect(FolioToInnReachLocationsForm.mock.calls[6][0].initialValues).toEqual({
+      expect(FolioToInnReachLocationsForm.mock.calls.at(-1)[0].initialValues).toEqual({
         librariesTabularList0: [
           {
             'code': 'QWER',
@@ -351,7 +351,7 @@ describe('FolioToInnReachLocationsCreateEditRoute component', () => {
       });
       act(() => { FolioToInnReachLocationsForm.mock.calls[0][0].onChangeServer(servers[0].name); });
       await act(async () => { await FolioToInnReachLocationsForm.mock.calls[1][0].onChangeMappingType('Libraries'); });
-      expect(FolioToInnReachLocationsForm.mock.calls[6][0].initialValues).toEqual(recordForLibrariesMappings);
+      expect(FolioToInnReachLocationsForm.mock.calls.at(-1)[0].initialValues).toEqual(recordForLibrariesMappings);
     });
 
     it('should be with the folio locations only', async () => {
@@ -379,7 +379,7 @@ describe('FolioToInnReachLocationsCreateEditRoute component', () => {
       act(() => { FolioToInnReachLocationsForm.mock.calls[0][0].onChangeServer(servers[0].name); });
       await act(async () => { await FolioToInnReachLocationsForm.mock.calls[1][0].onChangeMappingType('Locations'); });
       await act(async () => { await FolioToInnReachLocationsForm.mock.calls[2][0].onChangeLibrary(loclibs[3].name); });
-      expect(FolioToInnReachLocationsForm.mock.calls[8][0].initialValues).toEqual({
+      expect(FolioToInnReachLocationsForm.mock.calls.at(-1)[0].initialValues).toEqual({
         locationsTabularList: [
           {
             folioLocation: 'folioName5 (code5)',
@@ -409,7 +409,7 @@ describe('FolioToInnReachLocationsCreateEditRoute component', () => {
       act(() => { FolioToInnReachLocationsForm.mock.calls[0][0].onChangeServer(servers[0].name); });
       await act(async () => { await FolioToInnReachLocationsForm.mock.calls[1][0].onChangeMappingType('Locations'); });
       await act(async () => { await FolioToInnReachLocationsForm.mock.calls[2][0].onChangeLibrary(loclibs[3].name); });
-      expect(FolioToInnReachLocationsForm.mock.calls[8][0].initialValues).toEqual(recordForLocationMappings);
+      expect(FolioToInnReachLocationsForm.mock.calls.at(-1)[0].initialValues).toEqual(recordForLocationMappings);
     });
   });
 

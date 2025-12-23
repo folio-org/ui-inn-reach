@@ -1,6 +1,6 @@
 import React from 'react';
 import { createMemoryHistory } from 'history';
-import { screen, fireEvent } from '@testing-library/react';
+import { screen, fireEvent } from '@folio/jest-config-stripes/testing-library/react';
 import { Router } from 'react-router';
 import { translationsProperties, renderWithIntl } from '../../../../../../test/jest/helpers';
 import PatronInformation from './PatronInformation';

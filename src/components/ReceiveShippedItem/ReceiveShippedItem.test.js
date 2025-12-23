@@ -1,6 +1,6 @@
 import { cloneDeep } from 'lodash';
 import { createMemoryHistory } from 'history';
-import { act, screen } from '@testing-library/react';
+import { act, screen } from '@folio/jest-config-stripes/testing-library/react';
 import { useStripes } from '@folio/stripes/core';
 import { translationsProperties, renderWithIntl } from '../../../test/jest/helpers';
 import ReceiveShippedItem from './ReceiveShippedItem';
@@ -249,7 +249,7 @@ describe('ReceiveShippedItem', () => {
 
         it('should pass the received hold item to the list', async () => {
           await renderWithHoldItem(stripes);
-          expect(CheckIn.mock.calls[3][0].scannedItems).toEqual([{
+          expect(CheckIn.mock.calls.at(-1)[0].scannedItems).toEqual([{
             ...receiveShippedItemMock,
             isHoldItem: true,
           }]);
@@ -258,7 +258,7 @@ describe('ReceiveShippedItem', () => {
         describe('received item', () => {
           it('should be hold', async () => {
             await renderWithHoldItem(stripes);
-            expect(CheckIn.mock.calls[3][0].scannedItems).toEqual([{
+            expect(CheckIn.mock.calls.at(-1)[0].scannedItems).toEqual([{
               ...receiveShippedItemMock,
               isHoldItem: true,
             }]);
@@ -269,7 +269,7 @@ describe('ReceiveShippedItem', () => {
             const newReceiveShippedItemMock = cloneDeep(receiveShippedItemMock);
 
             newReceiveShippedItemMock.folioCheckIn.item.status.name = 'In transit';
-            expect(CheckIn.mock.calls[3][0].scannedItems).toEqual([{
+            expect(CheckIn.mock.calls.at(-1)[0].scannedItems).toEqual([{
               ...newReceiveShippedItemMock,
               isTransitItem: true,
             }]);
@@ -277,7 +277,7 @@ describe('ReceiveShippedItem', () => {
 
           it('should be with augmented barcode', async () => {
             await renderWithAugmentedBarcode(stripes);
-            expect(CheckIn.mock.calls[4][0].scannedItems).toEqual([{
+            expect(CheckIn.mock.calls.at(-1)[0].scannedItems).toEqual([{
               ...receiveShippedItemMock,
               isHoldItem: true,
               barcodeAugmented: true,

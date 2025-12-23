@@ -1,6 +1,6 @@
 import React from 'react';
-import { act, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { act, screen } from '@folio/jest-config-stripes/testing-library/react';
+import userEvent from '@folio/jest-config-stripes/testing-library/user-event';
 
 import GeneralInformation from './GeneralInformation';
 
@@ -87,12 +87,12 @@ describe('GeneralInformation component', () => {
   });
 
   describe('main accordion', () => {
-    it('should be collapsed after click', () => {
+    it('should be collapsed after click', async () => {
       const generalInformationBtn = document.querySelector('#accordion-toggle-button-centralServerGeneralAccordion');
 
-      act(() => { userEvent.click(generalInformationBtn); });
+      await act(() => userEvent.click(generalInformationBtn));
       expect(generalInformationBtn.getAttribute('aria-expanded')).toBe('false');
-      act(() => { userEvent.click(generalInformationBtn); });
+      await act(() => userEvent.click(generalInformationBtn));
       expect(generalInformationBtn.getAttribute('aria-expanded')).toBe('true');
     });
   });

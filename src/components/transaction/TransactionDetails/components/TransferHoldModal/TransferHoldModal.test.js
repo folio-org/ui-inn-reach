@@ -1,5 +1,5 @@
 import React from 'react';
-import { act } from '@testing-library/react';
+import { act } from '@folio/jest-config-stripes/testing-library/react';
 import { createMemoryHistory } from 'history';
 import { Router } from 'react-router';
 import {
@@ -107,7 +107,7 @@ describe('TransferHoldModal', () => {
   });
 
   it('should have a list of items with Available state', () => {
-    expect(MultiColumnList.mock.calls[2][0].contentData).toEqual([
+    expect(MultiColumnList.mock.calls.at(-1)[0].contentData).toEqual([
       { id: '444', status: { name: 'Available' }, requestQueue: 1 },
     ]);
   });

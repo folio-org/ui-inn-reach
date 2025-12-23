@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { Form } from 'react-final-form';
 import arrayMutators from 'final-form-arrays';
 
-import userEvent from '@testing-library/user-event';
-import { within } from '@testing-library/dom';
+import userEvent from '@folio/jest-config-stripes/testing-library/user-event';
+import { within } from '@folio/jest-config-stripes/testing-library/react';
 
 import {
   translationsProperties,
@@ -100,22 +100,22 @@ describe('LibraryTabularLists', () => {
 
   describe('when locations was not mapped to any agency', () => {
     describe('and user selects an INN-Reach location', () => {
-      it('should not crash the page', () => {
+      it('should not crash the page', async () => {
         const { container, getByTestId } = renderLibraryTabularLists({
           pickedLocationsByAgencyCode: {},
         });
 
         const agency1Section = within(getByTestId('section-fl1g1'));
 
-        userEvent.click(agency1Section.getByRole('button', { name: 'Select location' }));
-        userEvent.click(agency1Section.getByRole('option', { name: 'INN-Reach location 2' }));
+        await userEvent.click(agency1Section.getByRole('button', { name: 'Select location' }));
+        await userEvent.click(agency1Section.getByRole('option', { name: 'INN-Reach location 2' }));
 
         expect(container).toBeDefined();
       });
     });
 
     describe('and a location is selected in one agency', () => {
-      it('should not be present in the options for other agencies', () => {
+      it('should not be present in the options for other agencies', async () => {
         const { getByTestId } = renderLibraryTabularLists({
           pickedLocationsByAgencyCode: {},
         });
@@ -123,20 +123,20 @@ describe('LibraryTabularLists', () => {
         const agency1Section = within(getByTestId('section-fl1g1'));
         const agency2Section = within(getByTestId('section-fl1g2'));
 
-        userEvent.click(agency1Section.getByRole('button', { name: 'Select location' }));
+        await userEvent.click(agency1Section.getByRole('button', { name: 'Select location' }));
         expect(agency1Section.getByRole('option', { name: 'INN-Reach location 1' })).toBeVisible();
         expect(agency1Section.getByRole('option', { name: 'INN-Reach location 2' })).toBeVisible();
         expect(agency1Section.getByRole('option', { name: 'INN-Reach location 3' })).toBeVisible();
 
-        userEvent.click(agency2Section.getByRole('button', { name: 'Select location' }));
+        await userEvent.click(agency2Section.getByRole('button', { name: 'Select location' }));
         expect(agency2Section.getByRole('option', { name: 'INN-Reach location 1' })).toBeVisible();
         expect(agency2Section.getByRole('option', { name: 'INN-Reach location 2' })).toBeVisible();
         expect(agency2Section.getByRole('option', { name: 'INN-Reach location 3' })).toBeVisible();
 
-        userEvent.click(agency1Section.getByRole('button', { name: 'Select location' }));
-        userEvent.click(agency1Section.getByRole('option', { name: 'INN-Reach location 2' }));
+        await userEvent.click(agency1Section.getByRole('button', { name: 'Select location' }));
+        await userEvent.click(agency1Section.getByRole('option', { name: 'INN-Reach location 2' }));
 
-        userEvent.click(agency2Section.getByRole('button', { name: 'Select location' }));
+        await userEvent.click(agency2Section.getByRole('button', { name: 'Select location' }));
 
         expect(agency2Section.queryByRole('option', { name: 'INN-Reach location 2' })).not.toBeInTheDocument();
       });
@@ -144,7 +144,7 @@ describe('LibraryTabularLists', () => {
   });
 
   describe('when a location has been mapped to one agency', () => {
-    it('should not be present in the options for other agencies', () => {
+    it('should not be present in the options for other agencies', async () => {
       const pickedLocationsByAgencyCode = {
         fl1g2: [
           'location-id-1',
@@ -178,19 +178,19 @@ describe('LibraryTabularLists', () => {
       const agency1Section = within(getByTestId('section-fl1g1'));
       const agency2Section = within(getByTestId('section-fl1g2'));
 
-      userEvent.click(agency1Section.getByRole('button', { name: 'INN-Reach location 3' }));
+      await userEvent.click(agency1Section.getByRole('button', { name: 'INN-Reach location 3' }));
       expect(agency1Section.queryByRole('option', { name: 'INN-Reach location 1' })).not.toBeInTheDocument();
       expect(agency1Section.getByRole('option', { name: 'INN-Reach location 2' })).toBeVisible();
       expect(agency1Section.getByRole('option', { name: 'INN-Reach location 3' })).toBeVisible();
 
-      userEvent.click(agency2Section.getByRole('button', { name: 'INN-Reach location 1' }));
+      await userEvent.click(agency2Section.getByRole('button', { name: 'INN-Reach location 1' }));
       expect(agency2Section.getByRole('option', { name: 'INN-Reach location 1' })).toBeVisible();
       expect(agency2Section.queryByRole('option', { name: 'INN-Reach location 2' })).not.toBeInTheDocument();
       expect(agency2Section.queryByRole('option', { name: 'INN-Reach location 3' })).not.toBeInTheDocument();
     });
 
     describe('and a location is selected in one agency', () => {
-      it('should not be present in the options for other agencies', () => {
+      it('should not be present in the options for other agencies', async () => {
         const pickedLocationsByAgencyCode = {
           fl1g2: [
             'location-id-1',
@@ -223,20 +223,20 @@ describe('LibraryTabularLists', () => {
         const agency1Section = within(getByTestId('section-fl1g1'));
         const agency2Section = within(getByTestId('section-fl1g2'));
 
-        userEvent.click(agency1Section.getByRole('button', { name: 'INN-Reach location 3' }));
+        await userEvent.click(agency1Section.getByRole('button', { name: 'INN-Reach location 3' }));
         expect(agency1Section.queryByRole('option', { name: 'INN-Reach location 1' })).not.toBeInTheDocument();
         expect(agency1Section.getByRole('option', { name: 'INN-Reach location 2' })).toBeVisible();
         expect(agency1Section.getByRole('option', { name: 'INN-Reach location 3' })).toBeVisible();
 
-        userEvent.click(agency2Section.getByRole('button', { name: 'INN-Reach location 1' }));
+        await userEvent.click(agency2Section.getByRole('button', { name: 'INN-Reach location 1' }));
         expect(agency2Section.getByRole('option', { name: 'INN-Reach location 1' })).toBeVisible();
         expect(agency2Section.getByRole('option', { name: 'INN-Reach location 2' })).toBeVisible();
         expect(agency2Section.queryByRole('option', { name: 'INN-Reach location 3' })).not.toBeInTheDocument();
 
-        userEvent.click(agency1Section.getByRole('button', { name: 'INN-Reach location 3' }));
-        userEvent.click(agency1Section.getByRole('option', { name: 'INN-Reach location 2' }));
+        await userEvent.click(agency1Section.getByRole('button', { name: 'INN-Reach location 3' }));
+        await userEvent.click(agency1Section.getByRole('option', { name: 'INN-Reach location 2' }));
 
-        userEvent.click(agency2Section.getByRole('button', { name: 'INN-Reach location 1' }));
+        await userEvent.click(agency2Section.getByRole('button', { name: 'INN-Reach location 1' }));
 
         expect(agency2Section.getByRole('option', { name: 'INN-Reach location 1' })).toBeVisible();
         expect(agency2Section.queryByRole('option', { name: 'INN-Reach location 2' })).not.toBeInTheDocument();
