@@ -4,7 +4,7 @@ import {
   omit,
 } from 'lodash';
 import { createMemoryHistory } from 'history';
-import { screen, act } from '@testing-library/react';
+import { screen, act } from '@folio/jest-config-stripes/testing-library/react';
 
 import { ConfirmationModal } from '@folio/stripes/components';
 
@@ -320,30 +320,30 @@ describe('AgencyToFolioLocationsCreateEditRoute component', () => {
     });
 
     it('should pass the selected server', () => {
-      expect(AgencyToFolioLocationsForm.mock.calls[5][0].selectedServer).toEqual(servers[0]);
+      expect(AgencyToFolioLocationsForm.mock.calls.at(-1)[0].selectedServer).toEqual(servers[0]);
     });
 
     it('should pass the correct initialValues', () => {
-      expect(AgencyToFolioLocationsForm.mock.calls[5][0].initialValues).toEqual({
+      expect(AgencyToFolioLocationsForm.mock.calls.at(-1)[0].initialValues).toEqual({
         libraryId: agencyMappings.libraryId,
         locationId: agencyMappings.locationId,
       });
     });
 
     it('should pass the correct agencyMappings', () => {
-      expect(AgencyToFolioLocationsForm.mock.calls[5][0].agencyMappings).toEqual(agencyMappings);
+      expect(AgencyToFolioLocationsForm.mock.calls.at(-1)[0].agencyMappings).toEqual(agencyMappings);
     });
 
     it('should reset the form values', () => {
-      expect(AgencyToFolioLocationsForm.mock.calls[5][0].isResetForm).toBeTruthy();
+      expect(AgencyToFolioLocationsForm.mock.calls.at(-1)[0].isResetForm).toBeTruthy();
     });
 
     it('should fetch the local servers', () => {
-      expect(AgencyToFolioLocationsForm.mock.calls[5][0].localServers).toEqual(localServers);
+      expect(AgencyToFolioLocationsForm.mock.calls.at(-1)[0].localServers).toEqual(localServers);
     });
 
     it('should pass the library options', async () => {
-      expect(AgencyToFolioLocationsForm.mock.calls[5][0].libraryOptions).toEqual(libraryOptions);
+      expect(AgencyToFolioLocationsForm.mock.calls.at(-1)[0].libraryOptions).toEqual(libraryOptions);
     });
   });
 
@@ -368,14 +368,14 @@ describe('AgencyToFolioLocationsCreateEditRoute component', () => {
       renderAgencyToFolioLocationsCreateEditRoute({ history });
       await act(async () => { await AgencyToFolioLocationsForm.mock.calls[1][0].onChangeServer(servers[0].name); });
       await act(async () => {
-        await AgencyToFolioLocationsForm.mock.calls[5][0].onChangeLocalServer(
+        await AgencyToFolioLocationsForm.mock.calls.at(-1)[0].onChangeLocalServer(
           agencyMappings.localServers[0].localCode,
           agencyMappings.libraryId,
           agencyMappings.locationId
         );
       });
 
-      expect(AgencyToFolioLocationsForm.mock.calls[6][0].initialValues).toEqual({
+      expect(AgencyToFolioLocationsForm.mock.calls.at(-1)[0].initialValues).toEqual({
         libraryId: agencyMappings.libraryId,
         locationId: agencyMappings.locationId,
         localCode: agencyMappings.localServers[0].localCode,
@@ -399,14 +399,14 @@ describe('AgencyToFolioLocationsCreateEditRoute component', () => {
       renderAgencyToFolioLocationsCreateEditRoute({ history, mutator: newMutator });
       await act(async () => { await AgencyToFolioLocationsForm.mock.calls[1][0].onChangeServer(servers[0].name); });
       await act(async () => {
-        await AgencyToFolioLocationsForm.mock.calls[5][0].onChangeLocalServer(
+        await AgencyToFolioLocationsForm.mock.calls.at(-1)[0].onChangeLocalServer(
           agencyMappings.localServers[0].localCode,
           agencyMappings.libraryId,
           agencyMappings.locationId
         );
       });
 
-      expect(AgencyToFolioLocationsForm.mock.calls[6][0].initialValues).toEqual({
+      expect(AgencyToFolioLocationsForm.mock.calls.at(-1)[0].initialValues).toEqual({
         libraryId: agencyMappings.libraryId,
         locationId: agencyMappings.locationId,
         localCode: agencyMappings.localServers[0].localCode,
@@ -425,7 +425,7 @@ describe('AgencyToFolioLocationsCreateEditRoute component', () => {
     it('should send the payload without the local servers', async () => {
       renderAgencyToFolioLocationsCreateEditRoute({ history });
       await act(async () => { await AgencyToFolioLocationsForm.mock.calls[1][0].onChangeServer(servers[0].name); });
-      await act(async () => { await AgencyToFolioLocationsForm.mock.calls[5][0].onSubmit(omit(record, 'localCode')); });
+      await act(async () => { await AgencyToFolioLocationsForm.mock.calls.at(-1)[0].onSubmit(omit(record, 'localCode')); });
       expect(mutatorMock.agencyMappings.PUT).toHaveBeenCalledWith(finalRecord);
     });
   });
@@ -440,13 +440,13 @@ describe('AgencyToFolioLocationsCreateEditRoute component', () => {
         mutator: newMutatorMock,
       });
       await act(async () => { await AgencyToFolioLocationsForm.mock.calls[1][0].onChangeServer(servers[0].name); });
-      expect(AgencyToFolioLocationsForm.mock.calls[6][0].localServersFailed).toBeTruthy();
+      expect(AgencyToFolioLocationsForm.mock.calls.at(-1)[0].localServersFailed).toBeTruthy();
     });
 
     it('should be invisible', async () => {
       renderAgencyToFolioLocationsCreateEditRoute({ history });
       await act(async () => { await AgencyToFolioLocationsForm.mock.calls[1][0].onChangeServer(servers[0].name); });
-      expect(AgencyToFolioLocationsForm.mock.calls[5][0].localServersFailed).toBeFalsy();
+      expect(AgencyToFolioLocationsForm.mock.calls.at(-1)[0].localServersFailed).toBeFalsy();
     });
   });
 });

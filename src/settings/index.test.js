@@ -4,7 +4,7 @@ import {
   screen,
   render,
   waitFor,
-} from '@testing-library/react';
+} from '@folio/jest-config-stripes/testing-library/react';
 import { useStripes } from '@folio/stripes/core';
 import InnReachSettings from './index';
 
@@ -86,8 +86,10 @@ describe('InnReachSettings', () => {
       });
     });
 
-    expect(Settings.mock.calls[1][0].path).toEqual(path);
-    expect(Settings.mock.calls[1][0].sections).toEqual(sections);
+    expect(Settings).toHaveBeenCalledWith(expect.objectContaining({
+      sections,
+      path,
+    }), {});
   });
 
   it('should filter sections when there is no central server', async () => {

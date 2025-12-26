@@ -2,7 +2,7 @@ import React from 'react';
 import {
   cloneDeep,
 } from 'lodash';
-import { screen, act } from '@testing-library/react';
+import { screen, act } from '@folio/jest-config-stripes/testing-library/react';
 
 import { createMemoryHistory } from 'history';
 import { translationsProperties, renderWithIntl } from '../../../../test/jest/helpers';
@@ -136,11 +136,11 @@ describe('renderInnReachRecallUserCreateEditRoute component', () => {
     });
 
     it('should pass the selected server', () => {
-      expect(InnReachRecallUserForm.mock.calls[4][0].selectedServer).toEqual(servers[0]);
+      expect(InnReachRecallUserForm.mock.calls.at(-1)[0].selectedServer).toEqual(servers[0]);
     });
 
     it('should retrieve user id', () => {
-      expect(InnReachRecallUserForm.mock.calls[5][0].initialValues).toEqual(record);
+      expect(InnReachRecallUserForm.mock.calls.at(-1)[0].initialValues).toEqual(record);
     });
   });
 
@@ -157,7 +157,7 @@ describe('renderInnReachRecallUserCreateEditRoute component', () => {
       newMutator.innReachRecallUser.GET = jest.fn(() => Promise.resolve(record));
       await act(async () => { renderInnReachRecallUserCreateEditRoute({ mutator: newMutator }); });
       await act(async () => { InnReachRecallUserForm.mock.calls[0][0].onChangeServer(servers[0].name); });
-      await act(async () => { InnReachRecallUserForm.mock.calls[5][0].onSubmit(record); });
+      await act(async () => { InnReachRecallUserForm.mock.calls.at(-1)[0].onSubmit(record); });
       expect(mutatorMock.innReachRecallUser.PUT).toHaveBeenCalledWith(record);
     });
   });

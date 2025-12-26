@@ -2,7 +2,7 @@ import React from 'react';
 import {
   cloneDeep,
 } from 'lodash';
-import { screen, act } from '@testing-library/react';
+import { screen, act } from '@folio/jest-config-stripes/testing-library/react';
 
 import { createMemoryHistory } from 'history';
 import { translationsProperties, renderWithIntl } from '../../../../test/jest/helpers';
@@ -207,7 +207,7 @@ describe('renderPatronAgencyCreateEditRoute component', () => {
     });
 
     it('should pass the selected server', () => {
-      expect(PatronAgencyForm.mock.calls[4][0].selectedServer).toEqual(servers[0]);
+      expect(PatronAgencyForm.mock.calls.at(-1)[0].selectedServer).toEqual(servers[0]);
     });
   });
 
@@ -216,8 +216,8 @@ describe('renderPatronAgencyCreateEditRoute component', () => {
       it('should be without the agency codes', async () => {
         renderPatronAgencyCreateEditRoute();
         await act(async () => { await PatronAgencyForm.mock.calls[0][0].onChangeServer(servers[0].name); });
-        await act(async () => { PatronAgencyForm.mock.calls[4][0].onChangeCustomField(customFields[0].refId); });
-        expect(PatronAgencyForm.mock.calls[5][0].initialValues).toEqual({
+        await act(async () => { PatronAgencyForm.mock.calls.at(-1)[0].onChangeCustomField(customFields[0].refId); });
+        expect(PatronAgencyForm.mock.calls.at(-1)[0].initialValues).toEqual({
           customFieldId: customFields[0].refId,
           configuredOptions: [
             { customFieldValue: 'Meyer', customFieldValueId: 'opt_0' },
@@ -233,9 +233,9 @@ describe('renderPatronAgencyCreateEditRoute component', () => {
         newMutator.userCustomFieldMappings.GET = jest.fn(() => Promise.resolve(userCustomFieldMappings));
         renderPatronAgencyCreateEditRoute({ mutator: newMutator });
         await act(async () => { await PatronAgencyForm.mock.calls[0][0].onChangeServer(servers[0].name); });
-        await act(async () => { PatronAgencyForm.mock.calls[5][0].onChangeCustomField(customFields[1].refId); });
-        await act(async () => { PatronAgencyForm.mock.calls[6][0].onChangeCustomField(customFields[0].refId); });
-        expect(PatronAgencyForm.mock.calls[7][0].initialValues).toEqual(record);
+        await act(async () => { PatronAgencyForm.mock.calls.at(-1)[0].onChangeCustomField(customFields[1].refId); });
+        await act(async () => { PatronAgencyForm.mock.calls.at(-1)[0].onChangeCustomField(customFields[0].refId); });
+        expect(PatronAgencyForm.mock.calls.at(-1)[0].initialValues).toEqual(record);
       });
 
       it('should be with agency codes too', async () => {
@@ -244,7 +244,7 @@ describe('renderPatronAgencyCreateEditRoute component', () => {
         newMutator.userCustomFieldMappings.GET = jest.fn(() => Promise.resolve(userCustomFieldMappings));
         await renderPatronAgencyCreateEditRoute({ mutator: newMutator });
         await act(async () => { await PatronAgencyForm.mock.calls[0][0].onChangeServer(servers[0].name); });
-        expect(PatronAgencyForm.mock.calls[5][0].initialValues).toEqual(record);
+        expect(PatronAgencyForm.mock.calls.at(-1)[0].initialValues).toEqual(record);
       });
     });
   });
@@ -253,8 +253,8 @@ describe('renderPatronAgencyCreateEditRoute component', () => {
     it('should make a POST request', async () => {
       await act(async () => { renderPatronAgencyCreateEditRoute(); });
       await act(async () => { PatronAgencyForm.mock.calls[0][0].onChangeServer(servers[0].name); });
-      await act(async () => { PatronAgencyForm.mock.calls[4][0].onChangeCustomField(customFields[0].refId); });
-      await act(async () => { PatronAgencyForm.mock.calls[5][0].onSubmit(record); });
+      await act(async () => { PatronAgencyForm.mock.calls.at(-1)[0].onChangeCustomField(customFields[0].refId); });
+      await act(async () => { PatronAgencyForm.mock.calls.at(-1)[0].onSubmit(record); });
       expect(mutatorMock.userCustomFieldMappings.POST).toHaveBeenCalledWith(payload);
     });
 

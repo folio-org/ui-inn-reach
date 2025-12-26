@@ -1,7 +1,7 @@
-import { screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@folio/jest-config-stripes/testing-library/react';
 import { createMemoryHistory } from 'history';
 import { Router } from 'react-router-dom';
-import userEvent from '@testing-library/user-event';
+import userEvent from '@folio/jest-config-stripes/testing-library/user-event';
 import { translationsProperties, renderWithIntl } from '../../../../../test/jest/helpers';
 import PickupLocationsForm from './PickupLocationsForm';
 
@@ -68,10 +68,10 @@ describe('PickupLocationsForm', () => {
       });
     });
 
-    it('should be enabled if any checkbox is checked besides "User custom fields"', () => {
+    it('should be enabled if any checkbox is checked besides "User custom fields"', async () => {
       const checkbox = screen.getByRole('checkbox', { name: 'Enable local pickup locations for item holds' });
 
-      userEvent.click(checkbox);
+      await userEvent.click(checkbox);
       expect(screen.getByRole('button', { name: 'Save' })).toBeEnabled();
     });
   });

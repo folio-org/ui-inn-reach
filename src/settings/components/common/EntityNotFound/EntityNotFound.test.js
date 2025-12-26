@@ -1,6 +1,6 @@
 import React from 'react';
-import { screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { screen } from '@folio/jest-config-stripes/testing-library/react';
+import userEvent from '@folio/jest-config-stripes/testing-library/user-event';
 
 import EntityNotFound from './EntityNotFound';
 
@@ -48,8 +48,8 @@ describe('EntityNotFound component', () => {
     expect(screen.getByRole('button', { name: /Close/ })).toBeInTheDocument();
   });
 
-  it('should invoke onBack callback', () => {
-    userEvent.click(screen.getByRole('button', { name: /Close/ }));
+  it('should invoke onBack callback', async () => {
+    await userEvent.click(screen.getByRole('button', { name: /Close/ }));
     expect(handleClickBack).toBeCalled();
   });
 

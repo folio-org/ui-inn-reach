@@ -2,7 +2,7 @@ import React from 'react';
 import {
   cloneDeep,
 } from 'lodash';
-import { screen, act } from '@testing-library/react';
+import { screen, act } from '@folio/jest-config-stripes/testing-library/react';
 
 import { translationsProperties, renderWithIntl } from '../../../../test/jest/helpers';
 import BibTransformationOptionsCreateEditRoute from './BibTransformationOptionsCreateEditRoute';
@@ -146,7 +146,7 @@ describe('BibTransformationOptionsCreateEditRoute component', () => {
     });
 
     it('should pass the selected server', () => {
-      expect(BibTransformationOptionsForm.mock.calls[4][0].selectedServer).toEqual(servers[0]);
+      expect(BibTransformationOptionsForm.mock.calls.at(-1)[0].selectedServer).toEqual(servers[0]);
     });
 
     it('should pass the correct initialValues', () => {
@@ -158,7 +158,7 @@ describe('BibTransformationOptionsCreateEditRoute component', () => {
         ignorePrefixes: item.ignorePrefixes.join(', '),
       }));
       initialValues.excludedMARCFields = initialValues.excludedMARCFields.join(', ');
-      expect(BibTransformationOptionsForm.mock.calls[4][0].initialValues).toEqual(initialValues);
+      expect(BibTransformationOptionsForm.mock.calls.at(-1)[0].initialValues).toEqual(initialValues);
     });
   });
 
@@ -169,15 +169,15 @@ describe('BibTransformationOptionsCreateEditRoute component', () => {
       newMutator.marcTransformationOptions.GET = jest.fn(() => Promise.resolve());
       renderBibTransformationOptionsCreateEditRoute({ mutator: newMutator });
       await act(async () => { await BibTransformationOptionsForm.mock.calls[0][0].onChangeServer(servers[0].name); });
-      await act(async () => { await BibTransformationOptionsForm.mock.calls[3][0].onChangeConfigState({ change: jest.fn() })({ target: { checked: true } }); });
-      await act(async () => { await BibTransformationOptionsForm.mock.calls[4][0].onSubmit(record); });
+      await act(async () => { await BibTransformationOptionsForm.mock.calls.at(-1)[0].onChangeConfigState({ change: jest.fn() })({ target: { checked: true } }); });
+      await act(async () => { await BibTransformationOptionsForm.mock.calls.at(-1)[0].onSubmit(record); });
       expect(newMutator.marcTransformationOptions.POST).toHaveBeenCalledWith(finalRecord);
     });
 
     it('should make a PUT request', async () => {
       renderBibTransformationOptionsCreateEditRoute();
       await act(async () => { await BibTransformationOptionsForm.mock.calls[0][0].onChangeServer(servers[0].name); });
-      await act(async () => { await BibTransformationOptionsForm.mock.calls[4][0].onSubmit(record); });
+      await act(async () => { await BibTransformationOptionsForm.mock.calls.at(-1)[0].onSubmit(record); });
       expect(mutatorMock.marcTransformationOptions.PUT).toHaveBeenCalledWith(finalRecord);
     });
   });
@@ -191,12 +191,12 @@ describe('BibTransformationOptionsCreateEditRoute component', () => {
     });
 
     it('should display the tabular list', async () => {
-      await act(async () => { BibTransformationOptionsForm.mock.calls[4][0].onChangeConfigState(form)({ target: { checked: true } }); });
-      expect(BibTransformationOptionsForm.mock.calls[4][0].isConfigActive).toBeTruthy();
+      await act(async () => { BibTransformationOptionsForm.mock.calls.at(-1)[0].onChangeConfigState(form)({ target: { checked: true } }); });
+      expect(BibTransformationOptionsForm.mock.calls.at(-1)[0].isConfigActive).toBeTruthy();
     });
 
     it('should make initial state for tabular list', async () => {
-      await act(async () => { BibTransformationOptionsForm.mock.calls[4][0].onChangeConfigState(form)({ target: { checked: true } }); });
+      await act(async () => { BibTransformationOptionsForm.mock.calls.at(-1)[0].onChangeConfigState(form)({ target: { checked: true } }); });
       expect(form.change).toHaveBeenLastCalledWith(
         'modifiedFieldsForContributedRecords',
         [
@@ -215,7 +215,7 @@ describe('BibTransformationOptionsCreateEditRoute component', () => {
     });
 
     it('should make an empty state for tabular list', async () => {
-      await act(async () => { BibTransformationOptionsForm.mock.calls[4][0].onChangeConfigState(form)({ target: { checked: false } }); });
+      await act(async () => { BibTransformationOptionsForm.mock.calls.at(-1)[0].onChangeConfigState(form)({ target: { checked: false } }); });
       expect(form.change).toHaveBeenLastCalledWith('modifiedFieldsForContributedRecords', []);
     });
   });

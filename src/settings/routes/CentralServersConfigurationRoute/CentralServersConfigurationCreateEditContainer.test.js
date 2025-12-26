@@ -2,8 +2,8 @@ import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import { createMemoryHistory } from 'history';
-import { act } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { act } from '@folio/jest-config-stripes/testing-library/react';
+import userEvent from '@folio/jest-config-stripes/testing-library/user-event';
 
 import { translationsProperties, renderWithIntl } from '../../../../test/jest/helpers';
 import CentralServersConfigurationCreateEditContainer from './CentralServersConfigurationCreateEditContainer';
@@ -142,7 +142,7 @@ describe('CentralServersConfigurationCreateEditContainer', () => {
       });
     });
 
-    it('should call onModalConfirm prop', () => {
+    it('should call onModalConfirm prop', async () => {
       const onModalConfirm = jest.fn();
 
       renderContainer({
@@ -153,11 +153,11 @@ describe('CentralServersConfigurationCreateEditContainer', () => {
 
       const confirmButton = document.querySelector('[data-test-confirmation-modal-confirm-button]');
 
-      userEvent.click(confirmButton);
+      await userEvent.click(confirmButton);
       expect(onModalConfirm).toHaveBeenCalled();
     });
 
-    it('should call onModalCancel prop', () => {
+    it('should call onModalCancel prop', async () => {
       const onModalCancel = jest.fn();
 
       renderContainer({
@@ -168,7 +168,7 @@ describe('CentralServersConfigurationCreateEditContainer', () => {
 
       const cancelButton = document.querySelector('[data-test-confirmation-modal-cancel-button]');
 
-      userEvent.click(cancelButton);
+      await userEvent.click(cancelButton);
       expect(onModalCancel).toHaveBeenCalled();
     });
   });

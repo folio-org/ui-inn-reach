@@ -2,7 +2,7 @@ import React from 'react';
 import {
   cloneDeep,
 } from 'lodash';
-import { screen, act } from '@testing-library/react';
+import { screen, act } from '@folio/jest-config-stripes/testing-library/react';
 
 import { translationsProperties, renderWithIntl } from '../../../../test/jest/helpers';
 import FolioCirculationUserCreateEditRoute from './FolioCirculationUserCreateEditRoute';
@@ -147,11 +147,11 @@ describe('renderFolioCirculationUserCreateEditRoute component', () => {
     });
 
     it('should pass the selected server', () => {
-      expect(FolioCirculationUserForm.mock.calls[7][0].selectedServer).toEqual(servers[0]);
+      expect(FolioCirculationUserForm.mock.calls.at(-1)[0].selectedServer).toEqual(servers[0]);
     });
 
     it('should pass the correct initialValues', () => {
-      expect(FolioCirculationUserForm.mock.calls[7][0].initialValues).toEqual({
+      expect(FolioCirculationUserForm.mock.calls.at(-1)[0].initialValues).toEqual({
         centralPatronTypeMappings: [
           {
             id: '508657aa-927a-4515-91d8-a4e7a759b3db',
@@ -174,7 +174,7 @@ describe('renderFolioCirculationUserCreateEditRoute component', () => {
     it('should make a PUT request', async () => {
       renderFolioCirculationUserCreateEditRoute();
       await act(async () => { await FolioCirculationUserForm.mock.calls[1][0].onChangeServer(servers[0].name); });
-      await act(async () => { await FolioCirculationUserForm.mock.calls[7][0].onSubmit(record); });
+      await act(async () => { await FolioCirculationUserForm.mock.calls.at(-1)[0].onSubmit(record); });
       expect(mutatorMock.centralPatronTypeMappings.PUT).toHaveBeenCalledWith(payload);
     });
   });
@@ -186,13 +186,13 @@ describe('renderFolioCirculationUserCreateEditRoute component', () => {
       newMutatorMock.innReachPatronTypes.GET = jest.fn(() => Promise.reject());
       renderFolioCirculationUserCreateEditRoute({ mutator: newMutatorMock });
       await act(async () => { await FolioCirculationUserForm.mock.calls[1][0].onChangeServer(servers[0].name); });
-      expect(FolioCirculationUserForm.mock.calls[8][0].innReachPatronTypesFailed).toBeTruthy();
+      expect(FolioCirculationUserForm.mock.calls.at(-1)[0].innReachPatronTypesFailed).toBeTruthy();
     });
 
     it('should be invisible', async () => {
       renderFolioCirculationUserCreateEditRoute();
       await act(async () => { await FolioCirculationUserForm.mock.calls[1][0].onChangeServer(servers[0].name); });
-      expect(FolioCirculationUserForm.mock.calls[7][0].innReachPatronTypesFailed).toBeFalsy();
+      expect(FolioCirculationUserForm.mock.calls.at(-1)[0].innReachPatronTypesFailed).toBeFalsy();
     });
   });
 });

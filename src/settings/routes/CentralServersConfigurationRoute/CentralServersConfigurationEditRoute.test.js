@@ -2,7 +2,7 @@ import { MemoryRouter } from 'react-router-dom';
 import {
   act,
   waitFor,
-} from '@testing-library/react';
+} from '@folio/jest-config-stripes/testing-library/react';
 
 import { translationsProperties, renderWithIntl } from '../../../../test/jest/helpers';
 import CentralServersConfigurationCreateEditContainer from './CentralServersConfigurationCreateEditContainer';

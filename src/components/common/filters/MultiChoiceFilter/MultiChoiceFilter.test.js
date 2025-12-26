@@ -1,5 +1,5 @@
 import React from 'react';
-import { screen } from '@testing-library/react';
+import { screen } from '@folio/jest-config-stripes/testing-library/react';
 import { MultiSelectionFilter } from '@folio/stripes/smart-components';
 import MultiChoiceFilter from './MultiChoiceFilter';
 import { translationsProperties, renderWithIntl } from '../../../../../test/jest/helpers';

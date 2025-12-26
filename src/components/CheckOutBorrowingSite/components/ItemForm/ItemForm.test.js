@@ -1,7 +1,7 @@
 import { createMemoryHistory } from 'history';
-import { screen } from '@testing-library/react';
+import { screen } from '@folio/jest-config-stripes/testing-library/react';
 import { Router } from 'react-router-dom';
-import userEvent from '@testing-library/user-event';
+import userEvent from '@folio/jest-config-stripes/testing-library/user-event';
 import { translationsProperties, renderWithIntl } from '../../../../../test/jest/helpers';
 import ItemForm from './ItemForm';
 
@@ -54,16 +54,16 @@ describe('ItemForm', () => {
   });
 
   describe('"Enter" button', () => {
-    it('should submit request', () => {
+    it('should submit request', async () => {
       renderItemForm({ handleSubmit });
-      userEvent.type(screen.getByRole('textbox'), '123');
-      userEvent.click(screen.getByRole('button', { name: 'Enter' }));
+      await userEvent.type(screen.getByRole('textbox'), '123');
+      await userEvent.click(screen.getByRole('button', { name: 'Enter' }));
       expect(handleSubmit).toBeCalled();
     });
 
-    it('should be enabled', () => {
+    it('should be enabled', async () => {
       renderItemForm();
-      userEvent.type(screen.getByRole('textbox'), '123123');
+      await userEvent.type(screen.getByRole('textbox'), '123123');
       expect(screen.getByRole('button', { name: 'Enter' })).toBeEnabled();
     });
 

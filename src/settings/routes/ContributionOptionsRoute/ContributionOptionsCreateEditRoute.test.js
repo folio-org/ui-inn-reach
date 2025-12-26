@@ -4,7 +4,7 @@ import {
   omit,
 } from 'lodash';
 import { createMemoryHistory } from 'history';
-import { waitFor, screen, act } from '@testing-library/react';
+import { waitFor, screen, act } from '@folio/jest-config-stripes/testing-library/react';
 
 import { ConfirmationModal } from '@folio/stripes/components';
 
@@ -250,8 +250,12 @@ describe('ContributionOptionsCreateEditRoute component', () => {
           mutator: newMutator,
         });
       });
-      await act(async () => { await ContributionOptionsForm.mock.calls[3][0].onSubmit(record); });
-      expect(postMock).toHaveBeenCalledWith(finalRecord);
+
+      await waitFor(() => expect(newMutator.contributionOptions.GET).toHaveBeenCalled());
+
+      await act(() => ContributionOptionsForm.mock.calls.at(-1)[0].onSubmit(record));
+
+      await waitFor(() => expect(postMock).toHaveBeenCalledWith(finalRecord));
     });
 
     it('should trigger PUT request', async () => {

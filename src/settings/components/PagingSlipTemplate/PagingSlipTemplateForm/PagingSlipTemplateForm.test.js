@@ -1,8 +1,8 @@
-import { screen, act, waitFor } from '@testing-library/react';
+import { screen, act, waitFor } from '@folio/jest-config-stripes/testing-library/react';
 import { createMemoryHistory } from 'history';
 import { Router } from 'react-router-dom';
 import { TemplateEditor } from '@folio/stripes-template-editor';
-import userEvent from '@testing-library/user-event';
+import userEvent from '@folio/jest-config-stripes/testing-library/user-event';
 import { translationsProperties, renderWithIntl } from '../../../../../test/jest/helpers';
 import PagingSlipTemplateForm from './PagingSlipTemplateForm';
 import { TokensList } from './components';
@@ -117,16 +117,16 @@ describe('PagingSlipTemplateForm', () => {
     });
 
     describe('when changing the value of description field', () => {
-      beforeEach(() => {
-        userEvent.type(screen.getByRole('textbox', { name: 'Description' }), 'a');
+      beforeEach(async () => {
+        await userEvent.type(screen.getByRole('textbox', { name: 'Description' }), 'a');
       });
 
       it('should be enabled', () => {
         expect(screen.getByRole('button', { name: 'Save' })).toBeEnabled();
       });
 
-      it('should be disabled', () => {
-        userEvent.type(screen.getByRole('textbox', { name: 'Description' }), '{backspace}');
+      it('should be disabled', async () => {
+        await userEvent.type(screen.getByRole('textbox', { name: 'Description' }), '{backspace}');
         expect(screen.getByRole('button', { name: 'Save' })).toBeDisabled();
       });
     });

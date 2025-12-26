@@ -1,7 +1,7 @@
-import { screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@folio/jest-config-stripes/testing-library/react';
 import { createMemoryHistory } from 'history';
 import { Router } from 'react-router-dom';
-import userEvent from '@testing-library/user-event';
+import userEvent from '@folio/jest-config-stripes/testing-library/user-event';
 import { translationsProperties, renderWithIntl } from '../../../../../test/jest/helpers';
 import BibTransformationOptionsForm from './BibTransformationOptionsForm';
 import { DEFAULT_INITIAL_VALUES, CENTRAL_SERVER_ID } from '../../../../constants';
@@ -110,7 +110,7 @@ describe('BibTransformationOptionsForm', () => {
         expect(getByRole('button', { name: 'Save' })).toBeEnabled();
       });
 
-      it('should be disabled', () => {
+      it('should be disabled', async () => {
         const { getByRole } = renderBibTransformationOptionsForm({
           ...commonProps,
           isConfigActive: true,
@@ -124,25 +124,25 @@ describe('BibTransformationOptionsForm', () => {
           },
         });
 
-        userEvent.click(getByRole('checkbox', { name: 'Modify MARC 001 field for contributed records' }));
-        userEvent.click(getByRole('checkbox', { name: 'Modify MARC 001 field for contributed records' }));
+        await userEvent.click(getByRole('checkbox', { name: 'Modify MARC 001 field for contributed records' }));
+        await userEvent.click(getByRole('checkbox', { name: 'Modify MARC 001 field for contributed records' }));
         expect(getByRole('button', { name: 'Save' })).toBeDisabled();
       });
     });
 
     describe('when the "Identifier type" field has changes', () => {
-      it('should be enabled when at least one "Identifier type" is selected', () => {
+      it('should be enabled when at least one "Identifier type" is selected', async () => {
         const { getByRole } = renderBibTransformationOptionsForm({
           ...commonProps,
           isConfigActive: true,
         });
 
         expect(getByRole('button', { name: 'Save' })).toBeDisabled();
-        userEvent.selectOptions(getByRole('combobox', { name: 'Identifier type' }), 'd09901a7-1407-42d5-a680-e4d83fe93c5d');
+        await userEvent.selectOptions(getByRole('combobox', { name: 'Identifier type' }), 'd09901a7-1407-42d5-a680-e4d83fe93c5d');
         expect(getByRole('button', { name: 'Save' })).toBeEnabled();
       });
 
-      it('should be disabled', () => {
+      it('should be disabled', async () => {
         const { getByRole } = renderBibTransformationOptionsForm({
           ...commonProps,
           isConfigActive: true,
@@ -156,9 +156,9 @@ describe('BibTransformationOptionsForm', () => {
           },
         });
 
-        userEvent.selectOptions(getByRole('combobox', { name: 'Identifier type' }), 'e7bb3f98-5229-44dc-9da2-08bcfc67020a');
+        await userEvent.selectOptions(getByRole('combobox', { name: 'Identifier type' }), 'e7bb3f98-5229-44dc-9da2-08bcfc67020a');
         expect(getByRole('button', { name: 'Save' })).toBeEnabled();
-        userEvent.selectOptions(getByRole('combobox', { name: 'Identifier type' }), 'd09901a7-1407-42d5-a680-e4d83fe93c5d');
+        await userEvent.selectOptions(getByRole('combobox', { name: 'Identifier type' }), 'd09901a7-1407-42d5-a680-e4d83fe93c5d');
         expect(getByRole('button', { name: 'Save' })).toBeDisabled();
       });
     });
@@ -166,7 +166,7 @@ describe('BibTransformationOptionsForm', () => {
     describe('when the "Strip prefix" checkbox has checked/unchecked', () => {
       let checkbox;
 
-      beforeEach(() => {
+      beforeEach(async () => {
         renderBibTransformationOptionsForm({
           ...commonProps,
           isConfigActive: true,
@@ -180,21 +180,21 @@ describe('BibTransformationOptionsForm', () => {
         });
 
         checkbox = screen.getByRole('checkbox', { name: 'Strip prefix' });
-        userEvent.click(checkbox);
+        await userEvent.click(checkbox);
       });
 
       it('should be enabled', () => {
         expect(checkbox.checked).toBeTruthy();
       });
 
-      it('should be disabled', () => {
-        userEvent.click(checkbox);
+      it('should be disabled', async () => {
+        await userEvent.click(checkbox);
         expect(checkbox.checked).toBeFalsy();
       });
     });
 
     describe('when the "Ignore prefixes field" field has changes', () => {
-      beforeEach(() => {
+      beforeEach(async () => {
         renderBibTransformationOptionsForm({
           ...commonProps,
           isConfigActive: true,
@@ -209,35 +209,35 @@ describe('BibTransformationOptionsForm', () => {
           },
         });
 
-        userEvent.type(screen.getByRole('textbox', { name: 'Ignore prefixes' }), '1');
+        await userEvent.type(screen.getByRole('textbox', { name: 'Ignore prefixes' }), '1');
       });
 
       it('should be enabled', () => {
         expect(screen.getByRole('button', { name: 'Save' })).toBeEnabled();
       });
 
-      it('should be disabled when adding a value to the "Ignore prefixes field" and then remove it', () => {
-        userEvent.type(screen.getByRole('textbox', { name: 'Ignore prefixes' }), '{backspace}');
+      it('should be disabled when adding a value to the "Ignore prefixes field" and then remove it', async () => {
+        await userEvent.type(screen.getByRole('textbox', { name: 'Ignore prefixes' }), '{backspace}');
         expect(screen.getByRole('button', { name: 'Save' })).toBeDisabled();
       });
     });
 
     describe('when the "Strip fields and subfields" field has changes', () => {
-      beforeEach(() => {
+      beforeEach(async () => {
         renderBibTransformationOptionsForm({
           ...commonProps,
           isConfigActive: false,
         });
 
-        userEvent.type(screen.getByRole('textbox', { name: 'Strip fields and subfields' }), '1');
+        await userEvent.type(screen.getByRole('textbox', { name: 'Strip fields and subfields' }), '1');
       });
 
       it('should be enabled', () => {
         expect(screen.getByRole('button', { name: 'Save' })).toBeEnabled();
       });
 
-      it('should be disabled', () => {
-        userEvent.type(screen.getByRole('textbox', { name: 'Strip fields and subfields' }), '{backspace}');
+      it('should be disabled', async () => {
+        await userEvent.type(screen.getByRole('textbox', { name: 'Strip fields and subfields' }), '{backspace}');
         expect(screen.getByRole('button', { name: 'Save' })).toBeDisabled();
       });
     });

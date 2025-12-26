@@ -1,5 +1,5 @@
 import { createBrowserHistory } from 'history';
-import { renderHook, act } from '@testing-library/react-hooks';
+import { renderHook, act } from '@folio/jest-config-stripes/testing-library/react';
 import useCentralServers from './useCentralServers';
 
 const servers = [

@@ -1,4 +1,4 @@
-import { screen } from '@testing-library/react';
+import { screen } from '@folio/jest-config-stripes/testing-library/react';
 import { useStripes } from '@folio/stripes/core';
 import ListCheckInItems from './ListCheckInItems';
 import { translationsProperties, renderWithIntl } from '../../../../../../../test/jest/helpers';

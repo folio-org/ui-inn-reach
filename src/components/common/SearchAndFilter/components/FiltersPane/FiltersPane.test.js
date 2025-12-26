@@ -1,4 +1,4 @@
-import user from '@testing-library/user-event';
+import user from '@folio/jest-config-stripes/testing-library/user-event';
 
 import FiltersPane from './FiltersPane';
 import { translationsProperties, renderWithIntl } from '../../../../../../test/jest/helpers';
@@ -24,12 +24,11 @@ describe('FiltersPane', () => {
     expect(getByText(FILTERS)).toBeDefined();
   });
 
-  it('should call toggleFilters when collapse filters button is pressed', () => {
+  it('should call toggleFilters when collapse filters button is pressed', async () => {
     const toggleFilters = jest.fn();
     const { getByText } = renderFiltersPane({ toggleFilters });
 
-    user.click(getByText(COLLAPSE_FILTERS_BUTTON));
-
+    await user.click(getByText(COLLAPSE_FILTERS_BUTTON));
     expect(toggleFilters).toHaveBeenCalled();
   });
 });

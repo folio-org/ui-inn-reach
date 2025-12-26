@@ -2,7 +2,7 @@ import React from 'react';
 import { cloneDeep } from 'lodash';
 
 import { createMemoryHistory } from 'history';
-import { waitFor, screen, act } from '@testing-library/react';
+import { waitFor, screen, act } from '@folio/jest-config-stripes/testing-library/react';
 
 import { ConfirmationModal } from '@folio/stripes/components';
 
@@ -207,14 +207,14 @@ describe('MaterialTypeCreateEditRoute component', () => {
         history,
         mutator: newMutatorMock,
       });
-      await act(async () => { await MaterialTypeForm.mock.calls[1][0].onChangeServer(servers[0].name); });
-      expect(MaterialTypeForm.mock.calls[6][0].innReachItemTypesFailed).toBeTruthy();
+      await act(async () => { await MaterialTypeForm.mock.calls.at(-1)[0].onChangeServer(servers[0].name); });
+      expect(MaterialTypeForm.mock.calls.at(-1)[0].innReachItemTypesFailed).toBeTruthy();
     });
 
     it('should be invisible', async () => {
       renderMaterialTypesCreateEditRoute({ history });
-      await act(async () => { await MaterialTypeForm.mock.calls[1][0].onChangeServer(servers[0].name); });
-      expect(MaterialTypeForm.mock.calls[5][0].innReachItemTypesFailed).toBeFalsy();
+      await act(async () => { await MaterialTypeForm.mock.calls.at(-1)[0].onChangeServer(servers[0].name); });
+      expect(MaterialTypeForm.mock.calls.at(-1)[0].innReachItemTypesFailed).toBeFalsy();
     });
   });
 });

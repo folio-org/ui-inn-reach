@@ -2,8 +2,8 @@ import React from 'react';
 import { createMemoryHistory } from 'history';
 import { Router } from 'react-router-dom';
 import StripesFinalFormWrapper from '@folio/stripes-final-form/lib/StripesFinalFormWrapper';
-import userEvent from '@testing-library/user-event';
-import { screen, waitFor } from '@testing-library/react';
+import userEvent from '@folio/jest-config-stripes/testing-library/user-event';
+import { screen, waitFor } from '@folio/jest-config-stripes/testing-library/react';
 import { translationsProperties, renderWithIntl } from '../../../../../test/jest/helpers';
 import FolioToInnReachLocationsForm from './FolioToInnReachLocationsForm';
 import {

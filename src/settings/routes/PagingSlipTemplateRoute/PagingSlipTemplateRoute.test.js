@@ -2,7 +2,7 @@ import React from 'react';
 import {
   cloneDeep,
 } from 'lodash';
-import { screen, act } from '@testing-library/react';
+import { screen, act } from '@folio/jest-config-stripes/testing-library/react';
 import { createMemoryHistory } from 'history';
 import { translationsProperties, renderWithIntl } from '../../../../test/jest/helpers';
 import PagingSlipTemplateRoute from './PagingSlipTemplateRoute';
@@ -107,11 +107,11 @@ describe('renderPagingSlipTemplateRoute component', () => {
     });
 
     it('should pass the selected server', () => {
-      expect(PagingSlipTemplateForm.mock.calls[5][0].selectedServer).toEqual(servers[0]);
+      expect(PagingSlipTemplateForm.mock.calls.at(-1)[0].selectedServer).toEqual(servers[0]);
     });
 
     it('should produce correct initial values', () => {
-      expect(PagingSlipTemplateForm.mock.calls[5][0].initialValues).toEqual({
+      expect(PagingSlipTemplateForm.mock.calls.at(-1)[0].initialValues).toEqual({
         description: '',
         template: '<div><br></div>',
       });
@@ -125,7 +125,7 @@ describe('renderPagingSlipTemplateRoute component', () => {
       newMutator.pagingSlipTemplate.GET = jest.fn(() => Promise.resolve(payload));
       await act(async () => { renderPagingSlipTemplateRoute({ mutator: newMutator }); });
       await act(async () => { PagingSlipTemplateForm.mock.calls[0][0].onChangeServer(servers[0].name); });
-      await act(async () => { PagingSlipTemplateForm.mock.calls[5][0].onSubmit(payload); });
+      await act(async () => { PagingSlipTemplateForm.mock.calls.at(-1)[0].onSubmit(payload); });
       expect(mutatorMock.pagingSlipTemplate.PUT).toHaveBeenCalledWith(payload);
     });
   });

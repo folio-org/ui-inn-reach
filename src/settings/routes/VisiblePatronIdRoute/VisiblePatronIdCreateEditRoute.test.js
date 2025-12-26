@@ -2,7 +2,7 @@ import React from 'react';
 import {
   cloneDeep,
 } from 'lodash';
-import { screen, act } from '@testing-library/react';
+import { screen, act } from '@folio/jest-config-stripes/testing-library/react';
 import { createMemoryHistory } from 'history';
 import { translationsProperties, renderWithIntl } from '../../../../test/jest/helpers';
 import VisiblePatronIdCreateEditRoute from './VisiblePatronIdCreateEditRoute';
@@ -138,11 +138,11 @@ describe('renderVisiblePatronIdCreateEditRoute component', () => {
     });
 
     it('should pass the selected server', () => {
-      expect(VisiblePatronIdForm.mock.calls[4][0].selectedServer).toEqual(servers[0]);
+      expect(VisiblePatronIdForm.mock.calls.at(-1)[0].selectedServer).toEqual(servers[0]);
     });
 
     it('should produce correct initial values', () => {
-      expect(VisiblePatronIdForm.mock.calls[5][0].initialValues).toEqual(record);
+      expect(VisiblePatronIdForm.mock.calls.at(-1)[0].initialValues).toEqual(record);
     });
   });
 
@@ -159,7 +159,9 @@ describe('renderVisiblePatronIdCreateEditRoute component', () => {
       newMutator.visiblePatronIdConfiguration.GET = jest.fn(() => Promise.resolve(payload));
       await act(async () => { renderVisiblePatronIdCreateEditRoute({ mutator: newMutator }); });
       await act(async () => { VisiblePatronIdForm.mock.calls[0][0].onChangeServer(servers[0].name); });
-      await act(async () => { VisiblePatronIdForm.mock.calls[5][0].onSubmit(record); });
+      const lastCall = VisiblePatronIdForm.mock.calls.at(-1)[0];
+
+      await act(async () => { lastCall.onSubmit(record); });
       expect(mutatorMock.visiblePatronIdConfiguration.PUT).toHaveBeenCalledWith(payload);
     });
   });

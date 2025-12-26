@@ -4,7 +4,7 @@ import {
   omit,
 } from 'lodash';
 import { createMemoryHistory } from 'history';
-import { waitFor, screen, act } from '@testing-library/react';
+import { waitFor, screen, act } from '@folio/jest-config-stripes/testing-library/react';
 
 import { ConfirmationModal } from '@folio/stripes/components';
 
@@ -217,7 +217,7 @@ describe('ContributionCriteriaCreateEditRoute component', () => {
 
     it('should cause POST request', async () => {
       await act(async () => { await renderContributionCriteriaCreateEditRoute({ history }); });
-      await act(async () => { await ContributionCriteriaForm.mock.calls[3][0].onSubmit(record); });
+      await act(async () => { await ContributionCriteriaForm.mock.calls.at(-1)[0].onSubmit(record); });
       expect(postMock).toHaveBeenCalledWith(finalRecord);
     });
 

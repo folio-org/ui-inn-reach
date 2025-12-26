@@ -1,6 +1,6 @@
 import React from 'react';
-import { act, cleanup, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { act, cleanup, screen } from '@folio/jest-config-stripes/testing-library/react';
+import userEvent from '@folio/jest-config-stripes/testing-library/user-event';
 
 import ServerConnection from './ServerConnection';
 
@@ -72,12 +72,12 @@ describe('ServerConnection component', () => {
   });
 
   describe('accordion', () => {
-    it('should be collapsed after click', () => {
+    it('should be collapsed after click', async () => {
       const serverConnectionBtn = document.querySelector('#accordion-toggle-button-serverConnection');
 
-      act(() => { userEvent.click(serverConnectionBtn); });
+      await act(() => userEvent.click(serverConnectionBtn));
       expect(serverConnectionBtn.getAttribute('aria-expanded')).toBe('false');
-      act(() => { userEvent.click(serverConnectionBtn); });
+      await act(() => userEvent.click(serverConnectionBtn));
       expect(serverConnectionBtn.getAttribute('aria-expanded')).toBe('true');
     });
   });

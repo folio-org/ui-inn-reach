@@ -2,7 +2,7 @@ import React from 'react';
 import {
   cloneDeep,
 } from 'lodash';
-import { screen, act } from '@testing-library/react';
+import { screen, act } from '@folio/jest-config-stripes/testing-library/react';
 
 import { createMemoryHistory } from 'history';
 import { translationsProperties, renderWithIntl } from '../../../../test/jest/helpers';

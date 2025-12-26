@@ -1,6 +1,6 @@
 import React from 'react';
-import { screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { screen } from '@folio/jest-config-stripes/testing-library/react';
+import userEvent from '@folio/jest-config-stripes/testing-library/user-event';
 
 import FirsrMenuCloseButton from './FirsrMenuCloseButton';
 
@@ -44,8 +44,8 @@ describe('FirsrMenuCloseButton component', () => {
     expect(screen.getByRole('button', { name: /Cancel/ }).getAttribute('aria-label')).toEqual('Cancel');
   });
 
-  it('should invoke onEdit callback', () => {
-    userEvent.click(screen.getByRole('button', { name: /Cancel/ }));
+  it('should invoke onEdit callback', async () => {
+    await userEvent.click(screen.getByRole('button', { name: /Cancel/ }));
     expect(handleClick).toBeCalled();
   });
 });

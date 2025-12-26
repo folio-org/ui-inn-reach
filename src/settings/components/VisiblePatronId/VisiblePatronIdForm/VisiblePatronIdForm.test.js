@@ -1,7 +1,7 @@
-import { screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@folio/jest-config-stripes/testing-library/react';
 import { createMemoryHistory } from 'history';
 import { Router } from 'react-router-dom';
-import userEvent from '@testing-library/user-event';
+import userEvent from '@folio/jest-config-stripes/testing-library/user-event';
 import { translationsProperties, renderWithIntl } from '../../../../../test/jest/helpers';
 import VisiblePatronIdForm from './VisiblePatronIdForm';
 
@@ -100,10 +100,10 @@ describe('VisiblePatronIdForm', () => {
       expect(screen.getByText('MessageBanner')).toBeVisible();
     });
 
-    it('should be invisible', () => {
+    it('should be invisible', async () => {
       const checkbox = screen.getByRole('checkbox', { name: 'Barcode' });
 
-      userEvent.click(checkbox);
+      await userEvent.click(checkbox);
       expect(screen.queryByText('MessageBanner')).toBeNull();
     });
   });
@@ -116,10 +116,10 @@ describe('VisiblePatronIdForm', () => {
       });
     });
 
-    it('should be enabled if any checkbox is checked besides "User custom fields"', () => {
+    it('should be enabled if any checkbox is checked besides "User custom fields"', async () => {
       const checkbox = screen.getByRole('checkbox', { name: 'Barcode' });
 
-      userEvent.click(checkbox);
+      await userEvent.click(checkbox);
       expect(screen.getByRole('button', { name: 'Save' })).toBeEnabled();
     });
 

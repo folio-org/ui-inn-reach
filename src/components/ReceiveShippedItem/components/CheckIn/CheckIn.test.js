@@ -1,5 +1,5 @@
 import { createMemoryHistory } from 'history';
-import { screen } from '@testing-library/react';
+import { screen } from '@folio/jest-config-stripes/testing-library/react';
 import { translationsProperties, renderWithIntl } from '../../../../../test/jest/helpers';
 import CheckIn from './CheckIn';
 import {
