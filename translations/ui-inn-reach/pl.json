@@ -506,7 +506,7 @@
     "settings.paging-slip-template.token-header.inn-reach-agency": "INN-Reach agency",
     "settings.paging-slip-template.token-header.inn-reach-pickup-location": "INN-Reach pickup location",
     "settings.paging-slip-template.token-header.item": "Egzemplarz",
-    "settings.paging-slip-template.token-header.effective-location": "Aktualna lokalizacja",
+    "settings.paging-slip-template.token-header.effective-location": "Efektywna lokalizacja",
     "settings.paging-slip-template.token-header.staff-slip": "Rewers dla personelu",
     "printSlips.label": "INN-Reach paging slips for {servicePoint}",
     "paging-slips.callout.connection-problem.get.pagingSlip": "There was a problem loading the paging slips",
