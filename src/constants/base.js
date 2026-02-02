@@ -52,3 +52,5 @@ export const DATE_FORMAT = 'YYYY-MM-DD';
 export const ICON_KEYS = {
   APP: 'app',
 };
+
+export const LIMIT = 2000;

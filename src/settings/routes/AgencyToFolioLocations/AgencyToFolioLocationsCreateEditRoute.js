@@ -23,6 +23,7 @@ import {
   CALLOUT_ERROR_TYPE,
   AGENCY_TO_FOLIO_LOCATIONS_FIELDS,
   CENTRAL_SERVERS_LIMITING,
+  LIMIT,
 } from '../../../constants';
 import {
   getFolioLocationOptions,
@@ -394,7 +395,7 @@ AgencyToFolioLocationsCreateEditRoute.manifest = Object.freeze({
   },
   localServers: {
     type: 'okapi',
-    path: 'inn-reach/central-servers/%{selectedServerId}/d2r/contribution/localservers',
+    path: `inn-reach/central-servers/%{selectedServerId}/d2r/contribution/localservers?limit=${LIMIT}`,
     accumulate: true,
     fetch: false,
     throwErrors: false,
