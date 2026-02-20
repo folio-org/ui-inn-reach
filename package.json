@@ -101,12 +101,16 @@
       {
         "permissionName": "module.inn-reach.enabled",
         "displayName": "UI: ui-inn-reach module is enabled",
+        "subPermissions": [
+          "stripes-core.settings.read"
+        ],
         "visible": false
       },
       {
         "permissionName": "settings.inn-reach.enabled",
         "displayName": "Settings (inn-reach): display list of settings pages",
         "subPermissions": [
+          "stripes-core.settings.read",
           "settings.enabled"
         ],
         "visible": false
