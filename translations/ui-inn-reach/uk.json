@@ -416,7 +416,7 @@
     "reports.modal.field.minimum-days-requested": "Мінімальна кількість днів від замовлення",
     "reports.paged-too-long.label": "Стороною-власником відправлений занадто довгий звіт (CSV)",
     "reports.modal.title.paged-too-long-report": "Стороною-власником відправлений занадто довгий звіт",
-    "reports.modal.field.minimum-days-paged": "Мінімальна кількість днів на сторінці",
+    "reports.modal.field.minimum-days-paged": "Мінімальна кількість днів від простого замовлення",
     "reports.returned-too-long.label": "Повернуто занадто довгий звіт (CSV)",
     "reports.modal.title.returned-too-long-report": "Повернуто занадто довгий звіт",
     "reports.modal.field.minimum-days-returned": "Мінімальна кількість днів від повернення",
