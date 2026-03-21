@@ -295,7 +295,7 @@
     "transaction-detail.field.status": "สถานะ",
     "transaction-detail.field.patronName": "Patron name",
     "transaction-detail.field.pickupLocation": "Pickup location",
-    "transaction-detail.field.request": "Request",
+    "transaction-detail.field.request": "คำขอ",
     "transaction-detail.field.loan": "Loan",
     "transaction-detail.field.patronId": "Patron ID",
     "transaction-detail.field.patronType": "Patron type",
