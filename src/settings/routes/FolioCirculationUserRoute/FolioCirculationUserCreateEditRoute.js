@@ -16,6 +16,7 @@ import {
   CALLOUT_ERROR_TYPE,
   FOLIO_CIRCULATION_USER_FIELDS,
   CENTRAL_SERVERS_LIMITING,
+  LIMIT,
 } from '../../../constants';
 import {
   getCentralServerOptions,
@@ -168,14 +169,14 @@ FolioCirculationUserCreateEditRoute.manifest = Object.freeze({
   },
   centralPatronTypeMappings: {
     type: 'okapi',
-    path: 'inn-reach/central-servers/%{selectedServerId}/central-patron-type-mappings',
+    path: `inn-reach/central-servers/%{selectedServerId}/central-patron-type-mappings?limit=${LIMIT}`,
     accumulate: true,
     fetch: false,
     throwErrors: false,
   },
   innReachPatronTypes: {
     type: 'okapi',
-    path: 'inn-reach/central-servers/%{selectedServerId}/d2r/circ/patrontypes',
+    path: `inn-reach/central-servers/%{selectedServerId}/d2r/circ/patrontypes?limit=${LIMIT}`,
     accumulate: true,
     fetch: false,
     throwErrors: false,
