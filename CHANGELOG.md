@@ -6,6 +6,7 @@
 * Migrate tests to `@folio/jest-config-stripes` from the `@testing-library/*` packages. Refs UIINREACH-266.
 * Add `stripes-core.settings.read` permission to app and settings permissions. Refs UIINREACH-269.
 * Bump `@folio/stripes-data-transfer-components` to v7 for compatibility. Refs UIINREACH-276.
+* Add `limit` query parameter for the central patron type mappings, patron types, and local servers requests. Fixes UIINREACH-274.
 
 ## [6.0.2] (https://github.com/folio-org/ui-inn-reach/tree/v6.0.2) (2025-09-08)
 [Full Changelog](https://github.com/folio-org/ui-inn-reach/compare/v6.0.1...v6.0.2)
