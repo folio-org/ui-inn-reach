@@ -84,6 +84,7 @@ const SearchAndFilter = ({
   },
   children,
   visibleColumns,
+  nonInteractiveHeaders,
   columnMapping,
   resultsFormatter,
   resultsPaneTitle,
@@ -353,12 +354,14 @@ const SearchAndFilter = ({
         <MultiColumnList
           autosize
           virtualize
+          showSortIndicator
           columnMapping={columnMapping}
           contentData={contentData}
           formatter={resultsFormatter}
           id={id}
           isEmptyMessage={resultsStatusMessage}
           loading={isLoading}
+          nonInteractiveHeaders={nonInteractiveHeaders}
           sortDirection={`${sortingDirection}ending`}
           sortOrder={sortingField}
           totalCount={count}
@@ -403,6 +406,7 @@ SearchAndFilter.propTypes = {
   isLoading: PropTypes.bool,
   isPreRenderAllData: PropTypes.bool,
   isShowAddNew: PropTypes.bool,
+  nonInteractiveHeaders: PropTypes.array,
 };
 
 export default withRouter(SearchAndFilter);
