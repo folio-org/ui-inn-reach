@@ -1,6 +1,7 @@
 # Change history for ui-inn-reach
 
-## [6.1.0] IN PROGRESS 
+## [6.1.0] (https://github.com/folio-org/ui-inn-reach/tree/v6.1.0) (2026-04-16)
+[Full Changelog](https://github.com/folio-org/ui-inn-reach/compare/v6.0.2...v6.1.0)
 
 * Update only the local server secret after clicking the 'Generate keypair' button in edit mode in central server settings. Refs UIINREACH-272.
 * Migrate tests to `@folio/jest-config-stripes` from the `@testing-library/*` packages. Refs UIINREACH-266.
