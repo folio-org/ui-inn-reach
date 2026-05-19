@@ -19,6 +19,7 @@ import {
   METADATA_ACCORDION_NAME,
   CENTRAL_SERVER_CONFIGURATION_FIELDS,
   LOCAL_AGENCIES_FIELDS,
+  SYSTEM_USER_ID,
 } from '../../../../../../constants';
 import { CentralServersConfigurationContext } from '../../../../../../contexts';
 
@@ -70,6 +71,7 @@ const GeneralInformation = ({
           <ViewMetaData
             id={METADATA_ACCORDION_NAME}
             metadata={centralServer[CENTRAL_SERVER_CONFIGURATION_FIELDS.METADATA]}
+            systemId={SYSTEM_USER_ID}
           />
         </Col>
       </Row>
