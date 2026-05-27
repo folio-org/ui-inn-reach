@@ -54,3 +54,4 @@ export const ICON_KEYS = {
 };
 
 export const LIMIT = 2000;
+export const SYSTEM_USER_ID = '00000000-0000-0000-0000-000000000000';
