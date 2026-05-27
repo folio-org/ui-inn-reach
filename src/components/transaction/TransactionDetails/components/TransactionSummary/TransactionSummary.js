@@ -19,6 +19,7 @@ import {
   HOLD_FIELDS,
   TRANSACTION_FIELDS,
   TRANSACTION_SUMMARY,
+  SYSTEM_USER_ID,
 } from '../../../../../constants';
 
 const {
@@ -46,7 +47,10 @@ const TransactionSummary = ({
       id={TRANSACTION_SUMMARY}
       label={<FormattedMessage id="ui-inn-reach.transaction-detail.accordion.transaction" />}
     >
-      <ViewMetaData metadata={transaction[METADATA]} />
+      <ViewMetaData
+        metadata={transaction[METADATA]}
+        systemId={SYSTEM_USER_ID}
+      />
       <Row>
         <Col xs={3}>
           <KeyValue
