@@ -2,6 +2,10 @@
 
 ## IN PROGRESS
 
+
+## [6.1.1] (https://github.com/folio-org/ui-inn-reach/tree/v6.1.1) (2026-05-28)
+[Full Changelog](https://github.com/folio-org/ui-inn-reach/compare/v6.1.0...v6.1.1)
+
 * Add SYSTEM_USER_ID constant and update metadata components to display "System" instead of "Unknown user". Fixes UIINREACH-281.
 
 ## [6.1.0] (https://github.com/folio-org/ui-inn-reach/tree/v6.1.0) (2026-04-16)
