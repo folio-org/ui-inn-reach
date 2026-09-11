@@ -32,11 +32,6 @@ const visibleColumns = [
   TRANSACTION_FIELDS.STATUS,
 ];
 
-const nonInteractiveHeaders = [
-  TRANSACTION_FIELDS.ITEM_TITLE,
-  TRANSACTION_FIELDS.PATRON_NAME,
-];
-
 const columnMapping = {
   [TRANSACTION_FIELDS.TIME]: <FormattedMessage id="ui-inn-reach.transaction.field.time" />,
   [TRANSACTION_FIELDS.TYPE]: <FormattedMessage id="ui-inn-reach.transaction.field.type" />,
@@ -137,7 +132,6 @@ const TransactionListView = ({
       id="transactions-list"
       isLoading={isLoading}
       isShowAddNew={false}
-      nonInteractiveHeaders={nonInteractiveHeaders}
       resetData={resetData}
       pagingSlipsArr={pagingSlipsArr}
       pagingSlipTemplatesMap={pagingSlipTemplatesMap}

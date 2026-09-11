@@ -1,7 +1,8 @@
 # Change history for ui-inn-reach
 
-## IN PROGRESS
+## [6.2.0] IN_PROGRESS
 
+* Add possible to sort by item title and patron name. Refs UIINREACH-265.
 
 ## [6.1.1] (https://github.com/folio-org/ui-inn-reach/tree/v6.1.1) (2026-05-28)
 [Full Changelog](https://github.com/folio-org/ui-inn-reach/compare/v6.1.0...v6.1.1)
