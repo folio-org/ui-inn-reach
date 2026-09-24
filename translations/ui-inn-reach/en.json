@@ -510,6 +510,7 @@
   "reports.modal.button.save-and-close": "Save & close",
   "reports.modal.button.cancel": "Cancel",
   "reports.patronIdField": "INN-Reach Patron ID",
+  "reports.patronName": "INN-Reach Patron name",
   "reports.effectiveLocation": "Item's Effective Location",
   "reports.itemCallNumber": "Item call number",
   "reports.itemBarcode": "Item Barcode",
