@@ -8,6 +8,7 @@ export const REPORT_FIELDS = {
   DATE_RETURNED: 'dateReturned',
   PATRON_AGENCY: 'patronAgency',
   PATRON_ID_FIELD: 'patronIdField',
+  PATRON_NAME: 'patronName',
   DATE_REQUESTED: 'dateRequested',
   EFFECTIVE_LOCATION: 'effectiveLocation',
   LOAN_DUE_DATE: 'loanDueDate',
@@ -27,6 +28,7 @@ const {
   DATE_RETURNED,
   PATRON_AGENCY,
   PATRON_ID_FIELD,
+  PATRON_NAME,
   DATE_REQUESTED,
   EFFECTIVE_LOCATION,
   LOAN_DUE_DATE,
@@ -62,6 +64,7 @@ export const FIELDS_OF_REPORT_MODALS = {
 
 export const COLUMN_NAMES_FOR_OVERDUE_REPORT = [
   PATRON_ID_FIELD,
+  PATRON_NAME,
   EFFECTIVE_LOCATION,
   ITEM_CALL_NUMBER,
   ITEM_BARCODE,

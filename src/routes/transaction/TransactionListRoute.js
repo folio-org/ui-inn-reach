@@ -96,6 +96,7 @@ const {
   DATE_REQUESTED,
   PATRON_AGENCY,
   PATRON_ID_FIELD,
+  PATRON_NAME,
   LOAN_DUE_DATE,
   ITEM_HRID,
   REQUESTING_PATRON_AGENCY,
@@ -225,6 +226,7 @@ const TransactionListRoute = ({
 
       return {
         [PATRON_ID_FIELD]: holdData[PATRON_ID],
+        [PATRON_NAME]: holdData[PATRON_NAME],
         [EFFECTIVE_LOCATION]: item[EFFECTIVE_LOCATION].name,
         [ITEM_CALL_NUMBER]: item[CALL_NUMBER],
         [ITEM_BARCODE]: holdData[FOLIO_ITEM_BARCODE],
